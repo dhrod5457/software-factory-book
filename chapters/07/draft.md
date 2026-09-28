@@ -116,7 +116,7 @@ Execution Plane은 실제 작업이 일어나는 곳이다.
 
 Execution Plane은 Task를 **수행**한다.
 
-하지만 가능한 한 durable한 business state는 적게 가진다.
+하지만 가능한 한 durable한 orchestration state는 적게 가진다.
 
 예를 들어 Worker가 다음 정보를 유일하게 갖고 있으면 위험하다.
 
@@ -168,7 +168,7 @@ Issue
 → Worker
 ~~~
 
-OpenAI Symphony나 WorkOS Horizon처럼 Issue Tracker를 Control Plane의 입력으로 활용하는 공개 사례도 있다.
+OpenAI Symphony나 WorkOS Horizon처럼 Issue Tracker를 Work의 control surface로 활용하는 공개 사례도 있다. 다만 Symphony의 공개 spec도 dispatch·retry·reconciliation을 위한 authoritative orchestrator runtime state를 별도로 둔다. “Issue Tracker를 Control Plane으로 쓴다”는 표현을 runtime state까지 모두 Issue에 저장한다는 뜻으로 해석하면 안 된다.
 
 하지만 Issue Tracker 하나에 모든 runtime state를 넣으려 하면 문제가 생긴다.
 
