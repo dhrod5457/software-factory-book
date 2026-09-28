@@ -1,0 +1,7 @@
+flowchart LR
+  A["Tool Retry"] --> B["Step Retry"]
+  B --> C["Agent Intervention"]
+  C --> D["Subtask Retry"]
+  D --> E["Worker Restart"]
+  E --> F["Reassignment"]
+  F --> G["Human Escalation"]
