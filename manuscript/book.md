@@ -8520,6 +8520,22 @@ Factory Observability의 목적은 Agent를 감시하는 데 있지 않다.
 
 여기서 `Accepted Change`와 뒤에서 사용하는 `Cost per Accepted Change`는 업계 표준 Metric이 아니라 이 책이 Factory 수준의 측정 경계를 설명하기 위해 사용하는 synthesis다.
 
+Zach Lloyd도 Software Factory를 설명하면서 얼마나 많은 Software를 전달했는지뿐 아니라 human time과 token time을 함께 측정하고 개선해야 한다고 주장한다. 이 책은 그 측정 경계를 한 단계 더 좁힌다. 생성량이나 완료 보고보다 **검증과 Acceptance를 통과한 Change**를 중심으로 시간·비용·Human Attention을 본다.
+
+~~~text
+Generated Output
+→ Candidate
+→ Verified Change
+→ Accepted Change
+
+Accepted Change
+───────────────
+Human Attention
+Cycle Time
+Compute / Token Cost
+Retry / Rework
+~~~
+
 ---
 
 ### 19.1 무엇을 관찰할 것인가
@@ -9229,6 +9245,22 @@ Repeated Agent Failure
 ~~~
 
 이 책에서는 이런 Operate/Observe 결과가 다시 Requirement·Test·Task로 돌아가는 구조를 Closed-loop SDLC라고 부른다. 기존 DevSecOps의 continuous feedback을 Agent Work Intake까지 확장한 개념이다.
+
+Warp의 Factory cycle도 같은 방향의 사례다. Lloyd는 Agent가 code shipment에서 멈추지 않고, 배포 결과가 malfunction하는지 또는 실제로 사용되는지를 monitoring하고 그 output을 다시 Factory의 위쪽 입력으로 보내야 한다고 설명한다. 여기서 중요한 것은 특정 Vendor workflow가 아니라 **Delivery 이후의 Observation이 다음 Work의 원인이 되는 경계**다.
+
+<!-- CASE C15: Warp Public Software Factory -->
+
+> **Case Study C15 — Warp — Interactive Agent에서 Public Software Factory로**
+>
+> Warp 창업자 Zach Lloyd는 Software Factory를 idea/issue intake, triage, specification, implementation, review, verification, shipping, monitoring이 이어지는 cycle로 설명한다. 복잡한 Work에는 Product Specification과 Technical Specification을 나누고, UI verification에는 실제 computer use와 screenshot/video 같은 behavioral evidence를 사용한다.
+>
+> Open Source 전환 역시 단순한 코드 공개보다 public factory를 운영하려는 시도와 연결해 설명한다. Issue 상태와 작업 Agent/Contributor를 보이는 build.warp.dev를 proto-factory 사례로 제시했다.
+>
+> 이 책은 여기서 세 가지를 확장한다. 첫째, spec을 Requirement·Acceptance·Verification Contract로 연결한다. 둘째, factory efficiency를 단순 output보다 Accepted Change와 Human Attention으로 본다. 셋째, self-improvement를 Production에 즉시 적용하지 않고 Evaluate·Shadow·Approval을 거치는 guarded meta-change로 다룬다.
+>
+> **주의:** 이 사례는 Warp founder의 thesis와 자사 운영 사례다. 보편적 산업 성과나 모든 조직에 대한 예측으로 사용하지 않는다.
+>
+> Source: Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*.
 
 ---
 
@@ -10891,6 +10923,40 @@ Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없�
 
 Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
 
+중요한 것은 Self-improvement를 막연한 “Agent가 스스로 더 똑똑해진다”로 표현하지 않는 것이다. 실제 Factory에서는 실행 결과와 Human Correction을 관찰해 **개선 후보를 만드는 Loop**로 설계할 수 있다.
+
+Zach Lloyd는 예로 code review agent의 comment를 senior engineer가 수정했을 때 observer agent가 그 correction을 관찰하고 다음 실행을 위해 review skill을 개선하는 Skill Loop를 제시한다.
+
+~~~text
+Agent Execution
+      ↓
+Observable Result
+      ↓
+Human Correction / Verification Failure
+      ↓
+Observer
+      ↓
+Failure Pattern / Improvement Candidate
+      ↓
+Prompt / Skill / Rule / Context Candidate
+~~~
+
+여기까지는 개선 **후보 생성**이다.
+
+이 책의 Factory에서는 Candidate가 곧바로 Production Factory를 바꾸지 않는다.
+
+~~~text
+Observe
+→ Propose
+→ Evaluate
+→ Shadow
+→ Approve
+→ Promote
+→ Monitor
+~~~
+
+즉 Self-improvement도 일반 Software Change처럼 Verification과 Acceptance Authority를 가져야 한다. 이 원칙이 없으면 Factory는 자신의 성공 기준을 낮추는 방향으로도 “개선”될 수 있다.
+
 2026년 공개 사례에는 Factory.ai의 Signals처럼 session friction을 분석해 개선 Issue와 Fix로 연결하는 closed-loop 구현이 있고, Anthropic도 Agent Skills를 소개하며 장기적으로 Agent가 Skill을 직접 생성·편집·평가하는 방향을 언급했다. 전자는 한 회사의 제품 구현이고, 후자는 당시 “향후 탐색”으로 제시한 방향이다. 이를 일반적인 self-improving factory가 이미 확립됐다는 근거로 보지는 않는다.
 
 따라서 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
@@ -11187,6 +11253,38 @@ Dashboard
 이것이 Software Factory의 중요한 의미 중 하나다.
 
 Agent가 많아질수록 Orchestration과 Governance도 새로운 Software Engineering 대상이 된다.
+
+---
+
+## Product를 만드는 시스템을 설계한다
+
+Warp의 Zach Lloyd는 Factory Engineering을 설명하면서 엔지니어가 단순히 Product를 만드는 것이 아니라 **Product를 만드는 것을 만든다**는 방향으로 역할이 이동한다고 표현한다.
+
+이 책의 관점에서 이 역할을 조금 더 구체화하면 다음과 같다.
+
+~~~text
+Software Engineer
+→ Code / Architecture / Test를 설계한다
+
+Factory Engineer
+→ Work Definition을 설계한다
+→ Agent Authority를 설계한다
+→ Execution Environment를 설계한다
+→ Verification과 Evidence를 설계한다
+→ Failure Recovery를 설계한다
+→ Human Attention의 투입 지점을 설계한다
+→ Factory 자체의 변경 절차를 설계한다
+~~~
+
+이것은 기존 Software Engineering과 단절된 새 직업을 선언하려는 말이 아니다.
+
+오히려 Agent가 구현의 더 많은 부분을 맡을수록 Engineer가 관리해야 할 System Boundary가 넓어진다는 뜻에 가깝다. Repository와 Runtime뿐 아니라 Task State, Worker, Policy, Evaluator, Approval, Feedback Loop까지 Engineering 대상이 된다.
+
+따라서 Factory Engineer를 “AI에게 코딩을 시키는 사람”으로 이해하면 좁다.
+
+> Factory Engineer는 검증된 Software Change가 반복적으로 만들어질 수 있는 조건을 설계하고 운영하는 Engineer다.
+
+이 역할에서도 Product Judgment는 사라지지 않는다. Lloyd 역시 Factory metaphor가 mechanization처럼 들릴 수 있다는 한계를 인정하면서, 실제로 유용한 것을 만들고 무엇이 사용자에게 가치 있는지 판단하는 Human Input이 핵심이라고 강조한다.
 
 ---
 
@@ -11722,3 +11820,9 @@ Maturity와 같은 축이 아니다.
 
 53. WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
    https://workos.com/blog/project-horizon
+
+54. Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+   https://www.youtube.com/watch?v=tUPPVhBBcoM
+
+55. Warp / Zach Lloyd, *Adopting the software factory model: crawl, walk, run*  
+   https://www.warp.dev/blog/adopting-the-software-factory-model-crawl-walk-run
