@@ -136,7 +136,7 @@ Context File은 유용하다.
 
 Agent는 매 Task마다 이 전체를 읽어야 할 수 있다.
 
-최근 Context File 관련 연구들도 긴 Instruction이나 Repository-level Context File이 항상 Task success를 높이는 것은 아니며 exploration과 cost를 늘릴 수 있음을 보여준다.
+OpenAI의 2026년 Harness Engineering 사례도 “거대한 하나의 AGENTS.md” 방식을 실패한 접근으로 설명한다. Context를 과도하게 차지하고, 모든 규칙이 중요해 보여 우선순위가 흐려지며, 문서가 빠르게 stale해졌다는 것이다. 해당 팀은 대신 약 100줄 규모의 AGENTS.md를 목차처럼 사용하고 상세 지식은 구조화된 문서로 분리했다. 이는 한 조직의 사례이지만 Context File을 지식 저장소보다 Entry Point로 보는 데 유용한 근거다.
 
 그래서 Context File은 Entry Point에 가깝게 사용하는 편이 낫다.
 
@@ -358,7 +358,7 @@ Task
 
 Agent는 모른다.
 
-Agent가 해당 Repository를 수정할 때는 그 규칙이 사실상 존재하지 않는 것과 비슷하다.
+Agent가 해당 Repository를 수정할 때는 그 규칙을 안정적으로 사용할 수 없다. OpenAI의 사례에서는 이를 “Agent가 실행 중 접근할 수 없는 정보는 사실상 존재하지 않는 것과 같다”는 식으로 설명했다.
 
 같은 문제는 다음에서도 발생한다.
 
