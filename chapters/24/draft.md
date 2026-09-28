@@ -285,6 +285,40 @@ Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없�
 
 Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
 
+중요한 것은 Self-improvement를 막연한 “Agent가 스스로 더 똑똑해진다”로 표현하지 않는 것이다. 실제 Factory에서는 실행 결과와 Human Correction을 관찰해 **개선 후보를 만드는 Loop**로 설계할 수 있다.
+
+Zach Lloyd는 예로 code review agent의 comment를 senior engineer가 수정했을 때 observer agent가 그 correction을 관찰하고 다음 실행을 위해 review skill을 개선하는 Skill Loop를 제시한다.
+
+~~~text
+Agent Execution
+      ↓
+Observable Result
+      ↓
+Human Correction / Verification Failure
+      ↓
+Observer
+      ↓
+Failure Pattern / Improvement Candidate
+      ↓
+Prompt / Skill / Rule / Context Candidate
+~~~
+
+여기까지는 개선 **후보 생성**이다.
+
+이 책의 Factory에서는 Candidate가 곧바로 Production Factory를 바꾸지 않는다.
+
+~~~text
+Observe
+→ Propose
+→ Evaluate
+→ Shadow
+→ Approve
+→ Promote
+→ Monitor
+~~~
+
+즉 Self-improvement도 일반 Software Change처럼 Verification과 Acceptance Authority를 가져야 한다. 이 원칙이 없으면 Factory는 자신의 성공 기준을 낮추는 방향으로도 “개선”될 수 있다.
+
 2026년 공개 사례에는 Factory.ai의 Signals처럼 session friction을 분석해 개선 Issue와 Fix로 연결하는 closed-loop 구현이 있고, Anthropic도 Agent Skills를 소개하며 장기적으로 Agent가 Skill을 직접 생성·편집·평가하는 방향을 언급했다. 전자는 한 회사의 제품 구현이고, 후자는 당시 “향후 탐색”으로 제시한 방향이다. 이를 일반적인 self-improving factory가 이미 확립됐다는 근거로 보지는 않는다.
 
 따라서 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
@@ -461,3 +495,5 @@ Epilogue에서는 **Software Engineering에서 Software Production System Engine
   https://factory.ai/news/factory-signals
 - Anthropic, *Agent Skills*  
   https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
