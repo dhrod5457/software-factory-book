@@ -495,3 +495,6 @@ Epilogue에서는 **Software Engineering에서 Software Production System Engine
   https://factory.ai/news/factory-signals
 - Anthropic, *Agent Skills*  
   https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
+
