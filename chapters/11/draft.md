@@ -376,33 +376,11 @@ System은 process state를 관리한다.
 
 ---
 
-## 11.8 Recovery도 가장 작은 Scope부터
+## 11.8 Recovery Policy도 Agent 밖에 둔다
 
-Agent가 실패했다고 바로 전체 Worker를 재시작할 필요는 없다.
+Failure가 발생했을 때 어디까지 되돌릴지 결정하는 것도 Control 문제다. 일시적인 Tool 오류와 반복되는 구현 실패를 같은 Retry로 처리하면 비용과 변동성이 커진다.
 
-Failure Scope에 따라 대응한다.
-
-~~~text
-Tool Retry
-→ Step Retry
-→ Agent Nudge
-→ Subtask Retry
-→ Worker Restart
-→ Reassignment
-→ Human Escalation
-~~~
-
-예를 들어 GitHub API가 502를 반환했다.
-
-Code Agent를 새 Worker에서 처음부터 다시 시작할 이유가 없다.
-
-Tool Retry면 충분하다.
-
-반대로 Agent가 계속 같은 잘못된 Architecture를 고집한다면 단순 Tool Retry는 의미가 없다.
-
-Targeted Intervention이나 Reassignment가 필요할 수 있다.
-
-Recovery에도 Control Boundary가 있다.
+따라서 Recovery Budget과 Escalation 조건은 Control Plane이 소유하고, Agent는 필요한 진단과 수정에 집중하는 편이 좋다. Tool Retry부터 Reassignment, Human Escalation까지의 구체적인 Recovery Ladder는 14장에서 다룬다.
 
 ---
 
