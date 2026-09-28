@@ -62,9 +62,9 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 
 ## 24.2 M0~M5 Maturity 후보
 
-다음은 이 책에서 사용하는 설명용 Taxonomy다.
+다음은 이 책에서 복잡한 Capability 조합을 설명하기 위해 사용하는 **비규범적 Taxonomy**다.
 
-업계 표준이나 인증 모델이 아니다.
+업계 표준, 인증 모델, 조직 평가 점수가 아니다. 번호가 높다고 더 좋은 조직을 뜻하지 않으며, 실제 조직은 여러 단계의 특성을 동시에 가질 수 있다.
 
 ### M0. Interactive Agent
 
@@ -148,7 +148,7 @@ Autonomy를 하나의 숫자로 만들지 않는다.
 
 Decision별로 본다.
 
-예:
+예시 Matrix는 다음과 같이 만들 수 있다.
 
 | Decision | Human | Agent | System/Policy |
 | --- | --- | --- | --- |
@@ -163,7 +163,7 @@ A = Accountable
 R = Responsible  
 C = Consulted
 
-이 Matrix는 Task Risk에 따라 달라질 수 있다.
+이 표는 권장 RACI가 아니라 Authority를 분리해서 생각하기 위한 예시다. Task Risk와 조직 책임 구조에 따라 값은 달라진다.
 
 ---
 
@@ -281,9 +281,11 @@ Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없�
 
 ---
 
-## 24.8 Self-improvement는 마지막 쪽에 둔다
+## 24.8 Self-improvement Authority는 늦게 넓힌다
 
-Factory가 자기 자신을 개선할 수 있다.
+Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
+
+다만 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
 
 예:
 
@@ -376,31 +378,17 @@ Self-improvement를 Production에서 바로 자기 자신에게 적용하는 것
 
 ## 24.11 조직별 목표는 다르다
 
-### Small Team
+### Small Team 예시
 
-필요:
+Single Worker, Evidence, Human Review 중심의 M1~M2 성질만으로도 충분한 경우가 있다.
 
-- M1~M2
-- Single Worker
-- Human Review
-- Evidence
+### Platform Team 예시
 
-충분할 수 있다.
+여러 Project와 Worker Profile, Event Trigger, Policy, Observability 때문에 M2~M4 성질이 함께 필요할 수 있다.
 
-### Platform Team
+### Regulated Enterprise 예시
 
-필요:
-
-- M2~M4
-- Multiple Projects
-- Worker Profiles
-- Event Trigger
-- Policy
-- Observability
-
-### Regulated Enterprise
-
-Maturity는 높아도 Autonomy는 일부 Decision에서 의도적으로 낮게 유지할 수 있다.
+운영 Capability는 높아도 Autonomy는 일부 Decision에서 의도적으로 낮게 유지할 수 있다.
 
 예:
 
@@ -435,14 +423,13 @@ Agent-ready Repository
 더 짧게 줄이면:
 
 ~~~text
-Reliability
-→ Observability
-→ Recovery
+Reliability baseline
+→ Recovery + Observability
 → Scale
 → Autonomy
 ~~~
 
-실제 조직에서는 일부 순서가 바뀔 수 있다.
+실제 조직에서는 일부 순서가 바뀔 수 있다. 이 도식은 maturity score가 아니라 dependency를 설명하는 휴리스틱이다.
 
 중요한 것은 Autonomy를 첫 번째 목표로 두지 않는 것이다.
 
