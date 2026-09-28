@@ -162,11 +162,11 @@ Agent 수는 많지만 생산 시스템은 약하다.
 
 ---
 
-## 2.3 일곱 개 핵심 구성요소
+## 2.3 일곱 개 핵심 설계 속성
 
-이 책에서는 AI Software Factory의 최소 성질을 일곱 가지로 정리한다.
+이 책에서는 AI Software Factory를 설명할 때 반복해서 사용할 설계 속성을 일곱 가지로 정리한다.
 
-각 요소의 구현은 조직마다 다를 수 있다. 하지만 뒤 장에서 계속 사용할 공통 언어가 필요하기 때문에 먼저 이름을 붙여 둔다.
+이 일곱 가지가 모두 첫 구현부터 완비되어야 한다는 뜻은 아니다. 22장의 Minimum Viable Factory는 이 가운데 필요한 일부를 작은 흐름으로 시작한다. 여기서는 이후 장에서 사용할 공통 언어를 먼저 정리한다.
 
 ### 1. Durable Work
 
@@ -599,31 +599,9 @@ Human Review
 
 이 구조가 반복 가능하고, Worker가 실패해도 Task를 복구할 수 있고, 결과를 검증할 수 있다면 이미 중요한 Factory 성질을 갖는다.
 
-그다음 필요에 따라 확장한다.
+그다음 실제 병목과 실패를 관찰하면서 확장한다. Retry/Resume가 먼저 필요할 수도 있고, 반복되는 CI 실패처럼 명확한 Work Source가 있다면 Event Trigger를 먼저 붙일 수도 있다. 중요한 것은 기능 목록의 순서보다 **Reliability와 Verification을 확인하기 전에 Agent 수나 Decision Authority부터 크게 늘리지 않는 것**이다.
 
-```text
-Single Worker
-→ Retry / Resume
-→ Event Trigger
-→ Parallel Workers
-→ Risk-based Automation
-→ Automatic Work Selection
-→ Self-improvement
-```
-
-순서도 중요하다.
-
-Agent 수부터 늘리고 나중에 상태와 검증을 붙이는 방식보다, **Reliability와 Verification을 먼저 만들고 Autonomy를 올리는 편**이 운영하기 쉽다.
-
-이 책에서는 이후 장에서 이 Loop를 하나씩 분해한다.
-
-4~6장에서는 Work를 어떻게 정의하는지 다룬다.
-
-7~11장에서는 Control Plane, Worker, Harness, Context, Autonomy를 다룬다.
-
-12~16장에서는 Verification, Evidence, Recovery, Security를 다룬다.
-
-그 이후에는 Parallelism, Review Bottleneck, Observability, Event-driven Workflow와 실제 도입 순서로 확장한다.
+이후 장에서는 이 Loop를 Work 정의, 실행 구조, 검증과 복구, 전체 Flow 운영 순서로 분해한다.
 
 ---
 
