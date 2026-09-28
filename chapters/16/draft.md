@@ -114,7 +114,7 @@ Audit에서 Human Action과 Agent Action을 구분하기 어렵다.
 
 Task가 끝난 뒤에도 Credential이 남을 수 있다.
 
-더 나은 방향으로는 Delegated Identity를 고려할 수 있다. 2026년 2월 NIST NCCoE도 software/AI agent identity와 authorization에 대한 **Initial Public Draft concept paper**를 내고 identification, authorization, auditing, non-repudiation, prompt-injection controls를 논의하기 시작했다. 아직 확정 표준이 아니라 진행 중인 project 방향이라는 점이 중요하다.
+더 나은 방향으로는 Delegated Identity를 고려할 수 있다. 2026년 2월 NIST NCCoE는 software/AI agent identity와 authorization에 대한 Draft concept paper를 공개했고, 이후 이 논의를 Software and AI Agent Identity and Authorization project로 이어가고 있다. identification, authorization, auditing, non-repudiation, prompt-injection controls가 주요 문제로 다뤄진다. 아직 확정 표준이 아니라 진행 중인 project 방향이라는 점이 중요하다.
 
 ~~~text
 Human Principal
