@@ -243,10 +243,28 @@ Agent가 성공할 수 있는 실행 구조를 다룬다.
 - Result filtering
 - Subagents
 - Model routing 개념
+- execution loop
+- review / enforcement gate
+- feedback injection
+
+Harness를 Tool 묶음으로만 설명하지 않는다.
+
+~~~text
+Specification
+→ Plan
+→ Execute
+→ Review
+→ Feedback
+↺
+~~~
+
+Review에는 Task에 따라 Functional, Architecture, Scope, Security Conformance가 포함될 수 있다.
 
 핵심:
 
 > Model을 바꾸는 것과 Harness를 개선하는 것을 구분한다.
+
+> Skill / Tool과 Harness를 구분하고, Harness와 Factory 전체도 구분한다.
 
 제품별 설정법보다 architecture pattern을 중심으로 한다.
 
@@ -339,6 +357,8 @@ Agent가 조직 system에 안전하게 접근하는 interface 관점에서만 �
 ### Independent Evaluation
 
 - evaluator agent
+- architecture conformance
+- scope conformance
 - security review
 - human acceptance
 
