@@ -1,0 +1,7 @@
+flowchart LR
+  H["Human selects Task"] --> T["Durable Task"]
+  T --> W["Isolated Worker"]
+  W --> A["Coding Agent"]
+  A --> V["Verification"]
+  V --> E["Evidence"]
+  E --> G["Review / Policy Gate"]
