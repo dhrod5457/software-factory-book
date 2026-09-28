@@ -327,6 +327,12 @@ AI 시대
 - `research/16-productivity-evidence-and-measurement.md` - Productivity Evidence / Measurement
 - `research/17-review-integration-and-throughput-bottlenecks.md` - Review / Integration / Throughput Bottlenecks
 - `research/18-research-contradictions-and-open-questions.md` - Contradictions / Open Questions
+
+- `research/19-boundaries-devops-platform-engineering-agent-platform.md` - CI/CD / DevOps / Platform / Agent Platform 경계
+- `research/20-durable-execution-and-workflow-reliability.md` - Durable Execution / Workflow Reliability
+- `research/21-agent-ready-developer-platform-and-catalog.md` - Agent-ready Platform / Catalog
+- `research/22-closed-loop-sdlc-and-production-feedback.md` - Closed-loop SDLC / Production Feedback
+- `research/23-minimum-viable-ai-software-factory.md` - Minimum Viable Factory / Adoption
 - `research/sources.md` - 공식 1차 출처 인덱스
 
 다음 단계에서는 새 주제를 무작정 늘리기보다 각 문서의 주장과 출처를 다시 교차검증하고, 서로 반복되는 원칙을 `planning/concept.md` 후보로 추출한다.
