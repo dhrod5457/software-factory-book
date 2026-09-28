@@ -32,6 +32,7 @@ Autonomy와 실행 범위가 커질수록 failure probability보다 blast radius
 ---
 
 ## 반드시 사용할 Research
+- `research/30-workos-product-engineering-factory.md`
 
 - `research/06-security-isolation-and-permissions.md`
 - `research/14-failure-modes-and-antipatterns.md`
