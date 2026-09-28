@@ -129,6 +129,38 @@ Agent가 많아질수록 Orchestration과 Governance도 새로운 Software Engin
 
 ---
 
+## Product를 만드는 시스템을 설계한다
+
+Warp의 Zach Lloyd는 Factory Engineering을 설명하면서 엔지니어가 단순히 Product를 만드는 것이 아니라 **Product를 만드는 것을 만든다**는 방향으로 역할이 이동한다고 표현한다.
+
+이 책의 관점에서 이 역할을 조금 더 구체화하면 다음과 같다.
+
+~~~text
+Software Engineer
+→ Code / Architecture / Test를 설계한다
+
+Factory Engineer
+→ Work Definition을 설계한다
+→ Agent Authority를 설계한다
+→ Execution Environment를 설계한다
+→ Verification과 Evidence를 설계한다
+→ Failure Recovery를 설계한다
+→ Human Attention의 투입 지점을 설계한다
+→ Factory 자체의 변경 절차를 설계한다
+~~~
+
+이것은 기존 Software Engineering과 단절된 새 직업을 선언하려는 말이 아니다.
+
+오히려 Agent가 구현의 더 많은 부분을 맡을수록 Engineer가 관리해야 할 System Boundary가 넓어진다는 뜻에 가깝다. Repository와 Runtime뿐 아니라 Task State, Worker, Policy, Evaluator, Approval, Feedback Loop까지 Engineering 대상이 된다.
+
+따라서 Factory Engineer를 “AI에게 코딩을 시키는 사람”으로 이해하면 좁다.
+
+> Factory Engineer는 검증된 Software Change가 반복적으로 만들어질 수 있는 조건을 설계하고 운영하는 Engineer다.
+
+이 역할에서도 Product Judgment는 사라지지 않는다. Lloyd 역시 Factory metaphor가 mechanization처럼 들릴 수 있다는 한계를 인정하면서, 실제로 유용한 것을 만들고 무엇이 사용자에게 가치 있는지 판단하는 Human Input이 핵심이라고 강조한다.
+
+---
+
 ## Human과 Agent를 역할이 아니라 Authority로 본다
 
 “Agent는 구현하고 Human은 리뷰한다”는 구분도 너무 단순하다.
