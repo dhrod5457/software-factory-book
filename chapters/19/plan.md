@@ -32,6 +32,7 @@ Factory를 운영 가능한 시스템으로 만들기 위해 Task, Attempt, Work
 ---
 
 ## 반드시 사용할 Research
+- `research/30-workos-product-engineering-factory.md`
 
 - `research/07-observability-metrics-and-economics.md`
 - `research/16-productivity-evidence-and-measurement.md`
