@@ -333,6 +333,13 @@ AI 시대
 - `research/21-agent-ready-developer-platform-and-catalog.md` - Agent-ready Platform / Catalog
 - `research/22-closed-loop-sdlc-and-production-feedback.md` - Closed-loop SDLC / Production Feedback
 - `research/23-minimum-viable-ai-software-factory.md` - Minimum Viable Factory / Adoption
+
+- `research/24-academic-foundations-of-agentic-software-engineering.md` - Agentic SWE 학술 기반
+- `research/25-human-agent-collaboration-and-responsibility-research.md` - Human-Agent Collaboration / Responsibility
+- `research/26-orchestration-science-control-vs-autonomy.md` - Orchestration Science / Control Boundary
+- `research/27-context-files-and-repository-governance-evidence.md` - Context File / Repository Governance 실증
+- `research/28-benchmark-science-and-evaluation-methodology.md` - Benchmark / Evaluation Science
+- `research/29-academic-synthesis-design-principles.md` - Academic Synthesis / Design Principles
 - `research/sources.md` - 공식 1차 출처 인덱스
 
 다음 단계에서는 새 주제를 무작정 늘리기보다 각 문서의 주장과 출처를 다시 교차검증하고, 서로 반복되는 원칙을 `planning/concept.md` 후보로 추출한다.
