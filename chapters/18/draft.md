@@ -18,7 +18,7 @@ Worker가 많아질수록 이 이동은 더 빨라진다.
 
 전체 파이프라인의 Capacity를 봐야 한다.
 
-> Correct but unreviewable change도 Factory 품질 문제다.
+> 이 책에서는 Correct but unreviewable change도 Factory 품질 문제로 본다.
 
 ---
 
@@ -115,7 +115,7 @@ PR3 migration
 PR4 cleanup
 ~~~
 
-Stacked PR는 이런 구조를 지원하는 하나의 방식이다.
+Stacked PR는 이런 구조를 지원하는 하나의 방식이다. GitHub도 2026년 7월 Stacked Pull Requests를 public preview로 공개하고, 8월에는 AI-generated giant PR를 dependency-ordered stack으로 나누는 engineering workflow를 소개했다. 이는 Reviewability를 개선하는 하나의 구현 사례이지 모든 큰 변경을 stack으로 만들어야 한다는 뜻은 아니다.
 
 단, Dependency와 Rebase Cost가 생긴다.
 
@@ -261,9 +261,7 @@ Implementer
 - Correlated Error
 - Review Theater
 
-GitHub는 Code Review Tool을 개선했는데 초기에는 Tool Change와 Instruction이 맞지 않아 성능이 악화된 사례를 공개했다.
-
-따라서 Reviewer Agent도 Harness와 Eval이 필요하다.
+9장에서 본 GitHub의 2026년 Copilot Code Review 사례처럼 Reviewer Agent도 Tool 변경만으로 자동 개선되지 않는다. Tool, Instruction, 탐색 Workflow를 함께 평가해야 한다. 따라서 AI Reviewer를 Human Review의 단순 대체재가 아니라 별도의 Harness와 Eval이 필요한 검증 주체로 보는 편이 안전하다.
 
 ---
 
