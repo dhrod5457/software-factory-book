@@ -164,6 +164,8 @@ Repeated Agent Failure
 
 이 책에서는 이런 Operate/Observe 결과가 다시 Requirement·Test·Task로 돌아가는 구조를 Closed-loop SDLC라고 부른다. 기존 DevSecOps의 continuous feedback을 Agent Work Intake까지 확장한 개념이다.
 
+Warp의 Factory cycle도 같은 방향의 사례다. Lloyd는 Agent가 code shipment에서 멈추지 않고, 배포 결과가 malfunction하는지 또는 실제로 사용되는지를 monitoring하고 그 output을 다시 Factory의 위쪽 입력으로 보내야 한다고 설명한다. 여기서 중요한 것은 특정 Vendor workflow가 아니라 **Delivery 이후의 Observation이 다음 Work의 원인이 되는 경계**다.
+
 ---
 
 ## 20.5 Product Loop와 Factory Loop를 구분한다
@@ -341,3 +343,5 @@ Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구�
   https://workos.com/blog/project-horizon
 - Google, *Jules proactive updates*  
   https://blog.google/innovation-and-ai/technology/developers-tools/jules-proactive-updates/
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
