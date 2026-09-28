@@ -15,33 +15,36 @@ AI Coding Agent를 실제 소프트웨어 생산 시스템 안에서 어떻게 �
 ## 현재 작업 단계
 
 ```text
-Phase 1 Research   완료에 가까움
-Phase 2 Concept    완료
-Phase 3 Scope      완료
-Phase 4 TOC        완료
-Phase 5 Chapter Plan   다음
-Phase 6 Draft
+Phase 1 Research       완료에 가까움
+Phase 2 Concept        완료
+Phase 3 Scope          완료
+Phase 4 TOC            완료
+Phase 5 Chapter Plan   완료
+Phase 6 Draft          다음
 Phase 7 Review
 Phase 8 Manuscript
 ```
 
-현재 Source of Truth:
+## 현재 Source of Truth
 
 - `planning/concept.md`
 - `planning/scope.md`
 - `planning/toc.md`
+- `chapters/README.md`
+- `chapters/01..24/plan.md`
+- `chapters/epilogue/plan.md`
 - `PROJECT.md`
 - `STATUS.md`
 
-범위 밖 후속 주제:
-
-- `planning/future-topics.md`
-
-Research 자료:
+Research:
 
 - `research/README.md`
 - `research/00-research-map.md`
 - `research/sources.md`
+
+범위 밖 후속 주제:
+
+- `planning/future-topics.md`
 
 ## 책의 구조
 
@@ -53,24 +56,18 @@ Part IV  결과를 믿을 수 있게 만드는 시스템
 Part V   여러 Worker와 전체 Flow 관리
 Part VI  조직의 Software Delivery System으로 확장
 Part VII Minimum Viable Factory에서 Adaptive Factory까지
+Epilogue Software Engineering에서 Software Production으로
 ```
 
-24장 + Epilogue로 구성한 현재 TOC는 `planning/toc.md`에서 관리합니다.
+총 24장 + Epilogue입니다.
 
-## 핵심 관점
+## Draft 규칙
 
-- Software Factory는 Multi-Agent System과 같은 말이 아닙니다.
-- Agent Session보다 Durable Task를 중심에 둡니다.
-- 정형화 가능한 규칙은 시스템이 강제하고 불확실한 판단에 Agent를 사용합니다.
-- Agent의 완료 보고와 실제 완료 판정을 분리합니다.
-- Worker가 사라져도 Task와 Evidence는 남아야 합니다.
-- 높은 Autonomy에는 더 강한 Isolation, Verification, Governance가 필요합니다.
-- 기존 CI/CD와 Platform Engineering은 Factory가 대체하는 것이 아니라 기반으로 활용합니다.
-- Factory의 목표는 Agent 수나 코드량보다 검증된 변경의 전체 흐름을 개선하는 것입니다.
+각 장은 해당 `plan.md`를 기준으로 `draft.md`를 작성합니다.
+
+새로운 내용이 생기더라도 바로 범위를 넓히지 않고 먼저 `planning/scope.md`와 비교합니다.
 
 ## 작성 방식
-
-`cloud-agent-book`의 작성 방식을 참고합니다.
 
 ```text
 research
@@ -83,4 +80,4 @@ research
 → manuscript
 ```
 
-다음 작업은 각 장의 `chapters/NN/plan.md`를 작성하는 것입니다.
+다음 작업은 1장부터 Draft를 작성하는 것입니다.
