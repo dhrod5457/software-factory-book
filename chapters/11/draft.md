@@ -506,3 +506,5 @@ Test도 통과할 수 있다.
   https://arxiv.org/abs/2605.15425
 - *Wink: Recovering from Misbehaviors in Coding Agents*  
   https://arxiv.org/abs/2602.17037
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
