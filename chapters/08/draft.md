@@ -32,7 +32,7 @@ Workspace
 
 Agent가 파일을 수정하고 Shell 명령을 실행하려면 독립된 Workspace가 필요하다.
 
-가장 약한 형태는 Branch다.
+먼저 Branch는 source history를 분리하지만 실행환경을 격리하지는 않는다.
 
 ~~~text
 shared filesystem
@@ -40,9 +40,7 @@ shared filesystem
 └─ branch B
 ~~~
 
-Git history는 분리되지만 실제 working directory와 실행 중 process는 공유될 수 있다.
-
-조금 더 강한 방식은 Worktree나 독립 Clone이다.
+같은 working directory를 공유한다면 독립 Workspace라고 보기 어렵다. Worktree나 독립 Clone부터 filesystem 수준의 작업 공간을 나눌 수 있다.
 
 ~~~text
 repo/
@@ -269,11 +267,7 @@ Worker
 - credential accumulation
 - 재현성 저하
 
-둘 중 하나가 항상 정답은 아니다.
-
-Factory.ai의 persistent computer 사례와 cloud coding agent들의 disposable VM 모델이 동시에 존재하는 이유도 여기에 있다.
-
-Task 성격에 따라 선택해야 한다.
+둘 중 하나가 항상 정답은 아니다. 공개된 Agent 시스템에서도 persistent environment와 disposable sandbox가 모두 사용된다. 선택 기준은 제품 유행이 아니라 Task의 setup cost, contamination risk, security boundary, reproducibility다.
 
 예를 들어 Android Build처럼 초기 환경 준비가 매우 비싸다면 Persistent Worker가 유리할 수 있다.
 
