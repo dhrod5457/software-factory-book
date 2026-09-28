@@ -10363,18 +10363,21 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 **Figure F21. Maturity × Autonomy Matrix**
 
 ```mermaid
-quadrantChart
-  title Factory Maturity × Autonomy
-  x-axis Low Maturity --> High Maturity
-  y-axis Low Autonomy --> High Autonomy
-  quadrant-1 Mature + High Autonomy
-  quadrant-2 Low Maturity + High Autonomy
-  quadrant-3 Low Maturity + Low Autonomy
-  quadrant-4 Mature + Controlled Autonomy
-  "Interactive Agent": [0.15, 0.20]
-  "Durable Human-Gated Factory": [0.70, 0.35]
-  "Event-Driven Factory": [0.78, 0.58]
-  "Adaptive Factory": [0.90, 0.82]
+flowchart TB
+  subgraph HA["Higher Autonomy"]
+    direction LR
+    B["Low Maturity<br/>High Autonomy"]
+    A["High Maturity<br/>High Autonomy"]
+  end
+  subgraph LA["Lower / Controlled Autonomy"]
+    direction LR
+    C["Low Maturity<br/>Low Autonomy"]
+    D["High Maturity<br/>Controlled Autonomy"]
+  end
+  C -->|maturity increases| D
+  B -->|maturity increases| A
+  C -. autonomy increases .-> B
+  D -. autonomy increases .-> A
 ```
 
 *Factory Capability의 성숙도와 Agent Decision Authority는 서로 다른 축이다. 운영 Capability가 높아도 Risk가 큰 Decision은 Human Authority를 유지할 수 있다.*
