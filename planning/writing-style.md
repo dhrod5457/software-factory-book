@@ -255,3 +255,81 @@ Better:
 > 그렇다면 이런 생산 시스템을 어디까지 갖춰야 Software Factory라고 부를 수 있을까?
 
 이 질문이 다음 장 첫 부분과 연결되도록 한다.
+
+
+---
+
+# 16. 책에서 제안한 개념과 외부 표준을 구분한다
+
+책이 설명을 위해 만든 이름이나 Metric은 처음 등장할 때 성격을 밝힌다.
+
+예:
+
+> 이 책에서는 이 결과 형식을 Evidence Contract라고 부른다.
+
+> Cost per Accepted Change는 업계 표준 Metric이 아니라 Factory 수준의 측정 경계를 설명하기 위한 후보 지표다.
+
+특히 다음은 현재 책 자체의 synthesis / taxonomy다.
+
+- Evidence Contract
+- Failure Fingerprint
+- Cost per Accepted Change
+- Human Attention per Accepted Change
+- M0~M5 Factory Maturity
+- Reference Factory Acceptance Suite
+
+외부 표준처럼 표현하지 않는다.
+
+---
+
+# 17. Vendor 사례와 일반 원칙 사이에 문장 하나를 둔다
+
+Vendor 내부 데이터는 다음 순서로 쓴다.
+
+```text
+관찰된 사실
+→ 실험/운영 조건
+→ 일반화 한계
+→ 책에서 가져올 설계 원칙
+```
+
+Bad:
+
+> Agent는 3~5개 이상 관리할 수 없다.
+
+Better:
+
+> OpenAI의 한 내부 사례에서는 3~5개 interactive session 이후 관리 부담이 커졌다고 보고했다. 업계 일반 한계가 아니라 Human Attention이 capacity가 될 수 있음을 보여주는 사례다.
+
+---
+
+# 18. Preprint와 실험 환경을 숨기지 않는다
+
+Preprint는 가능하면 본문에서 바로 표시한다.
+
+- preprint
+- controlled simulation
+- vendor internal deployment
+- sampled production trace
+- small workload
+
+같은 범위를 독자가 참고 자료까지 내려가지 않아도 알 수 있게 적는다.
+
+숫자를 쓸 때 특히 중요하다.
+
+---
+
+# 19. 현재 제품 상태와 오래 유지될 원칙을 분리한다
+
+다음은 출간 직전 재검증 대상이다.
+
+- preview / GA 상태
+- model 이름
+- protocol version
+- product limit
+- pricing
+- current feature name
+
+본문의 핵심 논리는 이 값이 바뀌어도 유지되게 작성한다.
+
+제품 상태를 설명할 때 기준 날짜를 붙인다.
