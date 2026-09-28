@@ -833,6 +833,14 @@ flowchart TD
 
 *Intent가 Requirement와 Durable Task로 변환되고, Control Plane과 Worker를 거쳐 검증·Evidence·Governance·Delivery로 이어진 뒤 운영 Feedback이 다시 다음 Work로 돌아오는 전체 Loop.*
 
+여기서 Factory를 두 개의 경계로 볼 수 있다.
+
+좁은 의미에서는 이미 정의된 Task를 durable하게 실행하고 검증하고 복구하는 **실행 시스템**이다.
+
+넓은 의미에서는 Signal과 Intent를 Work로 변환하는 앞단부터 Delivery 이후의 Observation과 Improvement까지 연결하는 **생산 루프**다.
+
+Warp 창업자 Zach Lloyd는 2026년 발표에서 아이디어가 들어오면 Agent가 triage하고, 복잡한 Work는 specification으로 보내며, implementation·review·verification·shipping·monitoring 결과를 다시 위쪽으로 되돌리는 Software Factory cycle을 제시했다. 이 책은 그 전망을 그대로 정의로 채택하지는 않지만, Factory의 경계가 Coding Agent 실행보다 넓어질 수 있다는 실제 사례로 사용한다.
+
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
 ```text
@@ -1493,6 +1501,57 @@ Requirement
 ~~~
 
 좋은 Requirement는 구현 방법을 세세하게 지시하는 문서가 아니다. Agent가 여러 구현 방법 중 선택할 수 있도록 하면서도 완료 여부는 명확하게 판단할 수 있게 해야 한다.
+
+---
+
+#### Triage: 모든 Signal을 같은 깊이로 명세하지 않는다
+
+Requirement-first라는 말이 모든 Issue에 같은 분량의 문서를 만들라는 뜻은 아니다.
+
+Factory 앞단에는 먼저 **Planning Depth를 정하는 Triage**가 필요할 수 있다.
+
+~~~text
+Signal / Idea / Issue
+        ↓
+      Triage
+        ↓
+  ┌─────┴─────┐
+  │           │
+Simple      Complex
+  │           │
+Task      Product Spec
+              ↓
+         Technical Spec
+              ↓
+             Task
+~~~
+
+Zach Lloyd는 Warp의 Factory 설명에서 단순하고 명확한 Issue는 바로 구현으로 보내고, 복잡한 문제는 specification agent로 보내는 패턴을 제시한다. 이때 Product Specification은 product invariant를, Technical Specification은 architecture와 code form을 설명한다고 구분한다.
+
+이 책에서는 이 구조를 그대로 표준으로 삼기보다 다음 질문으로 일반화한다.
+
+~~~text
+Product / Requirement
+→ 무엇이 참이어야 하는가
+
+Design / Technical Spec
+→ 어떤 제약과 구조 안에서 만들 것인가
+
+Task
+→ 무엇을 수행할 것인가
+
+Acceptance
+→ 무엇이 만족되어야 하는가
+
+Verification
+→ 그것을 어떻게 증명할 것인가
+~~~
+
+핵심은 문서 종류를 늘리는 데 있지 않다.
+
+**모호성과 위험이 커질수록 실행 전에 의미와 완료 기준을 더 durable하게 만든다.**
+
+작고 명확한 수정은 곧바로 Task가 될 수 있고, 여러 모듈과 Product 판단이 얽힌 Work는 Specification 단계를 거칠 수 있다.
 
 ---
 
@@ -5072,6 +5131,21 @@ Task의 구체적인 behavior를 검증한다.
 - logs
 - traces
 - benchmark
+
+UI Task에서는 Behavioral Evidence가 특히 중요하다.
+
+Warp의 Zach Lloyd는 Software Factory의 verification 예로 Agent가 만든 UI를 computer use로 실제 실행하고 video와 screenshot을 남기는 흐름을 설명했다. 중요한 점은 screenshot 자체가 아니라 **실제 runtime behavior를 실행한 흔적을 Candidate Revision과 연결한다는 것**이다.
+
+~~~text
+UI Candidate
+→ Application Launch
+→ Computer Use
+→ Critical Flow
+→ Screenshot / Video
+→ Behavioral Evidence
+~~~
+
+이 패턴은 이 책의 Evidence Contract와 같은 문제를 다른 각도에서 보여준다. “화면을 수정했다”는 Agent의 설명보다, 특정 Revision에서 실제 사용 흐름을 실행하고 남긴 Evidence가 Review 비용을 줄인다.
 
 #### Independent Evaluator
 
