@@ -117,6 +117,44 @@ rework
 
 이 Layer들을 구분하면 Failure가 어디에서 생겼는지 더 정확히 볼 수 있다.
 
+### Human-facing Observability와 Telemetry는 다르다
+
+운영자가 항상 Trace Viewer를 열어야 하는 것은 아니다.
+
+작은 Factory에서는 기존 Work Surface에 단순한 상태를 보여주는 것만으로도 유용하다.
+
+예:
+
+~~~text
+Issue label
+ready → running → review
+
+Issue comment
+worker: W3
+result: PR #52
+~~~
+
+이 정도 정보만으로도 사람은 "시작됐는가, 누가 맡았는가, Review할 결과가 나왔는가"를 빠르게 판단할 수 있다.
+
+하지만 이것이 System Telemetry 전체를 대체하지는 않는다.
+
+~~~text
+Human-facing state
+- label
+- comment
+- PR link
+
+System telemetry
+- attempt
+- lease
+- tool event
+- verification
+- cost
+- failure
+~~~
+
+좋은 Observability는 두 Layer를 모두 가질 수 있다. 사람에게는 간단한 상태를 보여주고, 장애 분석에는 더 세밀한 Event와 Metric을 남긴다.
+
 ---
 
 ## 19.2 Raw Chain-of-Thought가 Observability의 중심은 아니다
