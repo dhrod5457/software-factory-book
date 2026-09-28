@@ -134,6 +134,57 @@ Requirement
 
 ---
 
+### Triage: 모든 Signal을 같은 깊이로 명세하지 않는다
+
+Requirement-first라는 말이 모든 Issue에 같은 분량의 문서를 만들라는 뜻은 아니다.
+
+Factory 앞단에는 먼저 **Planning Depth를 정하는 Triage**가 필요할 수 있다.
+
+~~~text
+Signal / Idea / Issue
+        ↓
+      Triage
+        ↓
+  ┌─────┴─────┐
+  │           │
+Simple      Complex
+  │           │
+Task      Product Spec
+              ↓
+         Technical Spec
+              ↓
+             Task
+~~~
+
+Zach Lloyd는 Warp의 Factory 설명에서 단순하고 명확한 Issue는 바로 구현으로 보내고, 복잡한 문제는 specification agent로 보내는 패턴을 제시한다. 이때 Product Specification은 product invariant를, Technical Specification은 architecture와 code form을 설명한다고 구분한다.
+
+이 책에서는 이 구조를 그대로 표준으로 삼기보다 다음 질문으로 일반화한다.
+
+~~~text
+Product / Requirement
+→ 무엇이 참이어야 하는가
+
+Design / Technical Spec
+→ 어떤 제약과 구조 안에서 만들 것인가
+
+Task
+→ 무엇을 수행할 것인가
+
+Acceptance
+→ 무엇이 만족되어야 하는가
+
+Verification
+→ 그것을 어떻게 증명할 것인가
+~~~
+
+핵심은 문서 종류를 늘리는 데 있지 않다.
+
+**모호성과 위험이 커질수록 실행 전에 의미와 완료 기준을 더 durable하게 만든다.**
+
+작고 명확한 수정은 곧바로 Task가 될 수 있고, 여러 모듈과 Product 판단이 얽힌 Work는 Specification 단계를 거칠 수 있다.
+
+---
+
 ## 4.3 Requirements-first와 Design-first
 
 모든 작업이 Requirement부터 시작하는 것은 아니다.
