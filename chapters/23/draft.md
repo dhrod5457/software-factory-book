@@ -373,6 +373,48 @@ Case Study
 
 ---
 
+## 23.9 Operator Surface
+
+Reference Factory가 내부적으로 Task Store, Scheduler, Worker, Verification, Approval을 갖추면 사용자가 보는 Surface도 복잡하게 만들기 쉽다.
+
+하지만 Operator에게 필요한 핵심 행동은 의외로 적다.
+
+~~~text
+Create
+Observe
+Approve
+Intervene
+Inspect Evidence
+~~~
+
+최근 persistent Agent 제품이 복잡한 Cloud Runtime과 Connector를 단순한 Message Interface 뒤에 숨기는 것은 중요한 UX 신호다. Factory도 내부 Complexity를 그대로 사람에게 노출할 필요는 없다.
+
+Reference Factory에서는 다음 구조를 목표로 한다.
+
+~~~text
+                Factory Internals
+Task Store / Scheduler / Worker / Retry / Policy
+Verification / Evidence / Event History
+                        ↓
+                 Operator Surface
+Create | Observe | Approve | Intervene | Inspect
+~~~
+
+단순한 Surface는 상태를 숨긴다는 뜻이 아니다.
+
+오히려 사용자가 다음 질문에 빠르게 답할 수 있어야 한다.
+
+- 지금 무엇이 Running인가
+- 어디에서 Blocked됐는가
+- Human 결정이 필요한 것은 무엇인가
+- Agent가 무엇을 변경했는가
+- 무엇으로 완료를 증명했는가
+- 실패하면 어디서 이어지는가
+
+Dashboard에 내부 Event를 모두 나열하는 것보다 다음 인간 행동을 결정하는 데 필요한 상태와 Evidence를 먼저 보여주는 것이 중요하다.
+
+Factory Architecture가 복잡해질수록 Operator Surface는 더 의도적으로 단순해져야 한다.
+
 ## Reference Factory Acceptance
 
 최소 Acceptance:
