@@ -166,7 +166,35 @@ Planning Depth는 Task의 Risk와 Complexity에 맞춰야 한다.
 
 ---
 
-## 4.4 Requirement Generator와 Acceptance Authority를 분리한다
+## 4.4 산업 사례: Specification과 Architecture가 Backlog로 합쳐진다
+
+Caylent가 공개한 Software Factory 설명은 Factory 앞단을 어떻게 준비하는지 보여주는 사례다.
+
+이들의 설명에서는 먼저 Scope를 정리하고 Claude를 사용해 Prototype Specification을 만든다. 이후 고객에게 반복적으로 새 버전을 보여주며 Feedback을 받고, 동시에 Production에 필요한 Architecture를 설계한다. 두 흐름은 최종적으로 Detailed Specification과 Backlog로 합쳐지고, 그 결과가 Software Factory의 입력이 된다.
+
+~~~text
+Scoping
+    ↓
+Prototype Specification
+    ↓
+Customer Feedback ───────┐
+                         ├→ Detailed Specification
+Production Architecture ─┘
+                         ↓
+                      Backlog
+                         ↓
+                  Software Factory
+~~~
+
+여기서 가져올 원칙은 특정 기간이나 Consulting Process가 아니다.
+
+> Factory의 입력은 Raw Idea가 아니라, 실행 가능한 수준으로 정리된 Specification과 Architecture Constraint, Backlog에 가까워질수록 안정적이다.
+
+이는 Product Discovery를 모두 자동화해야 한다는 뜻도 아니다. 오히려 Intent와 Architecture를 먼저 정리하고, Agent가 실행할 Work와 완료 기준으로 변환하는 경계가 필요하다는 사례다.
+
+---
+
+## 4.5 Requirement Generator와 Acceptance Authority를 분리한다
 
 Agent가 Requirement 초안을 만드는 것은 유용하다.
 
@@ -207,7 +235,7 @@ System / Reviewer
 
 ---
 
-## 4.5 Requirement에서 Verification까지 연결한다
+## 4.6 Requirement에서 Verification까지 연결한다
 
 좋은 Factory는 Work Artifact를 서로 연결한다. Spec Kit의 최신 `converge` 단계처럼 구현 결과를 다시 specification·plan·task와 대조하는 흐름도 이 연결의 한 사례다.
 
@@ -258,7 +286,7 @@ PASS
 
 ---
 
-## 4.6 Ready Contract
+## 4.7 Ready Contract
 
 Factory가 고도화되면 모든 Backlog Item을 곧바로 Worker에게 보내고 싶어진다.
 
@@ -358,3 +386,5 @@ Agent가 실행 중 중단되면 이 Work는 어디에 남는가. Session이 닫
   https://kiro.dev/docs/specs/analyze-requirements/
 - REAgent, *Requirement-Driven LLM Agents for Software Issue Resolution*  
   https://arxiv.org/abs/2604.06861
+- Caylent, *What is a Software Factory*  
+  https://www.youtube.com/watch?v=0Q8R_FZbnLk
