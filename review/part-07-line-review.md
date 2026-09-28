@@ -31,6 +31,7 @@
 - “Self-improvement를 마지막에”를 “self-modification authority를 늦게 넓힌다”로 정밀화
 - Small Team / Platform Team / Regulated Enterprise를 prescription이 아닌 예시로 변경
 - adoption shorthand를 22장과 동일하게 정렬
+- Factory.ai Signals는 한 회사의 self-improvement 구현, Anthropic의 agent-created Skills는 당시 future direction임을 명시해 self-improvement 과장 방지
 
 ### Epilogue
 - 미래 Engineer 역할을 단정하지 않고 Agent-heavy team에서 역할 비중이 변할 수 있다는 수준으로 조정
