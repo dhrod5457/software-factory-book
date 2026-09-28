@@ -173,16 +173,9 @@ Runtime conflict detection
 
 ## 17.5 More Agents가 More Throughput이 아닌 이유
 
-Anthropic의 multi-agent 연구에서는 Agent 수가 늘어날수록 shared software project에서 Coordination Failure가 관찰됐다.
+Anthropic이 2026년 8월 공개한 연구는 이런 Coordination Failure를 통제된 simulation에서 보여준다. 여러 Model Generation과 Agent 수를 바꿔 동일한 open-world game project를 12시간 동안 공동 개발하게 했을 때, 일부 Model에서는 많은 PR을 열고도 Merge 비율이 낮았고 shared file conflict 뒤 PR을 포기하는 패턴이 나타났다. 더 최신 Model 중 일부는 오히려 file ownership을 강하게 나눠 충돌을 줄였다.
 
-일부 실험에서는:
-
-- 많은 PR이 생성됐지만
-- merge fraction이 낮고
-- shared file conflict가 발생하며
-- conflict 이후 PR이 abandon되는 패턴이 나타났다.
-
-이 결과를 모든 Multi-Agent 시스템에 일반화할 수는 없다.
+저자들 스스로 결과물의 품질이 전반적으로 낮았다고 밝힌 실험이며 실제 조직의 Production Repository를 그대로 재현한 것은 아니다. 따라서 이 결과를 모든 Multi-Agent 시스템에 일반화할 수는 없다.
 
 하지만 한 가지는 분명하다.
 
@@ -211,7 +204,7 @@ Parallel Completed Work
 
 하지만 같은 Model, 같은 Context, 같은 Tool을 사용하면 비슷한 오류를 반복할 수 있다.
 
-Anthropic의 multi-agent research에서도 동일 Model/Context의 Agent들이 유사한 Strategy를 선택하는 conformity 문제가 관찰됐다.
+같은 연구에서는 Agent들이 동일하거나 유사한 Model·Context·Scaffolding을 가질 때 행동 다양성이 낮아지는 현상도 관찰됐다. 한 초기 game experiment에서는 30개 Agent 중 18개가 우연히 동일한 `mvp-game-loop` branch name을 선택했다.
 
 즉:
 
@@ -267,7 +260,7 @@ Task C → Worker C
 
 ## 17.8 Shared Resource Stampede
 
-여러 Agent가 같은 External Resource를 동시에 Polling하면 문제가 생길 수 있다.
+여러 Agent가 같은 External Resource를 동시에 Polling하면 문제가 생길 수 있다. Anthropic의 별도 queue-management experiment에서는 coordination 수단이 부족한 Agent들이 초당 30회 polling daemon을 만들었고, 한 run에서 240만 건의 요청 중 실제 accepted job은 117건이었다. 이 역시 실험 환경의 극단적 사례지만 Agent speed가 resource contention을 증폭할 수 있다는 점을 보여준다.
 
 예:
 
