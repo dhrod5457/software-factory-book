@@ -2,7 +2,7 @@
 
 Phase 8 - Manuscript
 
-상태: **WORKING MANUSCRIPT COMPLETE**
+상태: **RELEASE CANDIDATE RC1**
 
 24개 본장과 Epilogue의 Draft 및 Phase 7 Review를 완료했다.
 
@@ -110,20 +110,29 @@ Review에서 완료한 항목:
 - Case Study Box 14개 최종 working copy 작성
 - 기계적 proof scan PASS
 
-남은 작업:
+완료 추가:
 
-1. 실제 Figure 아트워크 제작
-2. Figure/Case Study 최종 삽입·레이아웃
-3. 출간 직전 source recheck
-4. 최종 release proof
+- F01~F21 Mermaid Figure source 작성
+- 21개 Figure를 book.md에 실제 삽입
+- C01~C14 Case Study Box를 book.md에 실제 삽입
+- Publication source recheck 완료
+- Release Proof PASS
+- RC1 snapshot 기록
+
+남은 Release Gate:
+
+1. 최종 제목 / 부제
+2. SVG/PDF용 Figure export 및 흑백/축소 가독성
+3. 53개 Reference 전체 dead-link + metadata 확인
+4. 사람 기준 최종 교정
+5. 최종 출판 산출물 build
 
 # Next
 
 ```text
-working manuscript complete
-→ copyedit
-→ figure / case-study production
-→ publication-time source recheck
+RC1
+→ final title / proof / reference pass
+→ publication build
 → release manuscript
 ```
 
