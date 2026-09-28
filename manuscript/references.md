@@ -81,7 +81,7 @@
    사용 장: 2장, 3장, 21장, 22장
 
 19. Factory.ai, *Signals*  
-   https://factory.ai/news/factory-signals  
+   https://factory.com/news/factory-signals  
    사용 장: 24장
 
 20. GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
