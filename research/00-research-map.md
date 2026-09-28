@@ -1,10 +1,12 @@
-# Software Factory Book - Research Map
+# AI Software Factory Book - Research Map
 
 기준일: 2026-09-28
 
-이 저장소는 현재 **자료 수집 단계**다.
+이 책의 주제는 **AI 시대의 Software Factory**다.
 
-참고 프로젝트 `cloud-agent-book`의 작업 방식을 따라, 본문을 먼저 쓰지 않고 다음 순서로 진행한다.
+과거 Software Factory의 역사는 용어 배경을 설명하기 위한 최소 범위로만 다룬다. 핵심은 2025~2026년에 실제 조직들이 coding agent를 단순 보조 도구가 아니라 **지속적으로 소프트웨어 변경을 생산하는 시스템** 안에 배치하기 시작한 변화다.
+
+참고 프로젝트 `cloud-agent-book`의 작성 방식을 따라 다음 순서로 진행한다.
 
 ```text
 research
@@ -17,140 +19,313 @@ research
 → manuscript
 ```
 
-현재 단계에서는 Software Factory의 정의를 하나로 고정하지 않는다. 역사적 Software Factory와 2025~2026년의 agent-native Software Factory를 분리해서 근거를 수집한 뒤, 공통점과 차이를 비교해 책의 정의를 만든다.
+현재는 **research 단계**다. 목차와 결론을 먼저 고정하지 않는다.
 
-## 조사 축
+## 책이 조사할 중심 질문
 
-### A. 역사와 원형
+> AI coding agent가 좋아진 뒤, 소프트웨어 개발 조직은 어떻게 "개발자가 agent를 사용하는 방식"에서 "software factory가 지속적으로 작업을 처리하는 방식"으로 이동하는가?
 
-확인할 질문:
+이를 다음 질문으로 나눈다.
 
-- Software Factory라는 표현은 언제 등장했는가?
-- 1960~1990년대 Software Factory는 무엇을 자동화하려 했는가?
-- Hitachi, SDC, Toshiba, NEC, Fujitsu 사례의 공통점은 무엇인가?
-- 표준화, 재사용, 프로세스, 품질관리, 도구화가 어떤 역할을 했는가?
-- 제조업 비유가 실제 소프트웨어 개발에서 어디까지 유효했는가?
+- 단일 coding agent와 Software Factory의 경계는 무엇인가?
+- 요구사항과 제품 의도를 누가 명세 가능한 Task로 바꾸는가?
+- 어떤 Task를 자동으로 선택하고 어떤 Task는 사람이 승인해야 하는가?
+- 여러 Worker/Agent를 어떻게 격리하고 병렬 실행하는가?
+- Session이 끊겨도 작업 상태와 미완료 맥락을 어떻게 이어가는가?
+- Repository, 문서, 도구, MCP, Skills를 어떻게 agent가 읽기 쉬운 환경으로 만드는가?
+- Build/Test/Browser/Observability를 어떻게 agent 검증 루프에 넣는가?
+- Agent가 "완료했다"고 말하는 것과 실제 완료를 어떻게 분리하는가?
+- Code Review, Acceptance Test, Scenario Validation 중 어디까지 자동화할 수 있는가?
+- Retry, reassignment, human approval, escalation은 누가 관리하는가?
+- Agent의 권한과 blast radius는 어떻게 제한하는가?
+- PR 수나 Token이 아니라 Factory 전체 생산성을 무엇으로 측정하는가?
+- Software Factory가 스스로 자신의 harness와 workflow를 개선할 수 있는가?
 
-우선 자료:
+## 작업 정의 - 아직 최종 정의가 아님
 
-- Michael A. Cusumano, *Japan's Software Factories: A Challenge to U.S. Management* (1991)
-- Michael A. Cusumano, *The Software Factory: A Historical Interpretation* (IEEE Software, 1989)
-- Yoshihiro Matsumoto, *Notes on the Next Generation Software Factory* (1992)
-- Hitachi corporate history / annual report
-- Harvey Bratman, Terry Court, *The Software Factory* (IEEE Computer, 1975)
+현재 자료 수집을 위한 임시 모델:
 
-### B. 2000년대 Software Factories
+```text
+Intent / Requirement
+        ↓
+Specification / Acceptance Criteria
+        ↓
+Task Planning / Dependency
+        ↓
+Orchestrator / Queue
+        ↓
+Isolated Worker / Sandbox
+        ↓
+Coding Agent + Tools + Context
+        ↓
+Build / Test / Browser / Runtime Verification
+        ↓
+Evidence / Artifact
+        ↓
+Review / Approval / Merge
+        ↓
+Observation / Feedback
+        ↺
+```
 
-확인할 질문:
+Software Factory인지 판단할 때 단순히 "AI가 코드를 작성한다"는 사실만 보지 않는다.
 
-- Software Product Line, DSL, Model Driven Development, code generation은 Software Factory 개념을 어떻게 바꾸었는가?
-- 2004년 Microsoft/Wiley 계열의 Software Factories 방법론은 일본식 factory와 무엇이 같고 다른가?
+반복 가능한 생산 시스템으로서 최소한 다음 축을 조사한다.
 
-우선 자료:
+1. Intent
+2. Work selection / planning
+3. Orchestration
+4. Isolation / execution
+5. Context / harness
+6. Verification
+7. Evidence
+8. Human control
+9. Recovery / continuity
+10. Security / permissions
+11. Observability
+12. Feedback / self-improvement
+13. Metrics / economics
 
-- Jack Greenfield, Keith Short, Steve Cook, Stuart Kent, *Software Factories: Assembling Applications with Patterns, Models, Frameworks, and Tools* (2004)
+## 1차 조사 대상
 
-### C. DevOps / Continuous Delivery / Platform Engineering
+### OpenAI - Harness Engineering / Symphony
 
-확인할 질문:
+중점:
 
-- CI/CD, Infrastructure as Code, self-service, paved road, Internal Developer Platform은 현대 Software Factory의 어떤 기반을 제공하는가?
-- 개발자 개인의 생산성보다 시스템 수준의 flow를 어떻게 측정해야 하는가?
-- 자동화가 많아질수록 품질·거버넌스·관측성은 어떻게 포함되어야 하는가?
+- Humans steer, agents execute
+- agent-friendly repository
+- repository knowledge as system of record
+- worktree별 실행환경과 observability
+- agent-to-agent review
+- task tracker를 control plane으로 사용하는 orchestration
+- coding session보다 deliverable/task 중심 운영
 
-우선 자료:
+자료:
 
-- DORA research
-- CNCF Platform Engineering / Platform Maturity Model
-- Continuous Delivery / Accelerate 계열 연구와 실무 자료
+- https://openai.com/index/harness-engineering/
+- https://openai.com/index/open-source-codex-orchestration-symphony/
 
-### D. Coding Agent에서 Agentic Software Factory로
+### WorkOS - Horizon
 
-확인할 질문:
+중점:
 
-- 단일 coding agent와 software factory의 경계는 무엇인가?
-- Task queue, orchestrator, workspace isolation, sandbox, retries, approvals, evidence가 왜 필요한가?
-- 사람이 코드를 쓰지 않는 것과 사람이 검증을 포기하는 것은 같은 말인가?
-- interactive agent에서 background / event-driven / fleet model로 넘어갈 때 병목은 무엇인가?
+- event-driven code factory
+- Linear issue decomposition
+- webhook-driven orchestration
+- cloud sandbox
+- shared MCP context surface
+- orchestrator/control plane과 disposable sandbox 분리
+- verification sandbox
+- human review gate
+- dogfooding을 통한 factory 자체 개선
 
-우선 사례:
+자료:
 
-- StrongDM Software Factory
-- Stripe Minions
-- WorkOS Horizon
-- OpenAI Symphony / Codex orchestration
-- OpenHands
+- https://workos.com/blog/project-horizon
+- https://workos.com/blog/six-months-of-applied-ai-lessons
 
-### E. Harness / Context / Verification
+### Stripe - Minions
 
-확인할 질문:
+중점:
 
-- 모델 성능보다 harness가 중요한 구간은 어디인가?
-- Repository instructions, skills, tools, MCP, sandbox, environment preparation은 어떤 역할을 하는가?
-- deterministic check와 LLM judge를 어떻게 나누는가?
-- retry loop는 언제 도움이 되고 언제 오류를 증폭하는가?
-- 사람이 개입해야 하는 approval boundary는 어디인가?
+- one-shot end-to-end unattended coding agent
+- Slack/task에서 시작해 CI-ready PR까지 진행
+- 사람의 중간 개입 없이 실행
+- 최종 human review/approval 유지
+- 대규모 monorepo에서 context search와 CI integration
+- 높은 Agent throughput 이후 review/CI가 병목이 되는 문제
 
-### F. 평가와 한계
+자료:
 
-확인할 질문:
+- https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents
+- https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents-part-2
+- https://stripe.com/se/sessions/2026/developer-keynote
 
-- SWE-bench류 benchmark가 실제 Software Factory 성능을 얼마나 설명하는가?
-- benchmark contamination과 saturation 문제는 무엇인가?
-- long-horizon task capability를 어떻게 측정할 것인가?
-- PR 수, token 사용량, cycle time, acceptance rate, escaped defect 중 무엇을 봐야 하는가?
-- 공장 전체의 성능과 단일 모델 성능을 어떻게 분리해서 측정할 것인가?
+### StrongDM - Software Factory
 
-우선 자료:
+중점:
 
-- SWE-bench / SWE-bench Pro
-- METR time horizon research
-- DORA AI-assisted software development research
+- humans define intent
+- agents generate/validate/iterate
+- scenario-based validation
+- Digital Twin Universe
+- human code review 없이 validation으로 convergence를 판단하는 강한 자율 모델
 
-## 출처 등급
+자료:
 
-### A - 1차 자료
+- https://www.strongdm.com/blog/the-strongdm-software-factory-building-software-with-ai
 
-가장 우선한다.
+주의:
 
-- 논문 원문
-- 공식 기술 문서
-- 실제 운영팀의 engineering blog
-- 공식 specification
-- 프로젝트 공식 repository
+StrongDM 모델을 AI Software Factory의 유일한 정의로 사용하지 않는다. human review를 유지하는 WorkOS/Stripe/OpenAI 사례와 비교한다.
 
-### B - 2차 분석
+### Anthropic - Long-running Harness / Agent Teams
 
-1차 자료를 해석하거나 비교할 때 사용한다.
+중점:
 
-- 신뢰할 수 있는 연구자/엔지니어의 분석
-- 기술 서적
-- 학회/산업 보고서
+- long-horizon 작업의 session continuity
+- progress artifact와 git history
+- feature/task decomposition
+- planner / generator / evaluator 분리
+- self-evaluation 한계
+- evaluator agent
+- parallel agents와 shared codebase
+- harness complexity와 비용
 
-### C - 탐색 자료
+자료:
 
-새로운 사례나 키워드를 찾는 용도다.
+- https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- https://www.anthropic.com/engineering/harness-design-long-running-apps
+- https://www.anthropic.com/engineering/building-c-compiler
+- https://www.anthropic.com/engineering/how-we-contain-claude
 
-- 개인 블로그
-- 뉴스레터
-- 커뮤니티 글
-- curated list
+## 기반 연구
 
-C 등급만으로 본문 핵심 주장을 만들지 않는다.
+### DORA
 
-## 현재 작성 원칙
+목적:
 
-- 최신 AI 제품의 가격, 모델명, 사용량 제한은 책의 핵심 정의와 분리한다.
-- 회사가 주장하는 생산성 수치는 해당 회사의 관측값으로만 기록한다.
-- benchmark 점수와 실제 조직 생산성을 동일시하지 않는다.
-- "완전 자율", "dark factory", "human review 유지"를 서로 다른 운영 모델로 구분한다.
-- 특정 제품 사용 설명서가 아니라 재사용 가능한 시스템 원리를 찾는다.
-- 기존 Software Factory의 역사와 2026년 agent-native 의미가 연속적인지, 단지 이름만 재사용한 것인지도 검증 대상으로 남긴다.
+AI가 기존 delivery system의 강점과 약점을 증폭한다는 관점, throughput과 stability의 trade-off, 조직/플랫폼 수준 측정.
 
-## Research 파일
+- https://dora.dev/research/2025/dora-report/
+- https://dora.dev/ai/capabilities-model/report/
+- https://dora.dev/insights/balancing-ai-tensions/
 
-- `research/01-history-and-classic-software-factories.md`
-- `research/02-platform-and-delivery-foundations.md`
-- `research/03-agentic-software-factories-2026.md`
-- `research/04-orchestration-verification-and-evaluation.md`
+### METR
 
+목적:
+
+Agent가 장시간 작업을 얼마나 안정적으로 수행할 수 있는지, long-horizon capability를 모델 성능과 factory 구조에서 분리해 이해.
+
+- https://metr.org/time-horizons/
+
+### GitHub Copilot Agent Platform
+
+목적:
+
+- custom agents
+- sub-agent orchestration
+- hooks
+- deterministic policy enforcement
+- MCP
+- cloud execution
+
+자료:
+
+- https://docs.github.com/en/copilot/concepts/agents/hooks
+- https://docs.github.com/en/copilot/how-tos/copilot-sdk/features/custom-agents
+
+## 핵심 비교 축
+
+사례를 다음 표준 축으로 기록한다.
+
+| 축 | 확인 내용 |
+|---|---|
+| Work Source | Human prompt, Issue, Slack, CI failure, webhook, backlog |
+| Planning | Human, PM agent, planner agent, 없음 |
+| Orchestration | Session 직접 실행, queue, task tracker, event-driven |
+| Worker | Local, cloud, VM, container, sandbox |
+| Isolation | Branch, worktree, container, VM |
+| Context | repo docs, AGENTS.md, MCP, logs, issue, chat |
+| Continuity | session resume, progress file, durable task state |
+| Verification | lint, build, unit, integration, E2E, browser, scenario |
+| Evaluator | same agent, separate agent, deterministic runner, human |
+| Output | diff, commit, PR, screenshot, log, artifact |
+| Human Gate | none, task approval, PR review, merge approval |
+| Recovery | retry, reassignment, resume, rollback |
+| Security | permission, egress, secret handling, sandbox |
+| Observability | task/event/log/trace/worker state |
+| Feedback | manual improvement, automated diagnosis, self-improvement |
+| Metric | task success, merge, cycle time, quality, cost |
+
+## 중요한 대립 가설
+
+자료를 수집하면서 다음을 일부러 한쪽으로 결론 내리지 않는다.
+
+### Human review
+
+- StrongDM: scenario validation이 code review를 대체하는 방향
+- Stripe: unattended implementation + human review
+- WorkOS: review-first, explicit human approval
+- OpenAI: human review가 필수는 아니며 agent-to-agent review 비중 확대
+
+### Single agent vs multi-agent
+
+- 강한 단일 agent + 좋은 harness로 충분한 영역
+- planner/generator/evaluator 분리가 도움이 되는 영역
+- parallel agents가 유리한 영역
+- coordination cost가 성능 이득을 넘는 영역
+
+### Model capability vs system capability
+
+분리해서 기록한다.
+
+```text
+Model Capability
+≠
+Software Factory Capability
+```
+
+Factory 성능에는 모델 외에도 다음이 포함된다.
+
+- Task quality
+- Environment
+- Context
+- Tools
+- Verification
+- Orchestration
+- State
+- Security
+- Human decisions
+
+## 역사 자료의 위치
+
+과거 Software Factory는 다음 질문에 답하는 정도로만 조사한다.
+
+> 왜 AI 시대에 다시 "factory"라는 표현이 등장했는가?
+
+본문의 주제가 되지 않는다.
+
+필요하다면 서론에서 다음 정도만 비교한다.
+
+```text
+과거
+표준화 + 자동화 + 재사용 + 품질관리
+
+AI 시대
+위 기반
++ autonomous coding agents
++ orchestration
++ isolated execution
++ machine-readable context
++ autonomous verification
++ durable task state
++ continuous feedback
+```
+
+## Research 파일 계획
+
+- `research/00-research-map.md` - 전체 조사 지도
+- `research/01-ai-software-factory-landscape-2026.md` - 실제 사례
+- `research/02-factory-architecture-patterns.md` - 공통 구조
+- `research/03-harness-context-and-agent-legibility.md`
+- `research/04-orchestration-task-state-and-continuity.md`
+- `research/05-verification-evidence-and-human-gates.md`
+- `research/06-security-isolation-and-permissions.md`
+- `research/07-observability-metrics-and-economics.md`
+- `research/08-autonomy-levels-and-self-improvement.md`
+- `research/09-history-background.md` - 최소 역사 배경
+- `research/sources.md` - 출처 인덱스
+
+## 출처 원칙
+
+A급 자료를 우선한다.
+
+- 운영 조직의 공식 Engineering Blog
+- 공식 문서 / specification
+- 연구 논문 / benchmark 원문
+- 실제 오픈소스 repository
+
+회사 자체 생산성 수치는 독립 검증된 일반 사실이 아니라 **해당 조직의 보고 사례**로 기록한다.
+
+최신 제품의 모델명, 가격, session 제한은 책의 핵심 정의와 분리한다.
