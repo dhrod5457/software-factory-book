@@ -158,7 +158,7 @@ Design Constraint
 
 중요한 것은 하나의 Planning Process를 모든 작업에 강요하지 않는 것이다.
 
-Kiro나 Spec Kit 같은 specification-driven workflow에서도 핵심은 문서 형식 자체보다 **Intent와 실행 사이에 durable artifact를 둔다는 것**에 있다.
+2026년 9월 기준 GitHub Spec Kit의 기본 SDD 흐름은 `Specify → Plan → Tasks → Implement → Converge`이고, Kiro도 Requirement·Design·Task를 별도 artifact로 관리한다. 제품별 절차는 다르지만 여기서 가져올 원칙은 문서 형식 자체가 아니라 **Intent와 실행 사이에 durable artifact와 검증 가능한 연결을 둔다는 것**이다.
 
 작은 수정에 20페이지 Spec을 만드는 것은 낭비다. 반대로 여러 모듈이 연결된 Migration을 한 줄 Prompt로 처리하는 것도 위험하다.
 
@@ -209,7 +209,7 @@ System / Reviewer
 
 ## 4.5 Requirement에서 Verification까지 연결한다
 
-좋은 Factory는 Work Artifact를 서로 연결한다.
+좋은 Factory는 Work Artifact를 서로 연결한다. Spec Kit의 최신 `converge` 단계처럼 구현 결과를 다시 specification·plan·task와 대조하는 흐름도 이 연결의 한 사례다.
 
 ~~~text
 Requirement R1
