@@ -1,0 +1,13 @@
+flowchart TD
+  T["Durable Task"]
+  subgraph CP["Control Plane"]
+    S["State / Dependency / Retry / Approval"]
+    A["Assignment / Policy"]
+  end
+  subgraph EP["Execution Plane"]
+    W["Worker / Workspace"]
+    X["Agent Execution"]
+  end
+  R["Result / Evidence"]
+  T --> S --> A --> W --> X --> R
+  R -. event / status .-> S
