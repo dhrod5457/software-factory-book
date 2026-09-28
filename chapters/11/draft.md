@@ -266,19 +266,17 @@ Agent가 가진 강점은 **정답이 이미 코드로 존재하지 않는 탐�
 
 연구에서도 비슷한 결과가 나온다.
 
-Agentless는 복잡한 자유 Agent Loop 없이 localization → repair → validation이라는 구조화된 Workflow로 강한 Software Engineering Benchmark 결과를 보여줬다.
+Agentless는 2024년 당시 복잡한 자유 Agent Loop 없이 localization → repair → validation이라는 구조화된 Workflow만으로 경쟁력 있는 SWE-bench 결과를 보여줬다. 현재 최고 성능을 말하는 근거라기보다, Agent Architecture의 복잡성이 성능의 필수조건은 아니라는 역사적 반례로 보는 편이 적절하다.
 
-또 2026년 COBOL-to-Python modernization 연구에서는 Model, Prompt, Tool을 같게 유지하고 Orchestration Strategy만 비교했다.
+2026년 AIware에 발표된 COBOL-to-Python modernization 연구는 Model, Prompt, Tool, Source Program을 고정하고 Orchestration Strategy만 바꿔 비교했다. 이 실험에서 Deterministic Orchestration은 LLM-controlled 방식과 비슷한 functional correctness를 보이면서 worst-case robustness와 run variability를 개선했고, Token 사용은 조건에 따라 최대 3.5배 낮았다.
 
-Deterministic Orchestration은 LLM-controlled Orchestration과 비슷한 Accuracy를 보이면서도 worst-case robustness와 run variability, Token 사용에서 더 나은 결과를 보고했다.
-
-이 결과를 모든 Task에 일반화할 수는 없다.
+다만 이 결과는 구조화된 Legacy Modernization workload에 대한 연구다. 모든 Coding Task에 deterministic flow가 더 낫다고 일반화할 수는 없다.
 
 하지만 한 가지는 분명하다.
 
 > 구조화 가능한 Process에 Autonomy를 추가한다고 자동으로 품질이 좋아지는 것은 아니다.
 
-Agent Autonomy에도 Cost가 있다.
+Agent Autonomy는 상황에 따라 추가 비용을 만들 수 있다.
 
 - 더 많은 Tool Call
 - 더 많은 Context
