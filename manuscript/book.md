@@ -1,6 +1,8 @@
 # AI Software Factory
 
-> Manuscript working copy  
+**코딩 에이전트를 소프트웨어 생산 시스템으로 운영하는 설계 원칙**
+
+> Release Candidate RC1  
 > 기준일: 2026-09-28  
 > Source: reviewed chapter drafts
 
@@ -11373,7 +11375,7 @@ Maturity와 같은 축이 아니다.
    https://dora.dev/capabilities/platform-engineering/
 
 19. Factory.ai, *Signals*  
-   https://factory.ai/news/factory-signals
+   https://factory.com/news/factory-signals
 
 20. GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
    https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
