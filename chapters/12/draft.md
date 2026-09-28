@@ -134,6 +134,21 @@ Task의 구체적인 behavior를 검증한다.
 - traces
 - benchmark
 
+UI Task에서는 Behavioral Evidence가 특히 중요하다.
+
+Warp의 Zach Lloyd는 Software Factory의 verification 예로 Agent가 만든 UI를 computer use로 실제 실행하고 video와 screenshot을 남기는 흐름을 설명했다. 중요한 점은 screenshot 자체가 아니라 **실제 runtime behavior를 실행한 흔적을 Candidate Revision과 연결한다는 것**이다.
+
+~~~text
+UI Candidate
+→ Application Launch
+→ Computer Use
+→ Critical Flow
+→ Screenshot / Video
+→ Behavioral Evidence
+~~~
+
+이 패턴은 이 책의 Evidence Contract와 같은 문제를 다른 각도에서 보여준다. “화면을 수정했다”는 Agent의 설명보다, 특정 Revision에서 실제 사용 흐름을 실행하고 남긴 Evidence가 Review 비용을 줄인다.
+
 ### Independent Evaluator
 
 구현 Agent와 다른 Context나 Role을 가진 평가자가 결과를 점검한다.
