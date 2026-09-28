@@ -623,3 +623,178 @@ These are useful research signals but should not be treated as settled findings 
   - https://arxiv.org/abs/2603.28592
 - AI-to-AI Code Reviews of GitHub Pull Requests
   - https://arxiv.org/abs/2608.21311
+
+
+---
+
+## Platform Engineering / DevSecOps / Durable Execution Sources
+
+### NIST / NCCoE - Software Factory / DevSecOps Boundary
+
+- Secure Software Development, Security, and Operations (DevSecOps) Practices
+  - https://www.nccoe.nist.gov/projects/secure-software-development-security-and-operations-devsecops-practices
+- Notional Reference Model for DevSecOps
+  - updated 2026-09
+  - https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
+- Functional Demonstration Scenarios
+  - https://pages.nist.gov/nccoe-devsecops/functional-demonstration-scenarios.html
+- New NIST NCCoE Resources on DevSecOps and Agentic AI
+  - 2026-09-24
+  - https://www.nist.gov/news-events/news/2026/09/new-nist-nccoe-resources-devsecops-and-october-28-webinar-agentic-ai
+
+주요 조사 주제:
+
+- Plan / Develop / Build / Test / Release / Deploy / Operate
+- software factory reference model
+- control gates
+- continuous feedback
+- CI/CD
+- Zero Trust
+- requirement/task generation with AI
+- future Agentic AI in develop/build/test
+- Agent identity / authorization
+
+### DORA - Platform Engineering
+
+- Platform engineering capability
+  - updated 2026-01-12
+  - https://dora.dev/capabilities/platform-engineering/
+
+주요 조사 주제:
+
+- Internal Developer Platform
+- golden path
+- platform as distribution/governance layer for AI
+- downstream disorder
+- minimum viable platform
+- clear task feedback
+- balanced scorecard
+
+### CNCF - Platform Engineering
+
+- Platform Engineering Maturity Model
+  - https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
+- Platform engineering for the agentic enterprise
+  - 2026-07-21
+  - https://www.cncf.io/blog/2026/07/21/platform-engineering-for-the-agentic-enterprise-managing-applications-resources-and-ai-agents/
+- Platform engineering maturity: From toolchain to self-service
+  - 2026-09-01
+  - https://www.cncf.io/blog/2026/09/01/platform-engineering-maturity-from-toolchain-to-self-service/
+
+주요 조사 주제:
+
+- self-service
+- platform interfaces
+- Agent as first-class platform consumer
+- identity / policy / audit
+- machine-readable interface
+
+### Backstage
+
+- AI in the Software Catalog
+  - https://backstage.io/docs/ai/ai-in-the-catalog/
+- Spotify Portal / Software Catalog
+  - https://backstage.spotify.com/build-like-spotify
+
+주요 조사 주제:
+
+- AI resource catalog
+- skills
+- rules
+- MCP servers
+- ownership
+- lifecycle
+- Agent-readable organizational context
+
+### Microsoft Durable Task
+
+- Durable Task for AI agents
+  - updated 2026-05-05
+  - https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+
+주요 조사 주제:
+
+- durable execution
+- checkpointing
+- resume
+- retry
+- framework-independent runtime
+- deterministic vs agent-directed workflows
+
+### Google Agent Executor / Agent Platform
+
+- Agent Executor: Google’s distributed Agent Runtime
+  - 2026-05-20
+  - https://cloud.google.com/blog/products/ai-machine-learning/agent-executor-googles-distributed-agent-runtime
+- Gemini Enterprise Agent Runtime
+  - https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/runtime
+- Choose your agentic AI architecture components
+  - https://docs.cloud.google.com/architecture/choose-agentic-ai-architecture-components
+- Gemini Enterprise Agent Platform updates
+  - 2026-07-29
+  - https://cloud.google.com/blog/products/ai-machine-learning/whats-new-in-gemini-enterprise-agent-platform
+
+주요 조사 주제:
+
+- event log / snapshot
+- resumption
+- distributed deployment
+- generic Agent Runtime
+- Agent Platform vs Software Factory boundary
+
+### Temporal
+
+- Durable AI
+  - https://docs.temporal.io/ai
+- Of course you can build dynamic AI agents with Temporal
+  - 2025-11-12
+  - https://temporal.io/blog/of-course-you-can-build-dynamic-ai-agents-with-temporal
+- Building AI agents that overcome the complexity cliff
+  - 2026-03-10
+  - https://temporal.io/blog/building-ai-agents-that-overcome-the-complexity-cliff
+
+주요 조사 주제:
+
+- durable workflow
+- event history
+- replay
+- activities
+- long-running agents
+- HITL
+- idempotent side effects
+
+### Vercel
+
+- Introducing eve
+  - 2026-06-17
+  - https://vercel.com/blog/introducing-eve
+- A new programming model for durable execution
+  - 2026-04-16
+  - https://vercel.com/blog/a-new-programming-model-for-durable-execution
+
+주요 조사 주제:
+
+- durable execution
+- sandboxed compute
+- HITL
+- subagents
+- evals
+
+### AWS AgentCore
+
+- Introducing Amazon Bedrock AgentCore
+  - https://aws.amazon.com/blogs/aws/introducing-amazon-bedrock-agentcore-securely-deploy-and-operate-ai-agents-at-any-scale/
+- AgentCore runtime security best practices
+  - https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-security-best-practices.html
+- AgentCore observability
+  - https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability-configure.html
+
+주요 조사 주제:
+
+- generic Agent Platform
+- runtime
+- identity
+- gateway
+- memory
+- observability
+- framework/model independence
