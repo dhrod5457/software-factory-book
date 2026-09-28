@@ -134,13 +134,13 @@ Sources: Microsoft Research, *The Effects of Generative AI on High-Skilled Work*
 
 ## C11. NIST Agent Identity — 사람 계정을 Agent에게 빌려주는 문제
 
-NIST NCCoE는 2026년 Software and AI Agent Identity and Authorization concept paper를 공개하며 Agent identification, authentication, authorization, auditing, non-repudiation 같은 문제를 공식적으로 다루기 시작했다.
+NIST NCCoE는 2026년 2월 Software and AI Agent Identity and Authorization Draft concept paper를 공개했고, 이후 이 논의를 정식 NCCoE project로 이어가고 있다. Agent identification, authentication, authorization, auditing, non-repudiation 같은 문제가 주요 범위다.
 
 이 책의 Task-scoped Agent Identity 모델은 이 방향과 맞닿아 있지만 NIST의 확정 표준은 아니다.
 
 핵심 질문은 “Agent가 누구인가”보다 “누가 어떤 Task에 어떤 Capability를 위임했고, 어떤 행동을 했는지 추적할 수 있는가”다.
 
-**상태:** Initial Public Draft / ongoing project.
+**상태:** Draft concept paper + ongoing NCCoE project.
 
 Source: NIST NCCoE, *Software and AI Agent Identity and Authorization*.
 
