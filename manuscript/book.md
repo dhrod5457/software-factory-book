@@ -488,8 +488,6 @@ Agent는 빨라졌지만 Accepted Change까지 걸리는 시간은 그대로인�
 
 ---
 
-### 이 장에서 남는 질문
-
 Software Factory가 모든 병목을 없애 주는 것은 아니다.
 
 요구사항은 바뀌고, 테스트는 불완전하고, Production 환경은 예상과 다르며, Agent도 실패한다.
@@ -1138,8 +1136,6 @@ Human Review
 
 ---
 
-### 이 장에서 남는 질문
-
 지금까지의 정의만으로도 한 가지는 분명해진다.
 
 Software Factory는 기존 Software Engineering을 버리고 새 시스템으로 교체하는 개념이 아니다.
@@ -1620,8 +1616,6 @@ Git
 
 ---
 
-### 다음 질문
-
 지금까지는 Factory의 외곽 경계를 정리했다.
 
 이제부터는 내부로 들어간다.
@@ -1992,8 +1986,6 @@ Verification
 **무엇을 하면 끝난 것인지 알 수 있게 됐다.**
 
 ---
-
-### 다음 질문
 
 Requirement와 Acceptance가 준비됐다고 해도 아직 한 가지 문제가 남는다.
 
@@ -2451,8 +2443,6 @@ Task는 처음부터 새로 만들어지지 않는다.
 
 ---
 
-### 다음 질문
-
 Durable Task를 만들었다고 끝은 아니다.
 
 Task가 너무 크면 Context와 Retry 비용이 커진다.
@@ -2800,8 +2790,6 @@ Task를 Queue에 넣기 전에 다음 질문을 해볼 수 있다.
 실행과 복구의 경계를 명시적으로 생각하게 만드는 장치다.
 
 ---
-
-### 다음 질문
 
 Requirement가 있고, Durable Task가 있고, Dependency Graph까지 만들었다.
 
@@ -3255,8 +3243,6 @@ Execution Plane
 - 나중에 Worker를 여러 개로 확장할 수 있다.
 
 ---
-
-### 다음 질문
 
 Control Plane과 Execution Plane을 나눴다.
 
@@ -3729,8 +3715,6 @@ Worker State 문제다.
 이 질문에 답하면 Worker가 단순한 “원격 개발 머신”에서 Factory의 execution unit으로 바뀐다.
 
 ---
-
-### 다음 질문
 
 좋은 Worker를 만들었다고 Agent가 자동으로 잘 일하는 것은 아니다.
 
@@ -4231,8 +4215,6 @@ Software Factory의 강점은 Model을 교체하는 것 외에도 개선할 수 
 
 ---
 
-### 다음 질문
-
 Harness를 준비했다고 해도 Context를 무한정 넣을 수는 없다.
 
 Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context에 넣으면 오히려 Agent가 중요한 정보를 찾기 어려워질 수 있다.
@@ -4650,8 +4632,6 @@ Context File은 Agent에게 설명하는 수단이다.
 Mandatory Rule을 보장하는 수단은 아니다.
 
 ---
-
-### 다음 질문
 
 Context를 잘 준비해도 한 가지 결정은 남는다.
 
@@ -5128,8 +5108,6 @@ Tool
 이 질문에 따라 Control 위치를 정한다.
 
 ---
-
-### 다음 질문
 
 Agent에게 적절한 Autonomy를 줬다.
 
@@ -5695,8 +5673,6 @@ Verification Profile은 Task type과 Risk에 맞아야 한다.
 
 ---
 
-### 다음 질문
-
 Verification이 끝났다고 사람이 결과를 빠르게 이해할 수 있는 것은 아니다.
 
 Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있는지, Known Risk는 무엇인지 매번 찾아야 한다면 Review 비용이 커진다.
@@ -6082,8 +6058,6 @@ Evidence는 결과만이 아니라 **재현 조건**도 포함할 수 있다.
 핵심은 필드 수가 아니라 **Result Revision과 검증·Artifact 사이의 연결을 일관되게 유지하는 것**이다.
 
 ---
-
-### 다음 질문
 
 Evidence가 실패를 보여주었다고 하자.
 
@@ -6568,8 +6542,6 @@ Control Plane이 소유하는 편이 좋다.
 
 ---
 
-### 다음 질문
-
 Retry와 Resume를 설계했어도 한 가지 어려운 문제가 남는다.
 
 외부 API 호출이 실제로 성공했는데 응답만 유실되면 어떻게 할까.
@@ -7014,8 +6986,6 @@ pr: #381
 이것이 Durable Execution이 Tool Contract까지 영향을 주는 예다.
 
 ---
-
-### 다음 질문
 
 Work가 Crash와 Wait를 견딜 수 있게 됐다.
 
@@ -7556,8 +7526,6 @@ Permission
 
 ---
 
-### 다음 질문
-
 지금까지는 하나의 Worker가 안전하게 실행되고 결과를 검증하고 복구하는 구조를 만들었다.
 
 이제 여러 Worker를 동시에 실행하면 어떻게 될까.
@@ -7954,8 +7922,6 @@ T6 auth API contract
 
 ---
 
-### 다음 질문
-
 Parallel Worker로 Implementation Throughput을 높였다.
 
 이제 더 많은 Pull Request와 Verification Job이 나온다.
@@ -8334,8 +8300,6 @@ Reviewer capacity
 Factory는 Worker Utilization이 아니라 전체 Flow를 최적화해야 한다.
 
 ---
-
-### 다음 질문
 
 어디가 병목인지 알려면 관찰해야 한다.
 
@@ -8875,8 +8839,6 @@ Metric은 측정 가능한 것을 많이 모으기 위해 만드는 것이 아�
 
 ---
 
-### 다음 질문
-
 Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
 사람이 매번 Task를 직접 만들지 않아도 CI Failure, Vulnerability, Production Signal이 Work Source가 될 수 있다.
@@ -9227,8 +9189,6 @@ latency high
 
 ---
 
-### 다음 질문
-
 Event-driven Factory가 Work를 만들기 시작하면 더 많은 Platform Capability가 필요해진다.
 
 Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구현하게 해야 할까.
@@ -9560,8 +9520,6 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 ~~~
 
 ---
-
-### 다음 질문
 
 지금까지 책에서는 상당히 많은 Capability를 다뤘다.
 
@@ -9950,8 +9908,6 @@ Human Review
 하지만 빠진 것이 무엇인지 알고 시작해야 한다.
 
 ---
-
-### 다음 질문
 
 Minimum Viable Factory의 구조는 이해했다.
 
@@ -10363,8 +10319,6 @@ H. Evidence is linked to result revision
 이 Scenario를 통과하면 책이 주장하는 핵심 경계가 해당 Reference Implementation에서 동작한다는 근거가 된다. Production readiness나 다른 조직에서의 일반적 우수성을 증명하는 것은 아니다.
 
 ---
-
-### 다음 질문
 
 Reference Factory가 동작한다.
 
