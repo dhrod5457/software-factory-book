@@ -146,6 +146,40 @@ Network
 
 ---
 
+### Prepared Snapshot과 Fresh Task State
+
+Prepared Environment를 실제 운영 형태로 만들 때는 Image나 Snapshot을 사용할 수 있다.
+
+한 공개 tutorial 구현에서는 Coding Agent Runtime, Skill, Browser Tool, MCP Server, `AGENTS.md` 같은 정적 실행 자산을 reusable snapshot에 넣고 새 Worker를 그 환경에서 생성한다. 특정 Vendor 방식이 표준이라는 뜻은 아니다. 중요한 것은 **환경의 재사용 단위와 Task의 fresh state를 분리했다는 점**이다.
+
+~~~text
+Reusable Worker Image / Snapshot
+- runtime
+- coding agent runtime
+- tools
+- browser
+- skills
+- MCP integration
+- static instructions
+
+Fresh per Task
+- source revision
+- workspace
+- task input
+- scoped credential
+- uncommitted work
+- test state
+- temporary service data
+~~~
+
+이 구분이 무너지면 Snapshot은 빠른 bootstrap 수단이 아니라 오래된 Work State를 복제하는 수단이 된다.
+
+따라서 Prepared Environment의 목표는 "항상 같은 Worker를 유지하는 것"이 아니라 다음에 가깝다.
+
+> **같은 실행 능력은 재현하고, Task의 작업 상태는 새로 시작한다.**
+
+---
+
 ## 8.3 Fresh State와 Cache를 구분한다
 
 환경을 재사용하기 시작하면 새로운 위험이 생긴다.
