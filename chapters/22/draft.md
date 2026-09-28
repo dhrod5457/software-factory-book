@@ -209,7 +209,7 @@ Approval delay
 
 ## 22.5 Scale: Event Trigger와 Parallel Worker
 
-**Step F — Event Trigger**
+**Step F — Event Trigger를 Dry Run으로 연결한다**
 
 Human이 직접 Start하지 않아도 되는 Work를 연결한다.
 
@@ -219,14 +219,59 @@ Human이 직접 Start하지 않아도 되는 Work를 연결한다.
 - Issue Status
 - Schedule
 
+하지만 Event를 연결했다고 곧바로 Repository Write나 Agent Execution까지 켤 필요는 없다.
+
+먼저 Signal Path만 검증할 수 있다.
+
+~~~text
+Issue / CI / Schedule
+→ Factory receives signal
+→ Task candidate visible
+→ no code change
+~~~
+
+실제 공개 tutorial에서도 Project Repository의 Issue와 Label이 중앙 Factory에 도달하는지만 먼저 확인한 뒤 real execution을 활성화하는 방식이 사용된다.
+
+이 패턴을 일반화하면 다음과 같다.
+
+~~~text
+Signal Integration
+→ Observe-only / Dry Run
+→ Agent Execution
+→ Repository Write
+→ Delivery / Merge Permission
+~~~
+
+각 단계에서 확인할 것이 다르다.
+
+~~~text
+Dry Run
+- 중복 Signal은 없는가
+- 올바른 Repository / Task로 매핑되는가
+- 예상하지 않은 사용자 입력이 Trigger하지 않는가
+
+Execution
+- 올바른 Worker가 선택되는가
+- 필요한 Context만 전달되는가
+
+Write
+- 허용된 Branch / Path만 변경하는가
+
+Delivery
+- Verification과 Approval 정책을 통과하는가
+~~~
+
 중요:
 
 ~~~text
 Auto Start
+≠ Auto Write
 ≠ Auto Merge
 ~~~
 
-Work Source 자동화와 Acceptance Authority는 별개다.
+Work Source 자동화와 Side Effect Authority, Acceptance Authority는 서로 다른 축이다.
+
+이렇게 단계적으로 권한을 열면 Event-driven Factory를 처음부터 Fully Autonomous System으로 만들지 않아도 된다.
 
 ---
 
