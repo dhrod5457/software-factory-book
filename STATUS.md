@@ -1,89 +1,10 @@
 # Current Phase
 
-Phase 3 - Scope 완료
+Phase 4 - TOC 완료
 
-Research 단계에서 산업 사례, 학술 연구, 실패 사례, 보안, 거버넌스, Platform/DevOps 경계, Benchmark/Eval 자료를 수집했다.
+Research, Concept, Scope를 바탕으로 `planning/toc.md`를 작성했다.
 
-`planning/concept.md`에서 책의 최소 정의와 중심 원칙을 고정했고, `planning/scope.md`에서 핵심 본문·Advanced Topic·Future Topic·명시적 제외 범위를 확정했다.
-
-# Working Title
-
-**AI Software Factory**
-
-최종 제목/부제는 아직 확정하지 않는다.
-
-# Core Definition
-
-> AI Software Factory는 소프트웨어 작업을 durable하게 관리하고, AI Agent에게 실행을 위임하며, 독립된 검증과 통제 아래 실패를 복구하고 검증된 변경을 지속적으로 전달하는 소프트웨어 생산 시스템이다.
-
-# Core Elements
-
-```text
-Durable Work
-Delegated Execution
-Controlled Autonomy
-Independent Verification
-Recoverability
-Acceptance / Governance
-Feedback
-```
-
-# Scope Guardrails
-
-핵심 범위:
-
-- Requirement / Task
-- Durable Control Plane
-- Worker / Sandbox
-- Harness / Context / Tool
-- Verification / Evidence
-- Retry / Resume / Reassignment
-- Security / Governance
-- Observability / Metrics
-- Review / Integration
-- CI/CD / Platform Engineering 연결
-- Minimum Viable Factory
-- Maturity / Autonomy
-
-최소 정의의 필수조건이 아닌 것:
-
-- Multi-Agent
-- Fully autonomous merge
-- Automatic work selection
-- Self-improvement
-- Agent-generated requirements
-- General-purpose Agent Platform
-
-핵심 범위에서 제외:
-
-- Foundation Model 학습
-- Fine-tuning 튜토리얼
-- Prompt Engineering 입문
-- Agent Framework 종합 비교
-- Kubernetes / DevOps 입문
-- General-purpose Agent OS
-- AI 조직 대체론
-
-# Source of Truth
-
-1. `planning/concept.md`
-2. `planning/scope.md`
-3. `planning/future-topics.md`
-4. `research/29-academic-synthesis-design-principles.md`
-5. `research/18-research-contradictions-and-open-questions.md`
-6. `research/19-boundaries-devops-platform-engineering-agent-platform.md`
-7. `research/14-failure-modes-and-antipatterns.md`
-8. `research/sources.md`
-
-# Next
-
-Phase 4 - TOC
-
-다음 문서를 작성한다.
-
-`planning/toc.md`
-
-목차 설계 방향:
+목차는 제품별 구성이 아니라 AI Software Factory를 설계하는 사고 흐름을 따른다.
 
 ```text
 왜 필요한가
@@ -92,9 +13,66 @@ Phase 4 - TOC
 → Agent가 어디서 일하는가
 → 어떻게 통제하는가
 → 어떻게 검증하는가
-→ 실패하면 어떻게 하는가
-→ 어떻게 확장하는가
-→ 조직에서 어떻게 운영하는가
+→ 실패하면 어떻게 복구하는가
+→ 여러 Worker를 어떻게 관리하는가
+→ 기존 Delivery System과 어떻게 연결하는가
+→ 작은 Factory부터 어떻게 확장하는가
 ```
 
-제품별 Part 구성은 피하고 원칙 중심으로 구성한다.
+# Working Title
+
+**AI Software Factory**
+
+최종 제목/부제는 아직 확정하지 않는다.
+
+# TOC Structure
+
+7 Parts + 24 Chapters + Epilogue
+
+```text
+Part I   Coding Agent에서 Software Factory로
+Part II  Work를 정의하는 시스템
+Part III Factory의 실행 구조
+Part IV  결과를 믿을 수 있게 만드는 시스템
+Part V   여러 Worker와 전체 Flow 관리
+Part VI  조직의 Software Delivery System으로 확장
+Part VII Minimum Viable Factory에서 Adaptive Factory까지
+```
+
+# Core Definition
+
+> AI Software Factory는 소프트웨어 작업을 durable하게 관리하고, AI Agent에게 실행을 위임하며, 독립된 검증과 통제 아래 실패를 복구하고 검증된 변경을 지속적으로 전달하는 소프트웨어 생산 시스템이다.
+
+# Source of Truth
+
+1. `planning/concept.md`
+2. `planning/scope.md`
+3. `planning/toc.md`
+4. `planning/future-topics.md`
+5. `research/29-academic-synthesis-design-principles.md`
+6. `research/18-research-contradictions-and-open-questions.md`
+7. `research/sources.md`
+
+# Next
+
+Phase 5 - Chapter Plan
+
+각 장마다:
+
+`chapters/NN/plan.md`
+
+를 작성한다.
+
+각 plan에 최소 포함:
+
+- 장의 목적
+- 독자가 답할 질문
+- 핵심 주장
+- 반드시 사용할 research source
+- 반례
+- 도식
+- 실전 예제
+- 포함/제외 경계
+- 다음 장으로 연결
+
+Draft는 Chapter Plan 이후 작성한다.
