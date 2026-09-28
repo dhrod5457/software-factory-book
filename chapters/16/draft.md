@@ -98,6 +98,28 @@ Instruction은 Guidance다.
 
 Mandatory Rule은 Enforcement가 필요하다.
 
+그리고 Enforcement는 항상 "실행 전에 승인받는다"는 형태일 필요도 없다.
+
+더 강한 방법은 위험한 Capability 자체를 주지 않는 것이다.
+
+~~~text
+Agent can
+- read repository
+- write task branch
+- create pull request
+
+Agent cannot
+- delete protected infrastructure
+- access production credential
+- bypass branch protection
+~~~
+
+한 공개 tutorial의 Worker 환경에서도 일부 destructive infrastructure operation은 Agent에게 허용되지 않고 사람이 직접 수행한다. 특정 제품 제약을 표준으로 볼 수는 없지만, 설계 원칙은 분명하다.
+
+> **Capability를 주지 않는 것도 Human Gate다.**
+
+승인 Flow를 복잡하게 만들기 전에 "이 Worker가 애초에 이 동작을 할 수 있어야 하는가"부터 묻는 편이 좋다.
+
 ---
 
 ## 16.3 Human Credential을 Agent에게 그대로 주지 않는다
