@@ -2,7 +2,7 @@
 
 Software Factory를 만든다고 모든 Infrastructure Capability를 새로 만들 필요는 없다.
 
-대부분의 조직에는 이미 다음이 있다.
+조직마다 성숙도는 다르지만, Software Factory를 도입하려는 팀은 대개 다음 Capability 중 일부를 이미 사용하고 있다.
 
 - CI/CD
 - Environment Provisioning
@@ -54,7 +54,7 @@ Factory가 각각의 Infra Detail을 직접 다루게 하면 다음 문제가 �
 - Documentation
 - Dashboard
 
-Agent는 다른 Interface를 선호할 수 있다.
+Agent에는 사람용 Portal과는 다른 Interface가 더 적합할 수 있다. 2026년 CNCF의 업계 논의에서도 AI Agent를 사람과 함께 Platform Capability를 소비하는 non-human consumer로 보고, distinct identity와 scoped permission, audit가 필요한 방향을 제시한다. 이는 CNCF 표준 정의라기보다 현재 Platform Engineering의 확장 논의로 보는 편이 맞다.
 
 - API
 - MCP
@@ -149,7 +149,7 @@ Agent의 자유도를 줄이는 것이 아니라 Infrastructure Domain에서는 
 
 Agent가 Repository만 보고 조직 전체를 이해하기는 어렵다.
 
-Catalog에서 다음을 찾을 수 있다.
+Catalog가 충분히 관리되고 있다면 다음 정보를 찾을 수 있다. Backstage의 현재 문서도 Skill, governance Rule, MCP Server 같은 AI resource를 ownership·lifecycle·relationship과 함께 Software Catalog에 모델링하는 기능을 제공한다.
 
 - Service Owner
 - Dependency
@@ -228,7 +228,7 @@ Agent는 다음 행동을 판단할 수 있다.
 - code fix
 - escalation
 
-Structured Feedback은 Agent UX의 핵심이다.
+Structured Feedback은 Agent가 다음 행동을 고르기 쉽게 한다. DORA의 2025 Platform Engineering 연구는 사람 개발자에게도 “작업 결과에 대한 명확한 feedback”이 Platform 경험과 강하게 연결된다고 보고한다. 이를 Agent Interface에 적용하는 것은 이 책의 설계 확장이다.
 
 ---
 
@@ -246,7 +246,7 @@ deploy_staging(
 
 같은 operation_id로 재호출해도 duplicate deploy를 막는다.
 
-Agent-ready Platform은 단순 API 노출이 아니라 **replay-safe machine contract**까지 고려해야 한다.
+Agent-ready Platform은 단순 API 노출을 넘어 **replay-safe machine contract**를 고려할 수 있다. 모든 Platform API에 반드시 operation_id가 필요한 것은 아니지만, 재시도 시 중복 Side Effect가 위험한 Operation에는 중요한 조건이다.
 
 ---
 
