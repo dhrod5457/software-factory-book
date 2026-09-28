@@ -212,6 +212,25 @@ Worker Runtime
 
 셋이 같은 제품일 수도 있다.
 
+작은 구현에서는 GitHub Issue의 Label과 Comment를 Human-facing Control Surface로 사용할 수도 있다.
+
+~~~text
+ready
+→ running
+→ review
+~~~
+
+이렇게 하면 별도 Dashboard 없이도 사람이 현재 흐름을 볼 수 있다.
+
+다만 이 편리함 때문에 다음 두 개를 같은 것으로 보면 안 된다.
+
+~~~text
+Human-facing State
+≠ Authoritative Runtime State
+~~~
+
+Issue Label은 사람이 이해하기 좋은 Projection일 수 있다. Worker Lease, Retry Count, Attempt History 같은 실행 의미까지 같은 표현에 억지로 담을 필요는 없다.
+
 중요한 것은 책임을 구분하는 것이다.
 
 ---
@@ -448,3 +467,5 @@ Warm 상태를 재사용하면 무엇이 위험한가.
   https://www.anthropic.com/engineering/managed-agents
 - Microsoft, *Durable Task for AI agents*  
   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
