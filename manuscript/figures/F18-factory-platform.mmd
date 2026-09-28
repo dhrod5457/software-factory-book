@@ -1,0 +1,8 @@
+flowchart TD
+  H["Human"] --> HP["Portal / CLI"]
+  A["Agent"] --> AP["API / MCP"]
+  HP --> G["Golden Path / Platform Contract"]
+  AP --> G
+  G --> P["Policy"]
+  P --> C["CI/CD · Environment · Secret · Deploy · Observability"]
+  C --> I["Infrastructure"]
