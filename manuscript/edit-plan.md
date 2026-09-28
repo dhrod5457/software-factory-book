@@ -136,3 +136,27 @@ URL
 - Figure와 Case Study 위치가 결정된다.
 - Reference 형식이 통일된다.
 - publication-time source recheck 목록이 남아 있다.
+
+
+---
+
+# Progress Snapshot
+
+2026-09-28 기준:
+
+- Pass 1 Structural Flow — DONE
+- Pass 2 Terminology — DONE at glossary/canonical-boundary level
+- Pass 3 Figures — placement markers DONE, artwork pending
+- Pass 4 Case Study Boxes — placement markers DONE, final box prose pending
+- Pass 5 References — consolidated 53 references, final publication style pending
+- Pass 6 Front Matter — Preface DONE
+
+추가:
+
+- Chapter balance review — DONE
+- Chapter 1/2 compression — DONE
+- Chapter 22/23 section grouping — DONE
+- Copyedit pass — DONE
+- Markdown integrity check — PASS
+
+구조와 핵심 논지는 동결한다.
