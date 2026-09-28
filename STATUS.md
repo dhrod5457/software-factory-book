@@ -96,6 +96,8 @@ Review에서 완료한 항목:
 
 완료 추가:
 
+- Copyedit Pass 완료
+- Markdown integrity check PASS
 - Glossary 추가
 - Chapter별 Reference 제거 → 53개 통합 References
 - Figure marker 21개 실제 배치
@@ -104,9 +106,9 @@ Review에서 완료한 항목:
 
 남은 작업:
 
-1. Copyedit
-2. 실제 Figure 제작 / Caption
-3. Case Study Box 최종 원고화
+1. 실제 Figure 제작 / Caption
+2. Case Study Box 최종 원고화
+3. 최종 오탈자 proofread
 4. publication-time source recheck
 
 # Next
