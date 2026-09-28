@@ -492,25 +492,6 @@ Software Factory가 모든 병목을 없애는 것은 아니다.
 
 ---
 
-### 참고 자료
-
-- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
-  https://openai.com/index/harness-engineering/
-- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
-  https://openai.com/index/open-source-codex-orchestration-symphony/
-- DORA, *2025 DORA Report*  
-  https://dora.dev/research/2025/dora-report/
-- DORA, *Balancing AI tensions*  
-  https://dora.dev/insights/balancing-ai-tensions/
-- Microsoft Research, *The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers*  
-  https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/
-- METR, *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*  
-  https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
-- METR, *We are Changing our Developer Productivity Experiment Design*  
-  https://metr.org/blog/2026-02-24-uplift-update/
-- METR, *Task Substitution and Uplift*  
-  https://metr.org/blog/2026-05-08-task-substitution-and-uplift/
-
 ---
 
 ## 2장. AI Software Factory란 무엇인가
@@ -851,19 +832,6 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 다음 장에서는 이 경계를 정리한다.
 
 ---
-
-### 참고 자료
-
-- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
-  https://openai.com/index/open-source-codex-orchestration-symphony/
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
-  https://www.anthropic.com/engineering/managed-agents
-- NIST NCCoE, *Notional Reference Model for DevSecOps*  
-  https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
-- DORA, *Platform Engineering Capability*  
-  https://dora.dev/capabilities/platform-engineering/
 
 ---
 
@@ -1323,19 +1291,6 @@ Agent가 무엇을 구현해야 하는지 어떻게 정의할 것인가.
 
 ---
 
-### 참고 자료
-
-- NIST NCCoE, *Notional Reference Model for DevSecOps*  
-  https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
-- DORA, *Platform Engineering Capability*  
-  https://dora.dev/capabilities/platform-engineering/
-- CNCF, *Platform Engineering Maturity Model*  
-  https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
-- CNCF, *Platform Engineering for the Agentic Enterprise*  
-  https://www.cncf.io/blog/2026/07/21/platform-engineering-for-the-agentic-enterprise-managing-applications-resources-and-ai-agents/
-- Backstage, *AI in the Software Catalog*  
-  https://backstage.io/docs/ai/ai-in-the-catalog/
-
 ---
 
 # Part II. Work를 정의하는 시스템
@@ -1687,17 +1642,6 @@ Agent가 실행 중 중단되면 이 Work는 어디에 남는가. Session이 닫
 다음 장에서는 Prompt나 Session보다 오래 살아남는 작업 단위인 **Durable Task**를 정의한다.
 
 ---
-
-### 참고 자료
-
-- GitHub, *Spec Kit*  
-  https://github.com/github/spec-kit
-- Kiro, *Specs*  
-  https://kiro.dev/docs/specs/
-- Kiro, *Analyze Requirements*  
-  https://kiro.dev/docs/specs/analyze-requirements/
-- REAgent, *Requirement-Driven LLM Agents for Software Issue Resolution*  
-  https://arxiv.org/abs/2604.06861
 
 ---
 
@@ -2148,17 +2092,6 @@ Task끼리 Dependency가 있으면 아무 순서로나 실행할 수도 없다.
 
 ---
 
-### 참고 자료
-
-- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
-  https://openai.com/index/open-source-codex-orchestration-symphony/
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Anthropic, *Effective harnesses for long-running agents*  
-  https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
-- Microsoft, *Durable Task for AI agents*  
-  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
-
 ---
 
 ## 6장. Task 크기, 분해, Dependency
@@ -2499,17 +2432,6 @@ Worker가 죽으면 누가 다시 배정할 것인가.
 먼저 **Control Plane과 Execution Plane**을 분리한다.
 
 ---
-
-### 참고 자료
-
-- GitHub, *Spec Kit*  
-  https://github.com/github/spec-kit
-- *Runtime-Structured Task Decomposition for Agentic Coding Systems*  
-  https://arxiv.org/abs/2605.15425
-- GitHub, *Stacked pull requests are now in public preview*  
-  https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/
-- GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
-  https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
 
 ---
 
@@ -2952,17 +2874,6 @@ Warm 상태를 재사용하면 무엇이 위험한가.
 다음 장에서는 **Worker, Sandbox, Workspace**를 다룬다.
 
 ---
-
-### 참고 자료
-
-- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
-  https://openai.com/index/open-source-codex-orchestration-symphony/
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
-  https://www.anthropic.com/engineering/managed-agents
-- Microsoft, *Durable Task for AI agents*  
-  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
 
 ---
 
@@ -3416,17 +3327,6 @@ Worker State 문제다.
 다음 장에서는 Model 주변에서 Agent의 실제 작업 능력을 만드는 **Harness Engineering**을 다룬다.
 
 ---
-
-### 참고 자료
-
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
-  https://www.anthropic.com/engineering/managed-agents
-- Cursor, *Cloud Agents*  
-  https://cursor.com/docs/cloud-agent
-- OpenHands, *Software Agent SDK*  
-  https://github.com/OpenHands/software-agent-sdk
 
 ---
 
@@ -3916,17 +3816,6 @@ Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context
 
 ---
 
-### 참고 자료
-
-- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
-  https://openai.com/index/harness-engineering/
-- SWE-agent, *Agent-Computer Interface*  
-  https://swe-agent.com/1.0/background/aci/
-- Anthropic, *Writing tools for agents*  
-  https://www.anthropic.com/engineering/writing-tools-for-agents
-- GitHub, *Better tools made Copilot code review worse*  
-  https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
-
 ---
 
 ## 10장. Context Engineering과 Agent Legibility
@@ -4339,17 +4228,6 @@ DB Migration 순서도 매번 새로 계획하게 할까.
 다음 장에서는 **Controlled Autonomy**, 즉 deterministic control과 Agent judgment의 경계를 다룬다.
 
 ---
-
-### 참고 자료
-
-- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
-  https://openai.com/index/harness-engineering/
-- SWE-agent, *Agent-Computer Interface*  
-  https://swe-agent.com/1.0/background/aci/
-- Backstage, *AI in the Software Catalog*  
-  https://backstage.io/docs/ai/ai-in-the-catalog/
-- SWE-Explore  
-  https://arxiv.org/abs/2606.07297
 
 ---
 
@@ -4815,17 +4693,6 @@ Test도 통과할 수 있다.
 다음 장에서는 **Agent의 완료 보고와 Factory의 완료 판정을 분리하는 Verification 구조**를 다룬다.
 
 ---
-
-### 참고 자료
-
-- Agentless  
-  https://arxiv.org/abs/2407.01489
-- *Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization*  
-  https://doi.org/10.1145/3805760.3814891
-- *Runtime-Structured Task Decomposition for Agentic Coding Systems*  
-  https://arxiv.org/abs/2605.15425
-- *Wink: Recovering from Misbehaviors in Coding Agents*  
-  https://arxiv.org/abs/2602.17037
 
 ---
 
@@ -5374,17 +5241,6 @@ Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있
 
 ---
 
-### 참고 자료
-
-- Microsoft Research, *Building to the Test: Coding Agents Deliver What You Check, Not What You Requested*  
-  https://www.microsoft.com/en-us/research/publication/building-to-the-test-coding-agents-deliver-what-you-check-not-what-you-requested/
-- METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*  
-  https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
-- OpenAI, *How we monitor internal coding agents for misalignment*  
-  https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
-- Microsoft Research, *AgentLens*  
-  https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
-
 ---
 
 # Part IV. 결과를 믿을 수 있게 만드는 시스템
@@ -5765,17 +5621,6 @@ Worker도 중간에 죽었다.
 다음 장에서는 Failure를 예외가 아니라 정상적인 State로 보고 **Retry, Restart, Resume, Reassignment, Human Escalation**을 구분한다.
 
 ---
-
-### 참고 자료
-
-- Anthropic, *Demystifying evals for AI agents*  
-  https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
-- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
-  https://openai.com/index/harness-engineering/
-- NIST NCCoE, *DevSecOps Functional Demonstration Scenarios*  
-  https://pages.nist.gov/nccoe-devsecops/functional-demonstration-scenarios.html
-- GitHub, *Turn one giant AI-generated pull request to a reviewable stack*  
-  https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
 
 ---
 
@@ -6247,17 +6092,6 @@ Human Approval을 하루 동안 기다리는 동안 Worker를 계속 붙잡고 �
 
 ---
 
-### 참고 자료
-
-- Anthropic, *Effective harnesses for long-running agents*  
-  https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
-- Microsoft, *Durable Task for AI agents*  
-  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
-- *Wink: Recovering from Misbehaviors in Coding Agents*  
-  https://arxiv.org/abs/2602.17037
-- Anthropic, *Patterns and problems in emerging multiagent systems*  
-  https://www.anthropic.com/research/multiagent-systems
-
 ---
 
 ## 15장. Durable Execution: Crash를 넘어 이어지는 Work
@@ -6693,17 +6527,6 @@ Untrusted Issue 내용이 Tool Call로 이어지면 어떻게 막을 것인가.
 다음 장에서는 **Security, Identity, Governance**를 다룬다.
 
 ---
-
-### 참고 자료
-
-- Microsoft, *Durable Task for AI agents*  
-  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
-- Temporal, *AI and Durable Execution*  
-  https://docs.temporal.io/ai
-- Google Cloud, *Agent Executor: Google’s distributed agent runtime*  
-  https://cloud.google.com/blog/products/ai-machine-learning/agent-executor-googles-distributed-agent-runtime
-- Anthropic, *Effective harnesses for long-running agents*  
-  https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
 
 ---
 
@@ -7231,17 +7054,6 @@ Agent 수를 늘리면 처리량도 선형으로 늘어날까.
 
 ---
 
-### 참고 자료
-
-- NIST, *Software and AI Agent Identity and Authorization*  
-  https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd
-- Microsoft Security, *Securing CI/CD in the agentic world: Claude Code GitHub Action case*  
-  https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/
-- Microsoft Security, *Prompts become shells: RCE vulnerabilities in AI agent frameworks*  
-  https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/
-- GitHub, *Enterprise AI controls: agent control plane*  
-  https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/
-
 ---
 
 # Part V. 여러 Worker와 전체 Flow 관리
@@ -7625,15 +7437,6 @@ Parallel Worker로 Implementation Throughput을 높였다.
 
 ---
 
-### 참고 자료
-
-- Anthropic, *Patterns and problems in emerging multiagent systems*  
-  https://www.anthropic.com/research/multiagent-systems
-- Anthropic, *Building a C compiler with a team of parallel Claudes*  
-  https://www.anthropic.com/engineering/building-c-compiler
-- GitHub, *Copilot CLI Fleet*  
-  https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet
-
 ---
 
 ## 18장. Review, CI, Integration: Coding 다음 병목
@@ -8003,17 +7806,6 @@ Token Cost만 봐서는 Retry와 Rework를 알 수 없다.
 다음 장에서는 **Factory Observability와 Metrics**를 다룬다.
 
 ---
-
-### 참고 자료
-
-- GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
-  https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
-- GitHub, *Stacked pull requests are now in public preview*  
-  https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/
-- METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*  
-  https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
-- GitHub, *Better tools made Copilot code review worse*  
-  https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
 
 ---
 
@@ -8542,17 +8334,6 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
 ---
 
-### 참고 자료
-
-- DORA, *2025 DORA Report*  
-  https://dora.dev/research/2025/dora-report/
-- Microsoft Research, *Agentic Coding in the Wild*  
-  https://www.microsoft.com/en-us/research/publication/agentic-coding-in-the-wild-characterizing-github-copilot-at-production-scale/
-- GitHub, *How we make AI coding more cost-efficient without sacrificing task quality*  
-  https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
-- Anthropic, *Demystifying evals for AI agents*  
-  https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
-
 ---
 
 # Part VI. 조직의 Software Delivery System으로 확장
@@ -8890,15 +8671,6 @@ Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구�
 
 ---
 
-### 참고 자료
-
-- NIST NCCoE, *DevSecOps Notional Reference Model*  
-  https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Google, *Jules proactive updates*  
-  https://blog.google/innovation-and-ai/technology/developers-tools/jules-proactive-updates/
-
 ---
 
 ## 21장. Developer Platform과 Golden Path를 Factory가 사용하게 만들기
@@ -9221,17 +8993,6 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 다음 장에서는 **Minimum Viable AI Software Factory**로 범위를 다시 줄인다.
 
 ---
-
-### 참고 자료
-
-- DORA, *Platform Engineering Capability*  
-  https://dora.dev/capabilities/platform-engineering/
-- CNCF, *Platform Engineering Maturity Model*  
-  https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
-- CNCF, *Platform Engineering for the Agentic Enterprise*  
-  https://www.cncf.io/blog/2026/07/21/platform-engineering-for-the-agentic-enterprise-managing-applications-resources-and-ai-agents/
-- Backstage, *AI in the Software Catalog*  
-  https://backstage.io/docs/ai/ai-in-the-catalog/
 
 ---
 
@@ -9615,17 +9376,6 @@ Minimum Viable Factory의 구조는 이해했다.
 다음 장에서는 **Reference Factory**를 설계하고 Happy Path보다 Failure Scenario를 중심으로 검증한다.
 
 ---
-
-### 참고 자료
-
-- DORA, *Platform Engineering Capability*  
-  https://dora.dev/capabilities/platform-engineering/
-- CNCF, *Platform Engineering Maturity Model*  
-  https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
-- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
-  https://openai.com/index/harness-engineering/
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
 
 ---
 
@@ -10036,17 +9786,6 @@ Agent가 Backlog에서 스스로 Work를 선택하게 할까.
 다음 장에서는 Factory의 **Maturity와 Autonomy를 서로 다른 축으로 분리해** 확장 순서를 정리한다.
 
 ---
-
-### 참고 자료
-
-- OpenAI, *Symphony*  
-  https://openai.com/index/open-source-codex-orchestration-symphony/
-- WorkOS, *Project Horizon*  
-  https://workos.com/blog/project-horizon
-- Microsoft, *Durable Task for AI agents*  
-  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
-- Anthropic, *Effective harnesses for long-running agents*  
-  https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
 
 ---
 
@@ -10503,17 +10242,6 @@ Epilogue에서는 **Software Engineering에서 Software Production System Engine
 
 ---
 
-### 참고 자료
-
-- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
-  https://openai.com/index/harness-engineering/
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Factory.ai, *Signals*  
-  https://factory.ai/news/factory-signals
-- Anthropic, *Agent Skills*  
-  https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
-
 ---
 
 # Epilogue. Software Engineering에서 Software Production으로
@@ -10803,3 +10531,167 @@ Repository, Risk, Team, Product가 다르기 때문이다.
 
 그 시스템이 각 조직에서 어디까지 자동화될지는 사람이 결정해야 한다.
 
+---
+
+# References
+
+> Working bibliography. 최종 출판 형식은 publication pass에서 통일한다.
+
+1. *Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization*  
+   https://doi.org/10.1145/3805760.3814891
+
+2. *Runtime-Structured Task Decomposition for Agentic Coding Systems*  
+   https://arxiv.org/abs/2605.15425
+
+3. *Wink: Recovering from Misbehaviors in Coding Agents*  
+   https://arxiv.org/abs/2602.17037
+
+4. Agentless  
+   https://arxiv.org/abs/2407.01489
+
+5. Anthropic, *Agent Skills*  
+   https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+
+6. Anthropic, *Building a C compiler with a team of parallel Claudes*  
+   https://www.anthropic.com/engineering/building-c-compiler
+
+7. Anthropic, *Demystifying evals for AI agents*  
+   https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+
+8. Anthropic, *Effective harnesses for long-running agents*  
+   https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+
+9. Anthropic, *Patterns and problems in emerging multiagent systems*  
+   https://www.anthropic.com/research/multiagent-systems
+
+10. Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
+   https://www.anthropic.com/engineering/managed-agents
+
+11. Anthropic, *Writing tools for agents*  
+   https://www.anthropic.com/engineering/writing-tools-for-agents
+
+12. Backstage, *AI in the Software Catalog*  
+   https://backstage.io/docs/ai/ai-in-the-catalog/
+
+13. CNCF, *Platform Engineering for the Agentic Enterprise*  
+   https://www.cncf.io/blog/2026/07/21/platform-engineering-for-the-agentic-enterprise-managing-applications-resources-and-ai-agents/
+
+14. CNCF, *Platform Engineering Maturity Model*  
+   https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
+
+15. Cursor, *Cloud Agents*  
+   https://cursor.com/docs/cloud-agent
+
+16. DORA, *2025 DORA Report*  
+   https://dora.dev/research/2025/dora-report/
+
+17. DORA, *Balancing AI tensions*  
+   https://dora.dev/insights/balancing-ai-tensions/
+
+18. DORA, *Platform Engineering Capability*  
+   https://dora.dev/capabilities/platform-engineering/
+
+19. Factory.ai, *Signals*  
+   https://factory.ai/news/factory-signals
+
+20. GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
+   https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
+
+21. GitHub, *Better tools made Copilot code review worse*  
+   https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
+
+22. GitHub, *Copilot CLI Fleet*  
+   https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet
+
+23. GitHub, *Enterprise AI controls: agent control plane*  
+   https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/
+
+24. GitHub, *How we make AI coding more cost-efficient without sacrificing task quality*  
+   https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
+
+25. GitHub, *Spec Kit*  
+   https://github.com/github/spec-kit
+
+26. GitHub, *Stacked pull requests are now in public preview*  
+   https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/
+
+27. Google Cloud, *Agent Executor: Google’s distributed agent runtime*  
+   https://cloud.google.com/blog/products/ai-machine-learning/agent-executor-googles-distributed-agent-runtime
+
+28. Google, *Jules proactive updates*  
+   https://blog.google/innovation-and-ai/technology/developers-tools/jules-proactive-updates/
+
+29. Kiro, *Analyze Requirements*  
+   https://kiro.dev/docs/specs/analyze-requirements/
+
+30. Kiro, *Specs*  
+   https://kiro.dev/docs/specs/
+
+31. METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*  
+   https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
+
+32. METR, *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*  
+   https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+
+33. METR, *Task Substitution and Uplift*  
+   https://metr.org/blog/2026-05-08-task-substitution-and-uplift/
+
+34. METR, *We are Changing our Developer Productivity Experiment Design*  
+   https://metr.org/blog/2026-02-24-uplift-update/
+
+35. Microsoft Research, *Agentic Coding in the Wild*  
+   https://www.microsoft.com/en-us/research/publication/agentic-coding-in-the-wild-characterizing-github-copilot-at-production-scale/
+
+36. Microsoft Research, *AgentLens*  
+   https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
+
+37. Microsoft Research, *Building to the Test: Coding Agents Deliver What You Check, Not What You Requested*  
+   https://www.microsoft.com/en-us/research/publication/building-to-the-test-coding-agents-deliver-what-you-check-not-what-you-requested/
+
+38. Microsoft Research, *The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers*  
+   https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/
+
+39. Microsoft Security, *Prompts become shells: RCE vulnerabilities in AI agent frameworks*  
+   https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/
+
+40. Microsoft Security, *Securing CI/CD in the agentic world: Claude Code GitHub Action case*  
+   https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/
+
+41. Microsoft, *Durable Task for AI agents*  
+   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+
+42. NIST NCCoE, *DevSecOps Functional Demonstration Scenarios*  
+   https://pages.nist.gov/nccoe-devsecops/functional-demonstration-scenarios.html
+
+43. NIST NCCoE, *Notional Reference Model for DevSecOps*  
+   https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
+
+44. NIST, *Software and AI Agent Identity and Authorization*  
+   https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd
+
+45. OpenAI, *An open-source spec for Codex orchestration: Symphony*  
+   https://openai.com/index/open-source-codex-orchestration-symphony/
+
+46. OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
+   https://openai.com/index/harness-engineering/
+
+47. OpenAI, *How we monitor internal coding agents for misalignment*  
+   https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
+
+48. OpenHands, *Software Agent SDK*  
+   https://github.com/OpenHands/software-agent-sdk
+
+49. REAgent, *Requirement-Driven LLM Agents for Software Issue Resolution*  
+   https://arxiv.org/abs/2604.06861
+
+50. SWE-agent, *Agent-Computer Interface*  
+   https://swe-agent.com/1.0/background/aci/
+
+51. SWE-Explore  
+   https://arxiv.org/abs/2606.07297
+
+52. Temporal, *AI and Durable Execution*  
+   https://docs.temporal.io/ai
+
+53. WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+   https://workos.com/blog/project-horizon
