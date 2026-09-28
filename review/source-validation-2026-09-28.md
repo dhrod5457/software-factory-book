@@ -80,6 +80,25 @@
 - event-driven work source
 - durable execution runtime
 
+### Warp / Zach Lloyd
+- *Software Engineering Is Becoming Factory Engineering* — AI Engineer World's Fair 2026 talk
+- *Adopting the software factory model: crawl, walk, run* — Warp, 2026-09-15
+
+확인 용도:
+- idea / issue intake와 triage
+- product specification / technical specification
+- implementation / review / verification / monitoring loop
+- computer-use 기반 behavioral evidence
+- human time / token time을 포함한 factory efficiency
+- observer / skill improvement loop
+- factory engineer / meta-engineering framing
+
+Claim strength:
+- 발표의 구조와 용어는 Zach Lloyd / Warp의 thesis와 운영 사례로 attribution한다.
+- “모든 프로젝트가 Software Factory를 갖게 된다” 같은 미래 전망은 일반 사실로 쓰지 않는다.
+- Warp 운영 수치와 제품 효과는 vendor claim으로 취급한다.
+- 이 책의 Evidence Contract, Accepted Change, guarded self-improvement는 Warp가 정의한 업계 표준이 아니라 책의 synthesis로 유지한다.
+
 ### DORA / CNCF / Backstage
 - 2025 DORA report and platform capability
 - CNCF agentic platform discussion
