@@ -452,6 +452,10 @@ Agent가 Backlog에서 스스로 Work를 선택하게 할까.
 
 ## 참고 자료
 
+- Cursor, *Grok Bot*  
+  https://cursor.com/docs/grok-bot
+- Cursor, *Work with Grok Bot*  
+  https://cursor.com/docs/grok-bot/work
 - OpenAI, *Symphony*  
   https://openai.com/index/open-source-codex-orchestration-symphony/
 - WorkOS, *Project Horizon*  
