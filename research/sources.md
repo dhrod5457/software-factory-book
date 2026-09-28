@@ -111,6 +111,37 @@ AI 시대 Software Factory 조사에 사용하는 1차 자료 인덱스다.
 
 ---
 
+## Warp
+
+### Software Factory / Factory Engineering
+
+- Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*
+  - AI Engineer World's Fair 2026 talk
+  - https://www.youtube.com/watch?v=tUPPVhBBcoM
+  - 조사 기준: 사용자 제공 English transcript와 원문 video
+- Zach Lloyd, *Adopting the software factory model: crawl, walk, run*
+  - 2026-09-15
+  - https://www.warp.dev/blog/adopting-the-software-factory-model-crawl-walk-run
+
+주요 조사 주제:
+
+- interactive agent에서 automated software factory로의 전환
+- idea / issue intake와 triage
+- product specification / technical specification
+- implementation / review / verification / monitoring을 잇는 closed loop
+- computer-use 기반 screenshot / video verification
+- control plane / execution environment / data plane
+- human time / token time을 포함한 factory efficiency
+- observer agent / skill loop 기반 self-improvement
+- factory engineer / meta-engineering
+- open-source project를 public factory로 운영하는 사례
+
+사용 규칙:
+
+- Lloyd의 보편화 전망은 Warp founder의 전망으로 attribution한다.
+- Warp 운영 수치나 제품 주장은 vendor claim으로 취급한다.
+- 이 책의 Durable Task, Evidence Contract, Accepted Change, guarded self-improvement 모델과 동일한 업계 표준으로 표현하지 않는다.
+
 ## Stripe
 
 - Minions: Stripe’s one-shot, end-to-end coding agents
