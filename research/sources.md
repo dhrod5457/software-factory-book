@@ -14,6 +14,41 @@ AI 시대 Software Factory 조사에 사용하는 1차 자료 인덱스다.
 
 ---
 
+## Cursor / Grok Bot
+
+- Grok Bot
+  - https://cursor.com/docs/grok-bot
+- Work with Grok Bot
+  - https://cursor.com/docs/grok-bot/work
+- Get started with Grok Bot
+  - https://cursor.com/docs/grok-bot/get-started
+- Routines
+  - https://prod.cursor.com/help/grok-bot/routines
+- Grok Bot for Teams and Enterprise
+  - https://cursor.com/docs/grok-bot/teams
+- Grok Bot security
+  - https://prod.cursor.com/docs/grok-bot/security
+- Agent Conf 2026 Agenda
+  - https://www.agent.sh/agenda
+
+주요 조사 주제:
+
+- persistent agent identity / context
+- persistent cloud computer
+- shared computer state and security boundary
+- browser / computer use integration
+- bot-to-bot coordination and handoff
+- reusable skills and templates
+- schedule / event routines
+- approval / policy / isolation
+- operator surface
+
+사용 규칙:
+
+- 발표 자막의 사용자 수, 10x 효과, 비용 절감액 같은 정량 주장은 독립 검증 없이 일반화하지 않는다.
+- Persistent Agent/Worker를 Durable Task/Execution과 동일시하지 않는다.
+- Bot messaging을 durable orchestration의 대체로 보지 않는다.
+
 ## OpenAI
 
 ### Agent-first engineering / orchestration
