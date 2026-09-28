@@ -55,7 +55,7 @@ Software Engineering에서 Software Production으로
 
 # Part I. Coding Agent에서 Software Factory로
 
-# 1장. Coding Agent가 좋아진 뒤 무엇이 병목이 되는가
+## 1장. Coding Agent가 좋아진 뒤 무엇이 병목이 되는가
 
 몇 년 전까지 AI 코딩 도구의 가치는 비교적 설명하기 쉬웠다. 개발자가 코드를 작성하는 동안 다음 줄을 추천하고, 반복 코드를 만들고, 모르는 API 사용법을 빠르게 알려주는 도구였다. 생산성 질문도 자연스럽게 개인 개발자의 작업 속도에 맞춰졌다.
 
@@ -81,7 +81,7 @@ Agent가 코드를 얼마나 잘 쓰는지뿐 아니라, **Agent가 만든 작�
 
 ---
 
-## 1.1 Coding Assistant에서 Coding Agent로
+### 1.1 Coding Assistant에서 Coding Agent로
 
 Coding Assistant와 Coding Agent를 제품 이름으로 구분하기는 어렵다. 같은 제품도 어떤 방식으로 사용하느냐에 따라 Assistant처럼 동작할 수도 있고 Agent처럼 동작할 수도 있다.
 
@@ -156,7 +156,7 @@ Benchmark가 높은 Model을 도입했다고 팀 생산성이 같은 비율로 �
 
 ---
 
-## 1.2 코드 생성 속도와 Delivery 속도는 다르다
+### 1.2 코드 생성 속도와 Delivery 속도는 다르다
 
 소프트웨어 변경이 사용자에게 도달하기까지는 코드 작성 외에도 여러 단계가 있다.
 
@@ -209,7 +209,7 @@ Worker를 2개에서 20개로 늘려도 Review Capacity가 그대로라면 전�
 
 DORA의 AI 연구에서도 비슷한 시스템 관점이 나타난다. AI가 초기 코드 생성을 빠르게 하더라도 테스트, 리뷰, 보안, 배포가 받쳐주지 않으면 개인 수준의 개선이 downstream 병목에 흡수될 수 있다.
 
-### 3분 수정, 하루 이상 대기
+#### 3분 수정, 하루 이상 대기
 
 작은 Bug 하나를 Agent가 3분 만에 고쳤다고 해보자.
 
@@ -256,7 +256,7 @@ Software Factory는 이 차이를 관리해야 한다.
 
 ---
 
-## 1.3 Human Attention이 새로운 Capacity가 된다
+### 1.3 Human Attention이 새로운 Capacity가 된다
 
 Agent가 한두 개일 때는 사람이 직접 관리해도 된다.
 
@@ -321,7 +321,7 @@ Agent가 수십 개의 PR을 만들었지만 사람이 그것을 이해하고 �
 
 ---
 
-## 1.4 생산성 연구가 서로 다른 이유
+### 1.4 생산성 연구가 서로 다른 이유
 
 AI 코딩 도구의 생산성 효과를 이야기할 때 서로 반대처럼 보이는 수치가 자주 등장한다.
 
@@ -413,7 +413,7 @@ AI의 효과가 기존 Task를 빠르게 하는 데만 있는 것은 아니다. 
 
 ---
 
-## 1.5 최적화 단위를 바꾼다
+### 1.5 최적화 단위를 바꾼다
 
 AI Coding Agent를 도입하면 눈에 잘 보이는 숫자부터 측정하기 쉽다.
 
@@ -488,7 +488,7 @@ Agent는 빨라졌지만 Accepted Change까지 걸리는 시간은 그대로인�
 
 ---
 
-## 이 장에서 남는 질문
+### 이 장에서 남는 질문
 
 Software Factory가 모든 병목을 없애 주는 것은 아니다.
 
@@ -510,7 +510,7 @@ Agent가 빨라지고 여러 작업을 동시에 실행할 수 있게 되면 사
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
   https://openai.com/index/harness-engineering/
@@ -531,7 +531,7 @@ Agent가 빨라지고 여러 작업을 동시에 실행할 수 있게 되면 사
 
 ---
 
-# 2장. AI Software Factory란 무엇인가
+## 2장. AI Software Factory란 무엇인가
 
 1장에서 본 문제는 단순했다.
 
@@ -565,7 +565,7 @@ Agent는 이 시스템의 중요한 Worker다.
 
 ---
 
-## 2.1 왜 다시 Factory라는 표현인가
+### 2.1 왜 다시 Factory라는 표현인가
 
 Software Factory라는 표현은 AI 시대에 처음 등장한 말이 아니다.
 
@@ -617,7 +617,7 @@ AI 시대에 Factory라는 표현이 다시 유용해지는 이유도 여기에 
 
 ---
 
-## 2.2 책의 최소 정의
+### 2.2 책의 최소 정의
 
 앞에서 제시한 정의를 다시 보자.
 
@@ -695,13 +695,13 @@ Agent 수는 많지만 생산 시스템은 약하다.
 
 ---
 
-## 2.3 일곱 개 핵심 설계 속성
+### 2.3 일곱 개 핵심 설계 속성
 
 이 책에서는 AI Software Factory를 설명할 때 반복해서 사용할 설계 속성을 일곱 가지로 정리한다.
 
 이 일곱 가지가 모두 첫 구현부터 완비되어야 한다는 뜻은 아니다. 22장의 Minimum Viable Factory는 이 가운데 필요한 일부를 작은 흐름으로 시작한다. 여기서는 이후 장에서 사용할 공통 언어를 먼저 정리한다.
 
-### 1. Durable Work
+#### 1. Durable Work
 
 Factory의 기본 단위는 Prompt가 아니라 Task다.
 
@@ -743,7 +743,7 @@ Task에는 다음과 같은 정보가 연결될 수 있다.
 
 ---
 
-### 2. Delegated Execution
+#### 2. Delegated Execution
 
 Factory의 Agent는 답변만 만드는 것이 아니라 실제 실행환경에서 일한다.
 
@@ -767,7 +767,7 @@ Factory의 Agent는 답변만 만드는 것이 아니라 실제 실행환경에�
 
 ---
 
-### 3. Controlled Autonomy
+#### 3. Controlled Autonomy
 
 Factory는 모든 결정을 Agent에게 넘기는 시스템이 아니다.
 
@@ -809,7 +809,7 @@ Factory에서 Autonomy는 "Agent에게 다 맡긴다"는 뜻이 아니다.
 
 ---
 
-### 4. Independent Verification
+#### 4. Independent Verification
 
 Agent가 완료했다고 말하는 것과 Task가 실제로 완료된 것은 다르다.
 
@@ -856,7 +856,7 @@ Factory는 Agent의 자연어 보고와 완료 판정을 분리해야 한다.
 
 ---
 
-### 5. Recoverability
+#### 5. Recoverability
 
 Agent는 실패한다.
 
@@ -889,7 +889,7 @@ Software Factory Architecture의 품질은 한 번의 happy path보다 **실패 
 
 ---
 
-### 6. Acceptance / Governance
+#### 6. Acceptance / Governance
 
 Agent가 실행할 수 있다고 해서 최종 승인 권한까지 가져야 하는 것은 아니다.
 
@@ -915,7 +915,7 @@ Task 위험에 따라 **누가 최종 위험을 받아들이는지 명확히 하
 
 ---
 
-### 7. Feedback
+#### 7. Feedback
 
 Factory는 Task 하나를 끝내고 사라지는 시스템이 아니다.
 
@@ -952,11 +952,11 @@ Feedback이 자동이어야 한다는 뜻은 아니다.
 
 ---
 
-## 2.4 Factory가 아닌 것
+### 2.4 Factory가 아닌 것
 
 정의를 더 명확하게 하려면 무엇이 아닌지도 볼 필요가 있다.
 
-### Multi-Agent System과 같지 않다
+#### Multi-Agent System과 같지 않다
 
 Agent가 여러 개 있다고 Factory가 되는 것은 아니다.
 
@@ -977,7 +977,7 @@ Minimum Viable Factory는 Agent 하나로도 만들 수 있다.
 
 ---
 
-### Agent Framework와 같지 않다
+#### Agent Framework와 같지 않다
 
 Agent Framework는 Model Loop, Tool 호출, Memory, Subagent, Context 같은 실행 기반을 제공할 수 있다.
 
@@ -1002,7 +1002,7 @@ Factory 전체와 같은 것은 아니다.
 
 ---
 
-### Coding Agent Farm과 같지 않다
+#### Coding Agent Farm과 같지 않다
 
 Agent를 여러 개 띄우고 사람이 각각 관리하는 구조를 생각해보자.
 
@@ -1022,7 +1022,7 @@ Factory는 Agent 수보다 **시스템이 Work를 책임지는 정도**가 중�
 
 ---
 
-### CI/CD에 LLM을 붙인 것과 같지 않다
+#### CI/CD에 LLM을 붙인 것과 같지 않다
 
 CI/CD는 이미 Software Factory의 중요한 기반이다.
 
@@ -1052,7 +1052,7 @@ Factory는 CI/CD보다 앞단의 Requirement/Task와 실행 중의 Retry/Approva
 
 ---
 
-### Fully Autonomous Organization과 같지 않다
+#### Fully Autonomous Organization과 같지 않다
 
 Software Factory라는 표현을 들으면 사람이 거의 없는 개발 조직을 떠올리기 쉽다.
 
@@ -1073,7 +1073,7 @@ Agent는 실행 권한만 많이 가질 수도 있다.
 
 ---
 
-## 2.5 Factory를 하나의 Loop로 본다
+### 2.5 Factory를 하나의 Loop로 본다
 
 지금까지의 요소를 하나의 흐름으로 연결하면 다음과 같다.
 
@@ -1138,7 +1138,7 @@ Human Review
 
 ---
 
-## 이 장에서 남는 질문
+### 이 장에서 남는 질문
 
 지금까지의 정의만으로도 한 가지는 분명해진다.
 
@@ -1163,7 +1163,7 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *An open-source spec for Codex orchestration: Symphony*  
   https://openai.com/index/open-source-codex-orchestration-symphony/
@@ -1178,7 +1178,7 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 ---
 
-# 3장. CI/CD, DevOps, Platform Engineering, Agent Platform과의 경계
+## 3장. CI/CD, DevOps, Platform Engineering, Agent Platform과의 경계
 
 2장에서 AI Software Factory의 최소 정의를 정했다.
 
@@ -1209,7 +1209,7 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 ---
 
-## 3.1 CI/CD는 무엇을 이미 잘하고 있는가
+### 3.1 CI/CD는 무엇을 이미 잘하고 있는가
 
 CI/CD는 이미 소프트웨어 생산 자동화의 핵심이다.
 
@@ -1288,7 +1288,7 @@ CI 결과가 Agent에게 다시 피드백되어 수정 루프 안으로 들어�
 
 ---
 
-## 3.2 DevOps와 DevSecOps를 대체하지 않는다
+### 3.2 DevOps와 DevSecOps를 대체하지 않는다
 
 AI Software Factory를 새로운 개발 방법론으로 오해할 필요도 없다.
 
@@ -1340,7 +1340,7 @@ DevOps가 사라지는 것이 아니라 실행 주체가 늘어나는 것이다.
 
 ---
 
-## 3.3 Platform Engineering과 Factory는 경쟁 관계가 아니다
+### 3.3 Platform Engineering과 Factory는 경쟁 관계가 아니다
 
 Platform Engineering과 Software Factory는 자주 겹쳐 보인다.
 
@@ -1419,7 +1419,7 @@ Factory
 
 ---
 
-### Agent도 Platform User가 된다
+#### Agent도 Platform User가 된다
 
 Agent가 Platform의 소비자가 되면 Portal과 문서만으로는 부족할 수 있다. Stable API, structured result, scoped permission처럼 machine-readable한 interface가 중요해진다.
 
@@ -1427,7 +1427,7 @@ Agent가 Platform의 소비자가 되면 Portal과 문서만으로는 부족할 
 
 ---
 
-## 3.4 Agent Platform과 Software Factory
+### 3.4 Agent Platform과 Software Factory
 
 Agent Platform과 Software Factory는 더 쉽게 혼동된다.
 
@@ -1492,7 +1492,7 @@ Agent Platform이 충분히 좋아도 다음을 자동으로 제공하지는 않
 
 ---
 
-### Runtime과 Factory도 구분한다
+#### Runtime과 Factory도 구분한다
 
 Agent Runtime은 실행 기반이다.
 
@@ -1544,7 +1544,7 @@ Factory는 이 기반 위에서 Software Delivery domain의 Work를 관리한다
 
 ---
 
-## 3.5 경계를 나누면 무엇이 좋아지는가
+### 3.5 경계를 나누면 무엇이 좋아지는가
 
 경계를 나누는 이유는 용어 정리를 하기 위해서만은 아니다.
 
@@ -1585,7 +1585,7 @@ CI/CD / Deploy / Observability
 
 ---
 
-## Software Factory는 새로운 섬이 아니다
+### Software Factory는 새로운 섬이 아니다
 
 이 책에서 AI Software Factory를 기존 Software Engineering과 분리된 새로운 세계로 보지 않는 이유가 있다.
 
@@ -1620,7 +1620,7 @@ Git
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 지금까지는 Factory의 외곽 경계를 정리했다.
 
@@ -1636,7 +1636,7 @@ Agent가 무엇을 구현해야 하는지 어떻게 정의할 것인가.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - NIST NCCoE, *Notional Reference Model for DevSecOps*  
   https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
@@ -1651,9 +1651,9 @@ Agent가 무엇을 구현해야 하는지 어떻게 정의할 것인가.
 
 ---
 
-# Part II. Work를 정의하는 시스템
+## Part II. Work를 정의하는 시스템
 
-# 4장. Prompt가 아니라 Requirement와 Acceptance에서 시작한다
+## 4장. Prompt가 아니라 Requirement와 Acceptance에서 시작한다
 
 AI Coding Agent를 쓰다 보면 가장 먼저 하고 싶은 일은 바로 시키는 것이다.
 
@@ -1679,7 +1679,7 @@ Agent는 주어진 정보 안에서 가장 그럴듯한 해석을 선택할 수 
 
 ---
 
-## 4.1 Prompt만으로 큰 Work를 관리하기 어려운 이유
+### 4.1 Prompt만으로 큰 Work를 관리하기 어려운 이유
 
 Prompt는 빠르다. 문제를 설명하고 곧바로 실행할 수 있다.
 
@@ -1722,7 +1722,7 @@ Task
 
 ---
 
-## 4.2 Intent에서 Acceptance까지
+### 4.2 Intent에서 Acceptance까지
 
 Factory 앞단을 다음처럼 볼 수 있다.
 
@@ -1737,7 +1737,7 @@ Intent
 
 각 단계는 다른 질문에 답한다.
 
-### Intent
+#### Intent
 
 왜 이 일을 하는가.
 
@@ -1746,7 +1746,7 @@ Intent
 인증 실패로 처리해야 한다.
 ~~~
 
-### Requirement
+#### Requirement
 
 시스템이 어떻게 동작해야 하는가.
 
@@ -1754,7 +1754,7 @@ Intent
 만료된 JWT 요청은 HTTP 401을 반환해야 한다.
 ~~~
 
-### Acceptance Criteria
+#### Acceptance Criteria
 
 무엇을 확인하면 완료라고 볼 것인가.
 
@@ -1765,7 +1765,7 @@ Then response status is 401
 And internal server error is not logged
 ~~~
 
-### Design Constraint
+#### Design Constraint
 
 무엇을 바꾸지 않아야 하는가.
 
@@ -1789,7 +1789,7 @@ Requirement
 
 ---
 
-## 4.3 Requirements-first와 Design-first
+### 4.3 Requirements-first와 Design-first
 
 모든 작업이 Requirement부터 시작하는 것은 아니다.
 
@@ -1821,7 +1821,7 @@ Planning Depth는 Task의 Risk와 Complexity에 맞춰야 한다.
 
 ---
 
-## 4.4 Requirement Generator와 Acceptance Authority를 분리한다
+### 4.4 Requirement Generator와 Acceptance Authority를 분리한다
 
 Agent가 Requirement 초안을 만드는 것은 유용하다.
 
@@ -1862,7 +1862,7 @@ System / Reviewer
 
 ---
 
-## 4.5 Requirement에서 Verification까지 연결한다
+### 4.5 Requirement에서 Verification까지 연결한다
 
 좋은 Factory는 Work Artifact를 서로 연결한다. Spec Kit의 최신 `converge` 단계처럼 구현 결과를 다시 specification·plan·task와 대조하는 흐름도 이 연결의 한 사례다.
 
@@ -1913,7 +1913,7 @@ PASS
 
 ---
 
-## 4.6 Ready Contract
+### 4.6 Ready Contract
 
 Factory가 고도화되면 모든 Backlog Item을 곧바로 Worker에게 보내고 싶어진다.
 
@@ -1956,7 +1956,7 @@ Docs 수정은 Goal과 Acceptance만으로 충분할 수 있다. Production Migr
 
 ---
 
-## 예: “로그인 오류 수정”을 Factory Task로 바꾸기
+### 예: “로그인 오류 수정”을 Factory Task로 바꾸기
 
 처음 Issue:
 
@@ -1993,7 +1993,7 @@ Verification
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Requirement와 Acceptance가 준비됐다고 해도 아직 한 가지 문제가 남는다.
 
@@ -2003,7 +2003,7 @@ Agent가 실행 중 중단되면 이 Work는 어디에 남는가. Session이 닫
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - GitHub, *Spec Kit*  
   https://github.com/github/spec-kit
@@ -2016,7 +2016,7 @@ Agent가 실행 중 중단되면 이 Work는 어디에 남는가. Session이 닫
 
 ---
 
-# 5장. Durable Task: Session보다 오래 살아남는 작업 단위
+## 5장. Durable Task: Session보다 오래 살아남는 작업 단위
 
 Agent에게 일을 맡겼다.
 
@@ -2042,7 +2042,7 @@ Software Factory에서는 충분하지 않다.
 
 ---
 
-## 5.1 Prompt, Session, Task
+### 5.1 Prompt, Session, Task
 
 세 가지는 비슷해 보이지만 lifetime이 다르다.
 
@@ -2091,20 +2091,20 @@ Session이 새로 만들어져도 이 정보는 유지돼야 한다.
 
 ---
 
-## 5.2 Task 최소 스키마
+### 5.2 Task 최소 스키마
 
 Durable Task를 처음부터 거대한 schema로 만들 필요는 없다.
 
 다만 다음 범주는 구분하는 편이 좋다.
 
-### Identity
+#### Identity
 
 ~~~text
 task_id
 project_id
 ~~~
 
-### Intent
+#### Intent
 
 ~~~text
 goal
@@ -2112,7 +2112,7 @@ scope
 acceptance
 ~~~
 
-### Scheduling
+#### Scheduling
 
 ~~~text
 priority
@@ -2121,7 +2121,7 @@ risk
 required_capability
 ~~~
 
-### Execution
+#### Execution
 
 ~~~text
 status
@@ -2132,7 +2132,7 @@ base_revision
 current_revision
 ~~~
 
-### Verification
+#### Verification
 
 ~~~text
 verification_profile
@@ -2140,14 +2140,14 @@ verification_result
 evidence
 ~~~
 
-### Governance
+#### Governance
 
 ~~~text
 approval_state
 approved_by
 ~~~
 
-### Recovery
+#### Recovery
 
 ~~~text
 failure_class
@@ -2161,7 +2161,7 @@ carryover
 
 ---
 
-## 5.3 Task와 Attempt를 분리한다
+### 5.3 Task와 Attempt를 분리한다
 
 Task를 운영 단위로 만들려면 Attempt를 별도로 봐야 한다.
 
@@ -2215,7 +2215,7 @@ Retry할 때 Task 자체를 새로 만들면 이 history가 끊긴다.
 
 ---
 
-## 5.4 Task 상태 전이
+### 5.4 Task 상태 전이
 
 Factory에서는 Task 상태를 Agent의 자연어 설명과 분리하는 편이 좋다.
 
@@ -2244,31 +2244,31 @@ RUNNING
 
 각 상태는 의미가 달라야 한다.
 
-### READY
+#### READY
 
 실행 조건이 충족됐다.
 
-### RUNNING
+#### RUNNING
 
 현재 Attempt가 실행 중이다.
 
-### VERIFYING
+#### VERIFYING
 
 구현은 끝났고 required verification을 수행 중이다.
 
-### AWAITING_HUMAN
+#### AWAITING_HUMAN
 
 Agent가 할 수 있는 일은 끝났고 승인이나 판단을 기다린다.
 
-### BLOCKED
+#### BLOCKED
 
 Dependency나 외부 조건 때문에 진행할 수 없다.
 
-### RETRY
+#### RETRY
 
 현재 Attempt는 종료됐고 새 Attempt가 필요하다. 실제 구현에서는 `RETRY_SCHEDULED`처럼 대기 상태와 실행 가능 상태를 더 세분화할 수 있다.
 
-### DONE
+#### DONE
 
 Acceptance와 required gate를 모두 통과했다.
 
@@ -2278,7 +2278,7 @@ Agent가 "완료"라고 말해도 바로 DONE으로 가지 않는다.
 
 ---
 
-## 5.5 Task가 Worker보다 오래 살아야 한다
+### 5.5 Task가 Worker보다 오래 살아야 한다
 
 Worker는 여러 이유로 사라질 수 있다.
 
@@ -2325,7 +2325,7 @@ Worker B assigned
 
 ---
 
-## 5.6 Context Window를 Task Database로 쓰지 않는다
+### 5.6 Context Window를 Task Database로 쓰지 않는다
 
 Agent Session에는 많은 정보가 있다.
 
@@ -2365,7 +2365,7 @@ Durable Task State는 운영을 위한 기록이다.
 
 ---
 
-## 5.7 Carryover: 다른 Worker가 이어받을 수 있는가
+### 5.7 Carryover: 다른 Worker가 이어받을 수 있는가
 
 단순히 다음 정보만 남겨서는 충분하지 않을 수 있다.
 
@@ -2413,7 +2413,7 @@ Carryover의 품질을 평가하는 가장 좋은 질문은 간단하다.
 
 ---
 
-## 예: Verification 실패 후 새 Attempt
+### 예: Verification 실패 후 새 Attempt
 
 ~~~text
 Task T-100
@@ -2451,7 +2451,7 @@ Task는 처음부터 새로 만들어지지 않는다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Durable Task를 만들었다고 끝은 아니다.
 
@@ -2465,7 +2465,7 @@ Task끼리 Dependency가 있으면 아무 순서로나 실행할 수도 없다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *An open-source spec for Codex orchestration: Symphony*  
   https://openai.com/index/open-source-codex-orchestration-symphony/
@@ -2478,7 +2478,7 @@ Task끼리 Dependency가 있으면 아무 순서로나 실행할 수도 없다.
 
 ---
 
-# 6장. Task 크기, 분해, Dependency
+## 6장. Task 크기, 분해, Dependency
 
 Task를 durable하게 만들면 다음 문제는 크기다.
 
@@ -2500,7 +2500,7 @@ Task 분해는 Prompt를 예쁘게 나누는 문제가 아니다.
 
 ---
 
-## 6.1 Task Size에는 양쪽 비용이 있다
+### 6.1 Task Size에는 양쪽 비용이 있다
 
 Task가 작아지면 좋은 점이 있다.
 
@@ -2548,7 +2548,7 @@ Very Large Task
 
 ---
 
-## 6.2 독립성은 파일 수보다 중요하다
+### 6.2 독립성은 파일 수보다 중요하다
 
 두 Task가 서로 다른 파일을 수정한다고 해서 독립적인 것은 아니다.
 
@@ -2582,7 +2582,7 @@ Task B
 
 ---
 
-## 6.3 Task List보다 Dependency Graph가 낫다
+### 6.3 Task List보다 Dependency Graph가 낫다
 
 Backlog는 보통 List로 보인다.
 
@@ -2619,7 +2619,7 @@ Task를 자동 선택하려면 Priority보다 먼저 Dependency가 정확해야 
 
 ---
 
-## 6.4 Retry Boundary를 같이 설계한다
+### 6.4 Retry Boundary를 같이 설계한다
 
 Task를 나누는 중요한 이유 중 하나는 Retry 범위를 줄이는 것이다.
 
@@ -2656,7 +2656,7 @@ Factory에서 좋은 Task Boundary는 Retry Boundary이기도 하다.
 
 ---
 
-## 6.5 Large Task와 Large PR는 다르다
+### 6.5 Large Task와 Large PR는 다르다
 
 큰 Feature가 하나의 Product Task라고 해서 하나의 거대한 Pull Request로 만들어야 하는 것은 아니다.
 
@@ -2701,7 +2701,7 @@ Rebase, merge ordering, dependency management가 필요하다.
 
 ---
 
-## 6.6 병렬화 후보는 Task 구조에서 나온다
+### 6.6 병렬화 후보는 Task 구조에서 나온다
 
 여러 Agent를 쓰고 싶어서 Task를 병렬화하면 안 된다.
 
@@ -2733,7 +2733,7 @@ Parallelism은 Agent 수가 아니라 Dependency Graph에서 나온다.
 
 ---
 
-## 예: Auth 개선을 분해하기
+### 예: Auth 개선을 분해하기
 
 처음 Work:
 
@@ -2782,7 +2782,7 @@ T4는 앞 작업 결과를 합친 뒤 실행한다.
 
 ---
 
-## Task 분해 체크
+### Task 분해 체크
 
 Task를 Queue에 넣기 전에 다음 질문을 해볼 수 있다.
 
@@ -2801,7 +2801,7 @@ Task를 Queue에 넣기 전에 다음 질문을 해볼 수 있다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Requirement가 있고, Durable Task가 있고, Dependency Graph까지 만들었다.
 
@@ -2819,7 +2819,7 @@ Worker가 죽으면 누가 다시 배정할 것인가.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - GitHub, *Spec Kit*  
   https://github.com/github/spec-kit
@@ -2832,9 +2832,9 @@ Worker가 죽으면 누가 다시 배정할 것인가.
 
 ---
 
-# Part III. Factory의 실행 구조
+## Part III. Factory의 실행 구조
 
-# 7장. Control Plane과 Execution Plane
+## 7장. Control Plane과 Execution Plane
 
 Part II에서는 Work를 실행 가능한 형태로 만들었다.
 
@@ -2872,7 +2872,7 @@ Factory에서는 반대여야 한다.
 
 ---
 
-## 7.1 Control Plane이 관리해야 하는 상태
+### 7.1 Control Plane이 관리해야 하는 상태
 
 Control Plane은 코드를 직접 작성하는 주체가 아니다.
 
@@ -2933,7 +2933,7 @@ Status: AWAITING_HUMAN
 
 ---
 
-## 7.2 Execution Plane의 책임
+### 7.2 Execution Plane의 책임
 
 Execution Plane은 실제 작업이 일어나는 곳이다.
 
@@ -2992,7 +2992,7 @@ Task Result
 
 ---
 
-## 7.3 Issue Tracker와 Execution State는 같은 것이 아니다
+### 7.3 Issue Tracker와 Execution State는 같은 것이 아니다
 
 많은 조직에서 Issue Tracker는 이미 Work의 출발점이다.
 
@@ -3052,7 +3052,7 @@ Worker Runtime
 
 ---
 
-## 7.4 Scheduler와 Agent를 구분한다
+### 7.4 Scheduler와 Agent를 구분한다
 
 어떤 Task를 언제 누구에게 줄 것인가.
 
@@ -3104,7 +3104,7 @@ Retry 횟수도 기억하고
 
 ---
 
-## 7.5 Worker를 disposable하게 만들려면 무엇을 밖으로 꺼내야 하는가
+### 7.5 Worker를 disposable하게 만들려면 무엇을 밖으로 꺼내야 하는가
 
 Execution Plane을 disposable하게 만들고 싶다면 먼저 물어야 한다.
 
@@ -3114,7 +3114,7 @@ Execution Plane을 disposable하게 만들고 싶다면 먼저 물어야 한다.
 
 최소한 다음은 외부화하는 편이 좋다.
 
-### Task State
+#### Task State
 
 ~~~text
 Task Store
@@ -3124,7 +3124,7 @@ Task Store
 - approval
 ~~~
 
-### Source State
+#### Source State
 
 ~~~text
 Git
@@ -3133,13 +3133,13 @@ Git
 - branch
 ~~~
 
-### Partial Work
+#### Partial Work
 
 ~~~text
 Checkpoint / Patch / Snapshot
 ~~~
 
-### Verification
+#### Verification
 
 ~~~text
 Verification Result
@@ -3149,7 +3149,7 @@ Verification Result
 - artifact reference
 ~~~
 
-### Evidence
+#### Evidence
 
 ~~~text
 Artifact Store
@@ -3186,7 +3186,7 @@ Worker B
 
 ---
 
-## Human Approval을 기다릴 때 Worker를 계속 잡고 있어야 할까
+### Human Approval을 기다릴 때 Worker를 계속 잡고 있어야 할까
 
 다음 상황을 생각해보자.
 
@@ -3226,7 +3226,7 @@ New Worker
 
 ---
 
-## Control Plane과 Execution Plane의 최소 경계
+### Control Plane과 Execution Plane의 최소 경계
 
 Minimum Viable Factory라면 거대한 orchestration platform이 없어도 된다.
 
@@ -3256,7 +3256,7 @@ Execution Plane
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Control Plane과 Execution Plane을 나눴다.
 
@@ -3274,7 +3274,7 @@ Warm 상태를 재사용하면 무엇이 위험한가.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *An open-source spec for Codex orchestration: Symphony*  
   https://openai.com/index/open-source-codex-orchestration-symphony/
@@ -3287,7 +3287,7 @@ Warm 상태를 재사용하면 무엇이 위험한가.
 
 ---
 
-# 8장. Worker, Sandbox, Workspace
+## 8장. Worker, Sandbox, Workspace
 
 Control Plane이 Task를 관리한다면 Execution Plane은 Task를 실제로 수행한다.
 
@@ -3317,7 +3317,7 @@ Workspace
 
 ---
 
-## 8.1 무엇을 격리해야 하는가
+### 8.1 무엇을 격리해야 하는가
 
 Agent가 파일을 수정하고 Shell 명령을 실행하려면 독립된 Workspace가 필요하다.
 
@@ -3372,7 +3372,7 @@ Workspace Isolation은 Git 문제만이 아니다.
 
 ---
 
-## 8.2 Prepared Environment
+### 8.2 Prepared Environment
 
 완전히 깨끗한 환경은 안전하지만 느릴 수 있다.
 
@@ -3435,7 +3435,7 @@ Network
 
 ---
 
-## 8.3 Fresh State와 Cache를 구분한다
+### 8.3 Fresh State와 Cache를 구분한다
 
 환경을 재사용하기 시작하면 새로운 위험이 생긴다.
 
@@ -3494,11 +3494,11 @@ Fresh per Task
 
 ---
 
-## 8.4 Ephemeral Worker와 Persistent Worker
+### 8.4 Ephemeral Worker와 Persistent Worker
 
 Worker 운영에는 두 방향이 있다.
 
-### Ephemeral Worker
+#### Ephemeral Worker
 
 Task마다 새로 만든다.
 
@@ -3531,7 +3531,7 @@ Task
 - 큰 Repository checkout 비용
 - 복잡한 runtime setup
 
-### Persistent Worker
+#### Persistent Worker
 
 Worker를 유지하고 여러 Task를 처리한다.
 
@@ -3564,7 +3564,7 @@ Worker
 
 ---
 
-## 8.5 Persistent Worker를 쓸 때 가장 조심할 것
+### 8.5 Persistent Worker를 쓸 때 가장 조심할 것
 
 Persistent Worker의 편리함 때문에 다음 상태까지 Worker에 맡기기 쉽다.
 
@@ -3603,7 +3603,7 @@ Worker가 오래 살아도 Work State는 외부에 남는다.
 
 ---
 
-## 8.6 Worker Profile
+### 8.6 Worker Profile
 
 모든 Task가 같은 Worker를 필요로 하지는 않는다.
 
@@ -3643,7 +3643,7 @@ Scheduler는 맞는 Worker를 찾는다.
 
 ---
 
-## 예: Java Backend Worker와 Browser Worker
+### 예: Java Backend Worker와 Browser Worker
 
 Backend Task:
 
@@ -3684,7 +3684,7 @@ Factory에서 Worker Selection은 Agent Personality가 아니라 **실행 capabi
 
 ---
 
-## Stale Browser State가 만든 잘못된 PASS
+### Stale Browser State가 만든 잘못된 PASS
 
 Persistent Browser Worker에서 이전 Task의 로그인 Session이 남았다고 하자.
 
@@ -3712,7 +3712,7 @@ Worker State 문제다.
 
 ---
 
-## Worker를 설계할 때 묻는 질문
+### Worker를 설계할 때 묻는 질문
 
 다음 질문으로 시작할 수 있다.
 
@@ -3730,7 +3730,7 @@ Worker State 문제다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 좋은 Worker를 만들었다고 Agent가 자동으로 잘 일하는 것은 아니다.
 
@@ -3740,7 +3740,7 @@ Worker State 문제다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
   https://workos.com/blog/project-horizon
@@ -3753,7 +3753,7 @@ Worker State 문제다.
 
 ---
 
-# 9장. Harness Engineering: Agent가 일할 수 있는 환경 만들기
+## 9장. Harness Engineering: Agent가 일할 수 있는 환경 만들기
 
 같은 Model을 쓰는데 팀마다 결과가 크게 다를 수 있다.
 
@@ -3785,7 +3785,7 @@ Agent가 Repository와 Tool을 어떻게 보고, 어떤 결과를 받고, 어떤
 
 ---
 
-## 9.1 Harness란 무엇인가
+### 9.1 Harness란 무엇인가
 
 Model은 혼자 Repository를 수정하지 않는다.
 
@@ -3833,7 +3833,7 @@ Harness가 Agent의 탐색 비용과 오류 가능성을 바꾼다.
 
 ---
 
-## 9.2 Agent-Computer Interface
+### 9.2 Agent-Computer Interface
 
 사람에게 좋은 CLI가 Agent에게도 항상 좋은 것은 아니다.
 
@@ -3881,7 +3881,7 @@ Tool이 Agent에게 즉시 구조화된 Feedback을 주면 잘못된 수정이 �
 
 ---
 
-## 9.3 Instruction, Skill, Tool, MCP의 역할을 나눈다
+### 9.3 Instruction, Skill, Tool, MCP의 역할을 나눈다
 
 Agent customization 기능이 늘어나면 모든 것을 한 파일에 넣고 싶어진다.
 
@@ -3889,7 +3889,7 @@ Agent customization 기능이 늘어나면 모든 것을 한 파일에 넣고 �
 
 이 책에서는 다음처럼 구분한다.
 
-### Instruction
+#### Instruction
 
 지속적으로 알아야 하는 Guideline이다.
 
@@ -3901,7 +3901,7 @@ Agent customization 기능이 늘어나면 모든 것을 한 파일에 넣고 �
 - 테스트 없는 behavior change 금지
 ~~~
 
-### Skill
+#### Skill
 
 반복해서 사용하는 Procedure다.
 
@@ -3917,7 +3917,7 @@ Skill은 필요할 때 불러오는 것이 좋다.
 
 모든 Task에 항상 넣을 필요는 없다.
 
-### Tool
+#### Tool
 
 Agent가 외부 행동을 수행하는 Interface다.
 
@@ -3930,7 +3930,7 @@ deploy_staging()
 get_issue()
 ~~~
 
-### MCP
+#### MCP
 
 외부 System의 Tool과 Data를 Agent에 노출하는 Protocol Surface로 볼 수 있다.
 
@@ -3957,7 +3957,7 @@ Task Store
 
 ---
 
-## 9.4 반드시 지켜야 할 규칙은 Prompt에만 두지 않는다
+### 9.4 반드시 지켜야 할 규칙은 Prompt에만 두지 않는다
 
 다음 규칙을 생각해보자.
 
@@ -4005,7 +4005,7 @@ Agent가 규칙을 이해하도록 하는 것과 시스템이 규칙을 강제�
 
 ---
 
-## 9.5 Tool은 Agent를 위한 API다
+### 9.5 Tool은 Agent를 위한 API다
 
 사람용 API와 Agent Tool은 목적이 조금 다르다.
 
@@ -4050,7 +4050,7 @@ Agent가 필요할 때 점진적으로 조회한다.
 
 ---
 
-## 9.6 Result Gateway
+### 9.6 Result Gateway
 
 Tool Output이 큰 시스템에서는 Model 앞에 Result Gateway를 둘 수 있다.
 
@@ -4094,7 +4094,7 @@ Signal-to-noise ratio를 높이는 것이 목적이다.
 
 ---
 
-## 9.7 Tool을 늘리면 항상 좋아지는가
+### 9.7 Tool을 늘리면 항상 좋아지는가
 
 Tool이 많으면 Agent가 할 수 있는 일이 늘어난다.
 
@@ -4133,7 +4133,7 @@ release-worker
 
 ---
 
-## 9.8 Harness도 Regression이 생긴다
+### 9.8 Harness도 Regression이 생긴다
 
 Tool을 업그레이드하면 성능이 좋아질 것이라고 생각하기 쉽다.
 
@@ -4158,7 +4158,7 @@ Model 평가만 하고 Harness 변경은 검증하지 않는다면 실제 Factor
 
 ---
 
-## 9.9 Prepared Harness
+### 9.9 Prepared Harness
 
 Worker Profile이 Runtime을 준비한다면 Prepared Harness는 Task 유형에 맞는 Agent 환경을 준비한다.
 
@@ -4212,7 +4212,7 @@ Verification
 
 ---
 
-## Model 문제인가 Harness 문제인가
+### Model 문제인가 Harness 문제인가
 
 Agent가 실패했을 때 바로 Model을 바꾸기 전에 확인할 수 있다.
 
@@ -4231,7 +4231,7 @@ Software Factory의 강점은 Model을 교체하는 것 외에도 개선할 수 
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Harness를 준비했다고 해도 Context를 무한정 넣을 수는 없다.
 
@@ -4241,7 +4241,7 @@ Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
   https://openai.com/index/harness-engineering/
@@ -4254,7 +4254,7 @@ Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context
 
 ---
 
-# 10장. Context Engineering과 Agent Legibility
+## 10장. Context Engineering과 Agent Legibility
 
 Agent가 실패하면 Context가 부족했다고 생각하기 쉽다.
 
@@ -4274,7 +4274,7 @@ Repository와 Application이 사람에게만 읽기 쉬운 것이 아니라 Agen
 
 ---
 
-## 10.1 Context Window는 Storage가 아니다
+### 10.1 Context Window는 Storage가 아니다
 
 Context Window는 Agent가 현재 Task를 이해하고 판단하는 작업 공간이다.
 
@@ -4312,7 +4312,7 @@ Task 시작 시 필요한 최소 정보만 주고, 추가 정보는 탐색을 �
 
 ---
 
-## 10.2 Repository Legibility
+### 10.2 Repository Legibility
 
 Agent가 Repository를 읽을 수 있다고 해서 Repository를 이해할 수 있는 것은 아니다.
 
@@ -4374,7 +4374,7 @@ Agent가 처음부터 모든 문서를 읽지 않아도 되는 구조가 중요�
 
 ---
 
-## 10.3 AGENTS.md는 지식 저장소가 아니라 Entry Point다
+### 10.3 AGENTS.md는 지식 저장소가 아니라 Entry Point다
 
 Context File은 유용하다.
 
@@ -4423,7 +4423,7 @@ Entry
 
 ---
 
-## 10.4 조직 지식은 Repository 밖에도 있다
+### 10.4 조직 지식은 Repository 밖에도 있다
 
 Repository만 읽어서는 알 수 없는 정보도 많다.
 
@@ -4470,7 +4470,7 @@ Catalog의 역할은 모든 것을 복제하는 것이 아니라 **Agent가 어�
 
 ---
 
-## 10.5 Application Legibility
+### 10.5 Application Legibility
 
 Agent에게 Code만 보이게 해서는 충분하지 않은 Task가 많다.
 
@@ -4519,7 +4519,7 @@ Task
 
 ---
 
-## 10.6 Raw Log를 Context에 그대로 넣지 않는다
+### 10.6 Raw Log를 Context에 그대로 넣지 않는다
 
 Production Log 50MB를 Agent에게 통째로 주면 어떻게 될까.
 
@@ -4555,7 +4555,7 @@ trace_get("trace-8421")
 
 ---
 
-## 10.7 예: Auth Bug의 Progressive Context
+### 10.7 예: Auth Bug의 Progressive Context
 
 Task:
 
@@ -4606,7 +4606,7 @@ Task
 
 ---
 
-## 10.8 Agent가 읽을 수 없는 정보는 운영상 없는 것과 비슷하다
+### 10.8 Agent가 읽을 수 없는 정보는 운영상 없는 것과 비슷하다
 
 중요한 Architecture Rule이 팀 Slack 대화에만 있다고 하자.
 
@@ -4632,7 +4632,7 @@ Repository, Catalog, Runtime을 Agent-readable하게 만드는 작업은 결국 
 
 ---
 
-## Context를 더 넣기 전에 묻는 질문
+### Context를 더 넣기 전에 묻는 질문
 
 ~~~text
 1. 이 정보는 현재 Task와 직접 관련 있는가?
@@ -4651,7 +4651,7 @@ Mandatory Rule을 보장하는 수단은 아니다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Context를 잘 준비해도 한 가지 결정은 남는다.
 
@@ -4667,7 +4667,7 @@ DB Migration 순서도 매번 새로 계획하게 할까.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
   https://openai.com/index/harness-engineering/
@@ -4680,7 +4680,7 @@ DB Migration 순서도 매번 새로 계획하게 할까.
 
 ---
 
-# 11장. Controlled Autonomy: 무엇을 시스템에 두고 무엇을 Agent에게 맡길 것인가
+## 11장. Controlled Autonomy: 무엇을 시스템에 두고 무엇을 Agent에게 맡길 것인가
 
 Agentic이라는 말은 자주 “Agent가 더 많은 것을 스스로 결정한다”는 의미로 쓰인다.
 
@@ -4712,11 +4712,11 @@ Agentic이라는 말은 자주 “Agent가 더 많은 것을 스스로 결정한
 
 ---
 
-## 11.1 세 가지 Control Model
+### 11.1 세 가지 Control Model
 
 Factory의 Control 방식을 단순화하면 세 가지로 볼 수 있다.
 
-### Model A. Deterministic Pipeline
+#### Model A. Deterministic Pipeline
 
 ~~~text
 Step 1
@@ -4752,7 +4752,7 @@ checkout
 
 ---
 
-### Model B. Agent-controlled
+#### Model B. Agent-controlled
 
 ~~~text
 Goal
@@ -4778,7 +4778,7 @@ Agent가 Workflow 전체를 판단한다.
 
 ---
 
-### Model C. Hybrid Runtime
+#### Model C. Hybrid Runtime
 
 ~~~text
 System owns
@@ -4801,13 +4801,13 @@ Agent owns
 
 ---
 
-## 11.2 Rule, Heuristic, Judgment를 구분한다
+### 11.2 Rule, Heuristic, Judgment를 구분한다
 
 Control Boundary를 설계할 때 모든 결정을 같은 종류로 보면 어렵다.
 
 세 가지로 나눌 수 있다.
 
-### Rule
+#### Rule
 
 정확한 조건이 이미 존재한다.
 
@@ -4823,7 +4823,7 @@ Agent에게 “가능하면 하지 마라”라고 말할 필요가 없다.
 
 ---
 
-### Heuristic
+#### Heuristic
 
 정답은 아니지만 좋은 기본 판단이 있다.
 
@@ -4839,7 +4839,7 @@ Agent에게 “가능하면 하지 마라”라고 말할 필요가 없다.
 
 ---
 
-### Judgment
+#### Judgment
 
 사전에 정확한 규칙을 만들기 어렵다.
 
@@ -4859,7 +4859,7 @@ Factory 설계에서 중요한 것은 세 종류를 섞지 않는 것이다.
 
 ---
 
-## 11.3 System이 소유해야 할 상태
+### 11.3 System이 소유해야 할 상태
 
 다음 상태를 Agent Transcript 안에만 두면 위험하다.
 
@@ -4908,33 +4908,33 @@ Model의 기억에 맡길 이유가 적다.
 
 ---
 
-## 11.4 Agent가 잘하는 영역
+### 11.4 Agent가 잘하는 영역
 
 반대로 다음은 시스템이 미리 모든 경우를 정의하기 어렵다.
 
-### Repository Exploration
+#### Repository Exploration
 
 어떤 File과 Symbol이 관련 있는지 찾는다.
 
-### Diagnosis
+#### Diagnosis
 
 실패 원인 후보를 만든다.
 
-### Hypothesis
+#### Hypothesis
 
 ~~~text
 JWT expiry exception이 generic error handler로 흘러가는 것 같다.
 ~~~
 
-### Implementation Strategy
+#### Implementation Strategy
 
 어떤 Layer에서 수정할지 판단한다.
 
-### Debugging Sequence
+#### Debugging Sequence
 
 어떤 Test와 Log를 먼저 볼지 선택한다.
 
-### Alternative Comparison
+#### Alternative Comparison
 
 두 구현의 Trade-off를 비교한다.
 
@@ -4944,7 +4944,7 @@ Agent가 가진 강점은 **정답이 이미 코드로 존재하지 않는 탐�
 
 ---
 
-## 11.5 왜 “더 Agentic”이 항상 더 좋은 것은 아닌가
+### 11.5 왜 “더 Agentic”이 항상 더 좋은 것은 아닌가
 
 연구에서도 비슷한 결과가 나온다.
 
@@ -4970,7 +4970,7 @@ Agent Autonomy는 상황에 따라 추가 비용을 만들 수 있다.
 
 ---
 
-## 11.6 DB Migration 예제
+### 11.6 DB Migration 예제
 
 다음 작업을 생각해보자.
 
@@ -5018,7 +5018,7 @@ Autonomy가 유용한 공간을 명확하게 만드는 것이다.
 
 ---
 
-## 11.7 LLM 안에 State Machine을 숨기지 않는다
+### 11.7 LLM 안에 State Machine을 숨기지 않는다
 
 다음 Prompt는 처음에는 편할 수 있다.
 
@@ -5058,7 +5058,7 @@ System은 process state를 관리한다.
 
 ---
 
-## 11.8 Recovery Policy도 Agent 밖에 둔다
+### 11.8 Recovery Policy도 Agent 밖에 둔다
 
 Failure가 발생했을 때 어디까지 되돌릴지 결정하는 것도 Control 문제다. 일시적인 Tool 오류와 반복되는 구현 실패를 같은 Retry로 처리하면 비용과 변동성이 커진다.
 
@@ -5066,7 +5066,7 @@ Failure가 발생했을 때 어디까지 되돌릴지 결정하는 것도 Contro
 
 ---
 
-## 11.9 Control Hierarchy
+### 11.9 Control Hierarchy
 
 Factory의 Control을 계층으로 보면 다음처럼 정리할 수 있다.
 
@@ -5114,7 +5114,7 @@ Tool
 
 ---
 
-## Controlled Autonomy를 설계할 때 묻는 질문
+### Controlled Autonomy를 설계할 때 묻는 질문
 
 ~~~text
 1. 이 결정은 이미 정확한 Rule이 있는가?
@@ -5129,7 +5129,7 @@ Tool
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Agent에게 적절한 Autonomy를 줬다.
 
@@ -5145,7 +5145,7 @@ Test도 통과할 수 있다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - Agentless  
   https://arxiv.org/abs/2407.01489
@@ -5158,7 +5158,7 @@ Test도 통과할 수 있다.
 
 ---
 
-# 12장. Verification: Agent가 완료했다고 말한 뒤부터가 시작이다
+## 12장. Verification: Agent가 완료했다고 말한 뒤부터가 시작이다
 
 Agent가 다음과 같이 보고했다고 하자.
 
@@ -5192,7 +5192,7 @@ System이나 Human은 남은 위험을 받아들일지 결정한다.
 
 ---
 
-## 12.1 Completion Claim과 Completion Authority
+### 12.1 Completion Claim과 Completion Authority
 
 Task를 수행한 Agent는 자신의 작업에 가장 많은 Context를 가지고 있다.
 
@@ -5233,7 +5233,7 @@ Acceptance
 
 ---
 
-## 12.2 Verification Pyramid
+### 12.2 Verification Pyramid
 
 모든 Task에 같은 검증 비용을 쓸 필요는 없다.
 
@@ -5255,7 +5255,7 @@ Human Acceptance
 
 위로 갈수록 일반적으로 비용이 커지고, 더 넓은 종류의 오류를 잡을 수 있다.
 
-### Static
+#### Static
 
 - compile
 - typecheck
@@ -5265,7 +5265,7 @@ Human Acceptance
 
 빠르고 deterministic하다.
 
-### Deterministic Test
+#### Deterministic Test
 
 - unit
 - integration
@@ -5274,7 +5274,7 @@ Human Acceptance
 
 Task의 구체적인 behavior를 검증한다.
 
-### Runtime Verification
+#### Runtime Verification
 
 실제 Service를 실행한다.
 
@@ -5283,7 +5283,7 @@ Task의 구체적인 behavior를 검증한다.
 - DB migration
 - background job
 
-### Behavioral Evidence
+#### Behavioral Evidence
 
 사람이나 Evaluator가 실제 결과를 볼 수 있게 한다.
 
@@ -5294,11 +5294,11 @@ Task의 구체적인 behavior를 검증한다.
 - traces
 - benchmark
 
-### Independent Evaluator
+#### Independent Evaluator
 
 구현 Agent와 다른 Context나 Role을 가진 평가자가 결과를 점검한다.
 
-### Human Acceptance
+#### Human Acceptance
 
 Residual Risk와 Product Intent를 최종적으로 사람이 판단한다.
 
@@ -5310,7 +5310,7 @@ Payment Logic 변경은 integration, security, human review까지 필요할 수 
 
 ---
 
-## 12.3 Verification은 마지막 단계가 아니라 Feedback Loop다
+### 12.3 Verification은 마지막 단계가 아니라 Feedback Loop다
 
 검증을 마지막에 한 번만 수행하면 Agent는 오랫동안 잘못된 방향으로 갈 수 있다.
 
@@ -5351,7 +5351,7 @@ Cheap Feedback
 
 ---
 
-## 12.4 Executable Acceptance
+### 12.4 Executable Acceptance
 
 4장에서 Requirement와 Acceptance를 분리했다.
 
@@ -5391,7 +5391,7 @@ Acceptance를 Test 하나와 완전히 동일시하면 안 된다.
 
 ---
 
-## 12.5 Test PASS가 User Intent와 같지 않은 이유
+### 12.5 Test PASS가 User Intent와 같지 않은 이유
 
 Test는 강력하다.
 
@@ -5434,7 +5434,7 @@ Validation의 종류를 넓혀야 한다.
 
 ---
 
-## 12.6 Automated Grader PASS와 Maintainer Acceptance는 다르다
+### 12.6 Automated Grader PASS와 Maintainer Acceptance는 다르다
 
 METR의 2026년 연구 노트는 SWE-bench Verified에서 자동 grader를 통과한 Patch를 실제 Maintainer에게 다시 검토하게 했다. 4명의 Maintainer가 3개 Repository의 95개 Issue 범위를 다룬 표본에서, Test를 통과한 AI Patch의 상당수가 실제 main에는 Merge되지 않았을 것으로 평가됐다. 다만 Agent에게 Review Feedback을 받고 반복 수정할 기회를 주지 않은 single-shot 평가라는 제한이 있다.
 
@@ -5461,7 +5461,7 @@ Factory의 Verification은 Test Runner 하나보다 넓어야 한다.
 
 ---
 
-## 12.7 Reward Hacking
+### 12.7 Reward Hacking
 
 더 위험한 경우도 있다.
 
@@ -5493,7 +5493,7 @@ Factory에서는 다음 경계를 고려할 수 있다.
 
 ---
 
-## 12.8 Lucky Pass: 결과만 맞아도 충분한가
+### 12.8 Lucky Pass: 결과만 맞아도 충분한가
 
 Final Test가 통과했지만 Trajectory가 불안정할 수도 있다.
 
@@ -5531,7 +5531,7 @@ Factory에서는 Outcome뿐 아니라 Process Signal도 일부 관찰할 수 있
 
 ---
 
-## 12.9 Independent Evaluator
+### 12.9 Independent Evaluator
 
 구현 Agent와 평가 Agent를 분리하면 장점이 있다.
 
@@ -5572,13 +5572,13 @@ Same Model
 
 ---
 
-## 12.10 Task별 Verification Policy
+### 12.10 Task별 Verification Policy
 
 Agent에게 “적절한 테스트를 알아서 해라”라고만 하지 않는다.
 
 Task Risk에 따라 최소 Verification을 System Policy로 정할 수 있다.
 
-### Low Risk
+#### Low Risk
 
 ~~~text
 docs
@@ -5594,7 +5594,7 @@ preview
 diff check
 ~~~
 
-### Medium Risk
+#### Medium Risk
 
 ~~~text
 business logic
@@ -5610,7 +5610,7 @@ contract
 agent review
 ~~~
 
-### High Risk
+#### High Risk
 
 ~~~text
 auth
@@ -5636,9 +5636,9 @@ Required Verification은 Control Plane이 알고 있기 때문이다.
 
 ---
 
-## 예: UI Task와 Backend Auth Task
+### 예: UI Task와 Backend Auth Task
 
-### UI Task
+#### UI Task
 
 Goal:
 
@@ -5657,7 +5657,7 @@ human visual acceptance
 
 Source Diff만으로는 화면을 판단하기 어렵다.
 
-### Auth Task
+#### Auth Task
 
 Goal:
 
@@ -5681,7 +5681,7 @@ Verification Profile은 Task type과 Risk에 맞아야 한다.
 
 ---
 
-## Verification 설계에서 묻는 질문
+### Verification 설계에서 묻는 질문
 
 ~~~text
 1. Agent의 자기 보고 외에 무엇으로 확인할 것인가?
@@ -5695,7 +5695,7 @@ Verification Profile은 Task type과 Risk에 맞아야 한다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Verification이 끝났다고 사람이 결과를 빠르게 이해할 수 있는 것은 아니다.
 
@@ -5705,7 +5705,7 @@ Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - Microsoft Research, *Building to the Test: Coding Agents Deliver What You Check, Not What You Requested*  
   https://www.microsoft.com/en-us/research/publication/building-to-the-test-coding-agents-deliver-what-you-check-not-what-you-requested/
@@ -5718,9 +5718,9 @@ Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있
 
 ---
 
-# Part IV. 결과를 믿을 수 있게 만드는 시스템
+## Part IV. 결과를 믿을 수 있게 만드는 시스템
 
-# 13장. Evidence Contract: 완료를 설명하지 말고 증명한다
+## 13장. Evidence Contract: 완료를 설명하지 말고 증명한다
 
 Verification이 끝났다고 Review가 자동으로 쉬워지는 것은 아니다.
 
@@ -5743,7 +5743,7 @@ Agent가 자연어로 길게 설명할 수도 있다.
 
 ---
 
-## 13.1 Result Contract가 필요한 이유
+### 13.1 Result Contract가 필요한 이유
 
 Agent마다 결과 보고 형식이 다르면 downstream이 복잡해진다.
 
@@ -5790,7 +5790,7 @@ Task
 
 ---
 
-## 13.2 Evidence 최소 필드
+### 13.2 Evidence 최소 필드
 
 모든 Task에 같은 Evidence가 필요한 것은 아니다.
 
@@ -5832,7 +5832,7 @@ artifacts:
 
 ---
 
-## 13.3 Commit과 Evidence를 연결한다
+### 13.3 Commit과 Evidence를 연결한다
 
 Evidence가 있어도 어떤 코드 기준인지 모르면 의미가 약해진다.
 
@@ -5863,29 +5863,29 @@ test_revision: abc123
 
 ---
 
-## 13.4 Behavioral Evidence
+### 13.4 Behavioral Evidence
 
 Source Diff만으로 확인하기 어려운 Task가 있다.
 
-### UI
+#### UI
 
 - Screenshot
 - Video
 - DOM Snapshot
 - Browser Trace
 
-### API
+#### API
 
 - Runtime Request / Response
 - Contract Test
 - Error Log
 
-### Performance
+#### Performance
 
 - Benchmark Before / After
 - Environment Metadata
 
-### Migration
+#### Migration
 
 - Schema Diff
 - Dry-run Result
@@ -5909,11 +5909,11 @@ Behavior를 보여주는 Evidence와 Source Risk는 다른 문제다.
 
 ---
 
-## 13.5 Evidence와 Provenance는 다르다
+### 13.5 Evidence와 Provenance는 다르다
 
 두 개념을 구분할 필요가 있다.
 
-### Evidence
+#### Evidence
 
 ~~~text
 이 결과가 맞다는 근거는 무엇인가?
@@ -5926,7 +5926,7 @@ Behavior를 보여주는 Evidence와 Source Risk는 다른 문제다.
 - Benchmark
 - API Response
 
-### Provenance
+#### Provenance
 
 ~~~text
 이 결과는 어떤 과정과 주체를 거쳐 만들어졌는가?
@@ -5955,7 +5955,7 @@ Provenance
 
 ---
 
-## 13.6 Evidence Manifest
+### 13.6 Evidence Manifest
 
 Machine-readable Manifest를 하나 두면 다음 단계가 쉬워진다.
 
@@ -6001,7 +6001,7 @@ Task T-100
 
 ---
 
-## 13.7 Review Startup Cost를 줄인다
+### 13.7 Review Startup Cost를 줄인다
 
 Reviewer의 시간은 결과 자체보다 Context를 복구하는 데 많이 쓰일 수 있다.
 
@@ -6040,7 +6040,7 @@ Reviewer는 모든 Command를 다시 실행하기 전에 Scope와 Result를 빠�
 
 ---
 
-## 13.8 Performance Task는 Environment도 Evidence다
+### 13.8 Performance Task는 Environment도 Evidence다
 
 Performance Benchmark는 결과 숫자만 남기면 부족하다.
 
@@ -6075,7 +6075,7 @@ Evidence는 결과만이 아니라 **재현 조건**도 포함할 수 있다.
 
 ---
 
-## 13.9 어디까지 표준화할 것인가
+### 13.9 어디까지 표준화할 것인가
 
 처음부터 복잡한 Artifact Platform이나 모든 Task에 동일한 Manifest를 강제할 필요는 없다. 13.2의 공통 골격에서 시작하고, UI에는 Screenshot/Trace를, Performance에는 Environment Metadata를 추가하는 식으로 Task 유형에 따라 확장하면 된다.
 
@@ -6083,7 +6083,7 @@ Evidence는 결과만이 아니라 **재현 조건**도 포함할 수 있다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Evidence가 실패를 보여주었다고 하자.
 
@@ -6099,7 +6099,7 @@ Worker도 중간에 죽었다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - Anthropic, *Demystifying evals for AI agents*  
   https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
@@ -6112,7 +6112,7 @@ Worker도 중간에 죽었다.
 
 ---
 
-# 14장. Failure와 Recovery: 실패를 정상 상태로 설계한다
+## 14장. Failure와 Recovery: 실패를 정상 상태로 설계한다
 
 Software Factory에서 실패는 예외가 아니다.
 
@@ -6146,11 +6146,11 @@ Test가 flaky할 수 있다.
 
 ---
 
-## 14.1 Failure Taxonomy
+### 14.1 Failure Taxonomy
 
 Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 
-### Tool Failure
+#### Tool Failure
 
 예:
 
@@ -6160,7 +6160,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 
 코드 자체와 무관할 수 있다.
 
-### Harness Failure
+#### Harness Failure
 
 예:
 
@@ -6169,7 +6169,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 - context assembly failure
 - Agent adapter crash
 
-### Worker Failure
+#### Worker Failure
 
 예:
 
@@ -6178,7 +6178,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 - disk full
 - out-of-memory
 
-### Network Failure
+#### Network Failure
 
 예:
 
@@ -6186,7 +6186,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 - internal API timeout
 - transient DNS error
 
-### Verification Failure
+#### Verification Failure
 
 예:
 
@@ -6196,7 +6196,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 
 실제 코드 문제일 가능성이 있다.
 
-### Permission Failure
+#### Permission Failure
 
 예:
 
@@ -6204,7 +6204,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 - production credential unavailable
 - network policy deny
 
-### Agent Drift
+#### Agent Drift
 
 예:
 
@@ -6212,7 +6212,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 - Acceptance와 무관한 Refactoring
 - 같은 잘못된 가설 반복
 
-### Environment Failure
+#### Environment Failure
 
 예:
 
@@ -6226,7 +6226,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 
 ---
 
-## 14.2 Recovery Ladder
+### 14.2 Recovery Ladder
 
 Failure가 났다고 바로 Worker 전체를 새로 만들 필요는 없다.
 
@@ -6242,31 +6242,31 @@ Tool Retry
 → Human Escalation
 ~~~
 
-### Tool Retry
+#### Tool Retry
 
 외부 API의 일시적 오류.
 
-### Step Retry
+#### Step Retry
 
 특정 Build/Test Step만 다시 실행.
 
-### Agent Nudge
+#### Agent Nudge
 
 방향은 맞지만 작은 오해가 있을 때 correction을 준다.
 
-### Subtask Retry
+#### Subtask Retry
 
 실패한 Task Segment만 다시 수행.
 
-### Worker Restart
+#### Worker Restart
 
 Worker 상태가 오염됐거나 process가 죽었을 때.
 
-### Reassignment
+#### Reassignment
 
 다른 Worker가 같은 Task를 이어받는다.
 
-### Human Escalation
+#### Human Escalation
 
 자동 복구가 의미 없거나 위험할 때 사람에게 넘긴다.
 
@@ -6276,7 +6276,7 @@ Recovery Scope가 커질수록 비용도 커진다.
 
 ---
 
-## 14.3 Infinite Retry를 막는다
+### 14.3 Infinite Retry를 막는다
 
 다음 구조는 위험하다.
 
@@ -6325,11 +6325,11 @@ System
 
 ---
 
-## 14.4 Restart, Resume, Reassign은 다르다
+### 14.4 Restart, Resume, Reassign은 다르다
 
 세 단어는 비슷해 보이지만 의미가 다르다.
 
-### Restart
+#### Restart
 
 처음부터 다시 시작한다.
 
@@ -6347,7 +6347,7 @@ Task
 
 - 이미 완료한 Work를 잃는다.
 
-### Resume
+#### Resume
 
 이미 완료한 Work를 인정하고 중단 지점 이후부터 이어간다.
 
@@ -6365,7 +6365,7 @@ Task
 
 - checkpoint quality가 필요하다.
 
-### Reassign
+#### Reassign
 
 다른 Worker가 이어받는다.
 
@@ -6380,7 +6380,7 @@ Worker A lost
 
 ---
 
-## 14.5 Carryover Contract
+### 14.5 Carryover Contract
 
 다른 Worker가 이어받으려면 “왜 중단됐는가”만으로는 부족하다.
 
@@ -6429,7 +6429,7 @@ Carryover의 품질은 다음 질문으로 평가할 수 있다.
 
 ---
 
-## 14.6 Infra Failure와 Code Failure를 섞지 않는다
+### 14.6 Infra Failure와 Code Failure를 섞지 않는다
 
 예를 들어 다음 오류가 발생했다.
 
@@ -6462,7 +6462,7 @@ Failure Classification이 없으면 복구가 잘못된 Layer에서 일어난다
 
 ---
 
-## 14.7 Targeted Intervention
+### 14.7 Targeted Intervention
 
 Recovery는 Retry 아니면 Human Takeover 두 가지만 있는 것이 아니다.
 
@@ -6499,7 +6499,7 @@ Primary Agent continues
 
 ---
 
-## 14.8 Human Escalation은 실패가 아니다
+### 14.8 Human Escalation은 실패가 아니다
 
 자동화 시스템에서는 Human Escalation을 실패처럼 보기 쉽다.
 
@@ -6535,7 +6535,7 @@ Human Escalation이 있다는 이유로 Factory가 덜 자율적인 것은 아�
 
 ---
 
-## 14.9 Recovery Policy 예시
+### 14.9 Recovery Policy 예시
 
 다음처럼 Failure Class마다 정책을 둘 수 있다.
 
@@ -6568,7 +6568,7 @@ Control Plane이 소유하는 편이 좋다.
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Retry와 Resume를 설계했어도 한 가지 어려운 문제가 남는다.
 
@@ -6582,7 +6582,7 @@ Human Approval을 하루 동안 기다리는 동안 Worker를 계속 붙잡고 �
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - Anthropic, *Effective harnesses for long-running agents*  
   https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
@@ -6595,7 +6595,7 @@ Human Approval을 하루 동안 기다리는 동안 Worker를 계속 붙잡고 �
 
 ---
 
-# 15장. Durable Execution: Crash를 넘어 이어지는 Work
+## 15장. Durable Execution: Crash를 넘어 이어지는 Work
 
 Agent Task가 몇 초 안에 끝난다면 실행 상태를 크게 고민하지 않아도 된다.
 
@@ -6620,7 +6620,7 @@ Agent Task가 몇 초 안에 끝난다면 실행 상태를 크게 고민하지 �
 
 ---
 
-## 15.1 Memory와 Execution State는 다르다
+### 15.1 Memory와 Execution State는 다르다
 
 Agent Session을 저장하면 이전 대화를 다시 읽을 수 있다.
 
@@ -6650,7 +6650,7 @@ Conversation History를 저장해도 이 문제는 해결되지 않는다.
 
 ---
 
-## 15.2 Event History
+### 15.2 Event History
 
 Durable Execution에서는 중요한 상태 변화와 외부 행동을 기록한다.
 
@@ -6681,7 +6681,7 @@ Workflow Runtime이 **어떤 실행이 이미 완료됐는지 재구성**하는 
 
 ---
 
-## 15.3 Checkpoint
+### 15.3 Checkpoint
 
 모든 Event만으로 실제 Workspace를 복구하기 어려울 수 있다.
 
@@ -6724,7 +6724,7 @@ Checkpoint Granularity는 Task마다 다를 수 있다.
 
 ---
 
-## 15.4 Exactly-once를 기대하지 않는다
+### 15.4 Exactly-once를 기대하지 않는다
 
 Factory Runtime만으로 임의의 외부 Side Effect에 완전한 Exactly-once를 보장한다고 가정하면 안 된다. 외부 시스템이 transaction이나 idempotency를 함께 지원하지 않으면 “실행은 성공했지만 응답은 유실된” 상태를 Runtime 혼자 판별할 수 없기 때문이다.
 
@@ -6775,7 +6775,7 @@ deployment_id: dep-882
 
 ---
 
-## 15.5 Replay-safe Tool
+### 15.5 Replay-safe Tool
 
 Agent Tool도 Durable Runtime을 고려해 설계할 수 있다.
 
@@ -6812,7 +6812,7 @@ Agent가 Tool을 자유롭게 호출할수록 Runtime이 duplicate Side Effect�
 
 ---
 
-## 15.6 Human Approval은 Async Event다
+### 15.6 Human Approval은 Async Event다
 
 Human-in-the-loop를 synchronous process로 생각하면 Resource를 낭비한다.
 
@@ -6849,11 +6849,11 @@ Workflow 모델에서는 Human Approval을 나중에 도착하는 asynchronous e
 
 ---
 
-## 15.7 Durable Runtime과 Agent Harness의 책임
+### 15.7 Durable Runtime과 Agent Harness의 책임
 
 둘을 구분해보자.
 
-### Agent Harness
+#### Agent Harness
 
 질문:
 
@@ -6869,7 +6869,7 @@ Workflow 모델에서는 Human Approval을 나중에 도착하는 asynchronous e
 - Reasoning
 - Implementation
 
-### Durable Runtime
+#### Durable Runtime
 
 질문:
 
@@ -6906,7 +6906,7 @@ Worker / Sandbox
 
 ---
 
-## 15.8 제품이 아니라 책임 분리로 본다
+### 15.8 제품이 아니라 책임 분리로 본다
 
 Temporal, Microsoft Durable Task, Google Agent Executor 같은 시스템은 서로 구현과 추상화가 다르다. 특히 여기서 Microsoft Durable Task는 5장에서 정의한 책의 “Durable Task” 작업 단위와 다른 workflow technology다. Microsoft는 이를 특정 Agent Framework에 종속되지 않은 long-running durable workflow 기반으로 설명하고 있고, Google은 2026년 5월 Agent Executor를 event log와 snapshot으로 outage나 HITL 이후 execution을 재개하는 open-source runtime standard로 공개했다.
 
@@ -6927,7 +6927,7 @@ Factory가 직접 모든 것을 구현할 수도 있다.
 
 ---
 
-## 15.9 Crash Test를 Acceptance Scenario로 만든다
+### 15.9 Crash Test를 Acceptance Scenario로 만든다
 
 Factory Reliability를 Happy Path만으로 평가하면 부족하다.
 
@@ -6957,7 +6957,7 @@ Different Worker resume possible?
 
 ---
 
-## 15.10 Resume Quality
+### 15.10 Resume Quality
 
 Agent Reliability를 Success Rate만으로 보면 부족하다.
 
@@ -6983,7 +6983,7 @@ Durable Task State가 있어도 Workspace/Checkpoint State가 없으면 실제 �
 
 ---
 
-## 예: Duplicate PR 방지
+### 예: Duplicate PR 방지
 
 Attempt A1:
 
@@ -7015,7 +7015,7 @@ pr: #381
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Work가 Crash와 Wait를 견딜 수 있게 됐다.
 
@@ -7031,7 +7031,7 @@ Untrusted Issue 내용이 Tool Call로 이어지면 어떻게 막을 것인가.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - Microsoft, *Durable Task for AI agents*  
   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
@@ -7044,7 +7044,7 @@ Untrusted Issue 내용이 Tool Call로 이어지면 어떻게 막을 것인가.
 
 ---
 
-# 16장. Security, Identity, Governance
+## 16장. Security, Identity, Governance
 
 Agent가 단순히 코드를 제안할 때와 실제 Tool을 실행할 때의 위험은 다르다.
 
@@ -7069,11 +7069,11 @@ Autonomy가 높아질수록 Failure Probability만 볼 것이 아니라 **Blast 
 
 ---
 
-## 16.1 Blast Radius를 먼저 본다
+### 16.1 Blast Radius를 먼저 본다
 
 같은 Agent 오류도 권한에 따라 결과가 다르다.
 
-### Case A
+#### Case A
 
 ~~~text
 docs branch
@@ -7083,7 +7083,7 @@ no external network
 
 잘못된 수정이 생겨도 Revert하기 쉽다.
 
-### Case B
+#### Case B
 
 ~~~text
 production credential
@@ -7110,7 +7110,7 @@ Approval
 
 ---
 
-## 16.2 Prompt-only Security를 피한다
+### 16.2 Prompt-only Security를 피한다
 
 다음 Instruction을 생각해보자.
 
@@ -7146,7 +7146,7 @@ Mandatory Rule은 Enforcement가 필요하다.
 
 ---
 
-## 16.3 Human Credential을 Agent에게 그대로 주지 않는다
+### 16.3 Human Credential을 Agent에게 그대로 주지 않는다
 
 가장 간단한 연결 방식은 개발자의 Personal Token을 Worker에 넣는 것이다.
 
@@ -7188,7 +7188,7 @@ Production Deploy 권한은 없다.
 
 ---
 
-## 16.4 Task-scoped Credential
+### 16.4 Task-scoped Credential
 
 Credential Scope를 다음 축으로 제한할 수 있다.
 
@@ -7220,7 +7220,7 @@ Task가 끝나면 Credential도 만료된다.
 
 ---
 
-## 16.5 Untrusted Context가 Tool Authority와 만날 때
+### 16.5 Untrusted Context가 Tool Authority와 만날 때
 
 Agent는 Issue, Pull Request, Comment, Documentation 같은 Text를 읽는다.
 
@@ -7261,7 +7261,7 @@ Microsoft Security가 2026년 공개한 두 사례는 이 연결을 구체적으
 
 ---
 
-## 16.6 Credential Broker
+### 16.6 Credential Broker
 
 Agent가 Secret 원문을 직접 받을 필요가 없는 경우도 많다.
 
@@ -7296,7 +7296,7 @@ Broker가 권한과 Audit를 관리한다.
 
 ---
 
-## 16.7 Risk-based Human Gate
+### 16.7 Risk-based Human Gate
 
 모든 Tool Call마다 사람에게 승인받으면 안전해 보인다.
 
@@ -7306,7 +7306,7 @@ Broker가 권한과 Audit를 관리한다.
 
 그래서 Risk에 따라 Gate 위치를 다르게 한다.
 
-### Low Risk
+#### Low Risk
 
 ~~~text
 docs
@@ -7319,7 +7319,7 @@ generated file
 - automated verification
 - light/no explicit approval
 
-### Medium Risk
+#### Medium Risk
 
 ~~~text
 business logic
@@ -7332,7 +7332,7 @@ API behavior
 - automated verification
 - human PR review
 
-### High Risk
+#### High Risk
 
 ~~~text
 auth
@@ -7355,7 +7355,7 @@ production
 
 ---
 
-## 16.8 Execution Authority와 Acceptance Authority를 분리한다
+### 16.8 Execution Authority와 Acceptance Authority를 분리한다
 
 같은 Agent가 다음을 모두 수행한다고 해보자.
 
@@ -7394,7 +7394,7 @@ Deployer
 
 ---
 
-## 16.9 Agent Identity
+### 16.9 Agent Identity
 
 Human과 Agent를 Audit에서 구분할 수 있어야 한다.
 
@@ -7420,7 +7420,7 @@ Agent Identity는 이름표가 아니라 Delegation과 Audit의 기준이 될 �
 
 ---
 
-## 16.10 Audit는 Chain-of-Thought 저장이 아니다
+### 16.10 Audit는 Chain-of-Thought 저장이 아니다
 
 Agent를 감사하려고 내부 Reasoning 전체를 저장해야 하는 것은 아니다.
 
@@ -7450,7 +7450,7 @@ Raw Chain-of-Thought를 Governance 요구사항으로 두지 않는다.
 
 ---
 
-## 16.11 Provenance
+### 16.11 Provenance
 
 Source Code의 Commit History만으로는 Agentic Factory의 전체 Lineage를 알기 어렵다.
 
@@ -7497,9 +7497,9 @@ required test → optional
 
 ---
 
-## 16.12 예: Docs Task와 Production Migration
+### 16.12 예: Docs Task와 Production Migration
 
-### Docs Task
+#### Docs Task
 
 ~~~text
 Goal
@@ -7516,7 +7516,7 @@ Approval
 - optional/light
 ~~~
 
-### Production Migration
+#### Production Migration
 
 첫 단계:
 
@@ -7542,7 +7542,7 @@ Permission
 
 ---
 
-## Security 설계에서 묻는 질문
+### Security 설계에서 묻는 질문
 
 ~~~text
 1. Agent가 실제로 필요한 Capability는 무엇인가?
@@ -7556,7 +7556,7 @@ Permission
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 지금까지는 하나의 Worker가 안전하게 실행되고 결과를 검증하고 복구하는 구조를 만들었다.
 
@@ -7570,7 +7570,7 @@ Agent 수를 늘리면 처리량도 선형으로 늘어날까.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - NIST, *Software and AI Agent Identity and Authorization*  
   https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd
@@ -7583,9 +7583,9 @@ Agent 수를 늘리면 처리량도 선형으로 늘어날까.
 
 ---
 
-# Part V. 여러 Worker와 전체 Flow 관리
+## Part V. 여러 Worker와 전체 Flow 관리
 
-# 17장. Parallel Worker와 Multi-Agent: 언제 병렬화할 것인가
+## 17장. Parallel Worker와 Multi-Agent: 언제 병렬화할 것인가
 
 Worker 하나가 안정적으로 동작하면 다음 생각이 자연스럽게 든다.
 
@@ -7611,7 +7611,7 @@ Worker 하나가 안정적으로 동작하면 다음 생각이 자연스럽게 �
 
 ---
 
-## 17.1 Useful Parallelism의 조건
+### 17.1 Useful Parallelism의 조건
 
 병렬화가 유리하려면 다음 조건이 많을수록 좋다.
 
@@ -7644,7 +7644,7 @@ Branch가 달라도 실제로는 같은 설계 결정을 공유한다.
 
 ---
 
-## 17.2 Task DAG에서 Parallelism이 나온다
+### 17.2 Task DAG에서 Parallelism이 나온다
 
 6장에서 Dependency Graph를 만들었다.
 
@@ -7674,7 +7674,7 @@ Ready Task 수와 Dependency를 보고 필요한 Worker 수를 정한다.
 
 ---
 
-## 17.3 Fan-out / Fan-in
+### 17.3 Fan-out / Fan-in
 
 Parallel Worker는 보통 다음 구조를 가진다.
 
@@ -7715,7 +7715,7 @@ Integration
 
 ---
 
-## 17.4 Ownership은 Scheduling Signal이다
+### 17.4 Ownership은 Scheduling Signal이다
 
 Factory Scheduler는 CPU와 Memory만 보는 것이 아니다.
 
@@ -7758,7 +7758,7 @@ Runtime conflict detection
 
 ---
 
-## 17.5 More Agents가 More Throughput이 아닌 이유
+### 17.5 More Agents가 More Throughput이 아닌 이유
 
 Anthropic이 2026년 8월 공개한 연구는 이런 Coordination Failure를 통제된 simulation에서 보여준다. 여러 Model Generation과 Agent 수를 바꿔 동일한 open-world game project를 12시간 동안 공동 개발하게 했을 때, 일부 Model에서는 많은 PR을 열고도 Merge 비율이 낮았고 shared file conflict 뒤 PR을 포기하는 패턴이 나타났다. 더 최신 Model 중 일부는 오히려 file ownership을 강하게 나눠 충돌을 줄였다.
 
@@ -7785,7 +7785,7 @@ Parallel Completed Work
 
 ---
 
-## 17.6 Same-model Committee의 함정
+### 17.6 Same-model Committee의 함정
 
 여러 Agent에게 같은 질문을 하고 다수결을 하면 더 안전할 것처럼 보인다.
 
@@ -7815,11 +7815,11 @@ Evaluator를 분리할 때도 마찬가지다.
 
 ---
 
-## 17.7 Parent/Subagent와 Task Worker는 다르다
+### 17.7 Parent/Subagent와 Task Worker는 다르다
 
 한 Agent가 내부적으로 Subagent를 쓰는 구조와 Factory가 여러 Durable Task를 병렬 실행하는 구조는 다르다.
 
-### Parent / Subagent
+#### Parent / Subagent
 
 ~~~text
 One Task
@@ -7831,7 +7831,7 @@ One Task
 
 Task State는 하나다.
 
-### Parallel Task Workers
+#### Parallel Task Workers
 
 ~~~text
 Task A → Worker A
@@ -7845,7 +7845,7 @@ Task C → Worker C
 
 ---
 
-## 17.8 Shared Resource Stampede
+### 17.8 Shared Resource Stampede
 
 여러 Agent가 같은 External Resource를 동시에 Polling하면 문제가 생길 수 있다. Anthropic의 별도 queue-management experiment에서는 coordination 수단이 부족한 Agent들이 초당 30회 polling daemon을 만들었고, 한 run에서 240만 건의 요청 중 실제 accepted job은 117건이었다. 이 역시 실험 환경의 극단적 사례지만 Agent speed가 resource contention을 증폭할 수 있다는 점을 보여준다.
 
@@ -7882,7 +7882,7 @@ Shared Resource Governance가 필요하다.
 
 ---
 
-## 17.9 Concurrency Budget
+### 17.9 Concurrency Budget
 
 Worker Count만 보지 않는다.
 
@@ -7913,9 +7913,9 @@ Factory Scheduler는 downstream capacity까지 고려할 수 있다.
 
 ---
 
-## 예: 독립 Task 3개와 충돌 Task 3개
+### 예: 독립 Task 3개와 충돌 Task 3개
 
-### Good
+#### Good
 
 ~~~text
 T1 backend unit tests
@@ -7925,7 +7925,7 @@ T3 docs
 
 병렬 실행 후 각 결과를 독립적으로 검증할 수 있다.
 
-### Bad
+#### Bad
 
 ~~~text
 T4 auth schema
@@ -7939,7 +7939,7 @@ T6 auth API contract
 
 ---
 
-## 병렬화 전에 묻는 질문
+### 병렬화 전에 묻는 질문
 
 ~~~text
 1. Acceptance를 독립적으로 검증할 수 있는가?
@@ -7954,7 +7954,7 @@ T6 auth API contract
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Parallel Worker로 Implementation Throughput을 높였다.
 
@@ -7966,7 +7966,7 @@ Parallel Worker로 Implementation Throughput을 높였다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - Anthropic, *Patterns and problems in emerging multiagent systems*  
   https://www.anthropic.com/research/multiagent-systems
@@ -7977,7 +7977,7 @@ Parallel Worker로 Implementation Throughput을 높였다.
 
 ---
 
-# 18장. Review, CI, Integration: Coding 다음 병목
+## 18장. Review, CI, Integration: Coding 다음 병목
 
 Agent가 코드를 빠르게 만들기 시작하면 조직의 병목은 사라지지 않는다.
 
@@ -8001,7 +8001,7 @@ Worker가 많아질수록 이 이동은 더 빨라진다.
 
 ---
 
-## 18.1 Bottleneck Migration
+### 18.1 Bottleneck Migration
 
 예를 들어 하루에 다음 처리량을 가진 팀이 있다고 하자.
 
@@ -8030,7 +8030,7 @@ Worker를 더 늘려 Implementation을 60 changes/day로 올려도 전체 처리
 
 ---
 
-## 18.2 Reviewability를 품질 속성으로 본다
+### 18.2 Reviewability를 품질 속성으로 본다
 
 Agent가 만든 코드가 기능적으로 맞더라도 Review가 매우 어렵다면 Delivery Cost가 커진다.
 
@@ -8061,7 +8061,7 @@ Unreviewable
 
 ---
 
-## 18.3 Giant PR 문제
+### 18.3 Giant PR 문제
 
 Agent는 장시간 실행되면 큰 Diff를 만들기 쉽다.
 
@@ -8102,7 +8102,7 @@ Stacked PR는 이런 구조를 지원하는 하나의 방식이다. GitHub도 20
 
 ---
 
-## 18.4 Verification Queue
+### 18.4 Verification Queue
 
 Agent가 수정할 때마다 모든 검증을 실행하면 CI가 포화될 수 있다.
 
@@ -8144,7 +8144,7 @@ Candidate
 
 ---
 
-## 18.5 CI도 Capacity다
+### 18.5 CI도 Capacity다
 
 Factory Scheduler가 Worker Availability만 보면 부족하다.
 
@@ -8174,7 +8174,7 @@ Implementation을 늦추는 것이 비효율처럼 보일 수 있다.
 
 ---
 
-## 18.6 WIP Limit
+### 18.6 WIP Limit
 
 Agent 실행 비용이 낮아지면 Work를 시작하는 것이 너무 쉬워진다.
 
@@ -8202,7 +8202,7 @@ PENDING_INTEGRATION <= 4
 
 ---
 
-## 18.7 Review Queue가 길어지면 생기는 비용
+### 18.7 Review Queue가 길어지면 생기는 비용
 
 Review가 늦어지면 단순 대기 시간만 늘어나는 것이 아니다.
 
@@ -8216,7 +8216,7 @@ Review가 늦어지면 단순 대기 시간만 늘어나는 것이 아니다.
 
 ---
 
-## 18.8 AI Reviewer가 모든 문제를 해결하지 않는다
+### 18.8 AI Reviewer가 모든 문제를 해결하지 않는다
 
 AI Reviewer를 붙이면 Review Capacity를 늘릴 수 있다.
 
@@ -8244,7 +8244,7 @@ Implementer
 
 ---
 
-## 18.9 Integration Acceptance
+### 18.9 Integration Acceptance
 
 각 PR이 맞아도 합친 결과가 틀릴 수 있다.
 
@@ -8280,7 +8280,7 @@ Parallel Factory에서는 Integration이 독립 Stage가 된다.
 
 ---
 
-## 18.10 Review Evidence Package
+### 18.10 Review Evidence Package
 
 13장의 Evidence Contract는 Reviewer Capacity와 직접 연결된다.
 
@@ -8302,7 +8302,7 @@ Repository를 처음부터 탐색하는 비용이 줄어든다.
 
 ---
 
-## 예: 30개 PR과 6개 Review Capacity
+### 예: 30개 PR과 6개 Review Capacity
 
 가상 상황:
 
@@ -8335,7 +8335,7 @@ Factory는 Worker Utilization이 아니라 전체 Flow를 최적화해야 한다
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 어디가 병목인지 알려면 관찰해야 한다.
 
@@ -8347,7 +8347,7 @@ Token Cost만 봐서는 Retry와 Rework를 알 수 없다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
   https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
@@ -8360,7 +8360,7 @@ Token Cost만 봐서는 Retry와 Rework를 알 수 없다.
 
 ---
 
-# 19장. Observability와 Metrics: 무엇을 측정할 것인가
+## 19장. Observability와 Metrics: 무엇을 측정할 것인가
 
 Factory를 운영하기 시작하면 곧 숫자가 쌓인다.
 
@@ -8387,11 +8387,11 @@ Factory Observability의 목적은 Agent를 감시하는 데 있지 않다.
 
 ---
 
-## 19.1 무엇을 관찰할 것인가
+### 19.1 무엇을 관찰할 것인가
 
 Factory Observability는 여러 Layer를 가진다.
 
-### Task
+#### Task
 
 ~~~text
 created
@@ -8404,7 +8404,7 @@ done
 failed
 ~~~
 
-### Attempt
+#### Attempt
 
 ~~~text
 attempt_id
@@ -8415,7 +8415,7 @@ retry_reason
 failure_class
 ~~~
 
-### Worker
+#### Worker
 
 ~~~text
 active
@@ -8425,7 +8425,7 @@ resource
 profile
 ~~~
 
-### Agent / Harness
+#### Agent / Harness
 
 ~~~text
 turns
@@ -8436,7 +8436,7 @@ model_switch
 
 이 Layer를 따로 보는 이유는 실제 Agentic Workload가 일반 Chat과 다르기 때문이다. Microsoft Research가 2026년 6월 GitHub Copilot production trace를 표본 분석한 preprint는 320만 사용자, 1,300만 session, 7억6,100만 LLM call, 95조 token 규모에서 user turn 안에 LLM call과 Tool 실행이 반복되고 사용량이 long-tail을 보이는 특성을 보고했다. 이는 한 제품의 sampled trace이지만 Agent Runtime 비용을 단순 Chat request 수로만 보기 어렵다는 근거가 된다.
 
-### Execution
+#### Execution
 
 ~~~text
 commands
@@ -8446,7 +8446,7 @@ cpu
 memory
 ~~~
 
-### Verification
+#### Verification
 
 ~~~text
 checks
@@ -8455,7 +8455,7 @@ duration
 artifact
 ~~~
 
-### Human
+#### Human
 
 ~~~text
 steering
@@ -8465,7 +8465,7 @@ rejection
 takeover
 ~~~
 
-### Cost
+#### Cost
 
 ~~~text
 model
@@ -8481,7 +8481,7 @@ rework
 
 ---
 
-## 19.2 Raw Chain-of-Thought가 Observability의 중심은 아니다
+### 19.2 Raw Chain-of-Thought가 Observability의 중심은 아니다
 
 Factory를 관찰한다고 Agent의 내부 Reasoning 전체를 저장해야 하는 것은 아니다.
 
@@ -8510,7 +8510,7 @@ TaskDone
 
 ---
 
-## 19.3 Task Timeline을 쪼개서 본다
+### 19.3 Task Timeline을 쪼개서 본다
 
 Task가 10시간 걸렸다고 하자.
 
@@ -8557,7 +8557,7 @@ Total Cycle Time
 
 ---
 
-## 19.4 Agent Metric과 Factory Metric을 구분한다
+### 19.4 Agent Metric과 Factory Metric을 구분한다
 
 Agent-level Metric:
 
@@ -8601,7 +8601,7 @@ Business Outcome
 
 ---
 
-## 19.5 First-pass Acceptance
+### 19.5 First-pass Acceptance
 
 Agent가 Candidate를 많이 만드는 것보다 실제로 얼마나 적은 수정으로 받아들여지는지가 중요할 수 있다.
 
@@ -8622,7 +8622,7 @@ Agent가 Candidate를 많이 만드는 것보다 실제로 얼마나 적은 수�
 
 ---
 
-## 19.6 Human Attention
+### 19.6 Human Attention
 
 Agent가 비동기로 일할수록 Human Time을 따로 봐야 한다.
 
@@ -8648,7 +8648,7 @@ Accepted Change
 
 ---
 
-## 19.7 Token을 비용과 생산성의 대리변수로 쓰지 않는다
+### 19.7 Token을 비용과 생산성의 대리변수로 쓰지 않는다
 
 Agent A:
 
@@ -8696,7 +8696,7 @@ Task Value와 Risk가 다르기 때문이다.
 
 ---
 
-## 19.8 Benchmark와 Production Metric을 분리한다
+### 19.8 Benchmark와 Production Metric을 분리한다
 
 SWE-bench 같은 Benchmark는 중요하다.
 
@@ -8729,7 +8729,7 @@ Production Metric은 실제 Work Distribution을 보여준다.
 
 ---
 
-## 19.9 Production Failure를 Eval로 되돌린다
+### 19.9 Production Failure를 Eval로 되돌린다
 
 Observability의 가장 큰 가치는 Dashboard가 아니라 Learning Loop에 있다.
 
@@ -8757,13 +8757,13 @@ Production Failure
 
 ---
 
-## 19.10 Minimum Viable Dashboard
+### 19.10 Minimum Viable Dashboard
 
 처음부터 거대한 Observability Platform이 필요하지는 않다.
 
 최소 Dashboard는 다음 질문에 답하면 된다.
 
-### Flow
+#### Flow
 
 ~~~text
 Backlog
@@ -8775,7 +8775,7 @@ Done
 Failed
 ~~~
 
-### Worker
+#### Worker
 
 ~~~text
 Active
@@ -8783,7 +8783,7 @@ Idle
 Lost
 ~~~
 
-### Quality
+#### Quality
 
 ~~~text
 Verification Pass
@@ -8792,7 +8792,7 @@ Reject
 Revert
 ~~~
 
-### Human Load
+#### Human Load
 
 ~~~text
 Review Queue
@@ -8800,7 +8800,7 @@ Approval Wait
 Intervention
 ~~~
 
-### Cost
+#### Cost
 
 ~~~text
 Task Cost
@@ -8811,7 +8811,7 @@ Accepted-change Cost
 
 ---
 
-## 예: 10분 실행, 8시간 Review Wait
+### 예: 10분 실행, 8시간 Review Wait
 
 Task A:
 
@@ -8840,7 +8840,7 @@ Observability가 있어야 두 문제를 구분할 수 있다.
 
 ---
 
-## 19.11 Factory Metric Set
+### 19.11 Factory Metric Set
 
 초기에는 다음 정도면 충분하다.
 
@@ -8875,7 +8875,7 @@ Metric은 측정 가능한 것을 많이 모으기 위해 만드는 것이 아�
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
@@ -8887,7 +8887,7 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - DORA, *2025 DORA Report*  
   https://dora.dev/research/2025/dora-report/
@@ -8900,9 +8900,9 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
 ---
 
-# Part VI. 조직의 Software Delivery System으로 확장
+## Part VI. 조직의 Software Delivery System으로 확장
 
-# 20장. Event-driven Factory와 Closed-loop SDLC
+## 20장. Event-driven Factory와 Closed-loop SDLC
 
 지금까지의 Factory는 대부분 사람이 Task를 시작하는 구조였다.
 
@@ -8934,7 +8934,7 @@ Alert
 
 ---
 
-## 20.1 Task Source를 확장한다
+### 20.1 Task Source를 확장한다
 
 Factory가 받을 수 있는 Work Source는 다양하다.
 
@@ -8960,7 +8960,7 @@ Production Signal
 
 ---
 
-## 20.2 Signal에서 Task로
+### 20.2 Signal에서 Task로
 
 좋은 흐름은 다음에 가깝다.
 
@@ -9000,7 +9000,7 @@ Diagnosis 결과가 Code Issue로 확인되면 그다음 Fix Task를 만든다.
 
 ---
 
-## 20.3 Event-driven은 Fully Autonomous와 다르다
+### 20.3 Event-driven은 Fully Autonomous와 다르다
 
 Event가 자동으로 Task를 생성해도 Merge까지 자동일 필요는 없다. Google이 2025년 12월 Jules에 공개한 Suggested Tasks와 Scheduled Tasks도 이 구분을 보여준다. Suggested Tasks는 개선 후보를 제안해 사용자가 review/approve/dismiss하도록 했고, Render 연동의 deployment-failure 대응도 fix를 만든 뒤 Pull Request를 열어 review를 남겼다.
 
@@ -9030,7 +9030,7 @@ Autonomy는 별도 축이다.
 
 ---
 
-## 20.4 Closed-loop SDLC
+### 20.4 Closed-loop SDLC
 
 Software Delivery는 Deploy에서 끝나지 않는다.
 
@@ -9070,11 +9070,11 @@ Repeated Agent Failure
 
 ---
 
-## 20.5 Product Loop와 Factory Loop를 구분한다
+### 20.5 Product Loop와 Factory Loop를 구분한다
 
 두 가지 Feedback Loop가 있다.
 
-### Product Loop
+#### Product Loop
 
 ~~~text
 Production Problem
@@ -9087,7 +9087,7 @@ Production Problem
 - validation bug
 - UI defect
 
-### Factory Loop
+#### Factory Loop
 
 ~~~text
 Factory Friction
@@ -9108,7 +9108,7 @@ Product 문제가 Factory configuration 변경으로 잘못 이어지거나, Fac
 
 ---
 
-## 20.6 Noise를 Work로 증폭시키지 않는다
+### 20.6 Noise를 Work로 증폭시키지 않는다
 
 Production Signal은 noisy할 수 있다.
 
@@ -9140,7 +9140,7 @@ within 10m
 
 ---
 
-## 20.7 Oscillation
+### 20.7 Oscillation
 
 자동 remediation이나 self-healing 성격의 Loop가 잘못 설계되면 반복 변경이 발생할 수 있다.
 
@@ -9168,7 +9168,7 @@ Repeat
 
 ---
 
-## 20.8 예: Nightly Test Failure
+### 20.8 예: Nightly Test Failure
 
 ~~~text
 02:00 Nightly Test FAIL
@@ -9196,7 +9196,7 @@ Human / Policy Gate
 
 ---
 
-## 20.9 Production Signal을 바로 Code Fix로 보내지 않는다
+### 20.9 Production Signal을 바로 Code Fix로 보내지 않는다
 
 Latency Alert 예:
 
@@ -9227,7 +9227,7 @@ latency high
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Event-driven Factory가 Work를 만들기 시작하면 더 많은 Platform Capability가 필요해진다.
 
@@ -9237,7 +9237,7 @@ Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구�
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - NIST NCCoE, *DevSecOps Notional Reference Model*  
   https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
@@ -9248,7 +9248,7 @@ Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구�
 
 ---
 
-# 21장. Developer Platform과 Golden Path를 Factory가 사용하게 만들기
+## 21장. Developer Platform과 Golden Path를 Factory가 사용하게 만들기
 
 Software Factory를 만든다고 모든 Infrastructure Capability를 새로 만들 필요는 없다.
 
@@ -9268,7 +9268,7 @@ Factory가 해야 할 일은 이 Capability를 Agent도 안전하게 사용할 �
 
 ---
 
-## 21.1 Platform이 이미 제공하는 것
+### 21.1 Platform이 이미 제공하는 것
 
 Internal Developer Platform은 보통 다음 문제를 해결한다.
 
@@ -9295,7 +9295,7 @@ Factory가 각각의 Infra Detail을 직접 다루게 하면 다음 문제가 �
 
 ---
 
-## 21.2 Agent도 Platform Consumer다
+### 21.2 Agent도 Platform Consumer다
 
 사람용 Platform Interface는 보통 다음과 같다.
 
@@ -9334,7 +9334,7 @@ log_ref
 
 ---
 
-## 21.3 Golden Path를 Tool로 만든다
+### 21.3 Golden Path를 Tool로 만든다
 
 기존 Golden Path:
 
@@ -9356,7 +9356,7 @@ Trusted Platform이 표준 구현을 제공한다.
 
 ---
 
-## 21.4 직접 Infra를 만들게 하는 방식과 비교
+### 21.4 직접 Infra를 만들게 하는 방식과 비교
 
 Task:
 
@@ -9395,7 +9395,7 @@ Agent의 자유도를 줄이는 것이 아니라 Infrastructure Domain에서는 
 
 ---
 
-## 21.5 Software Catalog
+### 21.5 Software Catalog
 
 Agent가 Repository만 보고 조직 전체를 이해하기는 어렵다.
 
@@ -9424,7 +9424,7 @@ Catalog에서 dependent service를 찾고 Integration Verification 범위를 결
 
 ---
 
-## 21.6 Catalog는 모든 것의 Source of Truth가 아니다
+### 21.6 Catalog는 모든 것의 Source of Truth가 아니다
 
 모든 Runtime State를 Catalog에 복제하면 stale data가 생긴다.
 
@@ -9451,7 +9451,7 @@ Catalog는 조직 Context Graph에 가깝다.
 
 ---
 
-## 21.7 Agent-friendly Feedback
+### 21.7 Agent-friendly Feedback
 
 사람에게는 다음 메시지도 충분할 수 있다.
 
@@ -9482,7 +9482,7 @@ Structured Feedback은 Agent가 다음 행동을 고르기 쉽게 한다. DORA�
 
 ---
 
-## 21.8 Idempotency도 Platform Contract에 포함한다
+### 21.8 Idempotency도 Platform Contract에 포함한다
 
 Durable Execution과 연결하면 Platform Tool에는 operation identity가 필요할 수 있다.
 
@@ -9500,7 +9500,7 @@ Agent-ready Platform은 단순 API 노출을 넘어 **replay-safe machine contra
 
 ---
 
-## 21.9 Platform Governance
+### 21.9 Platform Governance
 
 Agent가 Platform API를 통해 Infrastructure에 접근하면 Governance를 중앙화할 수 있다.
 
@@ -9524,7 +9524,7 @@ Policy:
 
 ---
 
-## 21.10 Human-friendly와 Agent-friendly를 함께 유지한다
+### 21.10 Human-friendly와 Agent-friendly를 함께 유지한다
 
 Agent-ready Platform이라고 사람용 Portal을 없앨 필요는 없다.
 
@@ -9547,7 +9547,7 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
-## Platform을 Agent-ready하게 만들 때 묻는 질문
+### Platform을 Agent-ready하게 만들 때 묻는 질문
 
 ~~~text
 1. Capability가 stable machine contract로 노출되는가?
@@ -9561,7 +9561,7 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 지금까지 책에서는 상당히 많은 Capability를 다뤘다.
 
@@ -9571,7 +9571,7 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - DORA, *Platform Engineering Capability*  
   https://dora.dev/capabilities/platform-engineering/
@@ -9584,9 +9584,9 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
-# Part VII. Minimum Viable Factory에서 Adaptive Factory까지
+## Part VII. Minimum Viable Factory에서 Adaptive Factory까지
 
-# 22장. Minimum Viable AI Software Factory
+## 22장. Minimum Viable AI Software Factory
 
 지금까지 책에서는 많은 구성요소를 다뤘다.
 
@@ -9614,7 +9614,7 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
-## 22.1 첫 Use Case를 고른다
+### 22.1 첫 Use Case를 고른다
 
 첫 Task는 화려할 필요가 없다.
 
@@ -9647,7 +9647,7 @@ Factory Boundary가 실제로 동작하는지 확인하는 것이다.
 
 ---
 
-## 22.2 권장 시작 구조
+### 22.2 권장 시작 구조
 
 2장에서 정의한 Factory의 최소 성질과, 조직이 처음 도입할 때 권장하는 시작 구성은 같지 않다. 여기서는 실패 비용을 낮추기 위해 **Human Review를 남겨 둔 시작 형태**를 사용한다.
 
@@ -9683,7 +9683,7 @@ Auto-merge도 필요 없다. 반대로 낮은 위험의 Task에서 충분한 검
 
 ---
 
-## 22.3 Step A: Agent-ready Repository
+### 22.3 Step A: Agent-ready Repository
 
 Factory보다 먼저 Repository를 본다.
 
@@ -9713,7 +9713,7 @@ Factory가 Repository Chaos를 자동으로 해결해줄 것이라고 기대하�
 
 ---
 
-## 22.4 Step B: Reproducible Worker
+### 22.4 Step B: Reproducible Worker
 
 다음 목표:
 
@@ -9733,7 +9733,7 @@ Worker 하나가 재현 가능하면 된다.
 
 ---
 
-## 22.5 Step C: Evidence Contract
+### 22.5 Step C: Evidence Contract
 
 Scale 전에 Result Format을 만든다.
 
@@ -9750,7 +9750,7 @@ Known Risk
 
 ---
 
-## 22.6 Step D: Durable Task State
+### 22.6 Step D: Durable Task State
 
 다음으로 Work State를 Session 밖으로 꺼낸다.
 
@@ -9769,7 +9769,7 @@ Attempt와 Retry도 기록한다.
 
 ---
 
-## 22.7 Step E: Retry와 Resume
+### 22.7 Step E: Retry와 Resume
 
 Happy Path가 반복적으로 안정적이라면 Failure Recovery를 넣는다.
 
@@ -9791,7 +9791,7 @@ Approval delay
 
 ---
 
-## 22.8 Step F: Event Trigger
+### 22.8 Step F: Event Trigger
 
 Human이 직접 Start하지 않아도 되는 Work를 연결한다.
 
@@ -9812,7 +9812,7 @@ Work Source 자동화와 Acceptance Authority는 별개다.
 
 ---
 
-## 22.9 Step G: Parallel Worker
+### 22.9 Step G: Parallel Worker
 
 Queue가 실제로 쌓이기 시작했을 때 Worker를 늘린다.
 
@@ -9829,7 +9829,7 @@ Conflict Rate?
 
 ---
 
-## 22.10 Step H: Risk-based Automation
+### 22.10 Step H: Risk-based Automation
 
 Task Risk에 따라 정책을 다르게 한다.
 
@@ -9852,7 +9852,7 @@ Auth / Payment / Migration
 
 ---
 
-## 22.11 Work Selection Automation은 뒤에 둔다
+### 22.11 Work Selection Automation은 뒤에 둔다
 
 Backlog에서 어떤 Task를 할지 Agent가 고르는 것은 높은 수준의 Autonomy다.
 
@@ -9871,7 +9871,7 @@ Reliability baseline
 
 ---
 
-## 22.12 Measure Before Automation
+### 22.12 Measure Before Automation
 
 자동화 전 Baseline을 남긴다.
 
@@ -9893,7 +9893,7 @@ cost
 
 ---
 
-## 예: CI Failure Fix부터 시작하기
+### 예: CI Failure Fix부터 시작하기
 
 첫 Use Case:
 
@@ -9933,7 +9933,7 @@ Human Review
 
 ---
 
-## Minimum Viable Factory 체크
+### Minimum Viable Factory 체크
 
 ~~~text
 1. 반복 가능한 Work가 있는가?
@@ -9951,7 +9951,7 @@ Human Review
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Minimum Viable Factory의 구조는 이해했다.
 
@@ -9961,7 +9961,7 @@ Minimum Viable Factory의 구조는 이해했다.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - DORA, *Platform Engineering Capability*  
   https://dora.dev/capabilities/platform-engineering/
@@ -9974,7 +9974,7 @@ Minimum Viable Factory의 구조는 이해했다.
 
 ---
 
-# 23장. 실전 Reference Factory 만들기
+## 23장. 실전 Reference Factory 만들기
 
 지금까지의 Architecture가 실제로 필요한지 확인하려면 작은 구현이 필요하다.
 
@@ -9995,7 +9995,7 @@ Minimum Viable Factory의 구조는 이해했다.
 
 ---
 
-## 23.1 Reference Architecture
+### 23.1 Reference Architecture
 
 최소 Component:
 
@@ -10028,9 +10028,9 @@ Task Create
 
 ---
 
-## 23.2 최소 Data Model
+### 23.2 최소 Data Model
 
-### Task
+#### Task
 
 ~~~text
 id
@@ -10042,7 +10042,7 @@ dependency
 risk
 ~~~
 
-### Attempt
+#### Attempt
 
 ~~~text
 id
@@ -10054,7 +10054,7 @@ ended_at
 failure
 ~~~
 
-### Assignment
+#### Assignment
 
 ~~~text
 task_id
@@ -10062,7 +10062,7 @@ worker_id
 lease
 ~~~
 
-### Verification
+#### Verification
 
 ~~~text
 task_id
@@ -10072,7 +10072,7 @@ status
 artifact
 ~~~
 
-### Evidence
+#### Evidence
 
 ~~~text
 result_revision
@@ -10081,7 +10081,7 @@ artifacts
 known_risk
 ~~~
 
-### Approval
+#### Approval
 
 ~~~text
 task_id
@@ -10094,7 +10094,7 @@ timestamp
 
 ---
 
-## 23.3 Scenario 1: Normal Success
+### 23.3 Scenario 1: Normal Success
 
 가장 먼저 Happy Path를 검증한다.
 
@@ -10118,7 +10118,7 @@ Task READY
 
 ---
 
-## 23.4 Scenario 2: Verification Failure
+### 23.4 Scenario 2: Verification Failure
 
 Agent가 Candidate를 만들었지만 Test가 실패한다.
 
@@ -10143,7 +10143,7 @@ retry_count < budget
 
 ---
 
-## 23.5 Scenario 3: Worker Kill
+### 23.5 Scenario 3: Worker Kill
 
 Task 수행 중 Worker Process를 강제로 죽인다.
 
@@ -10167,7 +10167,7 @@ integration pending
 
 ---
 
-## 23.6 Scenario 4: Worker A → Worker B Reassignment
+### 23.6 Scenario 4: Worker A → Worker B Reassignment
 
 Worker A의 Partial Work를 Worker B가 이어받는다.
 
@@ -10198,7 +10198,7 @@ duplicate work
 
 ---
 
-## 23.7 Scenario 5: Human Approval
+### 23.7 Scenario 5: Human Approval
 
 Task가 Verification을 통과한다.
 
@@ -10224,7 +10224,7 @@ APPROVED
 
 ---
 
-## 23.8 Scenario 6: Independent Parallel Tasks
+### 23.8 Scenario 6: Independent Parallel Tasks
 
 Task A와 B가 다른 Module을 수정한다.
 
@@ -10246,7 +10246,7 @@ Parallelism이 실제 이득인지 본다.
 
 ---
 
-## 23.9 Scenario 7: Same-file Conflict
+### 23.9 Scenario 7: Same-file Conflict
 
 Task C와 D가 같은 File을 수정한다.
 
@@ -10268,7 +10268,7 @@ Factory는 다음 중 하나를 해야 한다.
 
 ---
 
-## 23.10 Evidence Output
+### 23.10 Evidence Output
 
 각 Task 결과는 같은 Manifest를 반환한다.
 
@@ -10297,7 +10297,7 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ---
 
-## 23.11 Reference Implementation에서 일부러 만들지 않는 것
+### 23.11 Reference Implementation에서 일부러 만들지 않는 것
 
 다음은 없어도 된다.
 
@@ -10312,7 +10312,7 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ---
 
-## 23.12 Case Study와 Reference를 구분한다
+### 23.12 Case Study와 Reference를 구분한다
 
 실제 구현 경험은 유용하다.
 
@@ -10345,7 +10345,7 @@ Case Study
 
 ---
 
-## Reference Factory Acceptance
+### Reference Factory Acceptance
 
 최소 Acceptance:
 
@@ -10364,7 +10364,7 @@ H. Evidence is linked to result revision
 
 ---
 
-## 다음 질문
+### 다음 질문
 
 Reference Factory가 동작한다.
 
@@ -10380,7 +10380,7 @@ Agent가 Backlog에서 스스로 Work를 선택하게 할까.
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *Symphony*  
   https://openai.com/index/open-source-codex-orchestration-symphony/
@@ -10393,7 +10393,7 @@ Agent가 Backlog에서 스스로 Work를 선택하게 할까.
 
 ---
 
-# 24장. Factory Maturity와 Autonomy를 어떻게 올릴 것인가
+## 24장. Factory Maturity와 Autonomy를 어떻게 올릴 것인가
 
 Software Factory를 만들기 시작하면 곧 다음 질문이 생긴다.
 
@@ -10415,9 +10415,9 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 
 ---
 
-## 24.1 Maturity와 Autonomy는 다른 축이다
+### 24.1 Maturity와 Autonomy는 다른 축이다
 
-### Maturity
+#### Maturity
 
 질문:
 
@@ -10432,7 +10432,7 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 - Event Trigger
 - Observability
 
-### Autonomy
+#### Autonomy
 
 질문:
 
@@ -10455,13 +10455,13 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 
 ---
 
-## 24.2 M0~M5 Maturity 후보
+### 24.2 M0~M5 Maturity 후보
 
 다음은 이 책에서 복잡한 Capability 조합을 설명하기 위해 사용하는 **비규범적 Taxonomy**다.
 
 업계 표준, 인증 모델, 조직 평가 점수가 아니다. 번호가 높다고 더 좋은 조직을 뜻하지 않으며, 실제 조직은 여러 단계의 특성을 동시에 가질 수 있다.
 
-### M0. Interactive Agent
+#### M0. Interactive Agent
 
 ~~~text
 Human
@@ -10475,7 +10475,7 @@ Human
 - durable task 없음
 - 수동 verification
 
-### M1. Repeatable Worker
+#### M1. Repeatable Worker
 
 ~~~text
 Task
@@ -10491,7 +10491,7 @@ Task
 - 기본 Isolation
 - Result Contract
 
-### M2. Durable Factory
+#### M2. Durable Factory
 
 추가:
 
@@ -10504,7 +10504,7 @@ Task
 
 Worker Loss와 Task Loss가 분리된다.
 
-### M3. Parallel Factory
+#### M3. Parallel Factory
 
 추가:
 
@@ -10514,7 +10514,7 @@ Worker Loss와 Task Loss가 분리된다.
 - Conflict
 - Capacity Management
 
-### M4. Event-driven Factory
+#### M4. Event-driven Factory
 
 추가:
 
@@ -10522,7 +10522,7 @@ Worker Loss와 Task Loss가 분리된다.
 - automatic task intake
 - closed-loop feedback
 
-### M5. Adaptive Factory
+#### M5. Adaptive Factory
 
 추가 후보:
 
@@ -10537,7 +10537,7 @@ M5는 가장 높은 “좋음”을 의미하지 않는다.
 
 ---
 
-## 24.3 Autonomy Authority Matrix
+### 24.3 Autonomy Authority Matrix
 
 Autonomy를 하나의 숫자로 만들지 않는다.
 
@@ -10562,11 +10562,11 @@ C = Consulted
 
 ---
 
-## 24.4 같은 조직도 Task마다 Autonomy가 다르다
+### 24.4 같은 조직도 Task마다 Autonomy가 다르다
 
 예:
 
-### Documentation
+#### Documentation
 
 ~~~text
 Work Selection: system
@@ -10576,7 +10576,7 @@ Acceptance: automated
 Merge: automated
 ~~~
 
-### Business Logic
+#### Business Logic
 
 ~~~text
 Work Selection: human/system
@@ -10586,7 +10586,7 @@ Acceptance: human
 Merge: human
 ~~~
 
-### Production Migration
+#### Production Migration
 
 ~~~text
 Work Selection: human
@@ -10601,7 +10601,7 @@ Deploy: explicit approval
 
 ---
 
-## 24.5 다음 단계로 가기 전 확인할 것
+### 24.5 다음 단계로 가기 전 확인할 것
 
 Maturity를 올릴 때 Success Rate 하나만 보지 않는다.
 
@@ -10629,7 +10629,7 @@ Task readiness 자동 판정 가능?
 
 ---
 
-## 24.6 Autonomy 승급 조건
+### 24.6 Autonomy 승급 조건
 
 Agent에게 더 많은 Authority를 줄 때 다음 조건을 볼 수 있다.
 
@@ -10649,7 +10649,7 @@ Agent에게 더 많은 Authority를 줄 때 다음 조건을 볼 수 있다.
 
 ---
 
-## 24.7 Risk-based Autonomy
+### 24.7 Risk-based Autonomy
 
 Autonomy는 Risk에 따라 달라져야 한다.
 
@@ -10676,7 +10676,7 @@ Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없�
 
 ---
 
-## 24.8 Self-improvement Authority는 늦게 넓힌다
+### 24.8 Self-improvement Authority는 늦게 넓힌다
 
 Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
 
@@ -10718,7 +10718,7 @@ approval slows work
 
 ---
 
-## 24.9 Meta-change는 별도 Class로 관리한다
+### 24.9 Meta-change는 별도 Class로 관리한다
 
 Factory Configuration 변경:
 
@@ -10748,7 +10748,7 @@ Eval
 
 ---
 
-## 24.10 Shadow Mode
+### 24.10 Shadow Mode
 
 새 Harness나 Policy를 바로 Authoritative하게 사용하지 않는다.
 
@@ -10773,17 +10773,17 @@ Self-improvement를 Production에서 바로 자기 자신에게 적용하는 것
 
 ---
 
-## 24.11 조직별 목표는 다르다
+### 24.11 조직별 목표는 다르다
 
-### Small Team 예시
+#### Small Team 예시
 
 Single Worker, Evidence, Human Review 중심의 M1~M2 성질만으로도 충분한 경우가 있다.
 
-### Platform Team 예시
+#### Platform Team 예시
 
 여러 Project와 Worker Profile, Event Trigger, Policy, Observability 때문에 M2~M4 성질이 함께 필요할 수 있다.
 
-### Regulated Enterprise 예시
+#### Regulated Enterprise 예시
 
 운영 Capability는 높아도 Autonomy는 일부 Decision에서 의도적으로 낮게 유지할 수 있다.
 
@@ -10799,7 +10799,7 @@ Risk Model에 맞는 구조다.
 
 ---
 
-## 24.12 이 책의 도입 순서
+### 24.12 이 책의 도입 순서
 
 지금까지의 내용을 한 줄로 정리하면 다음과 같다.
 
@@ -10832,7 +10832,7 @@ Reliability baseline
 
 ---
 
-## 마지막 질문
+### 마지막 질문
 
 이 책의 기술적 여정은 여기까지다.
 
@@ -10846,7 +10846,7 @@ Epilogue에서는 **Software Engineering에서 Software Production System Engine
 
 ---
 
-## 참고 자료
+### 참고 자료
 
 - OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
   https://openai.com/index/harness-engineering/
