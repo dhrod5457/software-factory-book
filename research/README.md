@@ -230,3 +230,19 @@ Agent ↔ IDE/Client : ACP
   - 지금까지의 산업+학술 자료에서 반복적으로 지지되는 설계 원칙
 
 이번 학술 수집의 핵심은 **복잡한 Agent architecture와 높은 autonomy가 자동으로 더 좋은 결과를 만들지 않는다는 것**이다. Agentless와 deterministic orchestration 연구는 구조화 가능한 단계에서는 단순하고 deterministic한 시스템이 더 효율적일 수 있음을 보여주고, human-agent collaboration 연구는 실행 주도권과 최종 승인 권한을 독립적으로 설계해야 함을 보여준다.
+
+## 6차 추가 수집 - Persistent Agent와 운영 Surface
+
+Agent Conf 2026의 Nick Miller 세션과 Cursor 공식 Grok Bot 문서를 교차검증해 다음 문서를 추가했다.
+
+- `30-persistent-agents-routines-and-factory-boundaries.md`
+  - Persistent Agent / Persistent Worker / Durable Task / Durable Execution 분리
+  - Context / Capability / Outcome / Guardrail / Evidence Handoff
+  - Browser를 Integration Compatibility Layer로 보는 관점
+  - Role Separation과 Task Independence 구분
+  - Routine Trigger와 Durable Work의 차이
+  - Agent Execution Golden Path
+  - Learned Skill의 Candidate 승격
+  - Operator Surface
+
+이번 자료의 핵심은 Multi-Agent 자체가 아니라, 지속되는 Agent Identity와 Runtime이 등장해도 Factory의 authoritative Task State, Verification, Recovery, Governance는 별도로 필요하다는 점이다.
