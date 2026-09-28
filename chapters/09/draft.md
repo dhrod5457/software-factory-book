@@ -614,6 +614,10 @@ Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context
 
 ## 참고 자료
 
+- Cursor, *Grok Bot*  
+  https://cursor.com/docs/grok-bot
+- Cursor, *Get started with Grok Bot*  
+  https://cursor.com/docs/grok-bot/get-started
 - OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
   https://openai.com/index/harness-engineering/
 - SWE-agent, *Agent-Computer Interface*  
