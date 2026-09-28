@@ -570,3 +570,6 @@ Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있
   https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
 - Microsoft Research, *AgentLens*  
   https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
+
