@@ -1,0 +1,12 @@
+flowchart TD
+  T["Task"] --> H
+  subgraph H["Harness"]
+    I["Instructions"]
+    C["Context"]
+    TI["Tool Interface"]
+    F["Feedback"]
+  end
+  H --> M["Model"]
+  M --> TO["Tools"]
+  TO --> R["Runtime / Repository"]
+  R -. observations .-> F
