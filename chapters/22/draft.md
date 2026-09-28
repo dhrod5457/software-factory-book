@@ -434,3 +434,5 @@ Minimum Viable Factory의 구조는 이해했다.
   https://openai.com/index/harness-engineering/
 - WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
   https://workos.com/blog/project-horizon
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
