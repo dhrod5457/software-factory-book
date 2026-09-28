@@ -95,7 +95,9 @@ Auto-merge도 필요 없다. 반대로 낮은 위험의 Task에서 충분한 검
 
 ---
 
-## 22.3 Step A: Agent-ready Repository
+## 22.3 Baseline: Repository, Worker, Evidence
+
+**Step A — Agent-ready Repository**
 
 Factory보다 먼저 Repository를 본다.
 
@@ -125,7 +127,7 @@ Factory가 Repository Chaos를 자동으로 해결해줄 것이라고 기대하�
 
 ---
 
-## 22.4 Step B: Reproducible Worker
+**Step B — Reproducible Worker**
 
 다음 목표:
 
@@ -145,7 +147,7 @@ Worker 하나가 재현 가능하면 된다.
 
 ---
 
-## 22.5 Step C: Evidence Contract
+**Step C — Evidence Contract**
 
 Scale 전에 Result Format을 만든다.
 
@@ -162,7 +164,9 @@ Known Risk
 
 ---
 
-## 22.6 Step D: Durable Task State
+## 22.4 Reliability: Durable State와 Recovery
+
+**Step D — Durable Task State**
 
 다음으로 Work State를 Session 밖으로 꺼낸다.
 
@@ -181,7 +185,7 @@ Attempt와 Retry도 기록한다.
 
 ---
 
-## 22.7 Step E: Retry와 Resume
+**Step E — Retry와 Resume**
 
 Happy Path가 반복적으로 안정적이라면 Failure Recovery를 넣는다.
 
@@ -203,7 +207,9 @@ Approval delay
 
 ---
 
-## 22.8 Step F: Event Trigger
+## 22.5 Scale: Event Trigger와 Parallel Worker
+
+**Step F — Event Trigger**
 
 Human이 직접 Start하지 않아도 되는 Work를 연결한다.
 
@@ -224,7 +230,7 @@ Work Source 자동화와 Acceptance Authority는 별개다.
 
 ---
 
-## 22.9 Step G: Parallel Worker
+**Step G — Parallel Worker**
 
 Queue가 실제로 쌓이기 시작했을 때 Worker를 늘린다.
 
@@ -241,7 +247,7 @@ Conflict Rate?
 
 ---
 
-## 22.10 Step H: Risk-based Automation
+## 22.6 Risk-based Automation
 
 Task Risk에 따라 정책을 다르게 한다.
 
@@ -264,7 +270,7 @@ Auth / Payment / Migration
 
 ---
 
-## 22.11 Work Selection Automation은 뒤에 둔다
+## 22.7 Work Selection Automation은 뒤에 둔다
 
 Backlog에서 어떤 Task를 할지 Agent가 고르는 것은 높은 수준의 Autonomy다.
 
@@ -283,7 +289,7 @@ Reliability baseline
 
 ---
 
-## 22.12 Measure Before Automation
+## 22.8 Measure Before Automation
 
 자동화 전 Baseline을 남긴다.
 
