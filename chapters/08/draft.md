@@ -495,3 +495,5 @@ Worker State 문제다.
   https://cursor.com/docs/cloud-agent
 - OpenHands, *Software Agent SDK*  
   https://github.com/OpenHands/software-agent-sdk
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
