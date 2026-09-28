@@ -1001,3 +1001,32 @@ These are useful research signals but should not be treated as settled findings 
 - Position/theory papers should be used for concepts, not presented as empirical fact.
 - Small-N ablations are used as counterexamples or hypotheses rather than universal rules.
 - Benchmark result numbers should be interpreted together with environment, cost, task selection, and contamination controls.
+
+---
+
+## Implementation Tutorial Sources - Use as Case Studies
+
+### Simplest Software Factory
+
+- *I Built the Simplest Software Factory*
+  - YouTube video id: `AsvzMlLyQ38`
+  - https://www.youtube.com/watch?v=AsvzMlLyQ38
+  - user-provided transcript reviewed 2026-09-28
+  - Source Quality: C급 tutorial / implementation case
+
+주요 사용 주제:
+
+- GitHub Issue → Dispatcher → Agent → Pull Request → Human Review
+- Software Factory와 Coding Agent의 역할 분리
+- deterministic dispatcher와 optional LLM triage
+- isolated worker / VM sandbox
+- reusable worker snapshot
+- GitHub label/comment를 이용한 human-facing state
+- dry-run 후 side effect를 단계적으로 활성화하는 패턴
+- multi-repository hub-and-spoke orchestration
+
+사용 제한:
+
+- sponsor가 포함된 tutorial이므로 vendor architecture의 우월성 근거로 사용하지 않는다.
+- 특정 Worker 수, plan limit, provider/model 선택을 일반 원칙으로 일반화하지 않는다.
+- 핵심 설계 원칙은 A급 자료와 기존 연구에서 독립적으로 뒷받침되어야 한다.

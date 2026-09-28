@@ -50,6 +50,50 @@ Task Create
 
 특정 LLM Vendor에 종속되지 않도록 Agent Adapter를 분리한다.
 
+### 작은 구현 사례: GitHub-native Hub-and-Spoke
+
+Reference Architecture를 처음 접하면 별도 Dashboard와 복잡한 Queue부터 필요하다고 느낄 수 있다.
+
+하지만 가장 작은 구현은 기존 개발 Workflow를 Control Surface로 재사용할 수 있다.
+
+한 공개 tutorial에서는 여러 Project Repository의 GitHub Issue를 중앙 Factory가 받아 Worker에 배정하고, 결과 Pull Request를 원래 Repository로 돌려보내는 구조를 사용한다.
+
+~~~text
+Repo A ─┐
+Repo B ─┼→ Factory Ingress
+Repo C ─┘       ↓
+             Dispatcher
+                ↓
+            Worker Fleet
+                ↓
+       PR → Original Repo
+~~~
+
+Issue Label은 사람이 보는 상태를 표현한다.
+
+~~~text
+ready
+→ factory running
+→ factory review
+~~~
+
+이 구조의 의미는 GitHub가 반드시 Factory DB가 되어야 한다는 것이 아니다.
+
+7장에서 구분했듯 다음 책임은 여전히 분리해서 생각하는 편이 낫다.
+
+~~~text
+Issue / PR
+= Work Intent + Human Collaboration + Control Surface
+
+Task Store
+= authoritative durable execution state
+
+Worker
+= temporary execution
+~~~
+
+작은 Factory에서는 이 책임이 한 제품 안에 구현될 수도 있다. Reference Factory에서는 제품 선택보다 **책임 경계가 유지되는지**를 먼저 검증한다.
+
 ---
 
 ## 23.2 최소 Data Model
@@ -464,3 +508,5 @@ Agent가 Backlog에서 스스로 Work를 선택하게 할까.
   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
 - Anthropic, *Effective harnesses for long-running agents*  
   https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38

@@ -266,3 +266,14 @@ Agent Conf 2026의 Nick Miller 세션과 Cursor 공식 Grok Bot 문서를 교차
   - authorization open problem
 
 이번 자료의 핵심은 Software Factory의 자동화 단위를 코드 생성에 한정하지 않고 **Product Engineering Process 전체**로 확장한다는 점이다. 특히 Task 완료 후 새 지식을 반영해 Plan을 다시 평가하는 Continuous Planning Loop를 기존 Production Feedback Loop와 구분해 다룬다.
+
+## 구현 사례 추가 - Simplest Software Factory
+
+- `30-simplest-software-factory-case-study.md`
+  - GitHub Issue → Dispatcher → Worker → PR → Human Review의 최소 구현
+  - LLM 없는 deterministic dispatch
+  - GitHub를 Human-facing control surface로 사용하는 패턴
+  - Worker snapshot과 fresh task state 분리
+  - Event integration의 dry-run / staged activation
+  - multi-repository hub-and-spoke Factory
+  - C급 tutorial source로 분류하며 일반 원칙의 단독 근거로 사용하지 않음

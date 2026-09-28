@@ -177,6 +177,39 @@ Factory 설계에서 중요한 것은 세 종류를 섞지 않는 것이다.
 
 ---
 
+### 모든 Triage에 LLM이 필요한 것은 아니다
+
+Software Factory를 만들기 시작하면 Triage, Routing, Assignment까지 모두 Model에 맡기고 싶어질 수 있다.
+
+하지만 조건이 이미 명확하면 그럴 이유가 없다.
+
+예를 들어 공개된 한 작은 GitHub-native Factory 구현은 Issue에 `ready` 상태가 들어오면 단순 Dispatcher가 가용 Worker를 선택한다. 필요하면 LLM으로 bug / feature / documentation 같은 분류를 추가할 수 있지만, 기본 Assignment 자체에는 LLM이 필수가 아니다.
+
+~~~text
+ready task
+→ deterministic dispatcher
+→ available worker
+~~~
+
+반대로 입력의 의미를 해석해야 한다면 Model을 넣을 수 있다.
+
+~~~text
+known routing rule
+→ code
+
+ambiguous classification
+→ optional model
+
+root-cause diagnosis
+→ coding agent
+~~~
+
+이 사례는 Rule, Heuristic, Judgment를 나누는 이유를 잘 보여준다.
+
+> **Agentic System의 수준은 LLM 호출 횟수로 결정되지 않는다. 이미 아는 결정을 code로 남기는 것도 좋은 orchestration이다.**
+
+---
+
 ## 11.3 System이 소유해야 할 상태
 
 다음 상태를 Agent Transcript 안에만 두면 위험하다.
@@ -473,3 +506,5 @@ Test도 통과할 수 있다.
   https://arxiv.org/abs/2605.15425
 - *Wink: Recovering from Misbehaviors in Coding Agents*  
   https://arxiv.org/abs/2602.17037
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
