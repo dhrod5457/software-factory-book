@@ -72,6 +72,22 @@
 - reviewability
 - token vs task efficiency
 
+### Caylent / DevBench
+- What is a Software Factory
+- DevBench public architecture
+- DevBench execution modes
+
+확인 용도:
+- software factory / harness framing
+- specification + architecture → backlog → factory input
+- execution loop and review gates
+- changes-manifest scope conformance
+- security review
+
+주의:
+- 영상 자막은 자동 전사 오류 가능성이 있어 고유명사와 구현 세부는 공개 DevBench 저장소로 교차 확인
+- "completely automated" 같은 표현은 Caylent의 사례 설명으로만 사용하고 책의 일반 정의로 승격하지 않음
+
 ### Google
 - Jules proactive updates
 - Agent Executor
