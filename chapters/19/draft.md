@@ -255,6 +255,44 @@ Business Outcome
 
 ---
 
+### Activity → Output → Flow → Outcome
+
+Factory Metric을 한 층으로 놓으면 숫자가 쉽게 왜곡된다.
+
+WorkOS는 AI가 만든 PR 비율, PR 개수, Production에 들어간 AI Code 비율 같은 지표가 실제 Customer Outcome을 가릴 수 있다고 지적한다. PR이 늘어도 Feature Delivery가 빨라졌는지, Defect가 늘지 않았는지는 별도 문제다.
+
+이 책에서는 측정 경계를 다음 네 층으로 나눈다.
+
+~~~text
+Activity
+- Agent Runs
+- Tokens
+- Tool Calls
+
+Output
+- Commits
+- LOC
+- Pull Requests
+
+Flow
+- Cycle Time
+- Review Time
+- Human Blocking Time
+- First-pass Acceptance
+
+Outcome
+- Feature Delivery
+- Accepted Change
+- Escaped Defect
+- Revert
+- MTTR
+- Customer Impact
+~~~
+
+이 계층은 하위 Metric을 버리자는 뜻이 아니다. Agent Run과 PR 수는 Capacity와 Cost를 설명하는 데 필요하다. 다만 **Output이 늘었다는 사실을 Outcome이 좋아졌다는 결론으로 바로 연결하지 않는다.**
+
+WorkOS가 Factory의 목표를 코드 생산량보다 Feature Delivery와 Customer Impact에 두고, 동시에 Defect Rate와 Recovery Time을 보려는 이유도 여기에 있다.
+
 ## 19.5 First-pass Acceptance
 
 Agent가 Candidate를 많이 만드는 것보다 실제로 얼마나 적은 수정으로 받아들여지는지가 중요할 수 있다.

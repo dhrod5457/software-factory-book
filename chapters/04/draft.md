@@ -245,6 +245,37 @@ Production Architecture ─┘
 
 ---
 
+### WorkOS: 빈 문서를 Agent가 먼저 채우고 사람이 Scope를 결정한다
+
+WorkOS의 Product Engineering Process에는 `Hilltop`이라는 PRD 성격의 artifact가 있다. Project purpose, customer need, competitive context, early design, milestone 같은 정보를 한곳에 모으고, Agent가 짧은 brief에서 첫 초안을 만든 뒤 사람이 Review와 Scope correction을 수행한다. 승인된 artifact는 다시 구현 Ticket으로 분해된다.
+
+~~~text
+Brief
+→ Agent First Draft
+→ Human Review / Scope Correction
+→ Approved Product Artifact
+→ Task Decomposition
+→ Execution
+~~~
+
+중요한 점은 Agent가 Product Intent의 최종 권한까지 갖는 것이 아니다. 발표에서는 Agent가 실제 의도보다 Scope를 크게 잡는 경우도 있다고 설명한다. 하지만 blank page에서 모든 artifact를 사람이 처음부터 만드는 것보다, Agent가 context를 모아 첫 초안을 만들고 사람이 잘라내고 보정하는 방식이 engineering attention을 줄일 수 있다.
+
+따라서 Requirement Automation은 다음처럼 볼 수 있다.
+
+~~~text
+Agent
+- research
+- context collection
+- first draft
+- decomposition
+
+Human
+- intent
+- scope
+- trade-off
+- acceptance authority
+~~~
+
 ## 4.5 Requirement Generator와 Acceptance Authority를 분리한다
 
 Agent가 Requirement 초안을 만드는 것은 유용하다.

@@ -32,6 +32,7 @@ Coding Agent에게 곧바로 Issue 문장을 던지는 대신 Intent를 실행 �
 ---
 
 ## 반드시 사용할 Research
+- `research/30-workos-product-engineering-factory.md`
 
 - `research/10-requirements-specification-and-task-planning.md`
 - `research/24-academic-foundations-of-agentic-software-engineering.md`

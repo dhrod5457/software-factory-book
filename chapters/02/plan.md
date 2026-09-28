@@ -30,6 +30,7 @@
 ---
 
 ## 반드시 사용할 Research
+- `research/30-workos-product-engineering-factory.md`
 
 - `research/00-research-map.md`
 - `research/02-factory-architecture-patterns.md`

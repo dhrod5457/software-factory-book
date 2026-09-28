@@ -36,6 +36,34 @@ Agent Capability
 
 이 책의 정의는 여기서 한 단계 더 넓다. Harness는 중요한 실행 계층이지만, Durable Work, Recovery, Acceptance Authority, Feedback까지 포함하는 Factory 전체와 동일하지 않다.
 
+WorkOS의 Ryan Cooke도 비슷한 경계를 다른 각도에서 설명한다. WorkOS는 Sandbox에 Coding Agent를 넣고 Prompt로 PR을 만드는 초기 구조를 운영했지만, 그것만으로는 개발자가 로컬 Coding Agent를 직접 사용하는 것과 조직의 delivery outcome 측면에서 뚜렷한 차이를 만들기 어려웠다고 설명한다. 이후 자동화 범위를 코드 생성에서 Product Engineering Process로 확장했다.
+
+~~~text
+Sandbox + Agent + Prompt + PR
+= automated coding cell
+
+Work Intake
++ Planning
++ Durable Task
++ Execution
++ Verification
++ Delivery
++ Feedback
+= software production system
+~~~
+
+여기서 가져올 핵심은 WorkOS의 제품명이 아니다. **Product Engineering Process까지 자동화해야 Factory의 차이가 생긴다**는 경계다. PR 생성은 Factory의 중요한 출력일 수 있지만 Factory 자체와 동일하지 않다.
+
+<!-- CASE C16: WorkOS - PR Factory에서 Product Engineering Factory로 -->
+
+> **Case Study C16 — WorkOS — PR Factory에서 Product Engineering Factory로**
+>
+> WorkOS는 Sandbox와 Coding Agent로 PR을 만드는 초기 구조에서 출발했지만, 조직의 delivery outcome을 바꾸려면 Product Engineering Process 자체를 Factory에 encode해야 한다고 설명한다. Product artifact 초안, Human scope correction, Ticket decomposition, dependency-driven execution, Plan re-evaluation, MCP Context Engine을 하나의 흐름으로 연결한다.
+>
+> 이 사례의 핵심은 특정 Architecture가 아니라 **PR 생성은 Factory의 출력일 수 있지만 Factory 전체는 아니라는 것**이다.
+>
+> **주의:** 발표 후반의 Memory Layer와 일부 Self-improvement 기능은 향후 방향으로 설명됐으며, Agent Authorization도 아직 해결 중인 문제로 언급된다.
+
 ---
 
 ## 2.1 왜 다시 Factory라는 표현인가

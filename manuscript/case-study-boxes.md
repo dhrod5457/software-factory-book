@@ -2,7 +2,7 @@
 
 기준일: 2026-09-28
 
-`manuscript/book.md`의 C01~C14 marker에 대응하는 working box copy다.
+`manuscript/book.md`의 C01~C14, C16 marker에 대응하는 working box copy다.
 
 제품/연구 사례는 일반 원칙의 예시로 사용하며, 회사 내부 수치나 controlled experiment를 업계 일반 사실로 확장하지 않는다.
 
@@ -179,3 +179,22 @@ Source: Google, *Jules proactive updates*.
 > Worker 교체 시 유효한 partial work까지 전달하려면 Commit, Patch, Snapshot 같은 durable workspace checkpoint가 필요하다.
 
 **주의:** 자체 구현 Case Study이며 일반 산업 통계가 아니다.
+
+
+---
+
+## C16. WorkOS — PR Factory에서 Product Engineering Factory로
+
+WorkOS의 Ryan Cooke는 Sandbox에 Coding Agent를 넣고 Prompt로 Pull Request를 만드는 구조만으로는 조직의 Software Delivery outcome이 크게 달라지지 않을 수 있다고 설명했다. WorkOS는 이후 자동화 범위를 코드 생성에서 Product Engineering Process로 넓혔다.
+
+예를 들어 Product brief에서 PRD 성격의 artifact 초안을 만들고, 사람이 Scope를 보정한 뒤 Task로 분해한다. Linear Ticket이 끝나면 dependency에 따라 다음 Task를 진행할 뿐 아니라 현재 Plan을 다시 평가해 빠진 Work가 생겼는지도 확인한다.
+
+또한 내부 MCP Gateway를 Context Engine으로 사용해 Tool만 노출하는 것이 아니라 조직의 Data semantics와 Resource discovery guidance를 Agent에게 제공한다.
+
+이 사례가 보여주는 핵심은 다음과 같다.
+
+> PR 생성은 Factory의 출력일 수 있지만 Factory 전체는 아니다. Product Engineering Process와 Feedback Loop까지 연결될 때 Software Factory의 시스템적 차이가 커진다.
+
+**읽을 때 주의:** 발표 후반의 Memory Layer와 일부 Self-improvement 기능은 향후 방향으로 설명된 부분이다. 또한 발표자는 Agent Authorization을 아직 충분히 해결하지 못한 문제로 언급한다.
+
+Source: Ryan Cooke, WorkOS, *No, That's Not a Software Factory*, conference talk transcript.

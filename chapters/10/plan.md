@@ -32,6 +32,7 @@ Agent에게 많은 정보를 한 번에 넣는 대신 필요한 정보를 찾을
 ---
 
 ## 반드시 사용할 Research
+- `research/30-workos-product-engineering-factory.md`
 
 - `research/03-harness-context-and-agent-legibility.md`
 - `research/21-agent-ready-developer-platform-and-catalog.md`

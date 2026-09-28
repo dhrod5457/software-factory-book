@@ -395,6 +395,35 @@ Agent가 자신의 반복 Work를 더 잘 수행하도록 Procedure를 제안하
 
 따라서 "Agent가 학습한다"는 표현보다 어떤 변경이 Candidate로 생성되고 누가 Authoritative Configuration으로 승격하는가를 명확히 하는 편이 안전하다.
 
+### Session Friction을 Improvement Candidate로 바꾼다
+
+Self-improvement를 처음부터 Factory가 자기 코드를 마음대로 수정하는 기능으로 볼 필요는 없다.
+
+더 현실적인 출발점은 실제 Agent Session과 Task Timeline에서 반복되는 friction을 찾는 것이다.
+
+WorkOS가 설명한 향후 방향도 이쪽에 가깝다. 자체 infrastructure를 더 많이 소유하고 Session을 관찰하면서 다음과 같은 질문을 찾으려 한다.
+
+- Agent가 반복해서 같은 실수를 하는가
+- 새 Skill이 필요한가
+- 기존 Skill이 Repository 변화 때문에 낡았는가
+- Tool이나 Context 탐색이 반복해서 막히는가
+- Sandbox 자체가 bottleneck인가
+
+이를 Factory Improvement Loop로 표현하면:
+
+~~~text
+Execution
+→ Friction Signal
+→ Improvement Candidate
+→ Skill / Tool / Context / Infrastructure Change
+→ Eval
+→ Promotion
+~~~
+
+이 접근의 장점은 Self-improvement의 입력이 추상적인 "더 똑똑해져라"가 아니라 관찰 가능한 실패와 반복 비용이라는 점이다.
+
+단, 발표에서 memory layer와 일부 self-improvement 기능은 향후 방향으로 설명된 부분이므로 현재 production capability로 일반화하지 않는다.
+
 ## 24.9 Meta-change는 별도 Class로 관리한다
 
 Factory Configuration 변경:

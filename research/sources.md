@@ -133,15 +133,23 @@ AI 시대 Software Factory 조사에 사용하는 1차 자료 인덱스다.
   - https://workos.com/blog/project-horizon
 - What we learned in six months of making AI the default at WorkOS
   - https://workos.com/blog/six-months-of-applied-ai-lessons
+- Ryan Cooke, *No, That's Not a Software Factory*
+  - conference talk transcript, 사용자 제공 자료
+  - 파일: `No, That's Not a Software Factory - Ryan Cooke, WorkOS (HvboD89DyQ8).txt`
 
 주요 조사 주제:
 
 - internal code factory
+- Product Engineering Process automation
+- output metric vs outcome metric
 - Linear/webhook orchestration
+- continuous planning / plan re-evaluation
 - cloud sandbox
 - MCP context engine
 - durable control plane
+- agent-runtime-independent context
 - human approval
+- authorization boundary
 - dogfooding/self-improvement
 
 ---
