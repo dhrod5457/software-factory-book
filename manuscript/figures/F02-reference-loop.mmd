@@ -1,0 +1,14 @@
+flowchart TD
+  I["Intent / Signal"] --> R["Requirement / Specification"]
+  R --> T["Task / Acceptance"]
+  T --> C["Durable Control Plane"]
+  C --> O["Controlled Orchestration"]
+  O --> W["Worker / Sandbox"]
+  W --> A["Agent + Context + Tools"]
+  A --> IM["Implementation"]
+  IM --> V["Independent Verification"]
+  V --> E["Evidence"]
+  E --> G["Acceptance / Governance"]
+  G --> D["Delivery"]
+  D --> FB["Feedback"]
+  FB --> I
