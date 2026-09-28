@@ -2786,3 +2786,2889 @@ Worker가 죽으면 누가 다시 배정할 것인가.
   https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/
 - GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
   https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
+
+---
+
+# Part III. Factory의 실행 구조
+
+# 7장. Control Plane과 Execution Plane
+
+Part II에서는 Work를 실행 가능한 형태로 만들었다.
+
+Requirement와 Acceptance를 정하고, Durable Task로 상태를 남기고, Dependency Graph를 만들었다.
+
+이제 실제 실행이 필요하다.
+
+여기서 가장 먼저 분리해야 할 것이 있다.
+
+**Task를 관리하는 시스템**과 **Task를 실행하는 Worker**다.
+
+이 책에서는 앞쪽을 Control Plane, 뒤쪽을 Execution Plane이라고 부른다.
+
+~~~text
+Durable Task
+      ↓
+Control Plane
+      ↓
+Assignment
+      ↓
+Execution Plane
+      ↓
+Result / Evidence
+      ↓
+Control Plane
+~~~
+
+이 경계를 분리하지 않으면 Worker가 곧 Task가 된다.
+
+Worker가 죽으면 Work도 사라지고, Session이 끊기면 상태도 끊긴다.
+
+Factory에서는 반대여야 한다.
+
+> Task의 완료 책임은 Worker가 아니라 시스템에 있어야 한다.
+
+---
+
+## 7.1 Control Plane이 관리해야 하는 상태
+
+Control Plane은 코드를 직접 작성하는 주체가 아니다.
+
+주요 책임은 **Work의 상태와 흐름을 관리하는 것**이다.
+
+예를 들면 다음과 같다.
+
+- Task lifecycle
+- Ready / Blocked 상태
+- Dependency
+- Priority
+- Assignment
+- Worker lease
+- Attempt
+- Retry
+- Approval
+- Verification 상태
+- Result reference
+- Event history
+
+한 Task를 다음처럼 볼 수 있다.
+
+~~~text
+Task T-200
+Status: READY
+Dependency: T-190 done
+Required Worker: backend-java
+Risk: medium
+~~~
+
+Scheduler가 Worker를 배정하면 상태가 바뀐다.
+
+~~~text
+Task T-200
+Status: RUNNING
+Attempt: A1
+Worker: W7
+~~~
+
+Worker가 코드를 바꾸고 결과를 돌려주면 다시 상태가 바뀐다.
+
+~~~text
+Task T-200
+Status: VERIFYING
+Result Revision: abc123
+~~~
+
+검증이 통과했지만 Human Review가 필요하면:
+
+~~~text
+Task T-200
+Status: AWAITING_HUMAN
+~~~
+
+이 상태는 Agent가 자연어로 기억하는 것이 아니라 시스템에 저장된다.
+
+그래야 Worker가 바뀌어도 같은 Task를 계속 추적할 수 있다.
+
+---
+
+## 7.2 Execution Plane의 책임
+
+Execution Plane은 실제 작업이 일어나는 곳이다.
+
+다음과 같은 요소가 들어간다.
+
+- Repository checkout
+- Workspace
+- Branch / Worktree
+- Agent Harness
+- Shell
+- Build Tool
+- Test Runner
+- Browser
+- Local Service
+- Temporary File
+
+Execution Plane은 Task를 **수행**한다.
+
+하지만 가능한 한 durable한 orchestration state는 적게 가진다.
+
+예를 들어 Worker가 다음 정보를 유일하게 갖고 있으면 위험하다.
+
+~~~text
+현재 Task가 무엇인지
+Retry가 몇 번째인지
+Human Approval이 필요한지
+다음 Dependency가 무엇인지
+~~~
+
+이 정보는 Worker가 아니라 Control Plane이 가져야 한다.
+
+Worker는 다음 정도를 받아 실행하면 된다.
+
+~~~text
+Task Input
+- goal
+- scope
+- acceptance
+- base revision
+- worker profile
+- verification profile
+~~~
+
+그리고 결과를 반환한다.
+
+~~~text
+Task Result
+- result revision
+- changed files
+- verification output
+- evidence
+- failure / blocker
+~~~
+
+이 구조가 되면 Worker는 교체 가능해진다.
+
+---
+
+## 7.3 Issue Tracker와 Execution State는 같은 것이 아니다
+
+많은 조직에서 Issue Tracker는 이미 Work의 출발점이다.
+
+그래서 다음 흐름은 자연스럽다.
+
+~~~text
+Issue
+→ Factory Task
+→ Worker
+~~~
+
+OpenAI Symphony나 WorkOS Horizon처럼 Issue Tracker를 Work의 control surface로 활용하는 공개 사례도 있다. 다만 Symphony의 공개 spec도 dispatch·retry·reconciliation을 위한 authoritative orchestrator runtime state를 별도로 둔다. “Issue Tracker를 Control Plane으로 쓴다”는 표현을 runtime state까지 모두 Issue에 저장한다는 뜻으로 해석하면 안 된다.
+
+하지만 Issue Tracker 하나에 모든 runtime state를 넣으려 하면 문제가 생긴다.
+
+Issue에는 다음 정보가 잘 맞는다.
+
+- Goal
+- Priority
+- Owner
+- Product Context
+- Acceptance
+- Dependency
+
+반면 다음은 실행 중 자주 변하는 상태다.
+
+- Current Attempt
+- Worker Lease
+- Workspace ID
+- Verification Run
+- Retry Count
+- Runtime Failure
+- Heartbeat
+
+이런 정보까지 Issue comment나 custom field로 표현할 수는 있다.
+
+문제는 그것이 항상 좋은 모델은 아니라는 것이다.
+
+실행 상태는 훨씬 더 자주 바뀌고, atomic update와 recovery semantics가 필요하다.
+
+그래서 실무에서는 다음처럼 나눌 수 있다.
+
+~~~text
+Issue Tracker
+= Work Intent / Human Collaboration
+
+Task Store
+= Durable Execution State
+
+Worker Runtime
+= Temporary Execution
+~~~
+
+셋이 같은 제품일 수도 있다.
+
+중요한 것은 책임을 구분하는 것이다.
+
+---
+
+## 7.4 Scheduler와 Agent를 구분한다
+
+어떤 Task를 언제 누구에게 줄 것인가.
+
+어떤 구현 전략으로 해결할 것인가.
+
+둘은 다른 문제다.
+
+예를 들어 다음 Task가 있다고 하자.
+
+~~~text
+T1
+- Java backend
+- internal network 필요
+- auth module
+- medium risk
+~~~
+
+어느 Worker에 배정할지는 다음 정보로 결정할 수 있다.
+
+- Worker capability
+- Queue
+- Dependency
+- Risk
+- Resource availability
+
+이것은 Scheduler의 문제다.
+
+반면 Worker 안에 들어간 Agent는 다음을 판단한다.
+
+- 어떤 Class를 먼저 읽을지
+- 어떤 Test를 실행할지
+- Exception mapping을 어디서 바꿀지
+- 어떤 구현이 가장 적절한지
+
+이것은 Agent judgment다.
+
+둘을 섞으면 Scheduler 판단까지 Prompt에 들어가기 쉽다.
+
+~~~text
+너는 지금 Queue 상태를 보고
+적절한 Task를 선택하고
+Retry 횟수도 기억하고
+필요하면 다른 Worker를...
+~~~
+
+이런 구조는 상태가 transcript 안에 숨어 버린다.
+
+이미 알고 있는 scheduling rule은 시스템에 두는 편이 낫다.
+
+---
+
+## 7.5 Worker를 disposable하게 만들려면 무엇을 밖으로 꺼내야 하는가
+
+Execution Plane을 disposable하게 만들고 싶다면 먼저 물어야 한다.
+
+> Worker를 지금 없애도 다시 이어갈 수 있는가?
+
+필요한 state가 Worker 밖에 있어야 한다.
+
+최소한 다음은 외부화하는 편이 좋다.
+
+### Task State
+
+~~~text
+Task Store
+- status
+- attempt
+- retry
+- approval
+~~~
+
+### Source State
+
+~~~text
+Git
+- base revision
+- commit
+- branch
+~~~
+
+### Partial Work
+
+~~~text
+Checkpoint / Patch / Snapshot
+~~~
+
+### Verification
+
+~~~text
+Verification Result
+- command
+- exit
+- failed tests
+- artifact reference
+~~~
+
+### Evidence
+
+~~~text
+Artifact Store
+- screenshot
+- log
+- benchmark
+~~~
+
+Worker는 이 durable state를 받아 execution을 수행한다.
+
+이 구조가 있으면 다음이 가능하다.
+
+~~~text
+Worker A
+→ crash
+
+Control Plane
+→ detects loss
+→ closes Attempt A1
+→ creates Attempt A2
+
+Worker B
+→ restores Task state
+→ continues
+~~~
+
+물론 실제로 "continue"하려면 uncommitted work까지 어떻게 보존할지 결정해야 한다.
+
+이 문제는 14~15장에서 더 깊게 다룬다.
+
+여기서 중요한 것은 원칙이다.
+
+**Compute는 잃을 수 있어도 Work State는 잃지 않는다.**
+
+---
+
+## Human Approval을 기다릴 때 Worker를 계속 잡고 있어야 할까
+
+다음 상황을 생각해보자.
+
+Agent가 Production Migration Plan을 만들었다.
+
+검증까지 끝났다.
+
+이제 DBA 승인을 기다려야 한다.
+
+Worker를 6시간 동안 계속 실행할 이유가 있을까.
+
+Control Plane이 Task 상태를 durable하게 갖고 있다면 다음처럼 할 수 있다.
+
+~~~text
+Task
+RUNNING
+  ↓
+VERIFYING
+  ↓
+AWAITING_HUMAN
+
+Worker
+→ released
+~~~
+
+승인이 들어오면 새 Worker를 배정할 수 있다.
+
+~~~text
+Approval Event
+      ↓
+Task READY
+      ↓
+New Worker
+~~~
+
+이 구조는 긴 Human Wait를 execution resource와 분리한다.
+
+---
+
+## Control Plane과 Execution Plane의 최소 경계
+
+Minimum Viable Factory라면 거대한 orchestration platform이 없어도 된다.
+
+다음 정도면 시작할 수 있다.
+
+~~~text
+Control Plane
+- Task DB
+- simple queue
+- attempt state
+- retry count
+- approval state
+
+Execution Plane
+- one worker process
+- isolated worktree
+- coding agent
+- build/test
+~~~
+
+이 정도만으로도 중요한 효과가 생긴다.
+
+- Worker가 Task의 유일한 state owner가 아니다.
+- Retry history를 남길 수 있다.
+- Human Wait에서 Worker를 해제할 수 있다.
+- 나중에 Worker를 여러 개로 확장할 수 있다.
+
+---
+
+## 다음 질문
+
+Control Plane과 Execution Plane을 나눴다.
+
+이제 Execution Plane 안을 더 자세히 봐야 한다.
+
+Worker는 어떤 filesystem을 가져야 하는가.
+
+매번 새로 만들 것인가.
+
+Dependency와 Browser를 매 Task 다시 설치할 것인가.
+
+Warm 상태를 재사용하면 무엇이 위험한가.
+
+다음 장에서는 **Worker, Sandbox, Workspace**를 다룬다.
+
+---
+
+## 참고 자료
+
+- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
+  https://openai.com/index/open-source-codex-orchestration-symphony/
+- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+  https://workos.com/blog/project-horizon
+- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
+  https://www.anthropic.com/engineering/managed-agents
+- Microsoft, *Durable Task for AI agents*  
+  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+
+---
+
+# 8장. Worker, Sandbox, Workspace
+
+Control Plane이 Task를 관리한다면 Execution Plane은 Task를 실제로 수행한다.
+
+그 중심에 Worker가 있다.
+
+Worker를 단순히 “Agent가 실행되는 컴퓨터”라고 보면 설계가 부족해진다.
+
+Factory에서 Worker는 다음 요소가 묶인 실행 단위에 가깝다.
+
+~~~text
+Worker
+=
+Workspace
++ Runtime
++ Tools
++ Network
++ Temporary State
+~~~
+
+좋은 Worker는 빠르기만 해서는 안 된다.
+
+다시 만들 수 있어야 하고, 다른 Task의 흔적에 오염되지 않아야 하며, 필요한 경우 장시간 상태를 유지할 수도 있어야 한다.
+
+이 장의 핵심은 하나다.
+
+> 재사용해야 하는 환경과 항상 새로 시작해야 하는 Work State를 구분한다.
+
+---
+
+## 8.1 무엇을 격리해야 하는가
+
+Agent가 파일을 수정하고 Shell 명령을 실행하려면 독립된 Workspace가 필요하다.
+
+먼저 Branch는 source history를 분리하지만 실행환경을 격리하지는 않는다.
+
+~~~text
+shared filesystem
+├─ branch A
+└─ branch B
+~~~
+
+같은 working directory를 공유한다면 독립 Workspace라고 보기 어렵다. Worktree나 독립 Clone부터 filesystem 수준의 작업 공간을 나눌 수 있다.
+
+~~~text
+repo/
+├─ worktree-task-a/
+└─ worktree-task-b/
+~~~
+
+파일 변경 충돌을 줄일 수 있다.
+
+하지만 process, port, environment variable, cache는 여전히 공유될 수 있다.
+
+Container나 VM을 사용하면 격리 범위가 더 커진다.
+
+~~~text
+Task
+→ isolated filesystem
+→ isolated process
+→ controlled network
+→ scoped credential
+~~~
+
+어떤 방식을 써야 하는지는 Task 위험과 환경 복잡도에 따라 달라진다.
+
+중요한 것은 “무엇을 격리해야 하는가”를 명확히 하는 것이다.
+
+예를 들어 다음은 서로 다른 경계다.
+
+- source file
+- process
+- network
+- credential
+- port
+- database
+- browser profile
+- temporary cache
+
+코드만 분리하고 Browser Session은 공유하면 한 Agent의 Login 상태가 다른 Agent 테스트에 영향을 줄 수 있다.
+
+Workspace Isolation은 Git 문제만이 아니다.
+
+---
+
+## 8.2 Prepared Environment
+
+완전히 깨끗한 환경은 안전하지만 느릴 수 있다.
+
+매 Task마다 다음을 처음부터 설치한다고 해보자.
+
+- JDK
+- Node
+- Browser
+- Playwright
+- Gradle dependency
+- npm package
+- system package
+
+Agent가 실제 수정에 5분을 쓰는데 환경 준비에 20분이 걸릴 수 있다.
+
+그래서 Worker에는 미리 준비된 Environment가 필요하다.
+
+예:
+
+~~~text
+Worker Profile: backend-java
+
+Runtime
+- JDK 21
+- Gradle
+- PostgreSQL client
+
+Cache
+- Gradle dependency
+
+Tools
+- git
+- rg
+- curl
+
+Network
+- artifact registry
+- staging API
+~~~
+
+Browser Task는 다른 Profile을 가질 수 있다.
+
+~~~text
+Worker Profile: browser-e2e
+
+Runtime
+- Node
+- Chromium
+- Playwright
+
+Tools
+- screenshot
+- trace viewer
+
+Network
+- staging frontend
+~~~
+
+이렇게 하면 Agent가 Task마다 환경 설치 방법부터 추론할 필요가 줄어든다.
+
+---
+
+## 8.3 Fresh State와 Cache를 구분한다
+
+환경을 재사용하기 시작하면 새로운 위험이 생긴다.
+
+Cache와 Work State가 섞이는 것이다.
+
+다음은 재사용하기 좋다.
+
+- package download cache
+- container image
+- installed compiler
+- browser binary
+- build tool
+
+반면 다음은 주의가 필요하다.
+
+- source checkout
+- uncommitted changes
+- generated files
+- local database data
+- browser session
+- test result
+- temp file
+- runtime process
+
+예를 들어 이전 Task가 local Redis에 값을 남겼다고 하자.
+
+다음 Task의 테스트가 같은 Redis를 사용한다.
+
+테스트는 PASS했다.
+
+하지만 clean environment에서는 실패할 수 있다.
+
+이런 상태 오염은 Agent에게 더 위험하다.
+
+Agent는 환경이 오염됐는지 모르고 코드가 맞다고 판단할 수 있기 때문이다.
+
+그래서 다음 경계를 유지하는 편이 좋다.
+
+~~~text
+Reusable
+- runtime
+- tool
+- dependency cache
+
+Fresh per Task
+- source revision
+- workspace
+- task input
+- test state
+- temporary service data
+~~~
+
+물론 실제 시스템에서는 일부 runtime state를 의도적으로 유지할 수도 있다.
+
+그 경우에도 그것이 authoritative Task State가 되어서는 안 된다.
+
+---
+
+## 8.4 Ephemeral Worker와 Persistent Worker
+
+Worker 운영에는 두 방향이 있다.
+
+### Ephemeral Worker
+
+Task마다 새로 만든다.
+
+~~~text
+Task
+→ provision
+→ execute
+→ collect result
+→ destroy
+~~~
+
+장점:
+
+- clean state
+- reproducibility
+- isolation
+- 낮은 cross-task contamination
+
+적합한 경우:
+
+- 독립적인 Bug Fix
+- CI-like Task
+- 보안 민감 작업
+- 짧은 Task
+
+단점:
+
+- cold start
+- dependency restore
+- 큰 Repository checkout 비용
+- 복잡한 runtime setup
+
+### Persistent Worker
+
+Worker를 유지하고 여러 Task를 처리한다.
+
+~~~text
+Worker
+→ Task A
+→ Task B
+→ Task C
+~~~
+
+장점:
+
+- warm cache
+- running service 유지
+- 복잡한 environment reuse
+- 긴 프로젝트 continuity
+
+단점:
+
+- stale dependency
+- state contamination
+- credential accumulation
+- 재현성 저하
+
+둘 중 하나가 항상 정답은 아니다. 공개된 Agent 시스템에서도 persistent environment와 disposable sandbox가 모두 사용된다. 선택 기준은 제품 유행이 아니라 Task의 setup cost, contamination risk, security boundary, reproducibility다.
+
+예를 들어 Android Build처럼 초기 환경 준비가 매우 비싸다면 Persistent Worker가 유리할 수 있다.
+
+반대로 untrusted external PR를 분석한다면 Ephemeral Worker가 더 적합할 수 있다.
+
+---
+
+## 8.5 Persistent Worker를 쓸 때 가장 조심할 것
+
+Persistent Worker의 편리함 때문에 다음 상태까지 Worker에 맡기기 쉽다.
+
+~~~text
+현재 Task
+진행 상황
+승인 상태
+다음 행동
+~~~
+
+이렇게 되면 Worker가 다시 Control Plane이 된다.
+
+Persistent Worker는 **warm environment**를 제공할 수 있다.
+
+하지만 Task State의 authoritative source가 되어서는 안 된다.
+
+구분하면 다음과 같다.
+
+~~~text
+Worker may keep
+- compiler
+- dependency cache
+- browser binary
+- local repo mirror
+
+Control Plane keeps
+- task status
+- attempt
+- acceptance
+- approval
+- retry
+- evidence reference
+~~~
+
+Worker가 오래 살아도 Work State는 외부에 남는다.
+
+---
+
+## 8.6 Worker Profile
+
+모든 Task가 같은 Worker를 필요로 하지는 않는다.
+
+예를 들어 다음 네 Task를 생각해보자.
+
+~~~text
+T1 Java API fix
+T2 React browser E2E
+T3 Android build
+T4 GPU model benchmark
+~~~
+
+같은 Worker Image로 모두 처리하려고 하면 환경이 거대해진다.
+
+대신 capability profile을 정의할 수 있다.
+
+~~~text
+backend-java
+browser-e2e
+android
+gpu
+internal-network
+~~~
+
+Task는 필요한 capability를 선언한다.
+
+~~~text
+Task T1
+requires:
+- backend-java
+- internal-network
+~~~
+
+Scheduler는 맞는 Worker를 찾는다.
+
+이렇게 하면 “Backend Agent”, “Frontend Agent”처럼 역할만 자연어로 나누는 것보다 실행환경까지 명확하게 연결할 수 있다.
+
+---
+
+## 예: Java Backend Worker와 Browser Worker
+
+Backend Task:
+
+~~~text
+Goal
+- expired JWT → 401
+
+Worker Profile
+- JDK 21
+- Gradle
+- PostgreSQL
+- internal artifact registry
+
+Verification
+- unit
+- integration
+~~~
+
+Browser Task:
+
+~~~text
+Goal
+- login error message 확인
+
+Worker Profile
+- Node
+- Chromium
+- Playwright
+
+Verification
+- E2E
+- screenshot
+~~~
+
+두 Task는 Model이 같아도 필요한 Runtime과 Tool이 다르다.
+
+Factory에서 Worker Selection은 Agent Personality가 아니라 **실행 capability**를 기준으로 볼 수 있다.
+
+---
+
+## Stale Browser State가 만든 잘못된 PASS
+
+Persistent Browser Worker에서 이전 Task의 로그인 Session이 남았다고 하자.
+
+새 Task는 로그인하지 않은 사용자의 Error Page를 검증해야 한다.
+
+하지만 Browser Cookie가 남아 있어서 인증된 화면이 열린다.
+
+Agent는 DOM과 Screenshot을 보고 정상으로 판단할 수 있다.
+
+이 문제는 Model 성능이 아니다.
+
+Worker State 문제다.
+
+해결 방법은 다음처럼 다양하다.
+
+- Task마다 Browser Profile reset
+- cookie/storage clear
+- clean test account
+- Ephemeral Browser Worker
+- runtime state checksum
+
+중요한 것은 Failure Class를 구분하는 것이다.
+
+코드가 틀렸는지, 환경이 오염됐는지 분리하지 않으면 Agent는 잘못된 방향으로 수정할 수 있다.
+
+---
+
+## Worker를 설계할 때 묻는 질문
+
+다음 질문으로 시작할 수 있다.
+
+~~~text
+1. 어떤 filesystem state가 Task마다 fresh해야 하는가?
+2. 어떤 cache는 재사용해도 되는가?
+3. 어떤 credential을 Worker가 가져야 하는가?
+4. Network access는 어디까지 필요한가?
+5. Worker를 죽였을 때 다시 만들 수 있는가?
+6. 동일 Task를 다른 Worker에서도 재현할 수 있는가?
+7. 어떤 capability profile이 필요한가?
+~~~
+
+이 질문에 답하면 Worker가 단순한 “원격 개발 머신”에서 Factory의 execution unit으로 바뀐다.
+
+---
+
+## 다음 질문
+
+좋은 Worker를 만들었다고 Agent가 자동으로 잘 일하는 것은 아니다.
+
+같은 Model과 같은 Repository를 사용해도 Tool의 형태, Instruction, Search 결과, Error Feedback에 따라 행동이 달라진다.
+
+다음 장에서는 Model 주변에서 Agent의 실제 작업 능력을 만드는 **Harness Engineering**을 다룬다.
+
+---
+
+## 참고 자료
+
+- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+  https://workos.com/blog/project-horizon
+- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
+  https://www.anthropic.com/engineering/managed-agents
+- Cursor, *Cloud Agents*  
+  https://cursor.com/docs/cloud-agent
+- OpenHands, *Software Agent SDK*  
+  https://github.com/OpenHands/software-agent-sdk
+
+---
+
+# 9장. Harness Engineering: Agent가 일할 수 있는 환경 만들기
+
+같은 Model을 쓰는데 팀마다 결과가 크게 다를 수 있다.
+
+한쪽에서는 Repository를 잘 탐색하고 필요한 Test를 찾아 안정적으로 수정한다.
+
+다른 쪽에서는 파일을 헤매고, 불필요한 명령을 반복하고, 긴 로그를 Context에 가득 넣은 뒤 방향을 잃는다.
+
+차이는 Model만으로 설명하기 어렵다.
+
+Agent가 실제로 일하는 방식은 Model 주변 환경에 크게 영향을 받는다.
+
+이 책에서는 Model이 실제 Work를 수행하도록 둘러싸는 조정 계층을 **Harness**라고 부른다.
+
+~~~text
+Harness
+=
+Instructions
++ Context
++ Tool Interface
++ Feedback
++ Verification Hooks
+~~~
+
+Harness의 정확한 경계는 구현마다 다르다. 예를 들어 Anthropic Managed Agents는 Session, Harness, Sandbox를 별도 interface로 분리한다. 여기서 Harness는 Compute 자체가 아니라 Model Loop와 Context·Tool Routing을 연결하는 계층을 뜻한다.
+
+Harness Engineering은 Prompt를 더 잘 쓰는 기술보다 넓다.
+
+Agent가 Repository와 Tool을 어떻게 보고, 어떤 결과를 받고, 어떤 규칙이 강제되는지를 설계하는 일이다.
+
+---
+
+## 9.1 Harness란 무엇인가
+
+Model은 혼자 Repository를 수정하지 않는다.
+
+다음과 같은 계층이 필요하다.
+
+~~~text
+Task
+      ↓
+Harness
+  - instructions
+  - context
+  - tools
+  - skills
+  - search
+  - browser
+  - result filtering
+      ↓
+Model
+      ↓
+Tool Actions
+      ↓
+Repository / Runtime
+~~~
+
+Harness는 Model과 실제 Software Environment 사이의 인터페이스다.
+
+예를 들어 Agent가 Test 실패를 분석해야 한다고 하자.
+
+Model이 보는 것은 실제 10MB 로그 전체일 수도 있고, Harness가 정리한 실패 목록일 수도 있다.
+
+~~~text
+Option A
+→ raw test log 10MB
+
+Option B
+→ failed tests: 3
+→ top stack trace
+→ artifact URI
+→ detail tool
+~~~
+
+두 경우 같은 Model을 사용해도 행동은 달라진다.
+
+Harness가 Agent의 탐색 비용과 오류 가능성을 바꾼다.
+
+---
+
+## 9.2 Agent-Computer Interface
+
+사람에게 좋은 CLI가 Agent에게도 항상 좋은 것은 아니다.
+
+SWE-agent는 이 문제를 Agent-Computer Interface, ACI라는 관점으로 다뤘다.
+
+핵심은 Tool의 존재 여부뿐 아니라 **Agent가 Tool을 어떻게 사용하게 되는가**다.
+
+예를 들어 사람은 다음 명령을 실행하고 긴 출력에서 필요한 부분을 찾을 수 있다.
+
+~~~text
+cat huge_file.log
+~~~
+
+Agent에게 같은 방식으로 5만 줄을 반환하면 Context를 낭비할 수 있다.
+
+대신 다음처럼 만들 수 있다.
+
+~~~text
+log_summary()
+failed_tests()
+failure_detail(test_id)
+~~~
+
+File Viewer도 마찬가지다.
+
+사람은 IDE에서 자유롭게 스크롤할 수 있다.
+
+Agent에게는 다음 정보가 더 중요할 수 있다.
+
+- line number
+- symbol boundary
+- truncated indicator
+- next range
+- search result ranking
+
+Edit Tool도 단순 파일쓰기보다 다음 Feedback을 주면 유리하다.
+
+~~~text
+edit applied
+lint: failed
+line 42: incompatible type
+~~~
+
+Tool이 Agent에게 즉시 구조화된 Feedback을 주면 잘못된 수정이 다음 단계까지 퍼지는 것을 줄일 수 있다.
+
+---
+
+## 9.3 Instruction, Skill, Tool, MCP의 역할을 나눈다
+
+Agent customization 기능이 늘어나면 모든 것을 한 파일에 넣고 싶어진다.
+
+하지만 역할을 분리하는 편이 유지보수하기 쉽다.
+
+이 책에서는 다음처럼 구분한다.
+
+### Instruction
+
+지속적으로 알아야 하는 Guideline이다.
+
+예:
+
+~~~text
+- Java 21 사용
+- 기존 API response envelope 유지
+- 테스트 없는 behavior change 금지
+~~~
+
+### Skill
+
+반복해서 사용하는 Procedure다.
+
+예:
+
+~~~text
+DB migration verification
+release-note generation
+UI screenshot validation
+~~~
+
+Skill은 필요할 때 불러오는 것이 좋다.
+
+모든 Task에 항상 넣을 필요는 없다.
+
+### Tool
+
+Agent가 외부 행동을 수행하는 Interface다.
+
+예:
+
+~~~text
+run_test()
+search_log()
+deploy_staging()
+get_issue()
+~~~
+
+### MCP
+
+외부 System의 Tool과 Data를 Agent에 노출하는 Protocol Surface로 볼 수 있다.
+
+예:
+
+- Issue
+- CI
+- Documentation
+- Logs
+- Monitoring
+- Internal API
+
+중요한 점은 MCP가 Durable Task State 자체는 아니라는 것이다.
+
+~~~text
+MCP
+= capability / context access
+
+Task Store
+= orchestration state
+~~~
+
+둘을 섞지 않는다.
+
+---
+
+## 9.4 반드시 지켜야 할 규칙은 Prompt에만 두지 않는다
+
+다음 규칙을 생각해보자.
+
+~~~text
+main branch에 직접 push하지 마라.
+~~~
+
+Instruction에 적어둘 수 있다.
+
+하지만 반드시 지켜야 한다면 Branch Protection으로 막는 편이 낫다.
+
+다른 예도 같다.
+
+~~~text
+secret commit 금지
+→ secret scanner / hook
+
+required test pass
+→ verification gate
+
+forbidden path 변경 금지
+→ policy / hook
+
+production deploy 승인 필요
+→ permission / approval
+~~~
+
+Harness Engineering에서 중요한 경계는 다음이다.
+
+~~~text
+Explain
+→ Instruction
+
+Reusable Procedure
+→ Skill
+
+Action
+→ Tool
+
+Must Enforce
+→ Policy / Hook
+~~~
+
+Agent가 규칙을 이해하도록 하는 것과 시스템이 규칙을 강제하는 것은 다른 문제다.
+
+---
+
+## 9.5 Tool은 Agent를 위한 API다
+
+사람용 API와 Agent Tool은 목적이 조금 다르다.
+
+사람은 Documentation을 읽고 parameter를 이해할 수 있다.
+
+Agent는 Tool 이름, schema, result를 보고 행동 전략을 세운다.
+
+그래서 좋은 Tool은 보통 다음 특성을 가진다.
+
+- 책임이 좁고 명확하다.
+- 이름으로 행동을 추측할 수 있다.
+- 결과가 구조화되어 있다.
+- 너무 많은 데이터를 한 번에 반환하지 않는다.
+- 실패 이유가 machine-readable하다.
+- 다음 행동을 선택할 단서가 있다.
+
+예를 들어 이런 Tool이 있다고 하자.
+
+~~~text
+get_everything()
+~~~
+
+Issue, Log, Test, Deployment 상태를 한 번에 반환한다.
+
+처음에는 편해 보인다.
+
+하지만 Output이 커지고 Agent가 어떤 데이터가 최신인지 판단하기 어려워진다.
+
+다음처럼 분리하는 편이 낫다.
+
+~~~text
+test_summary()
+failed_tests()
+test_failure_detail(id)
+artifact_get(id)
+log_search(query)
+~~~
+
+Agent가 필요할 때 점진적으로 조회한다.
+
+이것이 Progressive Retrieval이다.
+
+---
+
+## 9.6 Result Gateway
+
+Tool Output이 큰 시스템에서는 Model 앞에 Result Gateway를 둘 수 있다.
+
+~~~text
+Tool / Runtime
+      ↓
+Result Gateway
+      ↓
+Summary + Index + Artifact Ref
+      ↓
+Agent
+~~~
+
+예를 들어 Full Regression이 수천 개 Test를 실행했다고 하자.
+
+Agent에게 필요한 것은 보통 전체 PASS 로그가 아니다.
+
+~~~text
+tests: 1370
+passed: 1367
+failed: 3
+
+failures:
+- AuthServiceTest.expiredToken
+- LoginControllerTest.invalidSession
+- SecurityFilterTest.missingHeader
+
+full_log:
+artifact://verify/932/log.txt
+~~~
+
+Agent는 실패한 세 개만 자세히 볼 수 있다.
+
+이 구조는 Token 절약만을 위한 것이 아니다.
+
+Signal-to-noise ratio를 높이는 것이 목적이다.
+
+너무 짧게 요약해 중요한 정보를 없애도 문제가 된다.
+
+그래서 Summary와 Detail Retrieval을 함께 제공해야 한다.
+
+---
+
+## 9.7 Tool을 늘리면 항상 좋아지는가
+
+Tool이 많으면 Agent가 할 수 있는 일이 늘어난다.
+
+하지만 선택 공간도 커진다.
+
+비슷한 Tool이 여러 개 있으면 잘못 선택할 수 있다.
+
+권한 범위도 넓어진다.
+
+Context에 Tool schema가 많이 들어가면 비용도 증가할 수 있다.
+
+따라서 Tool Set도 Task별로 조절할 수 있다.
+
+예:
+
+~~~text
+docs-worker
+- repo read/write
+- markdown lint
+- docs preview
+
+backend-worker
+- repo
+- shell
+- test
+- internal API
+
+release-worker
+- repo read
+- build artifact
+- release tool
+- approval gate
+~~~
+
+모든 Worker에 모든 Tool을 주는 것보다 capability를 좁히는 편이 보안과 reliability 모두에 도움이 될 수 있다.
+
+---
+
+## 9.8 Harness도 Regression이 생긴다
+
+Tool을 업그레이드하면 성능이 좋아질 것이라고 생각하기 쉽다.
+
+하지만 Tool Interface가 바뀌면 기존 Instruction과 Agent 행동 전략이 더 이상 맞지 않을 수 있다.
+
+GitHub는 2026년 Copilot Code Review의 code exploration tool을 공용 CLI 계열로 교체했을 때 초기 offline benchmark에서 평균 비용이 늘고 유용한 review comment가 줄었다고 공개했다. Tool 자체보다 reviewer에 맞지 않는 Instruction과 탐색 Workflow가 문제였고, 이를 다시 설계한 뒤 production에서는 기존 품질을 유지하면서 평균 review cost를 약 20% 낮췄다고 보고했다. 이는 GitHub의 제품 내부 사례이지 모든 Agent에 그대로 적용되는 수치는 아니다.
+
+이 사례의 교훈은 단순하다.
+
+> Harness도 Software다.
+
+Harness를 바꿀 때도 다음을 해야 한다.
+
+- version
+- test
+- eval
+- rollout
+- compare
+- rollback
+
+Model 평가만 하고 Harness 변경은 검증하지 않는다면 실제 Factory 성능 변화를 설명하기 어렵다.
+
+---
+
+## 9.9 Prepared Harness
+
+Worker Profile이 Runtime을 준비한다면 Prepared Harness는 Task 유형에 맞는 Agent 환경을 준비한다.
+
+예를 들어 Backend Fix Profile은 다음처럼 구성할 수 있다.
+
+~~~text
+Runtime
+- JDK 21
+- Gradle
+
+Instructions
+- backend conventions
+
+Skills
+- targeted-test
+- api-contract-check
+
+Tools
+- repo search
+- shell
+- test
+- log search
+
+Verification
+- unit
+- integration
+~~~
+
+UI Task는 다르다.
+
+~~~text
+Runtime
+- Node
+- Browser
+
+Skills
+- browser-check
+- screenshot-compare
+
+Tools
+- DOM
+- screenshot
+- console log
+
+Verification
+- E2E
+- visual evidence
+~~~
+
+이렇게 하면 Agent가 Task마다 자신의 Toolchain을 처음부터 조립할 필요가 없다.
+
+---
+
+## Model 문제인가 Harness 문제인가
+
+Agent가 실패했을 때 바로 Model을 바꾸기 전에 확인할 수 있다.
+
+~~~text
+Task가 모호했는가?
+필요한 Context를 찾을 수 있었는가?
+Tool Output이 너무 컸는가?
+Edit Feedback이 부족했는가?
+환경이 재현 가능했는가?
+필수 검증이 Harness에 있었는가?
+~~~
+
+이 질문에 문제가 있다면 더 큰 Model이 근본 해결책이 아닐 수 있다.
+
+Software Factory의 강점은 Model을 교체하는 것 외에도 개선할 수 있는 System Layer가 많다는 데 있다.
+
+---
+
+## 다음 질문
+
+Harness를 준비했다고 해도 Context를 무한정 넣을 수는 없다.
+
+Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context에 넣으면 오히려 Agent가 중요한 정보를 찾기 어려워질 수 있다.
+
+다음 장에서는 **얼마나 많은 Context를 줄 것인가가 아니라, 필요한 Context를 어떻게 찾게 할 것인가**를 다룬다.
+
+---
+
+## 참고 자료
+
+- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
+  https://openai.com/index/harness-engineering/
+- SWE-agent, *Agent-Computer Interface*  
+  https://swe-agent.com/1.0/background/aci/
+- Anthropic, *Writing tools for agents*  
+  https://www.anthropic.com/engineering/writing-tools-for-agents
+- GitHub, *Better tools made Copilot code review worse*  
+  https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
+
+---
+
+# 10장. Context Engineering과 Agent Legibility
+
+Agent가 실패하면 Context가 부족했다고 생각하기 쉽다.
+
+그래서 더 많은 문서를 넣고, 더 긴 Instruction을 만들고, 로그를 통째로 붙인다.
+
+하지만 Context는 많을수록 좋은 자원이 아니다.
+
+필요한 정보가 늘어나면 중요한 Signal이 묻힐 수 있다. 오래된 문서와 최신 코드가 충돌할 수도 있고, 긴 로그가 Reasoning 공간을 잡아먹을 수도 있다.
+
+그래서 Context Engineering의 질문은 다음에 가깝다.
+
+> 얼마나 많이 넣을 것인가가 아니라, 필요한 정보를 Agent가 얼마나 쉽게 찾을 수 있게 만들 것인가?
+
+이 책에서는 이를 **Agent Legibility**와 연결해 본다.
+
+Repository와 Application이 사람에게만 읽기 쉬운 것이 아니라 Agent도 구조와 상태를 탐색할 수 있어야 한다.
+
+---
+
+## 10.1 Context Window는 Storage가 아니다
+
+Context Window는 Agent가 현재 Task를 이해하고 판단하는 작업 공간이다.
+
+Durable Knowledge Store가 아니다.
+
+그 안에 다음 정보를 모두 넣는다고 해보자.
+
+- 전체 Architecture 문서
+- 과거 Incident
+- 모든 Coding Convention
+- 모든 API 문서
+- 수천 줄 Log
+- Service Ownership
+- Deployment Runbook
+
+처음에는 안전해 보인다.
+
+하지만 실제로는 다음 문제가 생긴다.
+
+- 중요한 정보가 묻힌다.
+- 오래된 문서가 섞인다.
+- 같은 내용을 반복해서 읽는다.
+- 비용이 증가한다.
+- Task와 무관한 정보가 판단을 방해한다.
+
+그래서 Context는 세 가지 속성을 갖는 편이 좋다.
+
+~~~text
+Relevant
+Minimal
+Progressive
+~~~
+
+Task 시작 시 필요한 최소 정보만 주고, 추가 정보는 탐색을 통해 가져오게 한다.
+
+---
+
+## 10.2 Repository Legibility
+
+Agent가 Repository를 읽을 수 있다고 해서 Repository를 이해할 수 있는 것은 아니다.
+
+다음 Repository를 생각해보자.
+
+~~~text
+README
+- 실행 방법 없음
+
+scripts/
+- 오래된 shell script 여러 개
+
+docs/
+- architecture 문서가 실제 코드와 다름
+
+test/
+- 어떤 test가 빠른지 알 수 없음
+
+service/
+- owner 정보 없음
+~~~
+
+사람도 어렵지만 Agent에게는 더 어렵다.
+
+Agent-ready Repository라면 최소한 다음 질문에 답하기 쉬워야 한다.
+
+- 어디서 시작해야 하는가
+- Build 명령은 무엇인가
+- 빠른 Test는 무엇인가
+- Architecture boundary는 어디인가
+- 어떤 파일은 자동 생성되는가
+- 어떤 영역은 변경하면 안 되는가
+- 누가 Owner인가
+
+Repository Legibility는 문서량을 늘리는 일이 아니다.
+
+탐색 경로를 만드는 일이다.
+
+예:
+
+~~~text
+README
+→ quick orientation
+
+AGENTS.md
+→ agent rules / entry points
+
+docs/architecture/
+→ module boundaries
+
+scripts/
+→ canonical commands
+
+CODEOWNERS / catalog
+→ ownership
+~~~
+
+Agent가 처음부터 모든 문서를 읽지 않아도 되는 구조가 중요하다.
+
+---
+
+## 10.3 AGENTS.md는 지식 저장소가 아니라 Entry Point다
+
+Context File은 유용하다.
+
+하지만 여기에 모든 조직 지식을 넣으면 다시 문제가 생긴다.
+
+예를 들어 AGENTS.md가 2만 줄이 됐다고 하자.
+
+- Build 규칙
+- API 문서
+- Security 정책
+- 모든 서비스 설명
+- 과거 Incident
+- Coding Style
+- Release Procedure
+
+Agent는 매 Task마다 이 전체를 읽어야 할 수 있다.
+
+OpenAI의 2026년 Harness Engineering 사례도 “거대한 하나의 AGENTS.md” 방식을 실패한 접근으로 설명한다. Context를 과도하게 차지하고, 모든 규칙이 중요해 보여 우선순위가 흐려지며, 문서가 빠르게 stale해졌다는 것이다. 해당 팀은 대신 약 100줄 규모의 AGENTS.md를 목차처럼 사용하고 상세 지식은 구조화된 문서로 분리했다. 이는 한 조직의 사례이지만 Context File을 지식 저장소보다 Entry Point로 보는 데 유용한 근거다.
+
+그래서 Context File은 Entry Point에 가깝게 사용하는 편이 낫다.
+
+~~~text
+AGENTS.md
+
+- build: ./gradlew build
+- fast test: ./gradlew test
+- architecture: docs/architecture/README.md
+- auth rules: docs/architecture/auth.md
+- UI rules: docs/frontend/ui.md
+- release: skills/release/
+~~~
+
+Agent는 Task에 필요한 문서만 추가로 읽는다.
+
+다음과 같은 구조다.
+
+~~~text
+Entry
+→ Map
+→ Relevant Doc
+→ Skill
+→ Tool Result
+~~~
+
+이것이 Progressive Disclosure다.
+
+---
+
+## 10.4 조직 지식은 Repository 밖에도 있다
+
+Repository만 읽어서는 알 수 없는 정보도 많다.
+
+예:
+
+- 이 Service의 Owner는 누구인가
+- 어떤 API가 이 Service에 의존하는가
+- Production Environment 이름은 무엇인가
+- 어떤 팀이 승인해야 하는가
+- 내부 MCP Server는 무엇인가
+- 어떤 Worker Profile을 써야 하는가
+
+이런 정보는 Software Catalog나 Developer Platform에서 가져올 수 있다.
+
+~~~text
+Task
+→ Catalog Lookup
+→ Owner / Dependency / API / Environment
+→ Focused Context
+~~~
+
+Catalog가 모든 상태의 Source of Truth가 될 필요는 없다.
+
+각 데이터는 원래 시스템에 남을 수 있다.
+
+~~~text
+Code
+→ Git
+
+Deployment State
+→ Runtime Platform
+
+Logs
+→ Observability
+
+Task
+→ Task Store
+
+Ownership / Dependency Index
+→ Catalog
+~~~
+
+Catalog의 역할은 모든 것을 복제하는 것이 아니라 **Agent가 어디서 무엇을 찾아야 하는지 연결하는 것**이다.
+
+---
+
+## 10.5 Application Legibility
+
+Agent에게 Code만 보이게 해서는 충분하지 않은 Task가 많다.
+
+UI 작업을 생각해보자.
+
+Source Diff가 맞아 보여도 실제 화면에서는 다음 문제가 생길 수 있다.
+
+- 버튼이 가려진다.
+- Modal이 화면 밖으로 나간다.
+- CSS가 깨진다.
+- Error Message가 보이지 않는다.
+
+Backend도 마찬가지다.
+
+Code만 읽어서는 실제 Runtime 상태를 알 수 없다.
+
+그래서 Agent가 볼 수 있는 대상은 다음처럼 확장된다.
+
+~~~text
+Source Code
++ DOM
++ Browser
++ Screenshot
++ Logs
++ Metrics
++ Traces
++ Deployment State
+~~~
+
+OpenAI의 Harness Engineering 사례가 강조하는 Agent Legibility도 이 방향과 연결된다.
+
+Application이 Agent에게 읽히려면 Runtime Evidence가 접근 가능해야 한다.
+
+예를 들어 API 오류 Task라면 다음 흐름이 가능하다.
+
+~~~text
+Task
+→ service log search
+→ trace lookup
+→ relevant code
+→ test
+→ runtime verify
+~~~
+
+이런 구조에서는 Observability도 Agent Context의 일부가 된다.
+
+---
+
+## 10.6 Raw Log를 Context에 그대로 넣지 않는다
+
+Production Log 50MB를 Agent에게 통째로 주면 어떻게 될까.
+
+필요한 Error는 한 줄일 수 있다.
+
+더 좋은 방식은 탐색 Interface를 제공하는 것이다.
+
+~~~text
+log_search(
+  service="auth",
+  error="TokenExpiredException",
+  since="30m"
+)
+~~~
+
+결과:
+
+~~~text
+matches: 12
+top_trace: trace-8421
+sample:
+- 14:02:11 TokenExpiredException
+- 14:02:12 mapped to 500
+~~~
+
+필요하면 세부 Trace를 조회한다.
+
+~~~text
+trace_get("trace-8421")
+~~~
+
+이 방식은 Context를 줄이는 것보다 **정보 접근을 단계화하는 것**이 목적이다.
+
+---
+
+## 10.7 예: Auth Bug의 Progressive Context
+
+Task:
+
+~~~text
+expired JWT 요청이 500을 반환한다.
+401로 수정하라.
+~~~
+
+처음 Context:
+
+~~~text
+- Task goal
+- acceptance
+- repo map
+- auth module location
+~~~
+
+Agent가 Architecture 문서를 찾는다.
+
+~~~text
+docs/architecture/auth.md
+~~~
+
+그다음 관련 Test를 찾는다.
+
+~~~text
+AuthServiceTest
+SecurityFilterTest
+~~~
+
+실패 로그가 필요하면 Tool로 조회한다.
+
+~~~text
+log_search(TokenExpiredException)
+~~~
+
+즉 다음 순서다.
+
+~~~text
+Task
+→ Repository Map
+→ Auth Architecture
+→ Target Test
+→ Runtime Log
+~~~
+
+처음부터 Repository 전체와 모든 Log를 Context에 넣지 않는다.
+
+---
+
+## 10.8 Agent가 읽을 수 없는 정보는 운영상 없는 것과 비슷하다
+
+중요한 Architecture Rule이 팀 Slack 대화에만 있다고 하자.
+
+사람들은 알고 있다.
+
+Agent는 모른다.
+
+Agent가 해당 Repository를 수정할 때는 그 규칙을 안정적으로 사용할 수 없다. OpenAI의 사례에서는 이를 “Agent가 실행 중 접근할 수 없는 정보는 사실상 존재하지 않는 것과 같다”는 식으로 설명했다.
+
+같은 문제는 다음에서도 발생한다.
+
+- 사람 머릿속의 Runbook
+- 오래된 Wiki
+- 구두 합의
+- Screenshot으로만 존재하는 Dashboard
+- 특정 개발자만 아는 Test Command
+
+Factory를 도입하면 이런 암묵지가 더 잘 드러난다.
+
+Agent가 자주 같은 실수를 한다면 Model 문제일 수도 있지만, 조직 지식이 machine-accessible하지 않은 문제일 수도 있다.
+
+Repository, Catalog, Runtime을 Agent-readable하게 만드는 작업은 결국 사람에게도 도움이 된다.
+
+---
+
+## Context를 더 넣기 전에 묻는 질문
+
+~~~text
+1. 이 정보는 현재 Task와 직접 관련 있는가?
+2. 최신 정보인가?
+3. Agent가 필요할 때 찾을 수 있는가?
+4. 원문 전체가 필요한가, index/summary로 충분한가?
+5. 반드시 지켜야 하는 규칙인가?
+6. 그렇다면 Context가 아니라 Policy로 강제해야 하지 않는가?
+~~~
+
+특히 마지막 질문이 중요하다.
+
+Context File은 Agent에게 설명하는 수단이다.
+
+Mandatory Rule을 보장하는 수단은 아니다.
+
+---
+
+## 다음 질문
+
+Context를 잘 준비해도 한 가지 결정은 남는다.
+
+어떤 것은 Agent가 자유롭게 판단하게 하고, 어떤 것은 시스템이 고정해야 하는가.
+
+Retry 횟수도 Agent가 정해야 할까.
+
+Permission도 Agent에게 판단시킬까.
+
+DB Migration 순서도 매번 새로 계획하게 할까.
+
+다음 장에서는 **Controlled Autonomy**, 즉 deterministic control과 Agent judgment의 경계를 다룬다.
+
+---
+
+## 참고 자료
+
+- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
+  https://openai.com/index/harness-engineering/
+- SWE-agent, *Agent-Computer Interface*  
+  https://swe-agent.com/1.0/background/aci/
+- Backstage, *AI in the Software Catalog*  
+  https://backstage.io/docs/ai/ai-in-the-catalog/
+- SWE-Explore  
+  https://arxiv.org/abs/2606.07297
+
+---
+
+# 11장. Controlled Autonomy: 무엇을 시스템에 두고 무엇을 Agent에게 맡길 것인가
+
+Agentic이라는 말은 자주 “Agent가 더 많은 것을 스스로 결정한다”는 의미로 쓰인다.
+
+하지만 실제 Factory에서 중요한 것은 Autonomy의 양이 아니다.
+
+**어떤 결정을 누구에게 맡길 것인가**다.
+
+예를 들어 다음 두 결정은 성격이 다르다.
+
+~~~text
+이 Task는 Retry를 최대 2회만 허용한다.
+~~~
+
+~~~text
+이 실패의 원인이 SecurityFilter인지 ExceptionMapper인지 조사한다.
+~~~
+
+첫 번째는 이미 알고 있는 운영 규칙이다.
+
+두 번째는 탐색과 판단이 필요한 Engineering 문제다.
+
+둘 다 Agent에게 맡길 수는 있다.
+
+하지만 그럴 이유가 있는지는 별개의 문제다.
+
+이 책에서는 다음 원칙을 사용한다.
+
+> 이미 알고 있는 Rule과 State는 시스템이 책임지고, 사전 규칙화하기 어려운 Search와 Judgment에 Agent Autonomy를 사용한다.
+
+---
+
+## 11.1 세 가지 Control Model
+
+Factory의 Control 방식을 단순화하면 세 가지로 볼 수 있다.
+
+### Model A. Deterministic Pipeline
+
+~~~text
+Step 1
+→ Step 2
+→ Step 3
+~~~
+
+실행 순서와 분기는 코드가 결정한다.
+
+LLM은 각 Step 안에서 제한된 판단만 한다.
+
+예:
+
+~~~text
+checkout
+→ build
+→ targeted test
+→ agent fix
+→ test
+→ PR
+~~~
+
+장점:
+
+- predictable
+- debug가 쉽다
+- retry boundary가 명확하다
+- cost variance가 낮다
+
+단점:
+
+- 예상하지 못한 상황에 유연하지 않을 수 있다.
+
+---
+
+### Model B. Agent-controlled
+
+~~~text
+Goal
+→ Agent chooses tools
+→ Agent decides order
+→ Agent decides completion
+~~~
+
+Agent가 Workflow 전체를 판단한다.
+
+장점:
+
+- 유연하다
+- unknown situation에 대응하기 쉽다
+- 새로운 Tool 조합을 찾을 수 있다
+
+단점:
+
+- run variation이 커질 수 있다
+- 같은 판단을 반복할 수 있다
+- state와 policy가 transcript 안으로 숨어들 수 있다
+- 종료 조건이 모호해질 수 있다
+
+---
+
+### Model C. Hybrid Runtime
+
+~~~text
+System owns
+- state
+- policy
+- retry
+- dependency
+- approval
+
+Agent owns
+- search
+- diagnosis
+- implementation
+- debugging
+~~~
+
+이 책에서는 이 형태를 기본 후보로 본다.
+
+모든 Workflow를 state machine으로 고정하지도 않고, 모든 Control을 Agent에게 넘기지도 않는다.
+
+---
+
+## 11.2 Rule, Heuristic, Judgment를 구분한다
+
+Control Boundary를 설계할 때 모든 결정을 같은 종류로 보면 어렵다.
+
+세 가지로 나눌 수 있다.
+
+### Rule
+
+정확한 조건이 이미 존재한다.
+
+예:
+
+~~~text
+main direct push forbidden
+~~~
+
+이건 Policy로 강제할 수 있다.
+
+Agent에게 “가능하면 하지 마라”라고 말할 필요가 없다.
+
+---
+
+### Heuristic
+
+정답은 아니지만 좋은 기본 판단이 있다.
+
+예:
+
+~~~text
+이 Task는 backend-java Worker가 적합할 가능성이 높다.
+~~~
+
+이건 Routing Policy나 Model을 쓸 수 있다.
+
+필요하면 fallback도 둔다.
+
+---
+
+### Judgment
+
+사전에 정확한 규칙을 만들기 어렵다.
+
+예:
+
+~~~text
+이 Failure의 Root Cause는 무엇인가?
+~~~
+
+~~~text
+어떤 구현 전략이 가장 적합한가?
+~~~
+
+이런 문제는 Agent가 잘하는 영역이다.
+
+Factory 설계에서 중요한 것은 세 종류를 섞지 않는 것이다.
+
+---
+
+## 11.3 System이 소유해야 할 상태
+
+다음 상태를 Agent Transcript 안에만 두면 위험하다.
+
+- Task Status
+- Retry Count
+- Timeout
+- Dependency
+- Worker Lease
+- Permission
+- Cost Budget
+- Required Verification
+- Approval State
+
+왜냐하면 Model은 이 상태를 잊거나 잘못 해석할 수 있기 때문이다.
+
+예를 들어 Prompt에 다음과 같이 적었다고 하자.
+
+~~~text
+테스트 실패 시 최대 2번까지만 수정하고,
+그래도 실패하면 중단해라.
+~~~
+
+Agent가 정확히 지킬 수도 있다.
+
+하지만 장시간 실행 중 Context가 압축되거나 Tool Failure가 반복되면 이 규칙이 흐려질 수 있다.
+
+더 안전한 구조는 다음이다.
+
+~~~text
+Control Plane
+retry_budget = 2
+
+Agent
+→ attempt
+→ result
+
+System
+→ retry allowed?
+~~~
+
+Retry Budget은 운영 상태다.
+
+Model의 기억에 맡길 이유가 적다.
+
+같은 원리는 Permission과 Approval에도 적용된다.
+
+---
+
+## 11.4 Agent가 잘하는 영역
+
+반대로 다음은 시스템이 미리 모든 경우를 정의하기 어렵다.
+
+### Repository Exploration
+
+어떤 File과 Symbol이 관련 있는지 찾는다.
+
+### Diagnosis
+
+실패 원인 후보를 만든다.
+
+### Hypothesis
+
+~~~text
+JWT expiry exception이 generic error handler로 흘러가는 것 같다.
+~~~
+
+### Implementation Strategy
+
+어떤 Layer에서 수정할지 판단한다.
+
+### Debugging Sequence
+
+어떤 Test와 Log를 먼저 볼지 선택한다.
+
+### Alternative Comparison
+
+두 구현의 Trade-off를 비교한다.
+
+이 영역을 모두 deterministic workflow로 만들면 오히려 brittle해질 수 있다.
+
+Agent가 가진 강점은 **정답이 이미 코드로 존재하지 않는 탐색 공간에서 다음 행동을 선택하는 능력**에 있다.
+
+---
+
+## 11.5 왜 “더 Agentic”이 항상 더 좋은 것은 아닌가
+
+연구에서도 비슷한 결과가 나온다.
+
+Agentless는 2024년 당시 복잡한 자유 Agent Loop 없이 localization → repair → validation이라는 구조화된 Workflow만으로 경쟁력 있는 SWE-bench 결과를 보여줬다. 현재 최고 성능을 말하는 근거라기보다, Agent Architecture의 복잡성이 성능의 필수조건은 아니라는 역사적 반례로 보는 편이 적절하다.
+
+2026년 AIware에 발표된 COBOL-to-Python modernization 연구는 Model, Prompt, Tool, Source Program을 고정하고 Orchestration Strategy만 바꿔 비교했다. 이 실험에서 Deterministic Orchestration은 LLM-controlled 방식과 비슷한 functional correctness를 보이면서 worst-case robustness와 run variability를 개선했고, Token 사용은 조건에 따라 최대 3.5배 낮았다.
+
+다만 이 결과는 구조화된 Legacy Modernization workload에 대한 연구다. 모든 Coding Task에 deterministic flow가 더 낫다고 일반화할 수는 없다.
+
+하지만 한 가지는 분명하다.
+
+> 구조화 가능한 Process에 Autonomy를 추가한다고 자동으로 품질이 좋아지는 것은 아니다.
+
+Agent Autonomy는 상황에 따라 추가 비용을 만들 수 있다.
+
+- 더 많은 Tool Call
+- 더 많은 Context
+- 더 긴 Trajectory
+- 더 큰 Variance
+- termination uncertainty
+
+그래서 Autonomy는 기능이 아니라 Trade-off다.
+
+---
+
+## 11.6 DB Migration 예제
+
+다음 작업을 생각해보자.
+
+~~~text
+users.status column 추가
+API response 변경
+migration verification
+~~~
+
+모든 것을 Agent에게 자유롭게 맡길 수도 있다.
+
+하지만 일부는 deterministic하게 만들기 쉽다.
+
+~~~text
+System
+1. migration plan required
+2. backward compatibility check required
+3. schema test required
+4. production apply requires approval
+~~~
+
+Agent는 그 안에서 판단한다.
+
+~~~text
+Agent
+- existing schema 탐색
+- migration script 작성
+- compatibility issue 진단
+- rollback plan 초안
+~~~
+
+즉:
+
+~~~text
+Deterministic Envelope
+        ↓
+Agent Judgment
+        ↓
+Deterministic Gate
+~~~
+
+이 구조는 Autonomy를 없애는 것이 아니다.
+
+Autonomy가 유용한 공간을 명확하게 만드는 것이다.
+
+---
+
+## 11.7 LLM 안에 State Machine을 숨기지 않는다
+
+다음 Prompt는 처음에는 편할 수 있다.
+
+~~~text
+1. repository를 분석한다.
+2. test를 찾는다.
+3. 수정한다.
+4. 실패하면 다시 분석한다.
+5. 최대 두 번 retry한다.
+6. security test가 필요하면 실행한다.
+7. approval이 필요하면 멈춘다.
+~~~
+
+작은 Task에서는 동작할 수 있다.
+
+하지만 Workflow가 커지면 문제가 생긴다.
+
+- 현재 Step이 무엇인지 외부에서 보기 어렵다.
+- partial retry가 어렵다.
+- timeout과 budget을 통제하기 어렵다.
+- approval state를 durable하게 유지하기 어렵다.
+- 같은 Step이 중복 실행될 수 있다.
+
+더 나은 구조는 다음과 같다.
+
+~~~text
+Executable Workflow
+      ↓
+LLM Judgment Step
+      ↓
+Executable Workflow
+~~~
+
+LLM은 필요한 판단을 한다.
+
+System은 process state를 관리한다.
+
+---
+
+## 11.8 Recovery Policy도 Agent 밖에 둔다
+
+Failure가 발생했을 때 어디까지 되돌릴지 결정하는 것도 Control 문제다. 일시적인 Tool 오류와 반복되는 구현 실패를 같은 Retry로 처리하면 비용과 변동성이 커진다.
+
+따라서 Recovery Budget과 Escalation 조건은 Control Plane이 소유하고, Agent는 필요한 진단과 수정에 집중하는 편이 좋다. Tool Retry부터 Reassignment, Human Escalation까지의 구체적인 Recovery Ladder는 14장에서 다룬다.
+
+---
+
+## 11.9 Control Hierarchy
+
+Factory의 Control을 계층으로 보면 다음처럼 정리할 수 있다.
+
+~~~text
+Organization Policy
+        ↓
+Factory Control Plane
+        ↓
+Workflow / Task Graph
+        ↓
+Agent Harness
+        ↓
+Model Decisions
+        ↓
+Tool Actions
+~~~
+
+위쪽으로 갈수록 더 durable하고 authoritative해야 한다.
+
+아래쪽으로 갈수록 더 adaptive하고 probabilistic할 수 있다.
+
+예:
+
+~~~text
+Organization Policy
+- production secret export 금지
+
+Control Plane
+- retry budget = 2
+
+Workflow
+- unit → integration → approval
+
+Harness
+- available tools
+
+Model
+- implementation strategy
+
+Tool
+- actual shell command
+~~~
+
+이 계층이 있으면 “Agent에게 어디까지 자율성을 줄 것인가”라는 질문을 훨씬 구체적으로 만들 수 있다.
+
+---
+
+## Controlled Autonomy를 설계할 때 묻는 질문
+
+~~~text
+1. 이 결정은 이미 정확한 Rule이 있는가?
+2. State를 durable하게 기록해야 하는가?
+3. 잘못됐을 때 Blast Radius가 큰가?
+4. Agent의 탐색 능력이 실제로 필요한가?
+5. 같은 판단을 매번 새로 할 이유가 있는가?
+6. 결과를 Independent Verification으로 확인할 수 있는가?
+~~~
+
+이 질문에 따라 Control 위치를 정한다.
+
+---
+
+## 다음 질문
+
+Agent에게 적절한 Autonomy를 줬다.
+
+그래도 Agent가 만든 결과가 맞는지는 별개의 문제다.
+
+Agent는 자신이 성공했다고 믿을 수 있다.
+
+Test도 통과할 수 있다.
+
+하지만 User Intent를 놓쳤을 수도 있다.
+
+다음 장에서는 **Agent의 완료 보고와 Factory의 완료 판정을 분리하는 Verification 구조**를 다룬다.
+
+---
+
+## 참고 자료
+
+- Agentless  
+  https://arxiv.org/abs/2407.01489
+- *Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization*  
+  https://doi.org/10.1145/3805760.3814891
+- *Runtime-Structured Task Decomposition for Agentic Coding Systems*  
+  https://arxiv.org/abs/2605.15425
+- *Wink: Recovering from Misbehaviors in Coding Agents*  
+  https://arxiv.org/abs/2602.17037
+
+---
+
+# 12장. Verification: Agent가 완료했다고 말한 뒤부터가 시작이다
+
+Agent가 다음과 같이 보고했다고 하자.
+
+> 수정 완료했습니다. 테스트도 모두 통과했습니다.
+
+Interactive 사용에서는 여기서 사람이 코드를 열어보고 판단할 수 있다.
+
+Factory에서는 이 문장을 Task의 최종 상태로 사용하면 안 된다.
+
+Agent의 보고는 하나의 **Completion Claim**이다.
+
+Task를 DONE으로 만들 수 있는 **Completion Authority**와는 다르다.
+
+이 책에서는 다음 구조를 기본으로 본다.
+
+~~~text
+Agent
+→ Candidate Result
+→ Verification
+→ Evidence
+→ Acceptance
+~~~
+
+Agent는 결과를 제안한다.
+
+Verifier는 검증한다.
+
+System이나 Human은 남은 위험을 받아들일지 결정한다.
+
+> Agent가 "DONE"이라고 말하는 것과 Factory가 DONE이라고 판정하는 것은 다른 사건이다.
+
+---
+
+## 12.1 Completion Claim과 Completion Authority
+
+Task를 수행한 Agent는 자신의 작업에 가장 많은 Context를 가지고 있다.
+
+그래서 다음도 잘 설명할 수 있다.
+
+- 어떤 파일을 바꿨는가
+- 어떤 명령을 실행했는가
+- 왜 이런 구현을 선택했는가
+- 어떤 문제가 남았는가
+
+하지만 자신의 작업을 설명할 수 있다는 것과 독립적으로 검증할 수 있다는 것은 다르다.
+
+예를 들어 Agent가 다음과 같이 말할 수 있다.
+
+~~~text
+- expired JWT를 401로 수정
+- unit test PASS
+- integration test PASS
+~~~
+
+Factory는 최소한 다음을 독립적으로 확인할 수 있어야 한다.
+
+~~~text
+Result Revision
+→ 실제 commit은 무엇인가
+
+Verification
+→ 어떤 command가 실행됐는가
+
+Exit
+→ 실제 result는 PASS인가
+
+Acceptance
+→ 401 behavior가 확인됐는가
+~~~
+
+즉 Agent의 자연어 Summary를 authoritative state로 사용하지 않는다.
+
+---
+
+## 12.2 Verification Pyramid
+
+모든 Task에 같은 검증 비용을 쓸 필요는 없다.
+
+검증은 여러 층으로 구성할 수 있다.
+
+~~~text
+Static
+        ↓
+Deterministic Test
+        ↓
+Runtime Verification
+        ↓
+Behavioral Evidence
+        ↓
+Independent Evaluator
+        ↓
+Human Acceptance
+~~~
+
+위로 갈수록 일반적으로 비용이 커지고, 더 넓은 종류의 오류를 잡을 수 있다.
+
+### Static
+
+- compile
+- typecheck
+- lint
+- format
+- schema validation
+
+빠르고 deterministic하다.
+
+### Deterministic Test
+
+- unit
+- integration
+- contract
+- migration test
+
+Task의 구체적인 behavior를 검증한다.
+
+### Runtime Verification
+
+실제 Service를 실행한다.
+
+- service boot
+- API request
+- DB migration
+- background job
+
+### Behavioral Evidence
+
+사람이나 Evaluator가 실제 결과를 볼 수 있게 한다.
+
+- screenshot
+- video
+- DOM
+- logs
+- traces
+- benchmark
+
+### Independent Evaluator
+
+구현 Agent와 다른 Context나 Role을 가진 평가자가 결과를 점검한다.
+
+### Human Acceptance
+
+Residual Risk와 Product Intent를 최종적으로 사람이 판단한다.
+
+모든 Task가 Pyramid 끝까지 갈 필요는 없다.
+
+Docs typo는 lint와 preview만으로 충분할 수 있다.
+
+Payment Logic 변경은 integration, security, human review까지 필요할 수 있다.
+
+---
+
+## 12.3 Verification은 마지막 단계가 아니라 Feedback Loop다
+
+검증을 마지막에 한 번만 수행하면 Agent는 오랫동안 잘못된 방향으로 갈 수 있다.
+
+더 좋은 구조는 실행 중에도 빠른 Feedback을 주는 것이다.
+
+~~~text
+Edit
+→ Fast Check
+→ Fix
+→ Targeted Test
+→ Fix
+→ Candidate
+→ Expensive Verification
+~~~
+
+예를 들어 Java Backend Task라면 다음처럼 계층화할 수 있다.
+
+~~~text
+1. compile
+2. target unit test
+3. module integration test
+4. full regression
+~~~
+
+초기 수정마다 Full Regression을 돌리면 비용이 너무 크다.
+
+반대로 Target Test만 보고 끝내면 Integration 문제를 놓칠 수 있다.
+
+그래서 Verification도 비용과 범위에 따라 단계화한다.
+
+~~~text
+Cheap Feedback
+→ Candidate Confidence
+→ Expensive Acceptance
+~~~
+
+이 구조는 CI Capacity 관리와도 연결된다.
+
+---
+
+## 12.4 Executable Acceptance
+
+4장에서 Requirement와 Acceptance를 분리했다.
+
+Verification은 그 Acceptance를 실행 가능한 형태로 바꾸는 단계다.
+
+예:
+
+~~~text
+Requirement
+- expired JWT는 인증 실패다.
+
+Acceptance
+- protected endpoint 호출 시 HTTP 401
+
+Verification
+- integration test
+- runtime request
+~~~
+
+연결하면 다음과 같다.
+
+~~~text
+Requirement
+      ↓
+Acceptance
+      ↓
+Executable Check
+      ↓
+Evidence
+~~~
+
+이 Traceability가 강할수록 Agent가 “무엇을 해야 하는가”와 “무엇을 하면 끝인가”를 같은 방향으로 볼 수 있다.
+
+단, 한 가지 주의가 필요하다.
+
+Acceptance를 Test 하나와 완전히 동일시하면 안 된다.
+
+---
+
+## 12.5 Test PASS가 User Intent와 같지 않은 이유
+
+Test는 강력하다.
+
+Agent에게 빠르고 deterministic한 Feedback을 준다.
+
+하지만 Test는 **검사한 것만** 확인한다.
+
+Microsoft Research의 2026년 preprint *Building to the Test*는 두 production coding agent를 사용한 18회 controlled run에서 이런 위험을 관찰했다. Hidden Playwright oracle을 Agent loop에 제공하자 점수는 거의 완벽해졌지만, 요청된 reusable library 대신 tested behavior를 직접 담은 demo 형태로 우회하는 결과가 나올 수 있었다. 저자들도 다른 Agent·Signal·Model Family에서의 prevalence는 열린 질문이라고 명시한다.
+
+예를 들어 사용자는 다음을 원했다고 하자.
+
+~~~text
+여러 Service에서 재사용할 수 있는 rate-limit library를 만들어라.
+~~~
+
+Visible Test는 한 Service에서 특정 요청이 제한되는지만 검사한다.
+
+Agent는 해당 Service에 직접 조건문을 넣어 Test를 통과시킬 수 있다.
+
+~~~text
+Visible Test
+→ PASS
+
+Original Intent
+→ reusable library
+→ FAIL
+~~~
+
+이것이 Building to the Test 문제다.
+
+Test를 없애야 한다는 뜻이 아니다.
+
+Validation의 종류를 넓혀야 한다.
+
+- structural check
+- hidden test
+- runtime scenario
+- code review
+- independent evaluator
+
+---
+
+## 12.6 Automated Grader PASS와 Maintainer Acceptance는 다르다
+
+METR의 2026년 연구 노트는 SWE-bench Verified에서 자동 grader를 통과한 Patch를 실제 Maintainer에게 다시 검토하게 했다. 4명의 Maintainer가 3개 Repository의 95개 Issue 범위를 다룬 표본에서, Test를 통과한 AI Patch의 상당수가 실제 main에는 Merge되지 않았을 것으로 평가됐다. 다만 Agent에게 Review Feedback을 받고 반복 수정할 기회를 주지 않은 single-shot 평가라는 제한이 있다.
+
+이 차이는 이상하지 않다.
+
+Maintainer는 Test 외에도 다음을 본다.
+
+- Repository Convention
+- Code Quality
+- Unintended Behavior
+- Maintainability
+- Broader Integration
+- Scope Appropriateness
+
+따라서 다음 등식은 성립하지 않는다.
+
+~~~text
+Automated Test PASS
+=
+Production-ready Change
+~~~
+
+Factory의 Verification은 Test Runner 하나보다 넓어야 한다.
+
+---
+
+## 12.7 Reward Hacking
+
+더 위험한 경우도 있다.
+
+Agent가 Task를 해결하는 대신 **검증 신호를 약화시킬 수 있다.**
+
+예:
+
+~~~text
+실패하는 Test를 skip 처리
+Test assertion 삭제
+Validation Script 수정
+Scoring condition 우회
+~~~
+
+결과만 보면 PASS다.
+
+실제 문제는 해결되지 않았다.
+
+OpenAI는 2026년 내부 Coding Agent Monitoring 결과에서 Test를 항상 통과하도록 수정하거나 Check를 비활성화하는 Reward Hacking을 실제 관찰 범주로 공개했고, 빈도는 rare이지만 severity는 높게 분류했다. 이 역시 OpenAI 내부 deployment의 관찰이며 일반적인 발생률로 해석하면 안 된다.
+
+Factory에서는 다음 경계를 고려할 수 있다.
+
+- Agent가 Verification Definition을 자유롭게 수정하지 못하게 한다.
+- Test 변경을 별도 Evidence로 표시한다.
+- 평가 코드/hidden test를 Worker에서 보호한다.
+- Verification Profile을 Control Plane이 정한다.
+
+특히 구현 Agent가 자신을 평가하는 기준까지 마음대로 바꿀 수 있는 구조는 위험하다.
+
+---
+
+## 12.8 Lucky Pass: 결과만 맞아도 충분한가
+
+Final Test가 통과했지만 Trajectory가 불안정할 수도 있다.
+
+Microsoft AgentLens 연구는 8개 Model Backend의 2,614개 OpenHands Trajectory를 분석했고, process reference를 구성할 수 있었던 47개 Task의 1,815개 Trajectory subset에서 Passing Trajectory의 10.7%를 Lucky Pass로 분류했다. 저자들은 반복 Regression, Blind Retry, Verification 누락처럼 결과 PASS만으로 가려지는 Process 문제를 분석한다.
+
+예:
+
+~~~text
+Edit
+→ test fail
+
+random edit
+→ another test fail
+
+revert
+
+different edit
+→ PASS
+~~~
+
+최종 결과만 보면 성공이다.
+
+하지만 다음 Task에서도 같은 성공을 재현할 수 있을지는 불확실하다.
+
+Factory에서는 Outcome뿐 아니라 Process Signal도 일부 관찰할 수 있다.
+
+- retry 횟수
+- test weakening
+- regression count
+- verification skipped
+- unsafe command
+- repeated same failure
+
+이 정보는 19장의 Observability에서 더 자세히 다룬다.
+
+---
+
+## 12.9 Independent Evaluator
+
+구현 Agent와 평가 Agent를 분리하면 장점이 있다.
+
+~~~text
+Implementer
+→ Candidate
+
+Evaluator
+→ inspect
+→ test
+→ behavioral check
+→ feedback
+~~~
+
+Anthropic의 long-running application harness 연구에서도 Planner, Generator, Evaluator를 분리하는 방향이 사용됐다.
+
+하지만 Evaluator Agent가 있다고 자동으로 독립 검증이 되는 것은 아니다.
+
+같은 Model, 같은 Context, 같은 Assumption을 사용하면 같은 오류를 공유할 수 있다.
+
+~~~text
+Same Model
++ Same Context
++ Same Tests
+→ Correlated Error 가능
+~~~
+
+그래서 Independent Evaluation은 다양한 방법을 조합할 수 있다.
+
+- deterministic tests
+- separate context
+- different role
+- different model
+- hidden check
+- human review
+
+핵심은 Agent 수가 아니라 **검증 신호의 독립성**이다.
+
+---
+
+## 12.10 Task별 Verification Policy
+
+Agent에게 “적절한 테스트를 알아서 해라”라고만 하지 않는다.
+
+Task Risk에 따라 최소 Verification을 System Policy로 정할 수 있다.
+
+### Low Risk
+
+~~~text
+docs
+generated file
+test-only change
+~~~
+
+예:
+
+~~~text
+lint
+preview
+diff check
+~~~
+
+### Medium Risk
+
+~~~text
+business logic
+API behavior
+~~~
+
+예:
+
+~~~text
+unit
+integration
+contract
+agent review
+~~~
+
+### High Risk
+
+~~~text
+auth
+payment
+migration
+infrastructure
+~~~
+
+예:
+
+~~~text
+unit
+integration
+security
+migration check
+runtime verification
+human approval
+~~~
+
+이 구조에서는 Agent가 Test 하나를 생략해도 Task가 DONE으로 이동할 수 없다.
+
+Required Verification은 Control Plane이 알고 있기 때문이다.
+
+---
+
+## 예: UI Task와 Backend Auth Task
+
+### UI Task
+
+Goal:
+
+~~~text
+모바일 화면에서 신청 버튼이 겹치지 않게 수정
+~~~
+
+Verification:
+
+~~~text
+typecheck
+E2E
+mobile viewport screenshot
+human visual acceptance
+~~~
+
+Source Diff만으로는 화면을 판단하기 어렵다.
+
+### Auth Task
+
+Goal:
+
+~~~text
+expired JWT → 401
+~~~
+
+Verification:
+
+~~~text
+unit
+integration
+contract
+security scan
+runtime request
+~~~
+
+같은 “코드 수정”이라도 필요한 Evidence가 다르다.
+
+Verification Profile은 Task type과 Risk에 맞아야 한다.
+
+---
+
+## Verification 설계에서 묻는 질문
+
+~~~text
+1. Agent의 자기 보고 외에 무엇으로 확인할 것인가?
+2. Acceptance를 실행 가능한 Check로 바꿀 수 있는가?
+3. Visible Test에만 과적합할 수 있는가?
+4. Agent가 Verification Definition을 약화시킬 수 있는가?
+5. Runtime Behavior를 봐야 하는가?
+6. Independent Evaluator나 Human Gate가 필요한가?
+7. 이 Task의 Risk에 비해 Verification Cost가 적절한가?
+~~~
+
+---
+
+## 다음 질문
+
+Verification이 끝났다고 사람이 결과를 빠르게 이해할 수 있는 것은 아니다.
+
+Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있는지, Known Risk는 무엇인지 매번 찾아야 한다면 Review 비용이 커진다.
+
+다음 장에서는 검증 결과를 표준화된 **Evidence Contract**로 묶는 방법을 다룬다.
+
+---
+
+## 참고 자료
+
+- Microsoft Research, *Building to the Test: Coding Agents Deliver What You Check, Not What You Requested*  
+  https://www.microsoft.com/en-us/research/publication/building-to-the-test-coding-agents-deliver-what-you-check-not-what-you-requested/
+- METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*  
+  https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
+- OpenAI, *How we monitor internal coding agents for misalignment*  
+  https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
+- Microsoft Research, *AgentLens*  
+  https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
