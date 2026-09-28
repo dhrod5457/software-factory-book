@@ -21,18 +21,19 @@ Phase 3 Scope          완료
 Phase 4 TOC            완료
 Phase 5 Chapter Plan   완료
 Phase 6 Draft          완료
-Phase 7 Review         진행
-Phase 8 Manuscript
+Phase 7 Review         완료
+Phase 8 Manuscript     진행
 ```
 
-## Draft 완료 상태
+## 완료 상태
 
 - 24개 본장 Draft 완료
 - Epilogue Draft 완료
-- 총 25개 Draft 파일 확인
-- Part I~VII Draft Review 완료
-- Full Draft Structural Review 완료
-- Writing Style Guide 작성
+- Part I~VII Structural Review 완료
+- Part I~VII Line Review 완료
+- Full Line Review 완료
+- Source Validation Snapshot 작성
+- Writing Style Guide Review 규칙 반영
 
 ## 현재 Source of Truth
 
@@ -40,20 +41,12 @@ Phase 8 Manuscript
 - `planning/scope.md`
 - `planning/toc.md`
 - `planning/writing-style.md`
-- `chapters/README.md`
-- `chapters/01..24/plan.md`
 - `chapters/01..24/draft.md`
-- `chapters/epilogue/plan.md`
 - `chapters/epilogue/draft.md`
-- `review/full-draft-structural-review.md`
+- `review/full-line-review.md`
+- `review/source-validation-2026-09-28.md`
 - `PROJECT.md`
 - `STATUS.md`
-
-Research:
-
-- `research/README.md`
-- `research/00-research-map.md`
-- `research/sources.md`
 
 ## 책의 구조
 
@@ -70,16 +63,19 @@ Epilogue Software Engineering에서 Software Production으로
 
 총 24장 + Epilogue입니다.
 
-## 현재 Review 우선순위
+## Manuscript 단계
 
-1. 중복 제거
+Review된 Chapter Draft를 하나의 원고 흐름으로 조립한다.
+
+우선순위:
+
+1. Part / Chapter 연결
 2. 용어 통일
-3. 주장 강도 조정
-4. 최신 Source 재검증
-5. 그림/도식 보강
-6. Case Study와 일반 원칙 분리
-7. 장간 연결 정리
-8. 문체 Line Edit
+3. Reference 형식 통일
+4. Figure 후보 정리
+5. Case Study Box 위치 결정
+6. 전체 분량 균형
+7. publication-time source recheck
 
 ## 작성 방식
 
