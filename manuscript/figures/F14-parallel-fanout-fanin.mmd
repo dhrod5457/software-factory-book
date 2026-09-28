@@ -1,0 +1,11 @@
+flowchart TD
+  G["Task Graph"]
+  G --> A["Worker A<br/>Task A"]
+  G --> B["Worker B<br/>Task B"]
+  G --> C["Worker C<br/>Task C"]
+  A --> I["Integration Gate"]
+  B --> I
+  C --> I
+  I --> V["Integration Verification"]
+  S["Shared Resource / Conflict"] -. contention .-> A
+  S -. contention .-> B
