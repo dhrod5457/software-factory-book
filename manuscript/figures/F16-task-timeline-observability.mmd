@@ -1,0 +1,5 @@
+flowchart LR
+  A["READY<br/>queue time"] --> B["RUNNING<br/>execution time"]
+  B --> C["VERIFYING<br/>verification time"]
+  C --> D["AWAITING_HUMAN<br/>human wait"]
+  D --> E["DONE<br/>cycle time"]
