@@ -556,11 +556,31 @@ Software Factory는 Agent를 여러 개 띄우는 시스템과 같은 말이 아
 
 Agent는 중요한 Worker지만 Factory 전체는 아니다.
 
+산업 현장에서도 비슷한 경계가 나타난다. Caylent는 Software Factory를 Claude Code 같은 Coding Agent 자체가 아니라, 그 주위에 Plugin과 Skill, Hook, Rule, 실행 Loop를 배치해 Software Engineering Process를 자동화하는 구조로 설명한다. 공개한 DevBench 역시 구조화된 Backlog를 구현, Review, Security Review, Git 흐름으로 통과시키는 Orchestration System에 가깝다.
+
+이 사례에서 가져올 원칙은 특정 제품이나 자동화 수준이 아니다.
+
+~~~text
+Coding Agent
+≠ Software Factory
+
+Agent Capability
++ Harness
++ Work State
++ Verification
++ Delivery Control
+→ Factory Capability
+~~~
+
+이 책의 정의는 여기서 한 단계 더 넓다. Harness는 중요한 실행 계층이지만, Durable Work, Recovery, Acceptance Authority, Feedback까지 포함하는 Factory 전체와 동일하지 않다.
+
 ---
 
 ### 2.1 왜 다시 Factory라는 표현인가
 
 Software Factory라는 말은 AI 시대에 처음 등장한 것이 아니다. Software Engineering은 오래전부터 반복 가능한 프로세스, 자동화, 표준화, 재사용 가능한 자산을 통해 생산성을 높이려 해왔다.
+
+최근에는 Software Factory와 함께 Dark Factory 같은 표현도 등장한다. 하지만 이 책에서는 사람이 보이지 않는가를 기준으로 Factory를 정의하지 않는다. Work가 durable하게 관리되고, 실행이 통제되며, 결과가 독립적으로 검증되고, 실패 후 복구 가능한가를 더 중요한 경계로 본다.
 
 이 책은 그 역사를 길게 다루지 않는다.
 
@@ -832,6 +852,14 @@ flowchart TD
 ```
 
 *Intent가 Requirement와 Durable Task로 변환되고, Control Plane과 Worker를 거쳐 검증·Evidence·Governance·Delivery로 이어진 뒤 운영 Feedback이 다시 다음 Work로 돌아오는 전체 Loop.*
+
+여기서 Factory를 두 개의 경계로 볼 수 있다.
+
+좁은 의미에서는 이미 정의된 Task를 durable하게 실행하고 검증하고 복구하는 **실행 시스템**이다.
+
+넓은 의미에서는 Signal과 Intent를 Work로 변환하는 앞단부터 Delivery 이후의 Observation과 Improvement까지 연결하는 **생산 루프**다.
+
+Warp 창업자 Zach Lloyd는 2026년 발표에서 아이디어가 들어오면 Agent가 triage하고, 복잡한 Work는 specification으로 보내며, implementation·review·verification·shipping·monitoring 결과를 다시 위쪽으로 되돌리는 Software Factory cycle을 제시했다. 이 책은 그 전망을 그대로 정의로 채택하지는 않지만, Factory의 경계가 Coding Agent 실행보다 넓어질 수 있다는 실제 사례로 사용한다.
 
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
@@ -1496,6 +1524,57 @@ Requirement
 
 ---
 
+#### Triage: 모든 Signal을 같은 깊이로 명세하지 않는다
+
+Requirement-first라는 말이 모든 Issue에 같은 분량의 문서를 만들라는 뜻은 아니다.
+
+Factory 앞단에는 먼저 **Planning Depth를 정하는 Triage**가 필요할 수 있다.
+
+~~~text
+Signal / Idea / Issue
+        ↓
+      Triage
+        ↓
+  ┌─────┴─────┐
+  │           │
+Simple      Complex
+  │           │
+Task      Product Spec
+              ↓
+         Technical Spec
+              ↓
+             Task
+~~~
+
+Zach Lloyd는 Warp의 Factory 설명에서 단순하고 명확한 Issue는 바로 구현으로 보내고, 복잡한 문제는 specification agent로 보내는 패턴을 제시한다. 이때 Product Specification은 product invariant를, Technical Specification은 architecture와 code form을 설명한다고 구분한다.
+
+이 책에서는 이 구조를 그대로 표준으로 삼기보다 다음 질문으로 일반화한다.
+
+~~~text
+Product / Requirement
+→ 무엇이 참이어야 하는가
+
+Design / Technical Spec
+→ 어떤 제약과 구조 안에서 만들 것인가
+
+Task
+→ 무엇을 수행할 것인가
+
+Acceptance
+→ 무엇이 만족되어야 하는가
+
+Verification
+→ 그것을 어떻게 증명할 것인가
+~~~
+
+핵심은 문서 종류를 늘리는 데 있지 않다.
+
+**모호성과 위험이 커질수록 실행 전에 의미와 완료 기준을 더 durable하게 만든다.**
+
+작고 명확한 수정은 곧바로 Task가 될 수 있고, 여러 모듈과 Product 판단이 얽힌 Work는 Specification 단계를 거칠 수 있다.
+
+---
+
 ### 4.3 Requirements-first와 Design-first
 
 모든 작업이 Requirement부터 시작하는 것은 아니다.
@@ -1528,7 +1607,35 @@ Planning Depth는 Task의 Risk와 Complexity에 맞춰야 한다.
 
 ---
 
-### 4.4 Requirement Generator와 Acceptance Authority를 분리한다
+### 4.4 산업 사례: Specification과 Architecture가 Backlog로 합쳐진다
+
+Caylent가 공개한 Software Factory 설명은 Factory 앞단을 어떻게 준비하는지 보여주는 사례다.
+
+이들의 설명에서는 먼저 Scope를 정리하고 Claude를 사용해 Prototype Specification을 만든다. 이후 고객에게 반복적으로 새 버전을 보여주며 Feedback을 받고, 동시에 Production에 필요한 Architecture를 설계한다. 두 흐름은 최종적으로 Detailed Specification과 Backlog로 합쳐지고, 그 결과가 Software Factory의 입력이 된다.
+
+~~~text
+Scoping
+    ↓
+Prototype Specification
+    ↓
+Customer Feedback ───────┐
+                         ├→ Detailed Specification
+Production Architecture ─┘
+                         ↓
+                      Backlog
+                         ↓
+                  Software Factory
+~~~
+
+여기서 가져올 원칙은 특정 기간이나 Consulting Process가 아니다.
+
+> Factory의 입력은 Raw Idea가 아니라, 실행 가능한 수준으로 정리된 Specification과 Architecture Constraint, Backlog에 가까워질수록 안정적이다.
+
+이는 Product Discovery를 모두 자동화해야 한다는 뜻도 아니다. 오히려 Intent와 Architecture를 먼저 정리하고, Agent가 실행할 Work와 완료 기준으로 변환하는 경계가 필요하다는 사례다.
+
+---
+
+### 4.5 Requirement Generator와 Acceptance Authority를 분리한다
 
 Agent가 Requirement 초안을 만드는 것은 유용하다.
 
@@ -1569,7 +1676,7 @@ System / Reviewer
 
 ---
 
-### 4.5 Requirement에서 Verification까지 연결한다
+### 4.6 Requirement에서 Verification까지 연결한다
 
 <!-- FIGURE F03: Work Artifact Traceability -->
 
@@ -1635,7 +1742,7 @@ PASS
 
 ---
 
-### 4.6 Ready Contract
+### 4.7 Ready Contract
 
 Factory가 고도화되면 모든 Backlog Item을 곧바로 Worker에게 보내고 싶어진다.
 
