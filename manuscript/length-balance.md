@@ -10,7 +10,9 @@
 
 24개 본장 평균:
 
-- 약 7,004 characters / chapter
+- 약 6,696 characters / chapter
+
+1·2장 압축 편집 후 재측정한 값이다.
 
 분량 자체를 동일하게 맞추는 것이 목표는 아니다.
 
@@ -23,55 +25,42 @@
 
 ---
 
-## 긴 장
+## 압축 완료
 
-### 1장 — 11,025 chars
+### 1장 — 7,228 chars
 
-평균 대비 약 +57%.
+기존 11,025자에서 약 34% 축소.
 
-원인:
+수정:
 
-- 문제 제기
-- Delivery bottleneck
-- Human Attention
-- Microsoft / METR productivity research
-- Metric discussion
+- Agent/Factory 차이를 핵심 구조로 압축
+- 30 PR/day와 cycle-time 예제 중복 축소
+- Microsoft/METR 연구 조건은 유지하되 반복 설명 정리
+- Metric 상세를 19장으로 이동
 
-편집 후보:
+현재 분량:
 
-- 생산성 연구를 C10 Case Study Box로 분리
-- Metric 상세를 19장으로 더 넘길 수 있음
-- 본문 목표를 “병목이 Model 밖으로 이동한다”에 집중
+- 평균 대비 약 +8%
+- 추가 구조 축소 불필요
 
-목표:
+### 2장 — 6,808 chars
 
-- 10~15% 압축 후보
-- 정보 삭제보다 Box / cross-reference 활용
+기존 10,563자에서 약 36% 축소.
 
----
+수정:
 
-### 2장 — 10,563 chars
+- 7개 설계 속성을 개념 요약 + 후속 장 cross-reference 구조로 압축
+- “Factory가 아닌 것” 사례 설명 축약
+- 전체 Loop 설명 중복 제거
 
-평균 대비 약 +51%.
+현재 분량:
 
-원인:
-
-- 정의
-- 7개 설계 속성
-- Factory가 아닌 것
-- 전체 Loop
-
-편집 후보:
-
-- 일곱 설계 속성을 F02/Figure + 요약표로 압축
-- 상세 설명은 뒤 장 cross-reference
-- “Factory가 아닌 것” 일부를 3장과 중복 재검토
-
-목표:
-
-- 10~15% 압축 후보
+- 평균과 거의 동일
+- 추가 압축 불필요
 
 ---
+
+## 현재 긴 장
 
 ### 12장 — 9,101 chars
 
@@ -210,12 +199,18 @@ Figure로 승격할 항목은 `manuscript/figures.md` 기준으로 치환한다.
 
 현재 장별 분량은 구조 변경이 필요할 정도로 불균형하지 않다.
 
-우선 조정 대상:
+완료:
 
 1. 1장 압축
 2. 2장 압축
 3. 22장 section grouping
 4. 23장 scenario grouping
-5. 12/16/19장의 research/diagram을 Box/Figure로 분리
+
+남은 편집 대상:
+
+1. 12장 Research Box / Figure 분리
+2. 16장 Security Case Study Box 분리
+3. 19장 text diagram 일부를 Figure로 대체
+4. 20~21장의 짧은 분량은 현재 유지
 
 내용 추가보다 **layout과 정보 계층 조정**을 우선한다.
