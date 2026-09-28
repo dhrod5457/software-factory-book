@@ -20,6 +20,7 @@ Instructions
 + Tool Interface
 + Feedback
 + Verification Hooks
++ Execution Loop / Gates
 ~~~
 
 Harness의 정확한 경계는 구현마다 다르다. 예를 들어 Anthropic Managed Agents는 Session, Harness, Sandbox를 별도 interface로 분리한다. 여기서 Harness는 Compute 자체가 아니라 Model Loop와 Context·Tool Routing을 연결하는 계층을 뜻한다.
@@ -75,6 +76,64 @@ Option B
 두 경우 같은 Model을 사용해도 행동은 달라진다.
 
 Harness가 Agent의 탐색 비용과 오류 가능성을 바꾼다.
+
+### Harness가 Tool 묶음보다 넓어지는 지점
+
+Skill과 Tool을 많이 제공한다고 End-to-End Delivery가 자동으로 만들어지는 것은 아니다.
+
+Caylent의 Software Factory 설명은 이 경계를 분명하게 보여준다. 이들은 Plugin이 Skill, Hook, Rule을 통해 Agent의 Knowledge와 행동 규칙을 제공할 수 있지만, Specification에서 Production-grade Software까지 신뢰성 있게 전달하려면 그 위에서 Agent Loop를 실행하는 Harness가 필요하다고 설명한다.
+
+그 Harness는 단순히 Tool을 노출하는 데서 끝나지 않는다.
+
+~~~text
+Specification
+      ↓
+Detailed Plan
+      ↓
+Execution
+      ↓
+Review Gates
+- functional
+- architecture conformance
+- security
+- scope conformance
+      ↓
+Feedback / Correction
+      ↺
+~~~
+
+즉 Production Harness는 다음 질문까지 책임질 수 있다.
+
+- 다음 실행 단계는 무엇인가
+- 어떤 Review를 언제 실행할 것인가
+- 실패한 Review Feedback을 어떻게 다음 Attempt에 전달할 것인가
+- 실제 변경이 계획된 Scope를 벗어나지 않았는가
+- Security와 Architecture Constraint를 지켰는가
+
+Caylent의 공개 DevBench 구현에서도 구조화된 Backlog를 Executor가 구현한 뒤 code, test, documentation, changes-manifest Judge와 별도 Security Review를 통과시키는 Loop가 확인된다. 모든 Factory가 같은 Review Topology를 가져야 한다는 뜻은 아니다. 중요한 것은 **Agent Capability를 반복 가능한 실행 순서와 강제 가능한 Gate로 묶는 것**이다.
+
+이 경계를 다음처럼 구분할 수 있다.
+
+~~~text
+Skill / Tool
+= Agent가 사용할 Capability
+
+Harness
+= Capability를 사용해 Agent Work Loop를 실행하는 구조
+
+Software Factory
+= Harness를 Durable Work, Control, Recovery, Acceptance, Delivery와 연결한 생산 시스템
+~~~
+
+따라서 다음 등식도 피한다.
+
+~~~text
+Skill
+≠ Harness
+
+Harness
+≠ Software Factory
+~~~
 
 ---
 
@@ -496,3 +555,9 @@ Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context
   https://www.anthropic.com/engineering/writing-tools-for-agents
 - GitHub, *Better tools made Copilot code review worse*  
   https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
+- Caylent, *What is a Software Factory*  
+  https://www.youtube.com/watch?v=0Q8R_FZbnLk
+- Caylent Solutions, *DevBench Architecture*  
+  https://github.com/caylent-solutions/devbench/blob/main/docs/architecture.md
+- Caylent Solutions, *DevBench Execution Modes*  
+  https://github.com/caylent-solutions/devbench/blob/main/docs/execution-modes.md
