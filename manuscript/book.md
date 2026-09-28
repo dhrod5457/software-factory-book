@@ -238,6 +238,18 @@ CI는 통과했는데 리뷰가 대기한다.
 
 <!-- FIGURE F01: Model → Agent → Factory Capability -->
 
+**Figure F01. Model → Agent → Factory Capability**
+
+```mermaid
+flowchart TD
+  M["Model Capability<br/>Reasoning · Code Generation"]
+  A["Agent Capability<br/>Tools · Context · Runtime"]
+  F["Factory Capability<br/>Task State · Verification · Recovery · Delivery"]
+  M --> A --> F
+```
+
+*Model 성능은 Agent와 Factory 성능의 한 구성요소일 뿐이다. Repository, Tool, Context, 실행환경, 상태 관리, 검증을 포함한 시스템 계층이 실제 Delivery Capability를 결정한다.*
+
 Coding Assistant와 Coding Agent를 제품 이름으로 나누기는 어렵다. 같은 제품도 사용 방식에 따라 Assistant처럼 동작할 수도 있고 Agent처럼 동작할 수도 있다.
 
 여기서는 작업 방식으로 구분한다.
@@ -775,6 +787,27 @@ Task 선택, Architecture, Acceptance, Merge, Deploy 권한을 사람이 유지�
 ### 2.5 하나의 Loop로 본다
 
 <!-- FIGURE F02: AI Software Factory Reference Loop -->
+
+**Figure F02. AI Software Factory Reference Loop**
+
+```mermaid
+flowchart TD
+  I["Intent / Signal"] --> R["Requirement / Specification"]
+  R --> T["Task / Acceptance"]
+  T --> C["Durable Control Plane"]
+  C --> O["Controlled Orchestration"]
+  O --> W["Worker / Sandbox"]
+  W --> A["Agent + Context + Tools"]
+  A --> IM["Implementation"]
+  IM --> V["Independent Verification"]
+  V --> E["Evidence"]
+  E --> G["Acceptance / Governance"]
+  G --> D["Delivery"]
+  D --> FB["Feedback"]
+  FB --> I
+```
+
+*Intent가 Requirement와 Durable Task로 변환되고, Control Plane과 Worker를 거쳐 검증·Evidence·Governance·Delivery로 이어진 뒤 운영 Feedback이 다시 다음 Work로 돌아오는 전체 Loop.*
 
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
@@ -1516,6 +1549,19 @@ System / Reviewer
 
 <!-- FIGURE F03: Work Artifact Traceability -->
 
+**Figure F03. Work Artifact Traceability**
+
+```mermaid
+flowchart LR
+  R["Requirement"] --> D["Design"]
+  D --> T["Task"]
+  T --> C["Commit / Revision"]
+  C --> V["Verification"]
+  V --> E["Evidence"]
+```
+
+*Requirement에서 Design, Task, Commit, Verification, Evidence까지 연결하면 “무엇을 왜 바꿨고 무엇으로 완료를 판정했는가”를 추적할 수 있다.*
+
 좋은 Factory는 Work Artifact를 서로 연결한다. Spec Kit의 최신 `converge` 단계처럼 구현 결과를 다시 specification·plan·task와 대조하는 흐름도 이 연결의 한 사례다.
 
 ~~~text
@@ -1803,6 +1849,23 @@ carryover
 ### 5.3 Task와 Attempt를 분리한다
 
 <!-- FIGURE F04: Task / Attempt / Worker State Model -->
+
+**Figure F04. Task / Attempt / Worker State Model**
+
+```mermaid
+flowchart TD
+  T["Task T1"]
+  A1["Attempt A1"]
+  A2["Attempt A2"]
+  W1["Worker W1"]
+  W2["Worker W2"]
+  F["FAILED"]
+  P["PASSED"]
+  T --> A1 --> W1 --> F
+  T --> A2 --> W2 --> P
+```
+
+*Task는 여러 Attempt를 가질 수 있고 각 Attempt는 서로 다른 Worker에서 실행될 수 있다. Worker가 교체되어도 Task와 Attempt History는 남는다.*
 
 Task를 운영 단위로 만들려면 Attempt를 별도로 봐야 한다.
 
@@ -2491,6 +2554,26 @@ Factory에서는 반대여야 한다.
 
 <!-- FIGURE F05: Control Plane vs Execution Plane -->
 
+**Figure F05. Control Plane vs Execution Plane**
+
+```mermaid
+flowchart TD
+  T["Durable Task"]
+  subgraph CP["Control Plane"]
+    S["State / Dependency / Retry / Approval"]
+    A["Assignment / Policy"]
+  end
+  subgraph EP["Execution Plane"]
+    W["Worker / Workspace"]
+    X["Agent Execution"]
+  end
+  R["Result / Evidence"]
+  T --> S --> A --> W --> X --> R
+  R -. event / status .-> S
+```
+
+*Control Plane은 Task State, Assignment, Retry, Approval을 관리하고 Execution Plane은 실제 Repository 수정과 Build/Test를 수행한다. Work State와 Compute를 분리하는 것이 핵심이다.*
+
 Control Plane은 코드를 직접 작성하는 주체가 아니다.
 
 주요 책임은 **Work의 상태와 흐름을 관리하는 것**이다.
@@ -2926,6 +3009,23 @@ Workspace
 ### 8.1 무엇을 격리해야 하는가
 
 <!-- FIGURE F06: Worker Isolation Boundary -->
+
+**Figure F06. Worker Isolation Boundary**
+
+```mermaid
+flowchart TB
+  W["Worker Isolation"]
+  W --> S["Source / Workspace"]
+  W --> P["Process"]
+  W --> N["Network"]
+  W --> C["Credential"]
+  W --> R["Runtime State"]
+  W --> E["External Resource"]
+  EP["Ephemeral"] -. lifecycle .-> W
+  PS["Persistent"] -. lifecycle .-> W
+```
+
+*Workspace Isolation은 Git Branch만의 문제가 아니다. Filesystem, Process, Network, Credential, Runtime State, External Resource를 각각 어떤 경계로 분리할지 결정해야 한다.*
 
 Agent가 파일을 수정하고 Shell 명령을 실행하려면 독립된 Workspace가 필요하다.
 
@@ -3385,6 +3485,25 @@ Agent가 Repository와 Tool을 어떻게 보고, 어떤 결과를 받고, 어떤
 ### 9.1 Harness란 무엇인가
 
 <!-- FIGURE F07: Harness / Context / Runtime 관계 -->
+
+**Figure F07. Harness / Context / Runtime**
+
+```mermaid
+flowchart TD
+  T["Task"] --> H
+  subgraph H["Harness"]
+    I["Instructions"]
+    C["Context"]
+    TI["Tool Interface"]
+    F["Feedback"]
+  end
+  H --> M["Model"]
+  M --> TO["Tools"]
+  TO --> R["Runtime / Repository"]
+  R -. observations .-> F
+```
+
+*Harness는 Model과 실제 Software Environment 사이에서 Instruction, Context, Tool Interface, Feedback을 연결한다. Sandbox와 Runtime은 실행 공간이고 Harness는 그 실행을 조정하는 계층이다.*
 
 Model은 혼자 Repository를 수정하지 않는다.
 
@@ -4647,6 +4766,21 @@ Failure가 발생했을 때 어디까지 되돌릴지 결정하는 것도 Contro
 
 <!-- FIGURE F08: Controlled Autonomy Stack -->
 
+**Figure F08. Controlled Autonomy Stack**
+
+```mermaid
+flowchart TD
+  P["Organization Policy<br/>durable / deterministic"]
+  C["Factory Control Plane"]
+  W["Workflow / Task Graph"]
+  H["Agent Harness"]
+  M["Model Decision"]
+  T["Tool Action<br/>adaptive / probabilistic"]
+  P --> C --> W --> H --> M --> T
+```
+
+*상위 계층은 Policy와 Durable State를 소유하고, 아래로 갈수록 Agent의 adaptive judgment가 커진다. 이미 알고 있는 Rule과 불확실한 Search/Judgment를 같은 방식으로 처리하지 않는다.*
+
 Factory의 Control을 계층으로 보면 다음처럼 정리할 수 있다.
 
 ~~~text
@@ -4802,6 +4936,21 @@ Acceptance
 ### 12.2 Verification Pyramid
 
 <!-- FIGURE F09: Verification Pyramid -->
+
+**Figure F09. Verification Pyramid**
+
+```mermaid
+flowchart BT
+  S["Static Check"]
+  D["Deterministic Test"]
+  R["Runtime Verification"]
+  B["Behavioral Evidence"]
+  E["Independent Evaluator"]
+  H["Human Acceptance"]
+  S --> D --> R --> B --> E --> H
+```
+
+*Static Check에서 Human Acceptance까지 검증의 범위와 비용이 달라진다. 모든 Task가 가장 높은 단계까지 갈 필요는 없으며 Risk에 맞는 검증 조합을 선택한다.*
 
 모든 Task에 같은 검증 비용을 쓸 필요는 없다.
 
@@ -5474,6 +5623,33 @@ Behavior를 보여주는 Evidence와 Source Risk는 다른 문제다.
 
 <!-- FIGURE F10: Evidence vs Provenance -->
 
+**Figure F10. Evidence vs Provenance**
+
+```mermaid
+flowchart LR
+  subgraph EV["Evidence"]
+    T["Test Result"]
+    S["Screenshot"]
+    B["Benchmark"]
+  end
+  R["Result Revision"]
+  subgraph PR["Provenance"]
+    TA["Task"]
+    AG["Agent"]
+    PO["Policy"]
+    AP["Approval"]
+  end
+  T --> R
+  S --> R
+  B --> R
+  TA --> R
+  AG --> R
+  PO --> R
+  AP --> R
+```
+
+*Evidence는 결과가 맞다는 근거이고 Provenance는 결과가 어떤 Task, Agent, Revision, Policy, Approval을 거쳐 만들어졌는지 나타내는 Lineage다.*
+
 두 개념을 구분할 필요가 있다.
 
 #### Evidence
@@ -5779,6 +5955,20 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 ### 14.2 Recovery Ladder
 
 <!-- FIGURE F11: Recovery Ladder -->
+
+**Figure F11. Recovery Ladder**
+
+```mermaid
+flowchart LR
+  A["Tool Retry"] --> B["Step Retry"]
+  B --> C["Agent Intervention"]
+  C --> D["Subtask Retry"]
+  D --> E["Worker Restart"]
+  E --> F["Reassignment"]
+  F --> G["Human Escalation"]
+```
+
+*일시적인 Tool 오류에서 Human Escalation까지 Failure Scope에 맞춰 복구 범위를 키운다. 가능한 한 가장 작은 범위부터 복구하는 것이 비용과 재작업을 줄인다.*
 
 Failure가 났다고 바로 Worker 전체를 새로 만들 필요는 없다.
 
@@ -6192,6 +6382,26 @@ Conversation History를 저장해도 이 문제는 해결되지 않는다.
 ### 15.2 Event History
 
 <!-- FIGURE F12: Durable Execution Timeline -->
+
+**Figure F12. Durable Execution Timeline**
+
+```mermaid
+sequenceDiagram
+  participant W as Workflow
+  participant X as External System
+  participant H as Event History
+  W->>X: Side Effect (operation_id)
+  X-->>W: success
+  W->>H: record result
+  Note over W: Crash / Restart
+  W->>H: replay history
+  H-->>W: completed step + checkpoint
+  W->>X: status lookup / idempotent call
+  X-->>W: existing result
+  W->>W: Resume next step
+```
+
+*Side Effect 이후 Crash가 발생해도 Event History, Checkpoint, Idempotency를 통해 이미 완료된 실행을 재구성하고 안전하게 Resume할 수 있어야 한다.*
 
 Durable Execution에서는 중요한 상태 변화와 외부 행동을 기록한다.
 
@@ -6679,6 +6889,20 @@ Mandatory Rule은 Enforcement가 필요하다.
 ### 16.3 Human Credential을 Agent에게 그대로 주지 않는다
 
 <!-- FIGURE F13: Agent Security Delegation -->
+
+**Figure F13. Agent Security Delegation**
+
+```mermaid
+flowchart TD
+  H["Human Principal"] -->|delegates| T["Task"]
+  T --> A["Agent Identity"]
+  A --> C["Scoped Capability"]
+  C --> P["Tool / Platform"]
+  G["Approval / Policy"] -. constrains .-> C
+  P -. audit event .-> AU["Audit"]
+```
+
+*Human Principal의 권한 전체를 빌려주는 대신 Task와 Agent Identity에 필요한 Capability만 위임한다. Identity, Authorization, Approval, Audit를 하나의 Delegation Chain으로 본다.*
 <!-- CASE C11: NIST Agent Identity Direction -->
 
 가장 간단한 연결 방식은 개발자의 Personal Token을 Worker에 넣는 것이다.
@@ -7198,6 +7422,24 @@ Ready Task 수와 Dependency를 보고 필요한 Worker 수를 정한다.
 
 <!-- FIGURE F14: Parallel Fan-out / Fan-in -->
 
+**Figure F14. Parallel Fan-out / Fan-in**
+
+```mermaid
+flowchart TD
+  G["Task Graph"]
+  G --> A["Worker A<br/>Task A"]
+  G --> B["Worker B<br/>Task B"]
+  G --> C["Worker C<br/>Task C"]
+  A --> I["Integration Gate"]
+  B --> I
+  C --> I
+  I --> V["Integration Verification"]
+  S["Shared Resource / Conflict"] -. contention .-> A
+  S -. contention .-> B
+```
+
+*Task Independence가 확보된 Work만 여러 Worker에 Fan-out하고, Fan-in 이후에는 Integration Verification을 수행한다. Parallelism의 단위는 Agent 수가 아니라 독립 Task다.*
+
 Parallel Worker는 보통 다음 구조를 가진다.
 
 ~~~text
@@ -7517,6 +7759,25 @@ Worker가 많아질수록 이 이동은 더 빨라진다.
 ### 18.1 Bottleneck Migration
 
 <!-- FIGURE F15: Factory Throughput Bottleneck -->
+
+**Figure F15. Factory Throughput Bottleneck**
+
+```mermaid
+flowchart LR
+  R["Ready Work"] --> W["Worker"]
+  W --> V["Verification"]
+  V --> RV["Review"]
+  RV --> I["Integration"]
+  I --> D["Deployment"]
+  B["Throughput = slowest stage"] -. governs .-> R
+  B -. governs .-> W
+  B -. governs .-> V
+  B -. governs .-> RV
+  B -. governs .-> I
+  B -. governs .-> D
+```
+
+*전체 Factory 처리량은 Worker 수 하나가 아니라 Ready Work, Verification, Review, Integration, Deployment 등 가장 느린 단계에 제한된다.*
 
 예를 들어 하루에 다음 처리량을 가진 팀이 있다고 하자.
 
@@ -8016,6 +8277,18 @@ TaskDone
 
 <!-- FIGURE F16: Task Timeline / Observability -->
 
+**Figure F16. Task Timeline / Observability**
+
+```mermaid
+flowchart LR
+  A["READY<br/>queue time"] --> B["RUNNING<br/>execution time"]
+  B --> C["VERIFYING<br/>verification time"]
+  C --> D["AWAITING_HUMAN<br/>human wait"]
+  D --> E["DONE<br/>cycle time"]
+```
+
+*Task Cycle Time을 Queue, Execution, Verification, Human Wait로 분해하면 병목이 Model인지 Review인지 구분할 수 있다.*
+
 Task가 10시간 걸렸다고 하자.
 
 이 숫자만으로는 원인을 알 수 없다.
@@ -8455,6 +8728,20 @@ Production Signal
 
 <!-- FIGURE F17: Signal → Task Conversion -->
 
+**Figure F17. Signal → Task Conversion**
+
+```mermaid
+flowchart LR
+  S["Signal"] --> D["Diagnose"]
+  D --> C["Correlate / Scope"]
+  C --> R["Risk"]
+  R --> A["Acceptance"]
+  A --> T["Task"]
+  T --> E["Execute"]
+```
+
+*Production Alert나 CI Failure를 바로 Agent Action으로 연결하지 않는다. Diagnose, Scope, Risk, Acceptance를 거쳐 실행 가능한 Task로 변환한다.*
+
 좋은 흐름은 다음에 가깝다.
 
 ~~~text
@@ -8782,6 +9069,21 @@ Factory가 각각의 Infra Detail을 직접 다루게 하면 다음 문제가 �
 ### 21.2 Agent도 Platform Consumer다
 
 <!-- FIGURE F18: Factory ↔ Developer Platform -->
+
+**Figure F18. Factory ↔ Developer Platform**
+
+```mermaid
+flowchart TD
+  H["Human"] --> HP["Portal / CLI"]
+  A["Agent"] --> AP["API / MCP"]
+  HP --> G["Golden Path / Platform Contract"]
+  AP --> G
+  G --> P["Policy"]
+  P --> C["CI/CD · Environment · Secret · Deploy · Observability"]
+  C --> I["Infrastructure"]
+```
+
+*Factory는 기존 Developer Platform의 Golden Path, CI/CD, Secret, Deploy, Observability Capability를 재사용한다. 사람과 Agent가 같은 Platform Capability를 서로 다른 Interface로 소비한다.*
 
 사람용 Platform Interface는 보통 다음과 같다.
 
@@ -9123,6 +9425,20 @@ Factory Boundary가 실제로 동작하는지 확인하는 것이다.
 ### 22.2 권장 시작 구조
 
 <!-- FIGURE F19: Minimum Viable Factory -->
+
+**Figure F19. Minimum Viable Factory**
+
+```mermaid
+flowchart LR
+  H["Human selects Task"] --> T["Durable Task"]
+  T --> W["Isolated Worker"]
+  W --> A["Coding Agent"]
+  A --> V["Verification"]
+  V --> E["Evidence"]
+  E --> G["Review / Policy Gate"]
+```
+
+*첫 Factory는 Single Worker와 Human Review로도 충분하다. 중요한 것은 Durable Task, Isolation, Verification, Evidence가 반복 가능한 흐름으로 연결되는가다.*
 
 2장에서 정의한 Factory의 최소 성질과, 조직이 처음 도입할 때 권장하는 시작 구성은 같지 않다. 여기서는 실패 비용을 낮추기 위해 **Human Review를 남겨 둔 시작 형태**를 사용한다.
 
@@ -9499,6 +9815,22 @@ Task Create
 ### 23.2 최소 Data Model
 
 <!-- FIGURE F20: Reference Factory Acceptance Scenarios -->
+
+**Figure F20. Reference Factory Acceptance Scenarios**
+
+```mermaid
+flowchart TD
+  RF["Reference Factory"]
+  RF --> N["Normal<br/>DONE"]
+  RF --> VF["Verification Fail<br/>bounded retry"]
+  RF --> WK["Worker Kill<br/>task survives"]
+  RF --> RA["Reassignment<br/>partial work reused"]
+  RF --> HW["Human Wait<br/>suspend / resume"]
+  RF --> PI["Parallel Independent<br/>concurrent success"]
+  RF --> CF["Conflict<br/>detect / replan"]
+```
+
+*Happy Path뿐 아니라 Verification Failure, Worker Kill, Reassignment, Human Wait, Parallel Execution, Conflict를 acceptance scenario로 만들어 Factory Reliability를 검증한다.*
 
 #### Task
 
@@ -9881,6 +10213,25 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 ### 24.1 Maturity와 Autonomy는 다른 축이다
 
 <!-- FIGURE F21: Maturity × Autonomy Matrix -->
+
+**Figure F21. Maturity × Autonomy Matrix**
+
+```mermaid
+quadrantChart
+  title Factory Maturity × Autonomy
+  x-axis Low Maturity --> High Maturity
+  y-axis Low Autonomy --> High Autonomy
+  quadrant-1 Mature + High Autonomy
+  quadrant-2 Low Maturity + High Autonomy
+  quadrant-3 Low Maturity + Low Autonomy
+  quadrant-4 Mature + Controlled Autonomy
+  "Interactive Agent": [0.15, 0.20]
+  "Durable Human-Gated Factory": [0.70, 0.35]
+  "Event-Driven Factory": [0.78, 0.58]
+  "Adaptive Factory": [0.90, 0.82]
+```
+
+*Factory Capability의 성숙도와 Agent Decision Authority는 서로 다른 축이다. 운영 Capability가 높아도 Risk가 큰 Decision은 Human Authority를 유지할 수 있다.*
 
 #### Maturity
 
