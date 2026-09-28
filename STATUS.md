@@ -79,22 +79,26 @@ Review에서 완료한 항목:
 
 - `manuscript/book.md` 전체 조립
 - Part 7개 / Chapter 24개 / Epilogue 검증
+- `들어가며` 추가
 - 목차 추가
 - Heading hierarchy 정리
 - Chapter transition heading 반복 제거
-- `manuscript/README.md`
-- `manuscript/edit-plan.md`
+- 1·2장 압축 및 원본 Chapter 동기화
+- 22·23장 section grouping 및 원본 Chapter 동기화
+- `manuscript/references.md` — 53개 고유 Reference
+- `manuscript/terminology.md`
+- `manuscript/figures.md` — Figure 후보 21개
+- `manuscript/case-studies.md` — Case Study Box 후보 14개
+- `manuscript/length-balance.md`
 - `manuscript/structural-flow-review.md`
 
 다음:
 
-1. 용어 일괄 통일
-2. Reference 표기 형식 통일
-3. Figure 후보 정리
-4. Case Study Box 위치 결정
-5. Preface / Introduction 필요 여부 판단
-6. 장별 분량 균형
-7. 최종 publication-time source recheck 목록 유지
+1. 용어 미세 조정
+2. Reference 표기 형식 최종 결정
+3. Figure / Case Study 실제 배치
+4. 12·16·19장 layout 정리
+5. publication-time source recheck 목록 유지
 
 # Next
 
