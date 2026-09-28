@@ -15,7 +15,7 @@ Agent가 자연어로 길게 설명할 수도 있다.
 
 하지만 설명은 재현성과 추적성이 약하다.
 
-Factory에서는 결과를 **Evidence Contract**로 표준화하는 편이 낫다.
+이 책에서는 이런 표준 결과 형식을 **Evidence Contract**라고 부른다. 업계의 정식 표준 이름이 아니라, 이후 설계를 설명하기 위한 이 책의 패턴이다.
 
 > 완료를 설명하는 것보다, 무엇으로 완료를 판단했는지 남긴다.
 
@@ -181,9 +181,7 @@ After
 → no overlap
 ~~~
 
-이것이 Demos over Diffs의 장점이다.
-
-하지만 Demo가 Diff Review와 Security Verification을 완전히 대체하는 것은 아니다.
+이런 방식은 일부 Agent 제품과 운영 사례에서 볼 수 있는 “Demos over Diffs” 접근과 닿아 있다. UI나 Runtime 결과를 빠르게 이해하는 데 유용하지만, Demo가 Diff Review와 Security Verification을 완전히 대체하는 것은 아니다.
 
 Behavior를 보여주는 Evidence와 Source Risk는 다른 문제다.
 
@@ -355,23 +353,11 @@ Evidence는 결과만이 아니라 **재현 조건**도 포함할 수 있다.
 
 ---
 
-## 13.9 Evidence Contract의 최소 시작점
+## 13.9 어디까지 표준화할 것인가
 
-처음부터 복잡한 Artifact Platform을 만들 필요는 없다.
+처음부터 복잡한 Artifact Platform이나 모든 Task에 동일한 Manifest를 강제할 필요는 없다. 13.2의 공통 골격에서 시작하고, UI에는 Screenshot/Trace를, Performance에는 Environment Metadata를 추가하는 식으로 Task 유형에 따라 확장하면 된다.
 
-다음 정도면 시작할 수 있다.
-
-~~~text
-Task ID
-Result Commit
-Changed Files
-Verification Commands
-Verification Result
-Artifact Paths
-Known Limitation
-~~~
-
-이 정도만 표준화해도 Review와 Automation이 쉬워진다.
+핵심은 필드 수가 아니라 **Result Revision과 검증·Artifact 사이의 연결을 일관되게 유지하는 것**이다.
 
 ---
 
