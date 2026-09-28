@@ -10,18 +10,19 @@
 
 Agent가 실제로 일하는 방식은 Model 주변 환경에 크게 영향을 받는다.
 
-이 책에서는 이 환경을 **Harness**라고 부른다.
+이 책에서는 Model이 실제 Work를 수행하도록 둘러싸는 조정 계층을 **Harness**라고 부른다.
 
 ~~~text
 Harness
 =
 Instructions
 + Context
-+ Tools
-+ Execution
++ Tool Interface
 + Feedback
-+ Verification
++ Verification Hooks
 ~~~
+
+Harness의 정확한 경계는 구현마다 다르다. 예를 들어 Anthropic Managed Agents는 Session, Harness, Sandbox를 별도 interface로 분리한다. 여기서 Harness는 Compute 자체가 아니라 Model Loop와 Context·Tool Routing을 연결하는 계층을 뜻한다.
 
 Harness Engineering은 Prompt를 더 잘 쓰는 기술보다 넓다.
 
@@ -383,7 +384,7 @@ Tool을 업그레이드하면 성능이 좋아질 것이라고 생각하기 쉽�
 
 하지만 Tool Interface가 바뀌면 기존 Instruction과 Agent 행동 전략이 더 이상 맞지 않을 수 있다.
 
-GitHub는 Copilot Code Review 개선 과정에서 더 좋은 Tool을 추가했지만 초기에는 오히려 비용이 늘고 이슈 검출이 악화된 사례를 공개했다. 이후 Instruction과 Workflow를 함께 조정해야 했다.
+GitHub는 2026년 Copilot Code Review의 code exploration tool을 공용 CLI 계열로 교체했을 때 초기 offline benchmark에서 평균 비용이 늘고 유용한 review comment가 줄었다고 공개했다. Tool 자체보다 reviewer에 맞지 않는 Instruction과 탐색 Workflow가 문제였고, 이를 다시 설계한 뒤 production에서는 기존 품질을 유지하면서 평균 review cost를 약 20% 낮췄다고 보고했다. 이는 GitHub의 제품 내부 사례이지 모든 Agent에 그대로 적용되는 수치는 아니다.
 
 이 사례의 교훈은 단순하다.
 
