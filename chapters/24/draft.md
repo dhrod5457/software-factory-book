@@ -323,6 +323,44 @@ approval slows work
 
 ---
 
+### Learned Skill은 Candidate로 시작한다
+
+일부 Agent 제품은 사람이 Browser에서 Workflow를 한 번 보여주면 이를 Skill로 저장하거나, Agent에게 Skill을 생성·수정하게 할 수 있는 방향을 제공한다.
+
+이 기능은 Factory Improvement Loop의 좋은 입력이 될 수 있다.
+
+하지만 Agent가 새 Skill을 만들었다고 곧바로 Production Factory의 표준 Skill로 승격하면 안 된다.
+
+~~~text
+Observed Workflow
+      ↓
+Candidate Skill
+      ↓
+Eval
+      ↓
+Human / Policy Review
+      ↓
+Version
+      ↓
+Shadow / Canary
+      ↓
+Production
+~~~
+
+이 구분은 Self-improvement에서 중요하다.
+
+Agent가 자신의 반복 Work를 더 잘 수행하도록 Procedure를 제안하는 것은 비교적 낮은 위험의 개선일 수 있다.
+
+반면 다음 변경은 Blast Radius가 크다.
+
+- Verification 약화
+- Approval 제거
+- Permission 확대
+- Security Rule 수정
+- Evaluator 기준 변경
+
+따라서 "Agent가 학습한다"는 표현보다 어떤 변경이 Candidate로 생성되고 누가 Authoritative Configuration으로 승격하는가를 명확히 하는 편이 안전하다.
+
 ## 24.9 Meta-change는 별도 Class로 관리한다
 
 Factory Configuration 변경:
