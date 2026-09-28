@@ -491,6 +491,10 @@ Untrusted Issue 내용이 Tool Call로 이어지면 어떻게 막을 것인가.
 
 ## 참고 자료
 
+- Cursor, *Work with Grok Bot*  
+  https://cursor.com/docs/grok-bot/work
+- Cursor, *Manage Grok Bot computers*  
+  https://cursor.com/docs/grok-bot/computers
 - Microsoft, *Durable Task for AI agents*  
   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
 - Temporal, *AI and Durable Execution*  
