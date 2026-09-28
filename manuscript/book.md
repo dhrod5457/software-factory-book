@@ -556,6 +556,34 @@ Software Factory는 Agent를 여러 개 띄우는 시스템과 같은 말이 아
 
 Agent는 중요한 Worker지만 Factory 전체는 아니다.
 
+WorkOS의 Ryan Cooke는 비슷한 경계를 다른 각도에서 설명한다. WorkOS는 Sandbox에 Coding Agent를 넣고 Prompt로 PR을 만드는 초기 구조만으로는 개발자가 로컬 Coding Agent를 직접 사용하는 것과 조직의 delivery outcome 측면에서 뚜렷한 차이를 만들기 어려웠다고 설명한다. 이후 자동화 범위를 코드 생성에서 Product Engineering Process로 확장했다.
+
+```text
+Sandbox + Agent + Prompt + PR
+= automated coding cell
+
+Work Intake
++ Planning
++ Durable Task
++ Execution
++ Verification
++ Delivery
++ Feedback
+= software production system
+```
+
+PR 생성은 Factory의 중요한 출력일 수 있지만 Factory 자체와 동일하지 않다.
+
+<!-- CASE C15: WorkOS - PR Factory에서 Product Engineering Factory로 -->
+
+> **Case Study C15 — WorkOS — PR Factory에서 Product Engineering Factory로**
+>
+> WorkOS는 Product artifact 초안, Human scope correction, Ticket decomposition, dependency-driven execution, Plan re-evaluation, MCP Context Engine을 하나의 흐름으로 연결하는 방향을 설명한다.
+>
+> 이 사례의 핵심은 특정 Architecture가 아니라 **PR 생성은 Factory의 출력일 수 있지만 Factory 전체는 아니라는 것**이다.
+>
+> **주의:** 발표 후반의 Memory Layer와 일부 Self-improvement 기능은 향후 방향으로 설명됐으며, Agent Authorization도 아직 해결 중인 문제로 언급된다.
+
 ---
 
 ### 2.1 왜 다시 Factory라는 표현인가
@@ -4241,6 +4269,25 @@ Catalog의 역할은 모든 것을 복제하는 것이 아니라 **Agent가 어�
 
 ---
 
+#### MCP Gateway를 Context Engine으로 만든다
+
+외부 시스템을 MCP로 연결했다고 Context Engineering이 끝나는 것은 아니다.
+
+WorkOS는 내부 MCP Gateway를 `Context Engine`처럼 사용한다고 설명한다. Snowflake와 내부 시스템을 연결하는 것뿐 아니라, 어떤 Table에 어떤 의미의 데이터가 있고 어떤 질문에서 어떤 Source를 찾아야 하는지까지 Tool description과 context로 제공한다.
+
+```text
+Raw Tool Gateway
+→ API 노출
+
+Semantic Tool Gateway
+→ Tool + Schema + Usage Guidance
+
+Organizational Context Gateway
+→ Tool + Data Semantics + Convention + Resource Discovery
+```
+
+MCP 연결과 조직 Context 설계는 별개의 문제다. 또한 Durable Task와 Organization Context를 특정 Coding Agent Session과 분리하면 여러 Agent Runtime이 같은 지식을 재사용할 수 있다.
+
 ### 10.5 Application Legibility
 
 Agent에게 Code만 보이게 해서는 충분하지 않은 Task가 많다.
@@ -7061,6 +7108,23 @@ Production Deploy 권한은 없다.
 
 ---
 
+#### Tool 연결보다 어려운 문제는 Delegated Authorization이다
+
+MCP Gateway를 통해 GitHub, Linear, Data Warehouse, Slack 같은 시스템이 Agent에게 연결되면 Context 접근성은 좋아진다. 동시에 Authorization 문제가 커진다.
+
+WorkOS 발표에서도 Agent authorization은 아직 충분히 해결하지 못한 영역으로 언급됐다. Tool을 연결하는 문제와 안전하게 권한을 위임하는 문제는 별개다.
+
+```text
+Human Principal
+→ Delegation
+→ Agent Identity
+→ Task-scoped Authorization
+→ Tool / MCP Gateway
+→ Internal System
+```
+
+Read/Write 범위, Side Effect Approval, Expiration, Revocation, initiating principal 추적을 별도로 설계해야 한다.
+
 ### 16.4 Task-scoped Credential
 
 Credential Scope를 다음 축으로 제한할 수 있다.
@@ -8506,6 +8570,38 @@ Business Outcome
 
 ---
 
+#### Activity → Output → Flow → Outcome
+
+WorkOS는 AI가 만든 PR 비율, PR 개수, Production에 들어간 AI Code 비율 같은 Output이 실제 Customer Outcome을 가릴 수 있다고 지적한다.
+
+```text
+Activity
+- Agent Runs
+- Tokens
+- Tool Calls
+
+Output
+- Commits
+- LOC
+- Pull Requests
+
+Flow
+- Cycle Time
+- Review Time
+- Human Blocking Time
+- First-pass Acceptance
+
+Outcome
+- Feature Delivery
+- Accepted Change
+- Escaped Defect
+- Revert
+- MTTR
+- Customer Impact
+```
+
+하위 Metric도 운영에는 필요하다. 다만 Output 증가를 Outcome 개선으로 바로 해석하지 않는다.
+
 ### 19.5 First-pass Acceptance
 
 Agent가 Candidate를 많이 만드는 것보다 실제로 얼마나 적은 수정으로 받아들여지는지가 중요할 수 있다.
@@ -8987,6 +9083,32 @@ Repeated Agent Failure
 이 책에서는 이런 Operate/Observe 결과가 다시 Requirement·Test·Task로 돌아가는 구조를 Closed-loop SDLC라고 부른다. 기존 DevSecOps의 continuous feedback을 Agent Work Intake까지 확장한 개념이다.
 
 ---
+
+#### Continuous Planning Loop: 실행 중 배운 것으로 Plan을 다시 본다
+
+WorkOS는 Linear Ticket이 끝날 때 dependency에 따라 다음 Task를 진행하는 것뿐 아니라 현재 Project를 다시 평가해 빠진 Work가 생겼는지도 Agent에게 확인시키는 흐름을 설명한다.
+
+```text
+Plan
+→ Task
+→ Execution
+→ New Knowledge
+→ Plan Re-evaluation
+→ Task Graph Update
+```
+
+처음 만든 Plan을 immutable contract로 취급하면 구현 중 발견한 Gap이 반영되지 않는다. 반대로 Agent가 마음대로 Roadmap을 바꾸게 하면 Scope가 흔들린다. Agent는 missing task, dependency, risk를 제안하고 Scope-changing proposal의 승인 권한은 Human이나 Policy에 둘 수 있다.
+
+```text
+Execution Learning Loop
+Task → New Knowledge → Plan
+
+Product Feedback Loop
+Operate → Signal → Requirement
+
+Factory Improvement Loop
+Execution Friction → Factory Capability
+```
 
 ### 20.5 Product Loop와 Factory Loop를 구분한다
 
@@ -10684,6 +10806,23 @@ approval slows work
 이런 변화는 “개선”처럼 보일 수 있지만 실제로는 Governance 붕괴다.
 
 ---
+
+#### Session Friction을 Improvement Candidate로 바꾼다
+
+Self-improvement의 현실적인 출발점은 Factory가 자기 코드를 마음대로 고치는 것이 아니라 실제 Agent Session과 Task Timeline에서 반복되는 friction을 찾는 것이다.
+
+WorkOS가 설명한 향후 방향도 반복 실수, 필요한 Skill, 낡은 Skill, Tool/Context friction, Sandbox bottleneck을 관찰해 개선 후보로 만드는 쪽에 가깝다.
+
+```text
+Execution
+→ Friction Signal
+→ Improvement Candidate
+→ Skill / Tool / Context / Infrastructure Change
+→ Eval
+→ Promotion
+```
+
+Self-improvement의 입력을 추상적인 목표가 아니라 관찰 가능한 실패와 반복 비용으로 만든다. 단, 발표에서 Memory Layer와 일부 Self-improvement 기능은 향후 방향으로 설명된 부분이므로 현재 Production Capability로 일반화하지 않는다.
 
 ### 24.9 Meta-change는 별도 Class로 관리한다
 
