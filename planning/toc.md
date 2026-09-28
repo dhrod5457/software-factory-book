@@ -381,12 +381,16 @@ Model 이외의 execution system이 Agent 성능에 미치는 영향을 설명�
 - Result Filter
 - Subagent
 - Model Routing
+- Execution Loop
+- Review / Enforcement Gate
+- Feedback Injection
 
 ### 연구
 
 - OpenAI Harness Engineering
 - SWE-agent ACI
 - OpenHands SDK
+- Caylent DevBench
 
 ### 핵심 메시지
 
@@ -494,6 +498,8 @@ Static
 - Unit / Integration / Contract
 - E2E
 - Browser
+- Architecture Conformance
+- Scope Conformance
 - Security
 - Benchmark
 - Evaluator Agent
@@ -522,6 +528,7 @@ Factory Result를 표준화한다.
 ```text
 Task
 Commit
+Declared Scope
 Changed Files
 
 Verification
