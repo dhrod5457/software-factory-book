@@ -49,7 +49,7 @@ Intent / Signal
 10. 병렬화의 대상은 Agent가 아니라 독립 Task다.
 11. Execution Authority와 Acceptance Authority를 분리한다.
 12. Autonomy가 높을수록 Isolation과 Evidence를 강화한다.
-13. Factory의 성능은 Accepted Change 중심으로 본다.
+13. Factory의 성능은 Accepted Change 중심으로 본다. 단, Accepted Change는 책의 synthesis다.
 14. Review / CI / Integration 병목도 Factory의 일부로 본다.
 15. Factory 자체의 변경도 versioning하고 검증한다.
 
@@ -73,49 +73,40 @@ Phase 5 Chapter Plan
 
 Phase 6 Draft
 완료
-- chapters/01..24/draft.md
-- chapters/epilogue/draft.md
+
+Phase 7 Review
+완료
+- part structural reviews
+- part line reviews
+- full line review
+- source validation snapshot
 
 Current
-Phase 7 Review
-- review/part-01..07-draft-review.md
-- review/full-draft-structural-review.md
-
-Next
 Phase 8 Manuscript
 ```
 
-## Draft Completion
+## Review Result
 
-확인 완료:
+Phase 7 판정:
 
-- 24개 본장 Draft
-- Epilogue Draft
-- Writing Style Guide
-- Part별 Draft Review
-- Full Draft Structural Review
+**READY FOR MANUSCRIPT**
 
-## Review 기준
+핵심 기록:
 
-- 중복 제거
-- 장간 역할 분리
-- 연구 주장 강도 조정
-- 최신 출처 재검증
-- Vendor 사례와 일반 원칙 구분
-- 용어 통일
-- 도식 보강
-- 문체 Line Edit
+- `review/full-line-review.md`
+- `review/source-validation-2026-09-28.md`
+- `planning/writing-style.md`
 
 ## Source of Truth
 
 1. `planning/concept.md`
 2. `planning/scope.md`
 3. `planning/toc.md`
-4. 각 `chapters/NN/plan.md`
-5. 각 `chapters/NN/draft.md`
-6. `chapters/epilogue/draft.md`
-7. `planning/writing-style.md`
-8. `review/full-draft-structural-review.md`
+4. `planning/writing-style.md`
+5. 각 `chapters/NN/plan.md`
+6. 각 `chapters/NN/draft.md`
+7. `chapters/epilogue/draft.md`
+8. `review/full-line-review.md`
 9. `research/sources.md`
 
 ## 작성 방식
@@ -131,4 +122,4 @@ research
 → manuscript
 ```
 
-현재는 Draft를 완료했고 Review 단계다.
+현재는 Review를 완료했고 Manuscript 단계다.
