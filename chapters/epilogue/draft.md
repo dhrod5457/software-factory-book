@@ -164,11 +164,13 @@ Agent 시대에는 다음 숫자가 쉽게 늘어난다.
 - Pull Request
 - Generated Code
 
-하지만 이 책에서 반복해서 본 것은 다른 단위다.
+하지만 이 책에서는 더 넓은 측정 단위 후보로 다음을 사용했다.
 
 ~~~text
 Accepted Change
 ~~~
+
+이는 업계 표준 Metric이 아니라 Agent output을 Delivery outcome과 구분하기 위한 책의 synthesis다.
 
 더 구체적으로는 다음 질문이다.
 
@@ -204,7 +206,7 @@ Unsafe Permission
 Review Bottleneck
 ~~~
 
-이 Friction을 다시 Factory Backlog로 넣을 수 있다.
+이 Friction을 다시 Factory Backlog로 넣는 운영 방식을 선택할 수 있다.
 
 ~~~text
 Factory Work
@@ -241,9 +243,9 @@ Intent
 → Feedback
 ~~~
 
-앞으로 좋은 Engineer의 한 형태는 더 많은 코드를 직접 작성하는 사람이 아닐 수도 있다.
+Agent 활용 비중이 높은 팀에서는 좋은 Engineer의 역할이 “직접 작성한 코드량”만으로 설명되기 어려워질 수 있다.
 
-대신 다음을 잘하는 사람일 수 있다.
+그런 환경에서는 다음 능력의 비중이 커질 수 있다.
 
 - 좋은 Work를 정의한다.
 - Agent가 일할 수 있는 Environment를 만든다.
