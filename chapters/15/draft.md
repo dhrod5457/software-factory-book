@@ -129,7 +129,7 @@ Checkpoint Granularity는 Task마다 다를 수 있다.
 
 ## 15.4 Exactly-once를 기대하지 않는다
 
-외부 Side Effect에 완전한 Exactly-once를 보장하기는 어렵다.
+Factory Runtime만으로 임의의 외부 Side Effect에 완전한 Exactly-once를 보장한다고 가정하면 안 된다. 외부 시스템이 transaction이나 idempotency를 함께 지원하지 않으면 “실행은 성공했지만 응답은 유실된” 상태를 Runtime 혼자 판별할 수 없기 때문이다.
 
 다음 상황을 보자.
 
@@ -246,7 +246,7 @@ Human Approval Event
 → Worker assigned
 ~~~
 
-Human은 Durable Workflow에 들어오는 asynchronous signal로 볼 수 있다.
+Workflow 모델에서는 Human Approval을 나중에 도착하는 asynchronous event나 signal로 표현할 수 있다.
 
 이 구조가 있으면 Approval Wait와 Compute Occupancy를 분리할 수 있다.
 
@@ -311,11 +311,9 @@ Worker / Sandbox
 
 ## 15.8 제품이 아니라 책임 분리로 본다
 
-Temporal, Microsoft Durable Task, Google Agent Executor 같은 시스템은 서로 구현이 다르다.
+Temporal, Microsoft Durable Task, Google Agent Executor 같은 시스템은 서로 구현과 추상화가 다르다. 특히 여기서 Microsoft Durable Task는 5장에서 정의한 책의 “Durable Task” 작업 단위와 다른 workflow technology다. Microsoft는 이를 특정 Agent Framework에 종속되지 않은 long-running durable workflow 기반으로 설명하고 있고, Google은 2026년 5월 Agent Executor를 event log와 snapshot으로 outage나 HITL 이후 execution을 재개하는 open-source runtime standard로 공개했다.
 
-이 책에서 중요한 것은 특정 제품 API가 아니다.
-
-공통적으로 다음 문제를 다룬다는 점이다.
+이 책에서 중요한 것은 특정 제품 API가 아니라 공통적으로 다음 문제를 별도 reliability layer에서 다룬다는 점이다.
 
 - long-running state
 - retry
