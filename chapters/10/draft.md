@@ -214,6 +214,42 @@ Catalog의 역할은 모든 것을 복제하는 것이 아니라 **Agent가 어�
 
 ---
 
+### MCP Gateway를 Context Engine으로 만든다
+
+외부 시스템을 MCP로 연결했다고 Context Engineering이 끝나는 것은 아니다.
+
+WorkOS는 내부 MCP Gateway를 `Context Engine`처럼 사용한다고 설명한다. Snowflake와 내부 시스템을 연결하는 것뿐 아니라, 어떤 Table에 어떤 의미의 데이터가 있고 어떤 질문에서 어떤 Source를 찾아야 하는지까지 Tool description과 context로 제공한다.
+
+이 차이는 다음처럼 볼 수 있다.
+
+~~~text
+Raw Tool Gateway
+→ API를 Agent에게 노출
+
+Semantic Tool Gateway
+→ Tool + Schema + Usage Guidance
+
+Organizational Context Gateway
+→ Tool
+ + Data Semantics
+ + Organization Convention
+ + Resource Discovery
+~~~
+
+Agent에게 `query()`라는 Tool 하나를 주는 것과, 조직의 데이터 구조를 이해하고 올바른 Source를 선택할 수 있게 만드는 것은 다른 문제다.
+
+또한 이런 Context Layer가 특정 Coding Agent의 Session 안에만 있지 않으면 여러 Runtime이 같은 조직 지식을 재사용할 수 있다.
+
+~~~text
+Durable Task / Context / Policy
+          ↓
+     MCP Context Layer
+      ↙    ↓     ↘
+ Agent A Agent B Agent C
+~~~
+
+따라서 Agent Vendor를 교체해도 Work State와 Organization Context가 유지되는 구조가 장기적으로 더 유연하다.
+
 ## 10.5 Application Legibility
 
 Agent에게 Code만 보이게 해서는 충분하지 않은 Task가 많다.
