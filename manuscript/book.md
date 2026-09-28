@@ -494,7 +494,7 @@ Software Factory가 모든 병목을 없애는 것은 아니다.
 
 > Agent를 포함한 Software Production System은 어떤 구조를 가져야 하는가?
 
-다음 장에서는 이 시스템을 이 책에서 **AI Software Factory**라고 부르는 이유와 최소 정의를 정리한다.
+먼저 이 시스템을 왜 **AI Software Factory**라고 부르는지, 최소 정의부터 정리한다.
 
 ---
 
@@ -837,7 +837,7 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 > AI Software Factory는 기존 CI/CD, DevOps, Platform Engineering, Agent Platform과 어디에서 겹치고 어디에서 달라지는가?
 
-다음 장에서는 이 경계를 정리한다.
+먼저 기존 Delivery System과의 경계를 정리한다.
 
 ---
 
@@ -1295,7 +1295,7 @@ Agent가 무엇을 구현해야 하는지 어떻게 정의할 것인가.
 
 어떤 상태가 되어야 "작업할 준비가 됐다"고 볼 것인가.
 
-다음 장에서는 Prompt를 바로 Agent에게 던지는 대신 **Intent를 Requirement와 Acceptance로 바꾸는 과정**부터 시작한다.
+이제 내부로 들어가 **Intent를 Requirement와 Acceptance로 바꾸는 과정**부터 시작한다.
 
 ---
 
@@ -1649,7 +1649,7 @@ Requirement와 Acceptance가 준비됐다고 해도 아직 한 가지 문제가 
 
 Agent가 실행 중 중단되면 이 Work는 어디에 남는가. Session이 닫히면 Task도 사라지는가. Retry할 때 처음부터 새로운 Prompt를 만들어야 하는가.
 
-다음 장에서는 Prompt나 Session보다 오래 살아남는 작업 단위인 **Durable Task**를 정의한다.
+그다음에는 Prompt나 Session보다 오래 살아남는 작업 단위인 **Durable Task**를 정의한다.
 
 ---
 
@@ -2100,7 +2100,7 @@ Task가 너무 크면 Context와 Retry 비용이 커진다.
 
 Task끼리 Dependency가 있으면 아무 순서로나 실행할 수도 없다.
 
-다음 장에서는 **어떤 크기로 Task를 나누고 어떤 Dependency를 표현해야 하는가**를 다룬다.
+이어지는 문제는 **Task를 어떤 크기로 나누고 어떤 Dependency를 표현할 것인가**다.
 
 ---
 
@@ -2887,7 +2887,7 @@ Dependency와 Browser를 매 Task 다시 설치할 것인가.
 
 Warm 상태를 재사용하면 무엇이 위험한가.
 
-다음 장에서는 **Worker, Sandbox, Workspace**를 다룬다.
+그다음 Worker, Sandbox, Workspace 안으로 들어간다.
 
 ---
 
@@ -3344,7 +3344,7 @@ Worker State 문제다.
 
 같은 Model과 같은 Repository를 사용해도 Tool의 형태, Instruction, Search 결과, Error Feedback에 따라 행동이 달라진다.
 
-다음 장에서는 Model 주변에서 Agent의 실제 작업 능력을 만드는 **Harness Engineering**을 다룬다.
+여기서 한 단계 더 들어가면 Model 주변의 실제 작업 능력을 만드는 **Harness Engineering**이 나온다.
 
 ---
 
@@ -3836,7 +3836,7 @@ Harness를 준비했다고 해도 Context를 무한정 넣을 수는 없다.
 
 Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 Context에 넣으면 오히려 Agent가 중요한 정보를 찾기 어려워질 수 있다.
 
-다음 장에서는 **얼마나 많은 Context를 줄 것인가가 아니라, 필요한 Context를 어떻게 찾게 할 것인가**를 다룬다.
+Harness 다음에는 **얼마나 많이 줄지가 아니라 필요한 Context를 어떻게 찾게 할지** 살펴본다.
 
 ---
 
@@ -4251,7 +4251,7 @@ Permission도 Agent에게 판단시킬까.
 
 DB Migration 순서도 매번 새로 계획하게 할까.
 
-다음 장에서는 **Controlled Autonomy**, 즉 deterministic control과 Agent judgment의 경계를 다룬다.
+이제 deterministic control과 Agent judgment의 경계, 즉 **Controlled Autonomy**를 정리할 차례다.
 
 ---
 
@@ -4718,7 +4718,7 @@ Test도 통과할 수 있다.
 
 하지만 User Intent를 놓쳤을 수도 있다.
 
-다음 장에서는 **Agent의 완료 보고와 Factory의 완료 판정을 분리하는 Verification 구조**를 다룬다.
+그 경계 위에서 **Agent의 완료 보고와 Factory의 완료 판정을 분리하는 Verification 구조**를 본다.
 
 ---
 
@@ -5273,7 +5273,7 @@ Verification이 끝났다고 사람이 결과를 빠르게 이해할 수 있는 
 
 Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있는지, Known Risk는 무엇인지 매번 찾아야 한다면 Review 비용이 커진다.
 
-다음 장에서는 검증 결과를 표준화된 **Evidence Contract**로 묶는 방법을 다룬다.
+검증 결과를 사람이 빠르게 판단하려면 표준화된 **Evidence Contract**가 필요하다.
 
 ---
 
@@ -5656,7 +5656,7 @@ Worker도 중간에 죽었다.
 
 이때 Factory는 무엇을 해야 할까.
 
-다음 장에서는 Failure를 예외가 아니라 정상적인 State로 보고 **Retry, Restart, Resume, Reassignment, Human Escalation**을 구분한다.
+Evidence가 실패를 보여줄 때는 Failure를 정상적인 State로 보고 **Retry, Restart, Resume, Reassignment, Human Escalation**을 구분해야 한다.
 
 ---
 
@@ -6128,7 +6128,7 @@ PR을 이미 만들었는데 Runtime이 그 사실을 모르고 다시 Create하
 
 Human Approval을 하루 동안 기다리는 동안 Worker를 계속 붙잡고 있어야 할까.
 
-다음 장에서는 Long-running Work를 현실의 Crash와 Wait에서 살아남게 만드는 **Durable Execution**을 다룬다.
+Long-running Work에서는 Recovery를 넘어 현실의 Crash와 Wait를 견디는 **Durable Execution**이 필요하다.
 
 ---
 
@@ -6568,7 +6568,7 @@ Agent가 어떤 Credential을 가져야 하는가.
 
 Untrusted Issue 내용이 Tool Call로 이어지면 어떻게 막을 것인가.
 
-다음 장에서는 **Security, Identity, Governance**를 다룬다.
+실행 지속성이 높아질수록 권한과 위험을 다루는 **Security, Identity, Governance**가 중요해진다.
 
 ---
 
@@ -7097,7 +7097,7 @@ Agent 수를 늘리면 처리량도 선형으로 늘어날까.
 
 같은 파일을 동시에 수정하면 누가 조정할까.
 
-다음 장에서는 **Parallel Worker와 Multi-Agent**를 다룬다.
+안전한 단일 Worker를 만들었다면 다음 문제는 **Parallel Worker와 Multi-Agent**다.
 
 ---
 
@@ -7484,7 +7484,7 @@ Parallel Worker로 Implementation Throughput을 높였다.
 
 그 결과 Review Queue와 CI Queue가 길어질 수 있다.
 
-다음 장에서는 Coding 다음 단계에서 생기는 **Review, CI, Integration Bottleneck**을 다룬다.
+병렬 실행이 가능해지면 병목은 **Review, CI, Integration**으로 이동할 수 있다.
 
 ---
 
@@ -7856,7 +7856,7 @@ Agent 실행 시간만 봐서는 Review Queue와 Human Wait를 알 수 없다.
 
 Token Cost만 봐서는 Retry와 Rework를 알 수 없다.
 
-다음 장에서는 **Factory Observability와 Metrics**를 다룬다.
+어디가 막히는지 판단하려면 **Factory Observability와 Metrics**가 필요하다.
 
 ---
 
@@ -8385,7 +8385,7 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
 하지만 Alert를 곧바로 Agent Action으로 연결하면 위험하다.
 
-다음 장에서는 **Event-driven Factory와 Closed-loop SDLC**를 다룬다.
+관찰 가능한 Factory는 CI Failure나 Production Signal을 Work Source로 연결하는 **Event-driven Factory**로 확장할 수 있다.
 
 ---
 
@@ -8726,7 +8726,7 @@ Event-driven Factory가 Work를 만들기 시작하면 더 많은 Platform Capab
 
 Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구현하게 해야 할까.
 
-다음 장에서는 기존 **Developer Platform과 Golden Path를 Factory가 어떻게 활용하는가**를 다룬다.
+이 Work를 실행할 때는 기존 **Developer Platform과 Golden Path**를 어떻게 재사용할지도 정해야 한다.
 
 ---
 
@@ -9051,7 +9051,7 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 하지만 처음 Factory를 만들 때 이 모든 것을 구현해야 할까.
 
-다음 장에서는 **Minimum Viable AI Software Factory**로 범위를 다시 줄인다.
+지금까지의 Capability를 실제 도입 관점에서 **Minimum Viable AI Software Factory**로 다시 줄여 보자.
 
 ---
 
@@ -9436,7 +9436,7 @@ Minimum Viable Factory의 구조는 이해했다.
 
 그렇다면 책 전체 원칙을 실제로 눈으로 확인할 수 있는 작은 Reference Implementation은 어떤 모습이어야 할까.
 
-다음 장에서는 **Reference Factory**를 설계하고 Happy Path보다 Failure Scenario를 중심으로 검증한다.
+그 구조를 실제로 확인하기 위해 **Reference Factory**를 설계하고 Failure Scenario로 검증한다.
 
 ---
 
@@ -9850,7 +9850,7 @@ Event Trigger를 붙일까.
 
 Agent가 Backlog에서 스스로 Work를 선택하게 할까.
 
-다음 장에서는 Factory의 **Maturity와 Autonomy를 서로 다른 축으로 분리해** 확장 순서를 정리한다.
+마지막으로 Factory의 **Maturity와 Autonomy를 서로 다른 축으로 놓고** 확장 순서를 정리한다.
 
 ---
 
