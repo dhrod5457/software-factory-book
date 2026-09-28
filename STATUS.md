@@ -2,7 +2,7 @@
 
 Phase 8 - Manuscript
 
-상태: **RELEASE CANDIDATE RC2**
+상태: **RELEASE CANDIDATE RC2 — CONTENT REFRESH / RE-PROOF REQUIRED**
 
 24개 본장과 Epilogue의 Draft 및 Phase 7 Review를 완료했다.
 
@@ -89,10 +89,10 @@ Review에서 완료한 항목:
 - Chapter transition heading 반복 제거
 - 1·2장 압축 및 원본 Chapter 동기화
 - 22·23장 section grouping 및 원본 Chapter 동기화
-- `manuscript/references.md` — 53개 고유 Reference
+- `manuscript/references.md` — 55개 고유 Reference
 - `manuscript/terminology.md`
 - `manuscript/figures.md` — Figure 후보 21개
-- `manuscript/case-studies.md` — Case Study Box 후보 14개
+- `manuscript/case-studies.md` — Case Study Box 후보 15개
 - `manuscript/length-balance.md`
 - `manuscript/structural-flow-review.md`
 
@@ -101,38 +101,40 @@ Review에서 완료한 항목:
 - Copyedit Pass 완료
 - Markdown integrity check PASS
 - Glossary 추가
-- Chapter별 Reference 제거 → 53개 통합 References
+- Chapter별 Reference 제거 → 55개 통합 References
 - Figure marker 21개 실제 배치
-- Case Study marker 14개 실제 배치
+- Case Study marker 15개 실제 배치
 - Manuscript quality check PASS
 
 완료 추가:
 
 - Figure caption 21개 작성
-- Case Study Box 14개 최종 working copy 작성
+- Case Study Box 15개 최종 working copy 작성
 - 기계적 proof scan PASS
 
 완료 추가:
 
 - F01~F21 Mermaid Figure source 작성
 - 21개 Figure를 book.md에 실제 삽입
-- C01~C14 Case Study Box를 book.md에 실제 삽입
+- C01~C15 Case Study Box를 book.md에 실제 삽입
 - Publication source recheck 완료
-- Release Proof PASS
+- Release Proof PASS — content refresh 이전 snapshot
 - RC1 snapshot 기록
 
 완료 추가:
 
 - 최종 RC 제목 / 부제 결정
-- 53개 Reference link audit PASS
-- dead link 0
+- 기존 53개 Reference link audit PASS
+- Warp 신규 Reference 2개 source URL 확인
+- 기존 audit 기준 dead link 0
 
 남은 Release Gate:
 
-1. SVG/PDF용 Figure export 및 흑백/축소 가독성
-2. Reference publication metadata/style 최종화
-3. 사람 기준 최종 교정
-4. 최종 출판 산출물 build
+1. Content refresh 이후 manuscript proof / link check 재실행
+2. SVG/PDF용 Figure export 및 흑백/축소 가독성
+3. Reference publication metadata/style 최종화
+4. 사람 기준 최종 교정
+5. 최종 출판 산출물 build
 
 # Next
 

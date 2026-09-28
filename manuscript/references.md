@@ -220,6 +220,14 @@
    https://workos.com/blog/project-horizon  
    사용 장: 2장, 5장, 7장, 8장, 20장, 22장, 23장, 24장
 
+54. Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+   https://www.youtube.com/watch?v=tUPPVhBBcoM  
+   사용 장: 2장, 4장, 12장, 19장, 20장, 24장, Epilogue
+
+55. Warp / Zach Lloyd, *Adopting the software factory model: crawl, walk, run*  
+   https://www.warp.dev/blog/adopting-the-software-factory-model-crawl-walk-run  
+   사용 장: 2장, 20장, 24장
+
 ## Publication-time Recheck
 
 다음은 출간 직전 다시 확인한다.

@@ -26,7 +26,7 @@ Phase 4 TOC            완료
 Phase 5 Chapter Plan   완료
 Phase 6 Draft          완료
 Phase 7 Review         완료
-Phase 8 Manuscript     RC2
+Phase 8 Manuscript     RC2 content refresh / re-proof
 ```
 
 ## 완료 상태

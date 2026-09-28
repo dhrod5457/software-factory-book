@@ -82,6 +82,13 @@ AI Software Factory
 
 Agent는 Factory의 중요한 Worker지만 Factory 전체는 아니다.
 
+이 정의는 두 경계로 읽을 수 있다.
+
+- 좁은 의미: 이미 정의된 Task를 durable하게 실행·검증·복구하는 실행 시스템
+- 넓은 의미: Signal / Intent를 Work로 변환하고 Delivery 이후 Observation과 Improvement까지 연결하는 생산 루프
+
+책의 최소 정의는 좁은 경계에서도 성립해야 한다. 다만 Part VI~VII에서는 넓은 경계로 확장해 Closed-loop와 Adaptive Factory를 다룬다.
+
 ---
 
 # 최소 구성요소
@@ -752,6 +759,22 @@ Agent-ready Repository
 
 Self-improvement는 강력하지만 최소 정의에는 포함하지 않는다.
 
+Self-improvement는 모델이 스스로 재학습한다는 뜻으로 한정하지 않는다.
+
+실제 Factory에서는 다음과 같은 Observer / Skill Loop로 볼 수 있다.
+
+~~~text
+Execution
+→ Observable Result
+→ Human Correction / Verification Failure
+→ Observer
+→ Improvement Candidate
+→ Eval / Shadow / Approval
+→ Promotion
+~~~
+
+즉 실행 결과에서 Prompt, Skill, Rule, Context, Tool 개선 후보를 만들 수 있지만, Candidate가 바로 Production Factory를 바꾸지는 않는다.
+
 Factory가 개선할 수 있는 것:
 
 - Docs
@@ -913,7 +936,7 @@ Intent
 
 # 제품 사용 원칙
 
-OpenAI, Anthropic, GitHub, WorkOS, Stripe, StrongDM, Factory.ai, Cursor, Jules, Kiro, OpenHands 등의 사례는 원칙을 설명하는 concrete example로 사용한다.
+OpenAI, Anthropic, GitHub, WorkOS, Warp, Stripe, StrongDM, Factory.ai, Cursor, Jules, Kiro, OpenHands 등의 사례는 원칙을 설명하는 concrete example로 사용한다.
 
 제품 자체가 책의 architecture가 되지 않는다.
 

@@ -556,11 +556,31 @@ Software Factory는 Agent를 여러 개 띄우는 시스템과 같은 말이 아
 
 Agent는 중요한 Worker지만 Factory 전체는 아니다.
 
+산업 현장에서도 비슷한 경계가 나타난다. Caylent는 Software Factory를 Claude Code 같은 Coding Agent 자체가 아니라, 그 주위에 Plugin과 Skill, Hook, Rule, 실행 Loop를 배치해 Software Engineering Process를 자동화하는 구조로 설명한다. 공개한 DevBench 역시 구조화된 Backlog를 구현, Review, Security Review, Git 흐름으로 통과시키는 Orchestration System에 가깝다.
+
+이 사례에서 가져올 원칙은 특정 제품이나 자동화 수준이 아니다.
+
+~~~text
+Coding Agent
+≠ Software Factory
+
+Agent Capability
++ Harness
++ Work State
++ Verification
++ Delivery Control
+→ Factory Capability
+~~~
+
+이 책의 정의는 여기서 한 단계 더 넓다. Harness는 중요한 실행 계층이지만, Durable Work, Recovery, Acceptance Authority, Feedback까지 포함하는 Factory 전체와 동일하지 않다.
+
 ---
 
 ### 2.1 왜 다시 Factory라는 표현인가
 
 Software Factory라는 말은 AI 시대에 처음 등장한 것이 아니다. Software Engineering은 오래전부터 반복 가능한 프로세스, 자동화, 표준화, 재사용 가능한 자산을 통해 생산성을 높이려 해왔다.
+
+최근에는 Software Factory와 함께 Dark Factory 같은 표현도 등장한다. 하지만 이 책에서는 사람이 보이지 않는가를 기준으로 Factory를 정의하지 않는다. Work가 durable하게 관리되고, 실행이 통제되며, 결과가 독립적으로 검증되고, 실패 후 복구 가능한가를 더 중요한 경계로 본다.
 
 이 책은 그 역사를 길게 다루지 않는다.
 
@@ -832,6 +852,14 @@ flowchart TD
 ```
 
 *Intent가 Requirement와 Durable Task로 변환되고, Control Plane과 Worker를 거쳐 검증·Evidence·Governance·Delivery로 이어진 뒤 운영 Feedback이 다시 다음 Work로 돌아오는 전체 Loop.*
+
+여기서 Factory를 두 개의 경계로 볼 수 있다.
+
+좁은 의미에서는 이미 정의된 Task를 durable하게 실행하고 검증하고 복구하는 **실행 시스템**이다.
+
+넓은 의미에서는 Signal과 Intent를 Work로 변환하는 앞단부터 Delivery 이후의 Observation과 Improvement까지 연결하는 **생산 루프**다.
+
+Warp 창업자 Zach Lloyd는 2026년 발표에서 아이디어가 들어오면 Agent가 triage하고, 복잡한 Work는 specification으로 보내며, implementation·review·verification·shipping·monitoring 결과를 다시 위쪽으로 되돌리는 Software Factory cycle을 제시했다. 이 책은 그 전망을 그대로 정의로 채택하지는 않지만, Factory의 경계가 Coding Agent 실행보다 넓어질 수 있다는 실제 사례로 사용한다.
 
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
@@ -1496,6 +1524,57 @@ Requirement
 
 ---
 
+#### Triage: 모든 Signal을 같은 깊이로 명세하지 않는다
+
+Requirement-first라는 말이 모든 Issue에 같은 분량의 문서를 만들라는 뜻은 아니다.
+
+Factory 앞단에는 먼저 **Planning Depth를 정하는 Triage**가 필요할 수 있다.
+
+~~~text
+Signal / Idea / Issue
+        ↓
+      Triage
+        ↓
+  ┌─────┴─────┐
+  │           │
+Simple      Complex
+  │           │
+Task      Product Spec
+              ↓
+         Technical Spec
+              ↓
+             Task
+~~~
+
+Zach Lloyd는 Warp의 Factory 설명에서 단순하고 명확한 Issue는 바로 구현으로 보내고, 복잡한 문제는 specification agent로 보내는 패턴을 제시한다. 이때 Product Specification은 product invariant를, Technical Specification은 architecture와 code form을 설명한다고 구분한다.
+
+이 책에서는 이 구조를 그대로 표준으로 삼기보다 다음 질문으로 일반화한다.
+
+~~~text
+Product / Requirement
+→ 무엇이 참이어야 하는가
+
+Design / Technical Spec
+→ 어떤 제약과 구조 안에서 만들 것인가
+
+Task
+→ 무엇을 수행할 것인가
+
+Acceptance
+→ 무엇이 만족되어야 하는가
+
+Verification
+→ 그것을 어떻게 증명할 것인가
+~~~
+
+핵심은 문서 종류를 늘리는 데 있지 않다.
+
+**모호성과 위험이 커질수록 실행 전에 의미와 완료 기준을 더 durable하게 만든다.**
+
+작고 명확한 수정은 곧바로 Task가 될 수 있고, 여러 모듈과 Product 판단이 얽힌 Work는 Specification 단계를 거칠 수 있다.
+
+---
+
 ### 4.3 Requirements-first와 Design-first
 
 모든 작업이 Requirement부터 시작하는 것은 아니다.
@@ -1528,7 +1607,35 @@ Planning Depth는 Task의 Risk와 Complexity에 맞춰야 한다.
 
 ---
 
-### 4.4 Requirement Generator와 Acceptance Authority를 분리한다
+### 4.4 산업 사례: Specification과 Architecture가 Backlog로 합쳐진다
+
+Caylent가 공개한 Software Factory 설명은 Factory 앞단을 어떻게 준비하는지 보여주는 사례다.
+
+이들의 설명에서는 먼저 Scope를 정리하고 Claude를 사용해 Prototype Specification을 만든다. 이후 고객에게 반복적으로 새 버전을 보여주며 Feedback을 받고, 동시에 Production에 필요한 Architecture를 설계한다. 두 흐름은 최종적으로 Detailed Specification과 Backlog로 합쳐지고, 그 결과가 Software Factory의 입력이 된다.
+
+~~~text
+Scoping
+    ↓
+Prototype Specification
+    ↓
+Customer Feedback ───────┐
+                         ├→ Detailed Specification
+Production Architecture ─┘
+                         ↓
+                      Backlog
+                         ↓
+                  Software Factory
+~~~
+
+여기서 가져올 원칙은 특정 기간이나 Consulting Process가 아니다.
+
+> Factory의 입력은 Raw Idea가 아니라, 실행 가능한 수준으로 정리된 Specification과 Architecture Constraint, Backlog에 가까워질수록 안정적이다.
+
+이는 Product Discovery를 모두 자동화해야 한다는 뜻도 아니다. 오히려 Intent와 Architecture를 먼저 정리하고, Agent가 실행할 Work와 완료 기준으로 변환하는 경계가 필요하다는 사례다.
+
+---
+
+### 4.5 Requirement Generator와 Acceptance Authority를 분리한다
 
 Agent가 Requirement 초안을 만드는 것은 유용하다.
 
@@ -1569,7 +1676,7 @@ System / Reviewer
 
 ---
 
-### 4.5 Requirement에서 Verification까지 연결한다
+### 4.6 Requirement에서 Verification까지 연결한다
 
 <!-- FIGURE F03: Work Artifact Traceability -->
 
@@ -1635,7 +1742,7 @@ PASS
 
 ---
 
-### 4.6 Ready Contract
+### 4.7 Ready Contract
 
 Factory가 고도화되면 모든 Backlog Item을 곧바로 Worker에게 보내고 싶어진다.
 
@@ -3591,6 +3698,64 @@ Option B
 
 Harness가 Agent의 탐색 비용과 오류 가능성을 바꾼다.
 
+#### Harness가 Tool 묶음보다 넓어지는 지점
+
+Skill과 Tool을 많이 제공한다고 End-to-End Delivery가 자동으로 만들어지는 것은 아니다.
+
+Caylent의 Software Factory 설명은 이 경계를 분명하게 보여준다. 이들은 Plugin이 Skill, Hook, Rule을 통해 Agent의 Knowledge와 행동 규칙을 제공할 수 있지만, Specification에서 Production-grade Software까지 신뢰성 있게 전달하려면 그 위에서 Agent Loop를 실행하는 Harness가 필요하다고 설명한다.
+
+그 Harness는 단순히 Tool을 노출하는 데서 끝나지 않는다.
+
+~~~text
+Specification
+      ↓
+Detailed Plan
+      ↓
+Execution
+      ↓
+Review Gates
+- functional
+- architecture conformance
+- security
+- scope conformance
+      ↓
+Feedback / Correction
+      ↺
+~~~
+
+즉 Production Harness는 다음 질문까지 책임질 수 있다.
+
+- 다음 실행 단계는 무엇인가
+- 어떤 Review를 언제 실행할 것인가
+- 실패한 Review Feedback을 어떻게 다음 Attempt에 전달할 것인가
+- 실제 변경이 계획된 Scope를 벗어나지 않았는가
+- Security와 Architecture Constraint를 지켰는가
+
+Caylent의 공개 DevBench 구현에서도 구조화된 Backlog를 Executor가 구현한 뒤 code, test, documentation, changes-manifest Judge와 별도 Security Review를 통과시키는 Loop가 확인된다. 모든 Factory가 같은 Review Topology를 가져야 한다는 뜻은 아니다. 중요한 것은 **Agent Capability를 반복 가능한 실행 순서와 강제 가능한 Gate로 묶는 것**이다.
+
+이 경계를 다음처럼 구분할 수 있다.
+
+~~~text
+Skill / Tool
+= Agent가 사용할 Capability
+
+Harness
+= Capability를 사용해 Agent Work Loop를 실행하는 구조
+
+Software Factory
+= Harness를 Durable Work, Control, Recovery, Acceptance, Delivery와 연결한 생산 시스템
+~~~
+
+따라서 다음 등식도 피한다.
+
+~~~text
+Skill
+≠ Harness
+
+Harness
+≠ Software Factory
+~~~
+
 ---
 
 ### 9.2 Agent-Computer Interface
@@ -5073,6 +5238,21 @@ Task의 구체적인 behavior를 검증한다.
 - traces
 - benchmark
 
+UI Task에서는 Behavioral Evidence가 특히 중요하다.
+
+Warp의 Zach Lloyd는 Software Factory의 verification 예로 Agent가 만든 UI를 computer use로 실제 실행하고 video와 screenshot을 남기는 흐름을 설명했다. 중요한 점은 screenshot 자체가 아니라 **실제 runtime behavior를 실행한 흔적을 Candidate Revision과 연결한다는 것**이다.
+
+~~~text
+UI Candidate
+→ Application Launch
+→ Computer Use
+→ Critical Flow
+→ Screenshot / Video
+→ Behavioral Evidence
+~~~
+
+이 패턴은 이 책의 Evidence Contract와 같은 문제를 다른 각도에서 보여준다. “화면을 수정했다”는 Agent의 설명보다, 특정 Revision에서 실제 사용 흐름을 실행하고 남긴 Evidence가 Review 비용을 줄인다.
+
 #### Independent Evaluator
 
 구현 Agent와 다른 Context나 Role을 가진 평가자가 결과를 점검한다.
@@ -5080,6 +5260,39 @@ Task의 구체적인 behavior를 검증한다.
 #### Human Acceptance
 
 Residual Risk와 Product Intent를 최종적으로 사람이 판단한다.
+
+Verification을 비용 순서의 Pyramid로만 볼 필요는 없다. **무엇에 대한 적합성을 검증하는가**라는 축도 필요하다.
+
+~~~text
+Functional Conformance
+- 요구한 동작을 실제로 하는가
+
+Architecture Conformance
+- 정해진 Architecture / Design Constraint를 지켰는가
+
+Scope Conformance
+- 허용된 파일과 변경 범위를 벗어나지 않았는가
+
+Security Conformance
+- 필요한 Security Policy와 Review를 통과했는가
+~~~
+
+예를 들어 Test가 모두 PASS해도 Agent가 허용되지 않은 공통 모듈까지 수정했거나, Requirement가 요구한 Architecture Boundary를 우회했다면 Production-ready Change라고 보기 어렵다.
+
+Caylent는 Software Factory Harness가 Security Review, Architectural Conformance, Scope 이탈 여부를 실행 Loop 안에서 점검해야 한다고 설명한다. 현재 공개 DevBench 구현은 이를 code/test/doc review, 실제 변경과 Changes Manifest의 비교, 별도 Security Review 같은 Gate로 구체화한다.
+
+~~~text
+Behavior PASS
++
+Architecture PASS
++
+Scope PASS
++
+Security PASS
+→ stronger completion evidence
+~~~
+
+모든 Task가 네 축을 모두 요구하는 것은 아니다. 핵심은 Functional Test 하나가 전체 Conformance를 대표한다고 가정하지 않는 것이다.
 
 모든 Task가 Pyramid 끝까지 갈 필요는 없다.
 
@@ -5606,6 +5819,7 @@ Task
 task_id
 base_revision
 result_revision
+declared_scope
 changed_files
 verification
 artifacts
@@ -5633,6 +5847,32 @@ artifacts:
 ~~~
 
 Agent가 “Test했다”고 말하는 것보다 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있어야 한다.
+
+Scope가 중요한 Task라면 `declared_scope`와 `changed_files`를 함께 남긴다.
+
+~~~text
+declared_scope
+- src/auth/**
+- tests/auth/**
+
+changed_files
+- src/auth/AuthService.java
+- tests/auth/AuthServiceTest.java
+~~~
+
+이 둘을 비교하면 “Test는 통과했지만 계획하지 않은 영역까지 수정한 Change”를 별도의 Evidence로 드러낼 수 있다.
+
+Verification도 이름만 나열하기보다 어떤 Conformance를 확인했는지 구분할 수 있다.
+
+~~~text
+verification
+- functional: PASS
+- architecture: PASS
+- scope: PASS
+- security: PASS
+~~~
+
+Task에 적용되지 않는 항목은 생략하거나 명시적으로 N/A 처리할 수 있다.
 
 ---
 
@@ -5799,6 +6039,10 @@ Machine-readable Manifest를 하나 두면 다음 단계가 쉬워진다.
   "taskId": "T-100",
   "baseRevision": "f10aa0",
   "resultRevision": "abc123",
+  "declaredScope": [
+    "src/auth/**",
+    "tests/auth/**"
+  ],
   "changedFiles": [
     "AuthService.java",
     "AuthServiceTest.java"
@@ -8276,6 +8520,22 @@ Factory Observability의 목적은 Agent를 감시하는 데 있지 않다.
 
 여기서 `Accepted Change`와 뒤에서 사용하는 `Cost per Accepted Change`는 업계 표준 Metric이 아니라 이 책이 Factory 수준의 측정 경계를 설명하기 위해 사용하는 synthesis다.
 
+Zach Lloyd도 Software Factory를 설명하면서 얼마나 많은 Software를 전달했는지뿐 아니라 human time과 token time을 함께 측정하고 개선해야 한다고 주장한다. 이 책은 그 측정 경계를 한 단계 더 좁힌다. 생성량이나 완료 보고보다 **검증과 Acceptance를 통과한 Change**를 중심으로 시간·비용·Human Attention을 본다.
+
+~~~text
+Generated Output
+→ Candidate
+→ Verified Change
+→ Accepted Change
+
+Accepted Change
+───────────────
+Human Attention
+Cycle Time
+Compute / Token Cost
+Retry / Rework
+~~~
+
 ---
 
 ### 19.1 무엇을 관찰할 것인가
@@ -8985,6 +9245,22 @@ Repeated Agent Failure
 ~~~
 
 이 책에서는 이런 Operate/Observe 결과가 다시 Requirement·Test·Task로 돌아가는 구조를 Closed-loop SDLC라고 부른다. 기존 DevSecOps의 continuous feedback을 Agent Work Intake까지 확장한 개념이다.
+
+Warp의 Factory cycle도 같은 방향의 사례다. Lloyd는 Agent가 code shipment에서 멈추지 않고, 배포 결과가 malfunction하는지 또는 실제로 사용되는지를 monitoring하고 그 output을 다시 Factory의 위쪽 입력으로 보내야 한다고 설명한다. 여기서 중요한 것은 특정 Vendor workflow가 아니라 **Delivery 이후의 Observation이 다음 Work의 원인이 되는 경계**다.
+
+<!-- CASE C15: Warp Public Software Factory -->
+
+> **Case Study C15 — Warp — Interactive Agent에서 Public Software Factory로**
+>
+> Warp 창업자 Zach Lloyd는 Software Factory를 idea/issue intake, triage, specification, implementation, review, verification, shipping, monitoring이 이어지는 cycle로 설명한다. 복잡한 Work에는 Product Specification과 Technical Specification을 나누고, UI verification에는 실제 computer use와 screenshot/video 같은 behavioral evidence를 사용한다.
+>
+> Open Source 전환 역시 단순한 코드 공개보다 public factory를 운영하려는 시도와 연결해 설명한다. Issue 상태와 작업 Agent/Contributor를 보이는 build.warp.dev를 proto-factory 사례로 제시했다.
+>
+> 이 책은 여기서 세 가지를 확장한다. 첫째, spec을 Requirement·Acceptance·Verification Contract로 연결한다. 둘째, factory efficiency를 단순 output보다 Accepted Change와 Human Attention으로 본다. 셋째, self-improvement를 Production에 즉시 적용하지 않고 Evaluate·Shadow·Approval을 거치는 guarded meta-change로 다룬다.
+>
+> **주의:** 이 사례는 Warp founder의 thesis와 자사 운영 사례다. 보편적 산업 성과나 모든 조직에 대한 예측으로 사용하지 않는다.
+>
+> Source: Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*.
 
 ---
 
@@ -10647,6 +10923,40 @@ Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없�
 
 Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
 
+중요한 것은 Self-improvement를 막연한 “Agent가 스스로 더 똑똑해진다”로 표현하지 않는 것이다. 실제 Factory에서는 실행 결과와 Human Correction을 관찰해 **개선 후보를 만드는 Loop**로 설계할 수 있다.
+
+Zach Lloyd는 예로 code review agent의 comment를 senior engineer가 수정했을 때 observer agent가 그 correction을 관찰하고 다음 실행을 위해 review skill을 개선하는 Skill Loop를 제시한다.
+
+~~~text
+Agent Execution
+      ↓
+Observable Result
+      ↓
+Human Correction / Verification Failure
+      ↓
+Observer
+      ↓
+Failure Pattern / Improvement Candidate
+      ↓
+Prompt / Skill / Rule / Context Candidate
+~~~
+
+여기까지는 개선 **후보 생성**이다.
+
+이 책의 Factory에서는 Candidate가 곧바로 Production Factory를 바꾸지 않는다.
+
+~~~text
+Observe
+→ Propose
+→ Evaluate
+→ Shadow
+→ Approve
+→ Promote
+→ Monitor
+~~~
+
+즉 Self-improvement도 일반 Software Change처럼 Verification과 Acceptance Authority를 가져야 한다. 이 원칙이 없으면 Factory는 자신의 성공 기준을 낮추는 방향으로도 “개선”될 수 있다.
+
 2026년 공개 사례에는 Factory.ai의 Signals처럼 session friction을 분석해 개선 Issue와 Fix로 연결하는 closed-loop 구현이 있고, Anthropic도 Agent Skills를 소개하며 장기적으로 Agent가 Skill을 직접 생성·편집·평가하는 방향을 언급했다. 전자는 한 회사의 제품 구현이고, 후자는 당시 “향후 탐색”으로 제시한 방향이다. 이를 일반적인 self-improving factory가 이미 확립됐다는 근거로 보지는 않는다.
 
 따라서 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
@@ -10943,6 +11253,38 @@ Dashboard
 이것이 Software Factory의 중요한 의미 중 하나다.
 
 Agent가 많아질수록 Orchestration과 Governance도 새로운 Software Engineering 대상이 된다.
+
+---
+
+## Product를 만드는 시스템을 설계한다
+
+Warp의 Zach Lloyd는 Factory Engineering을 설명하면서 엔지니어가 단순히 Product를 만드는 것이 아니라 **Product를 만드는 것을 만든다**는 방향으로 역할이 이동한다고 표현한다.
+
+이 책의 관점에서 이 역할을 조금 더 구체화하면 다음과 같다.
+
+~~~text
+Software Engineer
+→ Code / Architecture / Test를 설계한다
+
+Factory Engineer
+→ Work Definition을 설계한다
+→ Agent Authority를 설계한다
+→ Execution Environment를 설계한다
+→ Verification과 Evidence를 설계한다
+→ Failure Recovery를 설계한다
+→ Human Attention의 투입 지점을 설계한다
+→ Factory 자체의 변경 절차를 설계한다
+~~~
+
+이것은 기존 Software Engineering과 단절된 새 직업을 선언하려는 말이 아니다.
+
+오히려 Agent가 구현의 더 많은 부분을 맡을수록 Engineer가 관리해야 할 System Boundary가 넓어진다는 뜻에 가깝다. Repository와 Runtime뿐 아니라 Task State, Worker, Policy, Evaluator, Approval, Feedback Loop까지 Engineering 대상이 된다.
+
+따라서 Factory Engineer를 “AI에게 코딩을 시키는 사람”으로 이해하면 좁다.
+
+> Factory Engineer는 검증된 Software Change가 반복적으로 만들어질 수 있는 조건을 설계하고 운영하는 Engineer다.
+
+이 역할에서도 Product Judgment는 사라지지 않는다. Lloyd 역시 Factory metaphor가 mechanization처럼 들릴 수 있다는 한계를 인정하면서, 실제로 유용한 것을 만들고 무엇이 사용자에게 가치 있는지 판단하는 Human Input이 핵심이라고 강조한다.
 
 ---
 
@@ -11478,3 +11820,9 @@ Maturity와 같은 축이 아니다.
 
 53. WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
    https://workos.com/blog/project-horizon
+
+54. Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+   https://www.youtube.com/watch?v=tUPPVhBBcoM
+
+55. Warp / Zach Lloyd, *Adopting the software factory model: crawl, walk, run*  
+   https://www.warp.dev/blog/adopting-the-software-factory-model-crawl-walk-run

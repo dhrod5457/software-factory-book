@@ -219,3 +219,35 @@ Vendor comparison 자체가 목적이 아니라 responsibility boundary 사례.
 
 - 자체 구현 case study임을 명시
 - 일반 원칙의 독립 근거로 사용하지 않는다.
+
+---
+
+## C15. Warp - Interactive Agent에서 Public Software Factory로
+
+추천 장: 2장 / 20장 / 24장 / Epilogue
+
+사용:
+
+- interactive agent에서 automation 중심으로 이동하는 배경
+- issue / idea → triage → specification → implementation → review → verification → monitoring loop
+- UI 변경을 실제 computer use와 screenshot / video로 검증하는 사례
+- open-source repository를 public factory의 운영 대상으로 삼은 사례
+- observer agent가 human correction을 관찰해 skill을 개선하는 self-improvement loop
+- engineer가 product뿐 아니라 product를 만드는 system을 설계한다는 factory engineering 관점
+
+핵심:
+
+> Software Factory는 Coding Agent를 많이 실행하는 구조보다 Work Intake에서 Production Observation까지를 하나의 반복 가능한 생산 흐름으로 연결하는 구조에 가깝다.
+
+책의 확장:
+
+- Warp의 product / technical spec 구분을 이 책의 Requirement → Acceptance → Verification Contract와 연결한다.
+- Warp의 human time / token time 측정을 이 책의 Accepted Change / Human Attention / Cost 관점으로 확장한다.
+- Warp의 skill loop를 이 책의 Observe → Propose → Evaluate → Shadow → Approve → Promote 형태의 guarded self-improvement로 확장한다.
+
+주의:
+
+- Zach Lloyd의 발표는 Warp founder의 thesis와 운영 사례다.
+- “모든 프로젝트가 Software Factory를 갖게 된다”는 전망은 일반 사실로 쓰지 않는다.
+- Warp 자체의 운영 수치와 효과는 독립 검증된 일반 성능 근거로 사용하지 않는다.
+
