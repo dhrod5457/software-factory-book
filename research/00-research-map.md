@@ -321,6 +321,12 @@ AI 시대
 - `research/11-product-and-open-source-landscape.md` - Product / Open-source Landscape
 - `research/12-engineering-role-and-operating-model.md` - Human Role / Operating Model
 - `research/13-protocols-and-interoperability.md` - MCP / A2A / ACP / Interoperability
+
+- `research/14-failure-modes-and-antipatterns.md` - Failure Modes / Anti-patterns
+- `research/15-governance-provenance-and-agent-identity.md` - Governance / Provenance / Agent Identity
+- `research/16-productivity-evidence-and-measurement.md` - Productivity Evidence / Measurement
+- `research/17-review-integration-and-throughput-bottlenecks.md` - Review / Integration / Throughput Bottlenecks
+- `research/18-research-contradictions-and-open-questions.md` - Contradictions / Open Questions
 - `research/sources.md` - 공식 1차 출처 인덱스
 
 다음 단계에서는 새 주제를 무작정 늘리기보다 각 문서의 주장과 출처를 다시 교차검증하고, 서로 반복되는 원칙을 `planning/concept.md` 후보로 추출한다.
