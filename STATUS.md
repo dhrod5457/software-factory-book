@@ -2,6 +2,8 @@
 
 Phase 8 - Manuscript
 
+상태: **WORKING MANUSCRIPT COMPLETE**
+
 24개 본장과 Epilogue의 Draft 및 Phase 7 Review를 완료했다.
 
 확인:
@@ -92,21 +94,29 @@ Review에서 완료한 항목:
 - `manuscript/length-balance.md`
 - `manuscript/structural-flow-review.md`
 
-다음:
+완료 추가:
 
-1. 용어 미세 조정
-2. Reference 표기 형식 최종 결정
-3. Figure / Case Study 실제 배치
-4. 12·16·19장 layout 정리
-5. publication-time source recheck 목록 유지
+- Glossary 추가
+- Chapter별 Reference 제거 → 53개 통합 References
+- Figure marker 21개 실제 배치
+- Case Study marker 14개 실제 배치
+- Manuscript quality check PASS
+
+남은 작업:
+
+1. Copyedit
+2. 실제 Figure 제작 / Caption
+3. Case Study Box 최종 원고화
+4. publication-time source recheck
 
 # Next
 
-Phase 8 - Manuscript
-
 ```text
-reviewed chapter drafts
-→ manuscript assembly
-→ manuscript-level edit
-→ publication source pass
+working manuscript complete
+→ copyedit
+→ figure / case-study production
+→ publication-time source recheck
+→ release manuscript
 ```
+
+구조와 핵심 논지는 더 이상 확장하지 않는다.
