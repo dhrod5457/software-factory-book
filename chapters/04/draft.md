@@ -409,3 +409,6 @@ Agent가 실행 중 중단되면 이 Work는 어디에 남는가. Session이 닫
   https://kiro.dev/docs/specs/analyze-requirements/
 - REAgent, *Requirement-Driven LLM Agents for Software Issue Resolution*  
   https://arxiv.org/abs/2604.06861
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
+
