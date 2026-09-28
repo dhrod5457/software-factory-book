@@ -103,9 +103,19 @@ Draft 중 새로운 주제를 추가하기 전에:
 
 다음:
 
-- 17장 Parallel Worker / Multi-Agent
-- 18장 Review / CI / Integration
-- 19장 Observability / Metrics
+- 17장 Draft 작성
+- 18장 Draft 작성
+- 19장 Draft 작성
+- Part V Draft Review
+
+다음:
+
+- 20장 Event-driven Factory / Closed-loop SDLC
+- 21장 Developer Platform / Golden Path
+- 22장 Minimum Viable Factory
+- 23장 Reference Factory
+- 24장 Maturity / Autonomy
+- Epilogue
 
 # Draft Order
 
