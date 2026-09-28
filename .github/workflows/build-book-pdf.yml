@@ -49,6 +49,7 @@ jobs:
             base="$(basename "$src" .mmd)"
             echo "render $base"
             mmdc \
+              --puppeteerConfigFile manuscript/figures/puppeteer-config.json \
               --input "$src" \
               --output "manuscript/figures/rendered/$base.png"
           done
