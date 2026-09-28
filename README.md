@@ -18,8 +18,8 @@ AI Coding Agent를 실제 소프트웨어 생산 시스템 안에서 어떻게 �
 Phase 1 Research   완료에 가까움
 Phase 2 Concept    완료
 Phase 3 Scope      완료
-Phase 4 TOC        다음
-Phase 5 Chapter Plan
+Phase 4 TOC        완료
+Phase 5 Chapter Plan   다음
 Phase 6 Draft
 Phase 7 Review
 Phase 8 Manuscript
@@ -29,6 +29,7 @@ Phase 8 Manuscript
 
 - `planning/concept.md`
 - `planning/scope.md`
+- `planning/toc.md`
 - `PROJECT.md`
 - `STATUS.md`
 
@@ -42,6 +43,20 @@ Research 자료:
 - `research/00-research-map.md`
 - `research/sources.md`
 
+## 책의 구조
+
+```text
+Part I   Coding Agent에서 Software Factory로
+Part II  Work를 정의하는 시스템
+Part III Factory의 실행 구조
+Part IV  결과를 믿을 수 있게 만드는 시스템
+Part V   여러 Worker와 전체 Flow 관리
+Part VI  조직의 Software Delivery System으로 확장
+Part VII Minimum Viable Factory에서 Adaptive Factory까지
+```
+
+24장 + Epilogue로 구성한 현재 TOC는 `planning/toc.md`에서 관리합니다.
+
 ## 핵심 관점
 
 - Software Factory는 Multi-Agent System과 같은 말이 아닙니다.
@@ -52,20 +67,6 @@ Research 자료:
 - 높은 Autonomy에는 더 강한 Isolation, Verification, Governance가 필요합니다.
 - 기존 CI/CD와 Platform Engineering은 Factory가 대체하는 것이 아니라 기반으로 활용합니다.
 - Factory의 목표는 Agent 수나 코드량보다 검증된 변경의 전체 흐름을 개선하는 것입니다.
-
-## 핵심 범위
-
-```text
-Intent / Requirement
-→ Durable Task
-→ Control Plane
-→ Worker / Sandbox
-→ Agent Harness
-→ Verification / Evidence
-→ Recovery
-→ Governance
-→ Delivery / Feedback
-```
 
 ## 작성 방식
 
@@ -82,4 +83,4 @@ research
 → manuscript
 ```
 
-다음 작업은 `planning/toc.md` 설계입니다.
+다음 작업은 각 장의 `chapters/NN/plan.md`를 작성하는 것입니다.
