@@ -423,6 +423,8 @@ Parallel Worker로 Implementation Throughput을 높였다.
 
 ## 참고 자료
 
+- Cursor, *Grok Bot*  
+  https://cursor.com/docs/grok-bot
 - Anthropic, *Patterns and problems in emerging multiagent systems*  
   https://www.anthropic.com/research/multiagent-systems
 - Anthropic, *Building a C compiler with a team of parallel Claudes*  
