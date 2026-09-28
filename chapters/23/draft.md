@@ -142,7 +142,9 @@ Task READY
 
 ---
 
-## 23.4 Scenario 2: Verification Failure
+## 23.4 Failure와 Recovery Scenario
+
+**Scenario 2 — Verification Failure**
 
 Agent가 Candidate를 만들었지만 Test가 실패한다.
 
@@ -167,7 +169,7 @@ retry_count < budget
 
 ---
 
-## 23.5 Scenario 3: Worker Kill
+**Scenario 3 — Worker Kill**
 
 Task 수행 중 Worker Process를 강제로 죽인다.
 
@@ -191,7 +193,7 @@ integration pending
 
 ---
 
-## 23.6 Scenario 4: Worker A → Worker B Reassignment
+**Scenario 4 — Worker A → Worker B Reassignment**
 
 Worker A의 Partial Work를 Worker B가 이어받는다.
 
@@ -222,7 +224,7 @@ duplicate work
 
 ---
 
-## 23.7 Scenario 5: Human Approval
+**Scenario 5 — Human Approval**
 
 Task가 Verification을 통과한다.
 
@@ -248,7 +250,9 @@ APPROVED
 
 ---
 
-## 23.8 Scenario 6: Independent Parallel Tasks
+## 23.5 Parallel과 Conflict Scenario
+
+**Scenario 6 — Independent Parallel Tasks**
 
 Task A와 B가 다른 Module을 수정한다.
 
@@ -270,7 +274,7 @@ Parallelism이 실제 이득인지 본다.
 
 ---
 
-## 23.9 Scenario 7: Same-file Conflict
+**Scenario 7 — Same-file Conflict**
 
 Task C와 D가 같은 File을 수정한다.
 
@@ -292,7 +296,7 @@ Factory는 다음 중 하나를 해야 한다.
 
 ---
 
-## 23.10 Evidence Output
+## 23.6 Evidence Output
 
 각 Task 결과는 같은 Manifest를 반환한다.
 
@@ -321,7 +325,7 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ---
 
-## 23.11 Reference Implementation에서 일부러 만들지 않는 것
+## 23.7 Reference Implementation에서 일부러 만들지 않는 것
 
 다음은 없어도 된다.
 
@@ -336,7 +340,7 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ---
 
-## 23.12 Case Study와 Reference를 구분한다
+## 23.8 Case Study와 Reference를 구분한다
 
 실제 구현 경험은 유용하다.
 
