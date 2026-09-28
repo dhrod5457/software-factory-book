@@ -491,6 +491,8 @@ Epilogue에서는 **Software Engineering에서 Software Production System Engine
 
 ## 참고 자료
 
+- Cursor, *Work with Grok Bot*  
+  https://cursor.com/docs/grok-bot/work
 - OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
   https://openai.com/index/harness-engineering/
 - WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
