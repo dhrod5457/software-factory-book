@@ -774,6 +774,8 @@ Task 선택, Architecture, Acceptance, Merge, Deploy 권한을 사람이 유지�
 
 ### 2.5 하나의 Loop로 본다
 
+<!-- FIGURE F02: AI Software Factory Reference Loop -->
+
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
 ```text
