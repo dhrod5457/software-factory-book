@@ -4,8 +4,15 @@
 
 ## 현재 파일
 
-- `book.md` — 24개 본장 + Epilogue 전체 조립본
-- `edit-plan.md` — manuscript 단계 편집 순서와 완료 기준
+- `book.md` — 24개 본장 + Epilogue + 들어가며 전체 조립본
+- `preface.md` — 들어가며 Source
+- `edit-plan.md` — manuscript 단계 편집 순서
+- `structural-flow-review.md` — 조립 구조 검토
+- `terminology.md` — canonical terminology
+- `references.md` — 중복 제거 Reference 53개
+- `figures.md` — 출판용 Figure 후보
+- `case-studies.md` — Case Study Box 후보
+- `length-balance.md` — 장별 분량 분석
 
 ## 조립 상태
 
@@ -15,11 +22,23 @@
 - Chapter 1~24 모두 존재
 - Chapter 번호 중복 없음
 - Epilogue 존재
-- 상단 목차 추가
+- 들어가며 존재
+- 목차 존재
+- Part → Chapter → Section heading hierarchy 정리
+
+## Manuscript 편집 완료 항목
+
+- 반복되는 `다음 질문` 소제목 제거
+- 1장 11,025 → 7,228 chars 압축
+- 2장 10,563 → 6,808 chars 압축
+- 22장 Step A~H를 4개 상위 구조로 grouping
+- 23장 Scenario를 Failure/Recovery, Parallel/Conflict로 grouping
+- Figure 후보 21개 선정
+- Case Study Box 후보 14개 선정
 
 ## Source of Truth
 
-현재 원본 본문은 각 Chapter Draft다.
+Chapter 내용의 원본은 각 `chapters/NN/draft.md`다.
 
 ```text
 chapters/NN/draft.md
@@ -27,22 +46,14 @@ chapters/NN/draft.md
 manuscript/book.md
 ```
 
-Manuscript 단계에서 구조적 편집이 발생하면 최종적으로 Chapter Source와 동기화한다.
+Manuscript에서 구조 자체를 바꾼 1·2·22·23장은 Chapter Source에 동기화했다.
 
-## Phase 8 원칙
+## 남은 Phase 8 작업
 
-Manuscript 단계에서는 새로운 핵심 주제를 추가하지 않는다.
+1. 용어 미세 조정
+2. Reference 형식 최종 결정
+3. Figure / Case Study Box 실제 배치
+4. 12·16·19장 layout 정리
+5. publication-time source recheck
 
-우선순위:
-
-1. 장간 연결
-2. 중복 제거
-3. 용어 통일
-4. 제목/소제목 호흡
-5. Reference 형식
-6. Figure/Box 위치
-7. 전체 분량 균형
-8. Front matter
-9. Publication-time source recheck
-
-새로운 연구가 꼭 필요하면 `research/`에 먼저 기록한다.
+새로운 핵심 주제는 추가하지 않는다.
