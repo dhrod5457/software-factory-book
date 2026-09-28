@@ -272,6 +272,14 @@ Task 선택, Architecture, Acceptance, Merge, Deploy 권한을 사람이 유지�
 
 ## 2.5 하나의 Loop로 본다
 
+여기서 Factory를 두 개의 경계로 볼 수 있다.
+
+좁은 의미에서는 이미 정의된 Task를 durable하게 실행하고 검증하고 복구하는 **실행 시스템**이다.
+
+넓은 의미에서는 Signal과 Intent를 Work로 변환하는 앞단부터 Delivery 이후의 Observation과 Improvement까지 연결하는 **생산 루프**다.
+
+Warp 창업자 Zach Lloyd는 2026년 발표에서 아이디어가 들어오면 Agent가 triage하고, 복잡한 Work는 specification으로 보내며, implementation·review·verification·shipping·monitoring 결과를 다시 위쪽으로 되돌리는 Software Factory cycle을 제시했다. 이 책은 그 전망을 그대로 정의로 채택하지는 않지만, Factory의 경계가 Coding Agent 실행보다 넓어질 수 있다는 실제 사례로 사용한다.
+
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
 ```text
@@ -339,6 +347,8 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 ## 참고 자료
 
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
 - OpenAI, *An open-source spec for Codex orchestration: Symphony*  
   https://openai.com/index/open-source-codex-orchestration-symphony/
 - WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
