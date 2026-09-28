@@ -2,7 +2,11 @@
 
 AI Coding Agent를 실제 소프트웨어 생산 시스템 안에서 어떻게 배치하고 운영할지 다루는 Software Engineering 책 프로젝트입니다.
 
-현재 작업 제목은 **AI Software Factory**이며 최종 제목과 부제는 아직 확정하지 않았습니다.
+최종 RC 제목은 **AI Software Factory**입니다.
+
+부제:
+
+**코딩 에이전트를 소프트웨어 생산 시스템으로 운영하는 설계 원칙**
 
 ## 중심 질문
 
@@ -22,7 +26,7 @@ Phase 4 TOC            완료
 Phase 5 Chapter Plan   완료
 Phase 6 Draft          완료
 Phase 7 Review         완료
-Phase 8 Manuscript     진행
+Phase 8 Manuscript     RC2
 ```
 
 ## 완료 상태
