@@ -303,6 +303,7 @@ Feedback이 반드시 완전 자동일 필요는 없다.
 ```text
 Model Capability
 ≠ Agent Capability
+≠ Harness Capability
 ≠ Factory Capability
 ```
 
@@ -516,10 +517,35 @@ Harness는 Agent가 일을 할 수 있게 만드는 실행 구조다.
 - Sandbox
 - Result filtering
 - Subagents
+- Execution loop
+- Review / enforcement gates
+
+Production Harness는 Tool을 제공하는 데서 끝나지 않을 수 있다.
+
+~~~text
+Specification
+→ Plan
+→ Execute
+→ Review
+→ Feedback
+↺
+~~~
+
+이 Loop 안에서 Functional Verification뿐 아니라 Architecture Conformance, Scope Conformance, Security Gate를 실행할 수 있다.
+
+다음 경계를 유지한다.
+
+~~~text
+Skill / Tool
+≠ Harness
+
+Harness
+≠ Software Factory
+~~~
 
 책에서는 Harness를 Factory의 Worker/Execution Layer를 구성하는 핵심 요소로 다룬다.
 
-하지만 Harness 자체를 Factory 전체와 동일시하지 않는다.
+하지만 Harness 자체를 Factory 전체와 동일시하지 않는다. Durable Work, Control Plane, Recovery, Acceptance Authority, Delivery는 더 넓은 Factory 책임이다.
 
 ---
 
