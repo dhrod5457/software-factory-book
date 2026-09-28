@@ -835,22 +835,9 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 > AI Software Factory는 기존 CI/CD, DevOps, Platform Engineering, Agent Platform과 어디에서 겹치고 어디에서 달라지는가?
 
-다음 장에서는 이 경계를 정리한다.
+먼저 기존 Delivery System과의 경계를 정리한다.
 
 ---
-
-### 참고 자료
-
-- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
-  https://openai.com/index/open-source-codex-orchestration-symphony/
-- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
-  https://workos.com/blog/project-horizon
-- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
-  https://www.anthropic.com/engineering/managed-agents
-- NIST NCCoE, *Notional Reference Model for DevSecOps*  
-  https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
-- DORA, *Platform Engineering Capability*  
-  https://dora.dev/capabilities/platform-engineering/
 
 ---
 
