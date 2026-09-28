@@ -1,22 +1,17 @@
 # Current Phase
 
-Phase 6 - Draft 진행
+Phase 7 - Review
 
-Research → Concept → Scope → TOC를 바탕으로 24개 장과 Epilogue의 `plan.md`를 모두 작성했다.
+24개 본장과 Epilogue의 Draft 작성을 완료했다.
 
-각 Chapter Plan은 다음을 고정한다.
+검증 결과:
 
-- 장의 목표
-- 핵심 질문
-- 핵심 주장
-- 독자가 얻는 것
-- 반드시 사용할 Research
-- 반례 / 주의점
-- 절 구성
-- 필요한 구조 / 그림
-- 실전 예제 / 실험
-- 제외 범위
-- 앞뒤 장 연결
+- `chapters/01..24/draft.md` 존재
+- `chapters/epilogue/draft.md` 존재
+- 총 25개 Draft 파일 확인
+- Part I~VII Draft Review 작성
+- Full Draft Structural Review 작성
+- Writing Style Guide 적용
 
 # Working Title
 
@@ -39,92 +34,61 @@ Epilogue Software Engineering에서 Software Production으로
 
 24 Chapters + Epilogue.
 
+# Draft Status
+
+```text
+01~24 Draft 완료
+Epilogue Draft 완료
+Part I~VII Draft Review 완료
+Full Draft Structural Review 완료
+```
+
 # Source of Truth
 
 1. `planning/concept.md`
 2. `planning/scope.md`
 3. `planning/toc.md`
-4. `chapters/README.md`
-5. 각 `chapters/NN/plan.md`
-6. `planning/future-topics.md`
-7. `research/29-academic-synthesis-design-principles.md`
-8. `research/sources.md`
+4. 각 `chapters/NN/plan.md`
+5. 각 `chapters/NN/draft.md`
+6. `chapters/epilogue/draft.md`
+7. `planning/writing-style.md`
+8. `review/full-draft-structural-review.md`
+9. `research/sources.md`
 
-# Draft Rule
+# Review Priorities
 
-각 장 Draft는 같은 디렉터리의 `draft.md`에 작성한다.
+1. 구조 중복 제거
+2. 용어 통일
+3. 주장 강도 조정
+4. 최신 Source 재검증
+5. Vendor 수치/기능 검증
+6. Preprint publication 상태 확인
+7. 그림/도식 정리
+8. Case Study와 일반 원칙 분리
+9. 장간 연결 문장 정리
+10. 문체 Line Edit
 
-```text
-chapters/01/plan.md
-chapters/01/draft.md
-```
+# High-risk Review Areas
 
-Draft 중 새로운 주제를 추가하기 전에:
+특히 다시 확인한다.
 
-1. 해당 장 `plan.md`
-2. `planning/scope.md`
-3. `planning/toc.md`
+- 2026 제품 기능/출시 상태
+- 생산성 수치
+- Benchmark 상태
+- NIST / protocol 최신 버전
+- M0~M5 taxonomy가 업계 표준처럼 읽히지 않는지
+- Accepted Change metric이 저자 synthesis임을 명확히 했는지
+- Self-improvement / Autonomous Merge를 과장하지 않았는지
 
-와 비교한다.
+# Next
 
-# Draft Progress
+Phase 7 - Review
 
-완료:
+`review/full-draft-structural-review.md` 기준으로 1~24장 전체를 순차 Review한다.
 
-- 1장 Draft 작성 및 1차 수정
-- 2장 Draft 작성
-- 3장 Draft 작성
-- Part I Draft Review
-
-다음:
-
-- 4장 Draft 작성
-- 5장 Draft 작성
-- 6장 Draft 작성
-- Part II Draft Review
-
-다음:
-
-- 7장 Draft 작성
-- 8장 Draft 작성
-- 9장 Draft 작성
-- 10장 Draft 작성
-- 11장 Draft 작성
-- 12장 Draft 작성
-- Part III Draft Review
-
-다음:
-
-- 13장 Draft 작성
-- 14장 Draft 작성
-- 15장 Draft 작성
-- 16장 Draft 작성
-- Part IV Draft Review
-
-다음:
-
-- 17장 Draft 작성
-- 18장 Draft 작성
-- 19장 Draft 작성
-- Part V Draft Review
-
-다음:
-
-- 20장 Event-driven Factory / Closed-loop SDLC
-- 21장 Developer Platform / Golden Path
-- 22장 Minimum Viable Factory
-- 23장 Reference Factory
-- 24장 Maturity / Autonomy
-- Epilogue
-
-# Draft Order
-
-권장 순서:
+Review 완료 후:
 
 ```text
-01 → 02 → 03
-→ 04 → 05 → 06
-→ 07 ...
+Phase 8 Manuscript
+→ manuscript/
 ```
-
-초고는 처음부터 문장 완성도를 최대화하기보다 Plan의 논리와 Research 근거를 정확히 반영하는 것을 우선한다.
