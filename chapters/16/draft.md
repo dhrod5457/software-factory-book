@@ -556,3 +556,5 @@ Agent 수를 늘리면 처리량도 선형으로 늘어날까.
   https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/
 - GitHub, *Enterprise AI controls: agent control plane*  
   https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
