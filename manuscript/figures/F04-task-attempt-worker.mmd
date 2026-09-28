@@ -1,0 +1,10 @@
+flowchart TD
+  T["Task T1"]
+  A1["Attempt A1"]
+  A2["Attempt A2"]
+  W1["Worker W1"]
+  W2["Worker W2"]
+  F["FAILED"]
+  P["PASSED"]
+  T --> A1 --> W1 --> F
+  T --> A2 --> W2 --> P
