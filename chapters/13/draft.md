@@ -80,6 +80,7 @@ Task
 task_id
 base_revision
 result_revision
+declared_scope
 changed_files
 verification
 artifacts
@@ -107,6 +108,32 @@ artifacts:
 ~~~
 
 중요한 것은 Agent가 “Test했다”고 말하는 것이 아니라 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있다는 것이다.
+
+Scope가 중요한 Task라면 `declared_scope`와 `changed_files`를 함께 남긴다.
+
+~~~text
+declared_scope
+- src/auth/**
+- tests/auth/**
+
+changed_files
+- src/auth/AuthService.java
+- tests/auth/AuthServiceTest.java
+~~~
+
+이 둘을 비교하면 “Test는 통과했지만 계획하지 않은 영역까지 수정한 Change”를 별도의 Evidence로 드러낼 수 있다.
+
+Verification도 이름만 나열하기보다 어떤 Conformance를 확인했는지 구분할 수 있다.
+
+~~~text
+verification
+- functional: PASS
+- architecture: PASS
+- scope: PASS
+- security: PASS
+~~~
+
+Task에 적용되지 않는 항목은 생략하거나 명시적으로 N/A 처리할 수 있다.
 
 ---
 
@@ -244,6 +271,10 @@ Machine-readable Manifest를 하나 두면 다음 단계가 쉬워진다.
   "taskId": "T-100",
   "baseRevision": "f10aa0",
   "resultRevision": "abc123",
+  "declaredScope": [
+    "src/auth/**",
+    "tests/auth/**"
+  ],
   "changedFiles": [
     "AuthService.java",
     "AuthServiceTest.java"
@@ -387,3 +418,5 @@ Worker도 중간에 죽었다.
   https://pages.nist.gov/nccoe-devsecops/functional-demonstration-scenarios.html
 - GitHub, *Turn one giant AI-generated pull request to a reviewable stack*  
   https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
+- Caylent Solutions, *DevBench Architecture*  
+  https://github.com/caylent-solutions/devbench/blob/main/docs/architecture.md
