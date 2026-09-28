@@ -1,8 +1,12 @@
 # 프로젝트 목적
 
-작업 제목:
+제목:
 
 **AI Software Factory**
+
+부제:
+
+**코딩 에이전트를 소프트웨어 생산 시스템으로 운영하는 설계 원칙**
 
 AI Coding Agent를 개인 개발 보조도구가 아니라 반복 가능한 소프트웨어 생산 시스템의 Worker로 배치하는 방법을 다루는 Software Engineering 책을 작성한다.
 
@@ -122,4 +126,4 @@ research
 → manuscript
 ```
 
-현재는 Review를 완료했고 Manuscript 단계다.
+현재는 Release Candidate 단계다.
