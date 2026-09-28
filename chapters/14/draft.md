@@ -185,7 +185,7 @@ max_retries: 2
 
 같은 Failure가 반복되는지도 봐야 한다.
 
-이를 위해 Failure Fingerprint를 만들 수 있다.
+이를 위해 이 책에서는 반복 오류를 식별할 수 있는 **Failure Fingerprint**를 두는 방식을 사용한다. 이것 역시 특정 업계 표준이 아니라 동일 실패의 반복 여부를 판단하기 위한 설계 패턴이다.
 
 예:
 
@@ -352,7 +352,7 @@ Failure Classification이 없으면 복구가 잘못된 Layer에서 일어난다
 
 Recovery는 Retry 아니면 Human Takeover 두 가지만 있는 것이 아니다.
 
-Wink 연구는 Production Coding Agent Trajectory를 외부 Observer가 감시하고 작은 Intervention으로 복구하는 패턴을 연구했다.
+2026년 arXiv preprint인 Wink 연구는 production traffic에서 수집한 10,000개 이상의 coding-agent trajectory를 바탕으로 외부 Observer가 작은 Intervention으로 복구하는 패턴을 연구했다. 저자들은 분석 대상에서 Specification Drift, Reasoning Problem, Tool Call Failure 같은 misbehavior가 전체 trajectory의 약 30%에서 관찰됐고, 한 번의 intervention이 필요한 사례 중 90%를 Wink가 해결했다고 보고했다. 이 수치는 해당 production 환경과 taxonomy에서 나온 결과이며 일반적인 coding-agent 실패율로 해석하면 안 된다.
 
 개념적으로 다음과 같다.
 
