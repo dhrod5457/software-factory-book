@@ -467,3 +467,5 @@ Warm 상태를 재사용하면 무엇이 위험한가.
   https://www.anthropic.com/engineering/managed-agents
 - Microsoft, *Durable Task for AI agents*  
   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
