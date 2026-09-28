@@ -98,7 +98,7 @@ Diagnosis 결과가 Code Issue로 확인되면 그다음 Fix Task를 만든다.
 
 ## 20.3 Event-driven은 Fully Autonomous와 다르다
 
-Event가 자동으로 Task를 생성해도 Merge까지 자동일 필요는 없다.
+Event가 자동으로 Task를 생성해도 Merge까지 자동일 필요는 없다. Google이 2025년 12월 Jules에 공개한 Suggested Tasks와 Scheduled Tasks도 이 구분을 보여준다. Suggested Tasks는 개선 후보를 제안해 사용자가 review/approve/dismiss하도록 했고, Render 연동의 deployment-failure 대응도 fix를 만든 뒤 Pull Request를 열어 review를 남겼다.
 
 예:
 
@@ -162,7 +162,7 @@ Repeated Agent Failure
 → Factory Improvement Task
 ~~~
 
-이 구조가 Closed-loop다.
+이 책에서는 이런 Operate/Observe 결과가 다시 Requirement·Test·Task로 돌아가는 구조를 Closed-loop SDLC라고 부른다. 기존 DevSecOps의 continuous feedback을 Agent Work Intake까지 확장한 개념이다.
 
 ---
 
@@ -238,7 +238,7 @@ within 10m
 
 ## 20.7 Oscillation
 
-Self-healing Loop가 잘못 설계되면 반복 변경이 발생할 수 있다.
+자동 remediation이나 self-healing 성격의 Loop가 잘못 설계되면 반복 변경이 발생할 수 있다.
 
 ~~~text
 Agent
