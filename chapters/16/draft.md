@@ -114,7 +114,7 @@ Audit에서 Human Action과 Agent Action을 구분하기 어렵다.
 
 Task가 끝난 뒤에도 Credential이 남을 수 있다.
 
-더 나은 방향은 Delegated Identity다.
+더 나은 방향으로는 Delegated Identity를 고려할 수 있다. 2026년 2월 NIST NCCoE도 software/AI agent identity와 authorization에 대한 **Initial Public Draft concept paper**를 내고 identification, authorization, auditing, non-repudiation, prompt-injection controls를 논의하기 시작했다. 아직 확정 표준이 아니라 진행 중인 project 방향이라는 점이 중요하다.
 
 ~~~text
 Human Principal
@@ -126,7 +126,7 @@ Agent Identity
 Scoped Capability
 ~~~
 
-예를 들어 Task T-200에 다음 권한만 줄 수 있다.
+이 책의 설계 후보는 Human Principal과 Agent Identity를 분리하고 Task 범위에 맞는 Capability를 위임하는 것이다. 예를 들어 Task T-200에 다음 권한만 줄 수 있다.
 
 ~~~text
 repository: project-a
@@ -199,11 +199,9 @@ Untrusted Text
 → External Action
 ~~~
 
-Microsoft Security가 공개한 Agentic CI/CD 사례들이 중요한 이유도 이 연결에 있다.
+Microsoft Security가 2026년 공개한 두 사례는 이 연결을 구체적으로 보여준다. 하나는 당시 Claude Code GitHub Action의 특정 취약 경로에서 untrusted GitHub content가 runner의 environment secret 노출로 이어질 수 있었던 사례이고, 다른 하나는 Semantic Kernel의 이미 수정된 취약점에서 prompt injection이 tool parameter를 통해 host-level file write나 RCE로 확장될 수 있었던 사례다. 둘 다 특정 버전과 구성의 취약점이며 모든 Agent Framework의 일반 동작을 뜻하지 않는다.
 
-Prompt Injection은 단순히 잘못된 답변을 만드는 문제가 아니다.
-
-Tool Authority가 있으면 Host Action이나 Secret Exposure로 확대될 수 있다.
+공통 교훈은 Model 자체를 security boundary로 간주할 수 없다는 것이다. Tool Authority가 있으면 Prompt Injection의 영향이 Host Action이나 Secret Exposure까지 커질 수 있다.
 
 그래서 Untrusted Context와 Privileged Tool 사이에 Boundary가 필요하다.
 
@@ -372,7 +370,7 @@ approved_by: user:lee
 - 어떤 Attempt에서 결과가 나왔는가
 - 누가 Acceptance를 승인했는가
 
-Agent Identity는 이름표가 아니라 Delegation과 Audit의 기준이 된다.
+Agent Identity는 이름표가 아니라 Delegation과 Audit의 기준이 될 수 있다. 현재 표준화 방식은 아직 정착 중이므로, 이 장의 Task-scoped identity 모델은 NIST의 확정 규격이 아니라 책의 architecture proposal이다.
 
 ---
 
