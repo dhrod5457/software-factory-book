@@ -236,6 +236,8 @@ CI는 통과했는데 리뷰가 대기한다.
 
 ### 1.1 Coding Assistant에서 Coding Agent로
 
+<!-- FIGURE F01: Model → Agent → Factory Capability -->
+
 Coding Assistant와 Coding Agent를 제품 이름으로 나누기는 어렵다. 같은 제품도 사용 방식에 따라 Assistant처럼 동작할 수도 있고 Agent처럼 동작할 수도 있다.
 
 이 책에서는 작업 방식으로 구분한다.
@@ -356,6 +358,8 @@ Agent가 빨라졌다는 사실과 변경이 빨리 전달됐다는 사실은 �
 
 ### 1.3 Human Attention이 새로운 Capacity가 된다
 
+<!-- CASE C01: OpenAI Symphony - Human Attention에서 Task Orchestration으로 -->
+
 Agent가 한두 개일 때는 사람이 직접 관리해도 된다.
 
 여러 Agent를 동시에 사용하기 시작하면 개발자는 곧 다른 일을 하게 된다.
@@ -398,6 +402,8 @@ Accepted Change
 ---
 
 ### 1.4 생산성 연구가 서로 다른 이유
+
+<!-- CASE C10: Microsoft / METR Productivity Contrast -->
 
 AI 코딩 도구의 생산성 효과를 이야기하면 서로 반대처럼 보이는 수치가 나온다.
 
@@ -767,6 +773,8 @@ Task 선택, Architecture, Acceptance, Merge, Deploy 권한을 사람이 유지�
 ---
 
 ### 2.5 하나의 Loop로 본다
+
+<!-- FIGURE F02: AI Software Factory Reference Loop -->
 
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
@@ -1506,6 +1514,8 @@ System / Reviewer
 
 ### 4.5 Requirement에서 Verification까지 연결한다
 
+<!-- FIGURE F03: Work Artifact Traceability -->
+
 좋은 Factory는 Work Artifact를 서로 연결한다. Spec Kit의 최신 `converge` 단계처럼 구현 결과를 다시 specification·plan·task와 대조하는 흐름도 이 연결의 한 사례다.
 
 ~~~text
@@ -1791,6 +1801,8 @@ carryover
 ---
 
 ### 5.3 Task와 Attempt를 분리한다
+
+<!-- FIGURE F04: Task / Attempt / Worker State Model -->
 
 Task를 운영 단위로 만들려면 Attempt를 별도로 봐야 한다.
 
@@ -2477,6 +2489,8 @@ Factory에서는 반대여야 한다.
 
 ### 7.1 Control Plane이 관리해야 하는 상태
 
+<!-- FIGURE F05: Control Plane vs Execution Plane -->
+
 Control Plane은 코드를 직접 작성하는 주체가 아니다.
 
 주요 책임은 **Work의 상태와 흐름을 관리하는 것**이다.
@@ -2596,6 +2610,8 @@ Task Result
 ---
 
 ### 7.3 Issue Tracker와 Execution State는 같은 것이 아니다
+
+<!-- CASE C02: WorkOS Horizon - Durable Control Plane과 Disposable Execution -->
 
 많은 조직에서 Issue Tracker는 이미 Work의 출발점이다.
 
@@ -2909,6 +2925,8 @@ Workspace
 
 ### 8.1 무엇을 격리해야 하는가
 
+<!-- FIGURE F06: Worker Isolation Boundary -->
+
 Agent가 파일을 수정하고 Shell 명령을 실행하려면 독립된 Workspace가 필요하다.
 
 먼저 Branch는 source history를 분리하지만 실행환경을 격리하지는 않는다.
@@ -3085,6 +3103,8 @@ Fresh per Task
 ---
 
 ### 8.4 Ephemeral Worker와 Persistent Worker
+
+<!-- CASE C03: Anthropic Managed Agents - Brain / Hands Separation -->
 
 Worker 운영에는 두 방향이 있다.
 
@@ -3363,6 +3383,8 @@ Agent가 Repository와 Tool을 어떻게 보고, 어떤 결과를 받고, 어떤
 ---
 
 ### 9.1 Harness란 무엇인가
+
+<!-- FIGURE F07: Harness / Context / Runtime 관계 -->
 
 Model은 혼자 Repository를 수정하지 않는다.
 
@@ -3712,6 +3734,8 @@ release-worker
 
 ### 9.8 Harness도 Regression이 생긴다
 
+<!-- CASE C05: GitHub Copilot Code Review - Better Tool, Worse Result -->
+
 Tool을 업그레이드하면 성능이 좋아질 것이라고 생각하기 쉽다.
 
 하지만 Tool Interface가 바뀌면 기존 Instruction과 Agent 행동 전략이 더 이상 맞지 않을 수 있다.
@@ -3939,6 +3963,8 @@ Agent가 처음부터 모든 문서를 읽지 않아도 되는 구조가 중요�
 ---
 
 ### 10.3 AGENTS.md는 지식 저장소가 아니라 Entry Point다
+
+<!-- CASE C04: OpenAI Harness Engineering - Agent Legibility -->
 
 Context File은 유용하다.
 
@@ -4619,6 +4645,8 @@ Failure가 발생했을 때 어디까지 되돌릴지 결정하는 것도 Contro
 
 ### 11.9 Control Hierarchy
 
+<!-- FIGURE F08: Controlled Autonomy Stack -->
+
 Factory의 Control을 계층으로 보면 다음처럼 정리할 수 있다.
 
 ~~~text
@@ -4772,6 +4800,8 @@ Acceptance
 ---
 
 ### 12.2 Verification Pyramid
+
+<!-- FIGURE F09: Verification Pyramid -->
 
 모든 Task에 같은 검증 비용을 쓸 필요는 없다.
 
@@ -4931,6 +4961,8 @@ Acceptance를 Test 하나와 완전히 동일시하면 안 된다.
 
 ### 12.5 Test PASS가 User Intent와 같지 않은 이유
 
+<!-- CASE C06: Microsoft Building to the Test -->
+
 Test는 강력하다.
 
 Agent에게 빠르고 deterministic한 Feedback을 준다.
@@ -4973,6 +5005,8 @@ Validation의 종류를 넓혀야 한다.
 ---
 
 ### 12.6 Automated Grader PASS와 Maintainer Acceptance는 다르다
+
+<!-- CASE C07: METR Maintainer Review -->
 
 METR의 2026년 연구 노트는 SWE-bench Verified에서 자동 grader를 통과한 Patch를 실제 Maintainer에게 다시 검토하게 했다. 4명의 Maintainer가 3개 Repository의 95개 Issue 범위를 다룬 표본에서, Test를 통과한 AI Patch의 상당수가 실제 main에는 Merge되지 않았을 것으로 평가됐다. 다만 Agent에게 Review Feedback을 받고 반복 수정할 기회를 주지 않은 single-shot 평가라는 제한이 있다.
 
@@ -5032,6 +5066,8 @@ Factory에서는 다음 경계를 고려할 수 있다.
 ---
 
 ### 12.8 Lucky Pass: 결과만 맞아도 충분한가
+
+<!-- CASE C08: Microsoft AgentLens - Lucky Pass -->
 
 Final Test가 통과했지만 Trajectory가 불안정할 수도 있다.
 
@@ -5436,6 +5472,8 @@ Behavior를 보여주는 Evidence와 Source Risk는 다른 문제다.
 
 ### 13.5 Evidence와 Provenance는 다르다
 
+<!-- FIGURE F10: Evidence vs Provenance -->
+
 두 개념을 구분할 필요가 있다.
 
 #### Evidence
@@ -5739,6 +5777,8 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 ---
 
 ### 14.2 Recovery Ladder
+
+<!-- FIGURE F11: Recovery Ladder -->
 
 Failure가 났다고 바로 Worker 전체를 새로 만들 필요는 없다.
 
@@ -6151,6 +6191,8 @@ Conversation History를 저장해도 이 문제는 해결되지 않는다.
 
 ### 15.2 Event History
 
+<!-- FIGURE F12: Durable Execution Timeline -->
+
 Durable Execution에서는 중요한 상태 변화와 외부 행동을 기록한다.
 
 예:
@@ -6349,6 +6391,8 @@ Workflow 모델에서는 Human Approval을 나중에 도착하는 asynchronous e
 ---
 
 ### 15.7 Durable Runtime과 Agent Harness의 책임
+
+<!-- CASE C12: Google Agent Executor / Microsoft Durable Task -->
 
 둘을 구분해보자.
 
@@ -6633,6 +6677,9 @@ Mandatory Rule은 Enforcement가 필요하다.
 ---
 
 ### 16.3 Human Credential을 Agent에게 그대로 주지 않는다
+
+<!-- FIGURE F13: Agent Security Delegation -->
+<!-- CASE C11: NIST Agent Identity Direction -->
 
 가장 간단한 연결 방식은 개발자의 Personal Token을 Worker에 넣는 것이다.
 
@@ -7149,6 +7196,8 @@ Ready Task 수와 Dependency를 보고 필요한 Worker 수를 정한다.
 
 ### 17.3 Fan-out / Fan-in
 
+<!-- FIGURE F14: Parallel Fan-out / Fan-in -->
+
 Parallel Worker는 보통 다음 구조를 가진다.
 
 ~~~text
@@ -7232,6 +7281,8 @@ Runtime conflict detection
 ---
 
 ### 17.5 More Agents가 More Throughput이 아닌 이유
+
+<!-- CASE C09: Anthropic Multi-Agent Simulation -->
 
 Anthropic이 2026년 8월 공개한 연구는 이런 Coordination Failure를 통제된 simulation에서 보여준다. 여러 Model Generation과 Agent 수를 바꿔 동일한 open-world game project를 12시간 동안 공동 개발하게 했을 때, 일부 Model에서는 많은 PR을 열고도 Merge 비율이 낮았고 shared file conflict 뒤 PR을 포기하는 패턴이 나타났다. 더 최신 Model 중 일부는 오히려 file ownership을 강하게 나눠 충돌을 줄였다.
 
@@ -7464,6 +7515,8 @@ Worker가 많아질수록 이 이동은 더 빨라진다.
 ---
 
 ### 18.1 Bottleneck Migration
+
+<!-- FIGURE F15: Factory Throughput Bottleneck -->
 
 예를 들어 하루에 다음 처리량을 가진 팀이 있다고 하자.
 
@@ -7961,6 +8014,8 @@ TaskDone
 
 ### 19.3 Task Timeline을 쪼개서 본다
 
+<!-- FIGURE F16: Task Timeline / Observability -->
+
 Task가 10시간 걸렸다고 하자.
 
 이 숫자만으로는 원인을 알 수 없다.
@@ -8398,6 +8453,8 @@ Production Signal
 
 ### 20.2 Signal에서 Task로
 
+<!-- FIGURE F17: Signal → Task Conversion -->
+
 좋은 흐름은 다음에 가깝다.
 
 ~~~text
@@ -8437,6 +8494,8 @@ Diagnosis 결과가 Code Issue로 확인되면 그다음 Fix Task를 만든다.
 ---
 
 ### 20.3 Event-driven은 Fully Autonomous와 다르다
+
+<!-- CASE C13: Google Jules Proactive Work -->
 
 Event가 자동으로 Task를 생성해도 Merge까지 자동일 필요는 없다. Google이 2025년 12월 Jules에 공개한 Suggested Tasks와 Scheduled Tasks도 이 구분을 보여준다. Suggested Tasks는 개선 후보를 제안해 사용자가 review/approve/dismiss하도록 했고, Render 연동의 deployment-failure 대응도 fix를 만든 뒤 Pull Request를 열어 review를 남겼다.
 
@@ -8721,6 +8780,8 @@ Factory가 각각의 Infra Detail을 직접 다루게 하면 다음 문제가 �
 ---
 
 ### 21.2 Agent도 Platform Consumer다
+
+<!-- FIGURE F18: Factory ↔ Developer Platform -->
 
 사람용 Platform Interface는 보통 다음과 같다.
 
@@ -9060,6 +9121,8 @@ Factory Boundary가 실제로 동작하는지 확인하는 것이다.
 ---
 
 ### 22.2 권장 시작 구조
+
+<!-- FIGURE F19: Minimum Viable Factory -->
 
 2장에서 정의한 Factory의 최소 성질과, 조직이 처음 도입할 때 권장하는 시작 구성은 같지 않다. 여기서는 실패 비용을 낮추기 위해 **Human Review를 남겨 둔 시작 형태**를 사용한다.
 
@@ -9435,6 +9498,8 @@ Task Create
 
 ### 23.2 최소 Data Model
 
+<!-- FIGURE F20: Reference Factory Acceptance Scenarios -->
+
 #### Task
 
 ~~~text
@@ -9723,6 +9788,8 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ### 23.8 Case Study와 Reference를 구분한다
 
+<!-- CASE C14: Runmesh Continuity Gap -->
+
 실제 구현 경험은 유용하다.
 
 예를 들어 한 Factory 구현에서 다음이 관찰됐다고 하자.
@@ -9812,6 +9879,8 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 ---
 
 ### 24.1 Maturity와 Autonomy는 다른 축이다
+
+<!-- FIGURE F21: Maturity × Autonomy Matrix -->
 
 #### Maturity
 
