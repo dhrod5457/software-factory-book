@@ -514,7 +514,7 @@ Software Factory는 Agent를 여러 개 띄우는 시스템과 같은 말이 아
 
 > **AI Software Factory는 소프트웨어 작업을 durable하게 관리하고, AI Agent에게 실행을 위임하며, 독립된 검증과 통제 아래 실패를 복구하고 검증된 변경을 지속적으로 전달하는 소프트웨어 생산 시스템이다.**
 
-정의의 중심은 Agent 수가 아니다.
+정의에서 중요한 것은 Agent 수가 아니다.
 
 **Durable Work, 실행 위임, 독립된 검증, 실패 복구, 지속적인 전달**이다.
 
@@ -618,7 +618,7 @@ Prompt
 
 Task
 = durable work item
-~~~
+```
 
 Task에는 Goal, Scope, Acceptance, Status, Attempt, Worker, Verification, Evidence 같은 정보가 연결될 수 있다.
 
@@ -648,7 +648,7 @@ Known Rule
 
 Uncertain Search / Judgment
 → Agent
-~~~
+```
 
 11장에서 이 경계를 자세히 다룬다.
 
@@ -661,7 +661,7 @@ Agent Result
 → Verification
 → Evidence
 → Acceptance
-~~~
+```
 
 Compile, Test, Runtime Check, Screenshot, Security Scan, Evaluator, Human Review 등 Task 위험에 맞는 검증이 필요하다.
 
@@ -686,7 +686,7 @@ Execution
 Verification
 Acceptance
 Merge / Deploy
-~~~
+```
 
 Task 위험에 따라 Human, Agent, Policy가 서로 다른 권한을 가질 수 있다.
 
@@ -705,7 +705,7 @@ Task 실행에서는 계속 새로운 정보가 나온다.
 
 이 정보는 Product Fix나 Factory Improvement로 되돌아갈 수 있다.
 
-Feedback이 자동일 필요는 없다. 실행 결과가 다음 개선에 사용할 수 있는 상태로 남아야 한다.
+Feedback이 자동이어야 한다는 뜻은 아니다. 중요한 것은 실행 결과가 다음 개선에 사용할 수 있는 상태로 남는다는 것이다.
 
 ---
 
@@ -722,7 +722,7 @@ Multi-Agent는 Scheduling Pattern이나 구현 전략일 수 있다. Minimum Via
 ```text
 More Agents
 ≠ More Factory
-~~~
+```
 
 #### Agent Framework
 
@@ -740,7 +740,7 @@ Test
 Approval
 Release
 Deployment
-~~~
+```
 
 #### Coding Agent Farm
 
@@ -758,7 +758,7 @@ Source Change
 → Test
 → Release
 → Deploy
-~~~
+```
 
 Factory는 여기에 Requirement/Task, Agent Work, Retry/Approval, Feedback까지 연결할 수 있다. 기존 CI/CD를 대체하기보다 사용한다.
 
@@ -773,8 +773,6 @@ Task 선택, Architecture, Acceptance, Merge, Deploy 권한을 사람이 유지�
 ---
 
 ### 2.5 하나의 Loop로 본다
-
-<!-- FIGURE F02: AI Software Factory Reference Loop -->
 
 지금까지의 요소를 연결하면 책 전체의 Reference Loop가 된다.
 
@@ -805,7 +803,7 @@ Delivery
       ↓
 Feedback
       ↺
-~~~
+```
 
 처음부터 모든 요소를 구현할 필요는 없다.
 
@@ -819,9 +817,9 @@ Human selects Task
 → Build / Test
 → Evidence
 → Human Review
-~~~
+```
 
-기능 목록보다 순서가 더 중요하다.
+중요한 것은 기능 목록보다 순서다.
 
 Reliability와 Verification을 확인하기 전에 Agent 수나 Decision Authority부터 크게 늘리면 실패 원인을 구분하기 어려워진다.
 
@@ -837,9 +835,22 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 > AI Software Factory는 기존 CI/CD, DevOps, Platform Engineering, Agent Platform과 어디에서 겹치고 어디에서 달라지는가?
 
-먼저 기존 Delivery System과의 경계를 정리한다.
+다음 장에서는 이 경계를 정리한다.
 
 ---
+
+### 참고 자료
+
+- OpenAI, *An open-source spec for Codex orchestration: Symphony*  
+  https://openai.com/index/open-source-codex-orchestration-symphony/
+- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+  https://workos.com/blog/project-horizon
+- Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
+  https://www.anthropic.com/engineering/managed-agents
+- NIST NCCoE, *Notional Reference Model for DevSecOps*  
+  https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
+- DORA, *Platform Engineering Capability*  
+  https://dora.dev/capabilities/platform-engineering/
 
 ---
 
