@@ -78,9 +78,16 @@ Draft 중 새로운 주제를 추가하기 전에:
 
 다음:
 
-- 4장 Requirement / Acceptance
-- 5장 Durable Task
-- 6장 Task Decomposition / Dependency
+- 4장 Draft 작성
+- 5장 Draft 작성
+- 6장 Draft 작성
+- Part II Draft Review
+
+다음:
+
+- 7장 Control Plane / Execution Plane
+- 8장 Worker / Sandbox / Workspace
+- 9장 Harness Engineering
 
 # Draft Order
 
