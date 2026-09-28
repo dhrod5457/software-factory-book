@@ -230,3 +230,14 @@ Agent ↔ IDE/Client : ACP
   - 지금까지의 산업+학술 자료에서 반복적으로 지지되는 설계 원칙
 
 이번 학술 수집의 핵심은 **복잡한 Agent architecture와 높은 autonomy가 자동으로 더 좋은 결과를 만들지 않는다는 것**이다. Agentless와 deterministic orchestration 연구는 구조화 가능한 단계에서는 단순하고 deterministic한 시스템이 더 효율적일 수 있음을 보여주고, human-agent collaboration 연구는 실행 주도권과 최종 승인 권한을 독립적으로 설계해야 함을 보여준다.
+
+## 구현 사례 추가 - Simplest Software Factory
+
+- `30-simplest-software-factory-case-study.md`
+  - GitHub Issue → Dispatcher → Worker → PR → Human Review의 최소 구현
+  - LLM 없는 deterministic dispatch
+  - GitHub를 Human-facing control surface로 사용하는 패턴
+  - Worker snapshot과 fresh task state 분리
+  - Event integration의 dry-run / staged activation
+  - multi-repository hub-and-spoke Factory
+  - C급 tutorial source로 분류하며 일반 원칙의 단독 근거로 사용하지 않음
