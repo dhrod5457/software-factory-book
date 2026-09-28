@@ -161,3 +161,40 @@ Agent ↔ IDE/Client : ACP
 - `18-research-contradictions-and-open-questions.md`
   - 서로 충돌하는 산업 운영 모델
   - 아직 결론 내리면 안 되는 질문
+
+
+## 4차 추가 수집 - 경계와 Reliability Layer
+
+이번 수집에서는 AI Software Factory와 인접 discipline의 경계를 집중 조사했다.
+
+추가 문서:
+
+- `19-boundaries-devops-platform-engineering-agent-platform.md`
+  - CI/CD / DevOps / DevSecOps
+  - Platform Engineering
+  - Agent Platform / Runtime
+  - Software Factory의 domain boundary
+- `20-durable-execution-and-workflow-reliability.md`
+  - durable execution
+  - checkpoint / replay / retry
+  - HITL wait
+  - idempotency
+  - crash/reassignment reliability
+- `21-agent-ready-developer-platform-and-catalog.md`
+  - Agent-ready Internal Developer Platform
+  - Golden Path as machine contract
+  - Software Catalog
+  - Agent identity / quota
+- `22-closed-loop-sdlc-and-production-feedback.md`
+  - production signal
+  - diagnosis
+  - backlog generation
+  - continuous feedback
+  - product/factory improvement loop
+- `23-minimum-viable-ai-software-factory.md`
+  - Minimum Viable Factory
+  - reliability before autonomy
+  - staged adoption
+  - single-worker factory starting point
+
+이번 자료에서 특히 중요한 근거는 NIST NCCoE가 DevSecOps reference model 자체를 software factory 구성 관점으로 설명하고 있다는 점이다. AI Software Factory는 기존 SDLC/DevSecOps/Platform Engineering을 폐기하는 대체재라기보다 이 기반 위에서 AI Agent가 새로운 실행 주체로 들어가는 방향으로 검토한다.
