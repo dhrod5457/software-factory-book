@@ -17,9 +17,11 @@ Factory를 운영하기 시작하면 곧 숫자가 쌓인다.
 
 그런데 Review Queue가 두 배로 늘고 Revert가 증가했다면 전체 Delivery는 좋아지지 않았을 수 있다.
 
-Factory Observability의 목적은 Agent를 감시하는 것이 아니다.
+Factory Observability의 목적은 Agent를 감시하는 데 있지 않다.
 
 > Work가 어디에서 멈추고, 어떤 비용과 실패를 거쳐, 얼마나 많은 Human Attention을 사용해 Accepted Change가 되는지 보는 것이다.
+
+여기서 `Accepted Change`와 뒤에서 사용하는 `Cost per Accepted Change`는 업계 표준 Metric이 아니라 이 책이 Factory 수준의 측정 경계를 설명하기 위해 사용하는 synthesis다.
 
 ---
 
@@ -69,6 +71,8 @@ tool_calls
 context_compaction
 model_switch
 ~~~
+
+이 Layer를 따로 보는 이유는 실제 Agentic Workload가 일반 Chat과 다르기 때문이다. Microsoft Research가 2026년 6월 GitHub Copilot production trace를 표본 분석한 preprint는 320만 사용자, 1,300만 session, 7억6,100만 LLM call, 95조 token 규모에서 user turn 안에 LLM call과 Tool 실행이 반복되고 사용량이 long-tail을 보이는 특성을 보고했다. 이는 한 제품의 sampled trace이지만 Agent Runtime 비용을 단순 Chat request 수로만 보기 어렵다는 근거가 된다.
 
 ### Execution
 
@@ -252,13 +256,7 @@ Agent가 Candidate를 많이 만드는 것보다 실제로 얼마나 적은 수�
 
 이 데이터는 단순 PR Count보다 더 많은 정보를 준다.
 
-특히 다음 지표가 유용하다.
-
-~~~text
-First-pass Acceptance Rate
-~~~
-
-Retry가 많고 Human Edit가 크다면 Agent output throughput은 높아도 Factory efficiency는 낮을 수 있다.
+이 책에서는 이런 차이를 보기 위한 후보 지표로 `First-pass Acceptance Rate`를 사용한다. 표준 지표는 아니지만 Retry와 Human Edit가 많은 시스템을 단순 output count와 구분하는 데 유용하다.
 
 ---
 
@@ -306,9 +304,9 @@ retries: 0
 human fix: 2 min
 ~~~
 
-Token만 보면 A가 더 싸다.
+Token만 보면 A가 더 싸다. 하지만 GitHub가 2026년 공개한 Agent efficiency 사례도 개별 Tool 응답의 Token을 지나치게 줄이면 필요한 Context가 사라져 추가 호출과 전체 작업량이 늘 수 있다고 지적한다. 목표는 각 상호작용의 Token 최소화가 아니라 Task Outcome 대비 전체 비용을 줄이는 것이다.
 
-전체 비용은 다를 수 있다.
+따라서 전체 비용은 다를 수 있다.
 
 ~~~text
 Total Cost
