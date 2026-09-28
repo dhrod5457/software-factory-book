@@ -20,19 +20,32 @@ Phase 2 Concept        완료
 Phase 3 Scope          완료
 Phase 4 TOC            완료
 Phase 5 Chapter Plan   완료
-Phase 6 Draft          다음
-Phase 7 Review
+Phase 6 Draft          완료
+Phase 7 Review         진행
 Phase 8 Manuscript
 ```
+
+## Draft 완료 상태
+
+- 24개 본장 Draft 완료
+- Epilogue Draft 완료
+- 총 25개 Draft 파일 확인
+- Part I~VII Draft Review 완료
+- Full Draft Structural Review 완료
+- Writing Style Guide 작성
 
 ## 현재 Source of Truth
 
 - `planning/concept.md`
 - `planning/scope.md`
 - `planning/toc.md`
+- `planning/writing-style.md`
 - `chapters/README.md`
 - `chapters/01..24/plan.md`
+- `chapters/01..24/draft.md`
 - `chapters/epilogue/plan.md`
+- `chapters/epilogue/draft.md`
+- `review/full-draft-structural-review.md`
 - `PROJECT.md`
 - `STATUS.md`
 
@@ -41,10 +54,6 @@ Research:
 - `research/README.md`
 - `research/00-research-map.md`
 - `research/sources.md`
-
-범위 밖 후속 주제:
-
-- `planning/future-topics.md`
 
 ## 책의 구조
 
@@ -61,11 +70,16 @@ Epilogue Software Engineering에서 Software Production으로
 
 총 24장 + Epilogue입니다.
 
-## Draft 규칙
+## 현재 Review 우선순위
 
-각 장은 해당 `plan.md`를 기준으로 `draft.md`를 작성합니다.
-
-새로운 내용이 생기더라도 바로 범위를 넓히지 않고 먼저 `planning/scope.md`와 비교합니다.
+1. 중복 제거
+2. 용어 통일
+3. 주장 강도 조정
+4. 최신 Source 재검증
+5. 그림/도식 보강
+6. Case Study와 일반 원칙 분리
+7. 장간 연결 정리
+8. 문체 Line Edit
 
 ## 작성 방식
 
@@ -79,5 +93,3 @@ research
 → review
 → manuscript
 ```
-
-다음 작업은 1장부터 Draft를 작성하는 것입니다.
