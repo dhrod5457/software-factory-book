@@ -11,7 +11,9 @@
 - `terminology.md` — canonical terminology
 - `references.md` — 중복 제거 Reference 53개
 - `figures.md` — 출판용 Figure 후보
-- `case-studies.md` — Case Study Box 후보
+- `case-studies.md` — Case Study Box 계획
+- `case-study-boxes.md` — Case Study Box working copy 14개
+- `figure-captions.md` — Figure caption 21개
 - `length-balance.md` — 장별 분량 분석
 
 ## 조립 상태
@@ -63,10 +65,10 @@ Manuscript에서 구조 자체를 바꾼 1·2·22·23장은 Chapter Source에 �
 
 ## 남은 작업
 
-1. 실제 Figure 제작 / Caption
-2. Case Study Box 최종 원고화
-3. 최종 오탈자 proofread
-4. publication-time source recheck
+1. 실제 Figure 아트워크 제작
+2. Figure / Case Study 최종 삽입·레이아웃
+3. 출간 직전 source recheck
+4. 최종 release proof
 
 새로운 핵심 주제는 추가하지 않는다.
 
