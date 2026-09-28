@@ -516,6 +516,73 @@ Verification
 
 ---
 
+## 9.10 Context, Capability, Outcome, Guardrail, Evidence
+
+Prepared Harness를 실제 Task에 적용할 때는 Agent에게 무엇을 줄지 다시 한 번 단순한 질문으로 정리할 수 있다.
+
+Cursor의 Grok Bot 문서는 좋은 Handoff를 설명하면서 Task, 관련 Context, 필요한 Tool 접근, 완료 상태를 함께 주는 방식을 제시한다. 제품별 UI는 달라질 수 있지만, 이 구조는 Agent Work Design의 실용적인 출발점이 된다.
+
+이 책에서는 이를 다음 다섯 요소로 확장한다.
+
+~~~text
+Context
+- 무엇을 알아야 하는가
+
+Capability
+- 어디에서 읽고
+- 어디에 행동할 수 있는가
+
+Outcome
+- 무엇이 끝난 상태인가
+
+Guardrail
+- 무엇을 하면 안 되는가
+- 어디에서 멈춰야 하는가
+
+Evidence
+- 완료를 무엇으로 증명하는가
+~~~
+
+Capability는 Tool, MCP, API, Browser, Shell 같은 실행 수단을 포함한다.
+
+Outcome은 단순한 자연어 목표보다 구체적이어야 한다.
+
+~~~text
+Goal
+- 로그인 실패 메시지 개선
+
+Outcome
+- 잘못된 자격증명 입력 시 새 메시지 표시
+- 기존 성공 로그인 동작 유지
+
+Guardrail
+- 인증 정책 변경 금지
+- production 직접 변경 금지
+
+Evidence
+- targeted test
+- browser screenshot
+- changed revision
+~~~
+
+이 구조는 Prompt Template을 만들기 위한 것이 아니다.
+
+Task가 Agent에게 전달되기 전에 정보, 권한, 완료 조건, 통제, 증거가 서로 분리되어 있는지 확인하는 Work Contract에 가깝다.
+
+특히 Outcome과 Evidence를 분리하는 것이 중요하다.
+
+~~~text
+Outcome
+= 무엇이 참이어야 하는가
+
+Evidence
+= 그것이 참임을 무엇으로 확인했는가
+~~~
+
+Agent가 "완료했다"고 말하는 것은 Outcome도 Evidence도 아니다.
+
+이 구분은 뒤의 Verification과 Evidence Contract로 이어진다.
+
 ## Model 문제인가 Harness 문제인가
 
 Agent가 실패했을 때 바로 Model을 바꾸기 전에 확인할 수 있다.
