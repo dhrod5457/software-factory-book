@@ -1,0 +1,9 @@
+flowchart TD
+  RF["Reference Factory"]
+  RF --> N["Normal<br/>DONE"]
+  RF --> VF["Verification Fail<br/>bounded retry"]
+  RF --> WK["Worker Kill<br/>task survives"]
+  RF --> RA["Reassignment<br/>partial work reused"]
+  RF --> HW["Human Wait<br/>suspend / resume"]
+  RF --> PI["Parallel Independent<br/>concurrent success"]
+  RF --> CF["Conflict<br/>detect / replan"]
