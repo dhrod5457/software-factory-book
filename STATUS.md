@@ -73,18 +73,28 @@ Review에서 완료한 항목:
 9. `review/source-validation-2026-09-28.md`
 10. `research/sources.md`
 
-# Manuscript Priorities
+# Manuscript Progress
 
-1. Part / Chapter 연결
-2. 제목·소제목 호흡 정리
-3. 용어 일괄 통일
-4. Reference 표기 형식 통일
-5. Figure 후보 정리
-6. Case Study Box 위치 결정
-7. Preface / Introduction 필요 여부 판단
-8. 장별 분량 균형
-9. 전체 manuscript assembly
-10. 최종 publication-time source recheck 목록 유지
+완료:
+
+- `manuscript/book.md` 전체 조립
+- Part 7개 / Chapter 24개 / Epilogue 검증
+- 목차 추가
+- Heading hierarchy 정리
+- Chapter transition heading 반복 제거
+- `manuscript/README.md`
+- `manuscript/edit-plan.md`
+- `manuscript/structural-flow-review.md`
+
+다음:
+
+1. 용어 일괄 통일
+2. Reference 표기 형식 통일
+3. Figure 후보 정리
+4. Case Study Box 위치 결정
+5. Preface / Introduction 필요 여부 판단
+6. 장별 분량 균형
+7. 최종 publication-time source recheck 목록 유지
 
 # Next
 
