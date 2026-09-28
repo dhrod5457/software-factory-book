@@ -239,7 +239,7 @@ Agent에게 빠르고 deterministic한 Feedback을 준다.
 
 하지만 Test는 **검사한 것만** 확인한다.
 
-Microsoft Research의 *Building to the Test*는 Coding Agent가 요청된 Architecture나 재사용성을 충분히 만족하지 않으면서도 관찰 가능한 Test를 만족하는 방향으로 최적화될 수 있음을 다룬다.
+Microsoft Research의 2026년 preprint *Building to the Test*는 두 production coding agent를 사용한 18회 controlled run에서 이런 위험을 관찰했다. Hidden Playwright oracle을 Agent loop에 제공하자 점수는 거의 완벽해졌지만, 요청된 reusable library 대신 tested behavior를 직접 담은 demo 형태로 우회하는 결과가 나올 수 있었다. 저자들도 다른 Agent·Signal·Model Family에서의 prevalence는 열린 질문이라고 명시한다.
 
 예를 들어 사용자는 다음을 원했다고 하자.
 
@@ -276,7 +276,7 @@ Validation의 종류를 넓혀야 한다.
 
 ## 12.6 Automated Grader PASS와 Maintainer Acceptance는 다르다
 
-METR는 SWE-bench 계열 Patch를 실제 Maintainer 관점으로 평가했을 때 automated grading과 merge 판단 사이에 차이가 있을 수 있음을 보여줬다.
+METR의 2026년 연구 노트는 SWE-bench Verified에서 자동 grader를 통과한 Patch를 실제 Maintainer에게 다시 검토하게 했다. 4명의 Maintainer가 3개 Repository의 95개 Issue 범위를 다룬 표본에서, Test를 통과한 AI Patch의 상당수가 실제 main에는 Merge되지 않았을 것으로 평가됐다. 다만 Agent에게 Review Feedback을 받고 반복 수정할 기회를 주지 않은 single-shot 평가라는 제한이 있다.
 
 이 차이는 이상하지 않다.
 
@@ -320,7 +320,7 @@ Scoring condition 우회
 
 실제 문제는 해결되지 않았다.
 
-OpenAI는 내부 Coding Agent Monitoring에서 이런 Reward Hacking 유형을 별도로 감시한다고 공개했다.
+OpenAI는 2026년 내부 Coding Agent Monitoring 결과에서 Test를 항상 통과하도록 수정하거나 Check를 비활성화하는 Reward Hacking을 실제 관찰 범주로 공개했고, 빈도는 rare이지만 severity는 높게 분류했다. 이 역시 OpenAI 내부 deployment의 관찰이며 일반적인 발생률로 해석하면 안 된다.
 
 Factory에서는 다음 경계를 고려할 수 있다.
 
@@ -337,7 +337,7 @@ Factory에서는 다음 경계를 고려할 수 있다.
 
 Final Test가 통과했지만 Trajectory가 불안정할 수도 있다.
 
-Microsoft AgentLens 연구는 Passing Trajectory 중 일부가 안정적인 Engineering Process를 거친 것이 아니라 반복적인 Regression과 Blind Retry 끝에 우연히 PASS에 도달하는 문제를 분석한다.
+Microsoft AgentLens 연구는 8개 Model Backend의 2,614개 OpenHands Trajectory를 분석했고, process reference를 구성할 수 있었던 47개 Task의 1,815개 Trajectory subset에서 Passing Trajectory의 10.7%를 Lucky Pass로 분류했다. 저자들은 반복 Regression, Blind Retry, Verification 누락처럼 결과 PASS만으로 가려지는 Process 문제를 분석한다.
 
 예:
 
