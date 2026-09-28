@@ -95,10 +95,17 @@ Draft 중 새로운 주제를 추가하기 전에:
 
 다음:
 
-- 13장 Evidence Contract
-- 14장 Failure / Recovery
-- 15장 Durable Execution
-- 16장 Security / Identity / Governance
+- 13장 Draft 작성
+- 14장 Draft 작성
+- 15장 Draft 작성
+- 16장 Draft 작성
+- Part IV Draft Review
+
+다음:
+
+- 17장 Parallel Worker / Multi-Agent
+- 18장 Review / CI / Integration
+- 19장 Observability / Metrics
 
 # Draft Order
 
