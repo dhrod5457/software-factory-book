@@ -3698,6 +3698,64 @@ Option B
 
 Harness가 Agent의 탐색 비용과 오류 가능성을 바꾼다.
 
+#### Harness가 Tool 묶음보다 넓어지는 지점
+
+Skill과 Tool을 많이 제공한다고 End-to-End Delivery가 자동으로 만들어지는 것은 아니다.
+
+Caylent의 Software Factory 설명은 이 경계를 분명하게 보여준다. 이들은 Plugin이 Skill, Hook, Rule을 통해 Agent의 Knowledge와 행동 규칙을 제공할 수 있지만, Specification에서 Production-grade Software까지 신뢰성 있게 전달하려면 그 위에서 Agent Loop를 실행하는 Harness가 필요하다고 설명한다.
+
+그 Harness는 단순히 Tool을 노출하는 데서 끝나지 않는다.
+
+~~~text
+Specification
+      ↓
+Detailed Plan
+      ↓
+Execution
+      ↓
+Review Gates
+- functional
+- architecture conformance
+- security
+- scope conformance
+      ↓
+Feedback / Correction
+      ↺
+~~~
+
+즉 Production Harness는 다음 질문까지 책임질 수 있다.
+
+- 다음 실행 단계는 무엇인가
+- 어떤 Review를 언제 실행할 것인가
+- 실패한 Review Feedback을 어떻게 다음 Attempt에 전달할 것인가
+- 실제 변경이 계획된 Scope를 벗어나지 않았는가
+- Security와 Architecture Constraint를 지켰는가
+
+Caylent의 공개 DevBench 구현에서도 구조화된 Backlog를 Executor가 구현한 뒤 code, test, documentation, changes-manifest Judge와 별도 Security Review를 통과시키는 Loop가 확인된다. 모든 Factory가 같은 Review Topology를 가져야 한다는 뜻은 아니다. 중요한 것은 **Agent Capability를 반복 가능한 실행 순서와 강제 가능한 Gate로 묶는 것**이다.
+
+이 경계를 다음처럼 구분할 수 있다.
+
+~~~text
+Skill / Tool
+= Agent가 사용할 Capability
+
+Harness
+= Capability를 사용해 Agent Work Loop를 실행하는 구조
+
+Software Factory
+= Harness를 Durable Work, Control, Recovery, Acceptance, Delivery와 연결한 생산 시스템
+~~~
+
+따라서 다음 등식도 피한다.
+
+~~~text
+Skill
+≠ Harness
+
+Harness
+≠ Software Factory
+~~~
+
 ---
 
 ### 9.2 Agent-Computer Interface
@@ -5180,6 +5238,21 @@ Task의 구체적인 behavior를 검증한다.
 - traces
 - benchmark
 
+UI Task에서는 Behavioral Evidence가 특히 중요하다.
+
+Warp의 Zach Lloyd는 Software Factory의 verification 예로 Agent가 만든 UI를 computer use로 실제 실행하고 video와 screenshot을 남기는 흐름을 설명했다. 중요한 점은 screenshot 자체가 아니라 **실제 runtime behavior를 실행한 흔적을 Candidate Revision과 연결한다는 것**이다.
+
+~~~text
+UI Candidate
+→ Application Launch
+→ Computer Use
+→ Critical Flow
+→ Screenshot / Video
+→ Behavioral Evidence
+~~~
+
+이 패턴은 이 책의 Evidence Contract와 같은 문제를 다른 각도에서 보여준다. “화면을 수정했다”는 Agent의 설명보다, 특정 Revision에서 실제 사용 흐름을 실행하고 남긴 Evidence가 Review 비용을 줄인다.
+
 #### Independent Evaluator
 
 구현 Agent와 다른 Context나 Role을 가진 평가자가 결과를 점검한다.
@@ -5187,6 +5260,39 @@ Task의 구체적인 behavior를 검증한다.
 #### Human Acceptance
 
 Residual Risk와 Product Intent를 최종적으로 사람이 판단한다.
+
+Verification을 비용 순서의 Pyramid로만 볼 필요는 없다. **무엇에 대한 적합성을 검증하는가**라는 축도 필요하다.
+
+~~~text
+Functional Conformance
+- 요구한 동작을 실제로 하는가
+
+Architecture Conformance
+- 정해진 Architecture / Design Constraint를 지켰는가
+
+Scope Conformance
+- 허용된 파일과 변경 범위를 벗어나지 않았는가
+
+Security Conformance
+- 필요한 Security Policy와 Review를 통과했는가
+~~~
+
+예를 들어 Test가 모두 PASS해도 Agent가 허용되지 않은 공통 모듈까지 수정했거나, Requirement가 요구한 Architecture Boundary를 우회했다면 Production-ready Change라고 보기 어렵다.
+
+Caylent는 Software Factory Harness가 Security Review, Architectural Conformance, Scope 이탈 여부를 실행 Loop 안에서 점검해야 한다고 설명한다. 현재 공개 DevBench 구현은 이를 code/test/doc review, 실제 변경과 Changes Manifest의 비교, 별도 Security Review 같은 Gate로 구체화한다.
+
+~~~text
+Behavior PASS
++
+Architecture PASS
++
+Scope PASS
++
+Security PASS
+→ stronger completion evidence
+~~~
+
+모든 Task가 네 축을 모두 요구하는 것은 아니다. 핵심은 Functional Test 하나가 전체 Conformance를 대표한다고 가정하지 않는 것이다.
 
 모든 Task가 Pyramid 끝까지 갈 필요는 없다.
 
@@ -5713,6 +5819,7 @@ Task
 task_id
 base_revision
 result_revision
+declared_scope
 changed_files
 verification
 artifacts
@@ -5740,6 +5847,32 @@ artifacts:
 ~~~
 
 Agent가 “Test했다”고 말하는 것보다 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있어야 한다.
+
+Scope가 중요한 Task라면 `declared_scope`와 `changed_files`를 함께 남긴다.
+
+~~~text
+declared_scope
+- src/auth/**
+- tests/auth/**
+
+changed_files
+- src/auth/AuthService.java
+- tests/auth/AuthServiceTest.java
+~~~
+
+이 둘을 비교하면 “Test는 통과했지만 계획하지 않은 영역까지 수정한 Change”를 별도의 Evidence로 드러낼 수 있다.
+
+Verification도 이름만 나열하기보다 어떤 Conformance를 확인했는지 구분할 수 있다.
+
+~~~text
+verification
+- functional: PASS
+- architecture: PASS
+- scope: PASS
+- security: PASS
+~~~
+
+Task에 적용되지 않는 항목은 생략하거나 명시적으로 N/A 처리할 수 있다.
 
 ---
 
@@ -5906,6 +6039,10 @@ Machine-readable Manifest를 하나 두면 다음 단계가 쉬워진다.
   "taskId": "T-100",
   "baseRevision": "f10aa0",
   "resultRevision": "abc123",
+  "declaredScope": [
+    "src/auth/**",
+    "tests/auth/**"
+  ],
   "changedFiles": [
     "AuthService.java",
     "AuthServiceTest.java"
