@@ -217,7 +217,7 @@ Agent가 한두 개일 때는 사람이 직접 관리해도 된다.
 
 처음에는 “Agent가 나 대신 일한다”고 느꼈지만 어느 순간 “내가 Agent들을 관리하고 있다”는 상태가 된다.
 
-OpenAI가 Symphony를 공개하며 설명한 문제도 이 지점과 닿아 있다. 여러 interactive coding-agent session을 사람이 직접 관리하면 Context Switching과 Attention이 부담이 된다. 그래서 session보다 Task와 Deliverable을 중심으로 orchestration하는 방향이 등장한다.
+OpenAI가 2026년 4월 Symphony를 공개하며 설명한 문제도 이 지점과 닿아 있다. OpenAI는 내부 경험에서 한 엔지니어가 interactive coding-agent session을 대체로 3~5개 정도까지는 편하게 관리했지만, 그 이상에서는 Context Switching이 눈에 띄게 부담이 됐다고 설명한다. 이 수치는 업계 일반 한계가 아니라 한 조직의 운영 사례다. 중요한 점은 session 수가 늘수록 사람의 Attention이 새로운 Capacity Constraint가 될 수 있다는 것이다. Symphony는 이 문제를 session보다 Task와 Deliverable 중심으로 orchestration하는 방식으로 풀었다.
 
 Software Factory의 목표는 사람을 없애는 것이 아니다.
 
@@ -268,11 +268,11 @@ Agent가 수십 개의 PR을 만들었지만 사람이 그것을 이해하고 �
 
 AI 코딩 도구의 생산성 효과를 이야기할 때 서로 반대처럼 보이는 수치가 자주 등장한다.
 
-2025년 Microsoft Research가 세 회사의 Randomized Field Experiment를 통합 분석한 연구에서는 총 4,867명의 개발자를 대상으로 AI Coding Assistant 접근 효과를 분석했다. 당시 연구에서 AI 도구 사용군은 completed task 기준으로 평균 약 26% 높은 결과가 관찰됐다. 경험이 적은 개발자에서 adoption과 gain이 더 큰 경향도 보고됐다.
+2025년 6월 Microsoft Research가 Microsoft, Accenture, 익명의 Fortune 100 기업에서 수행된 세 Randomized Field Experiment를 통합 분석한 연구에서는 총 4,867명의 개발자를 대상으로 AI 기반 Coding Assistant 접근 효과를 분석했다. 세 실험을 합친 추정치에서는 completed task가 26.08% 증가했고, 경험이 적은 개발자에서 adoption과 gain이 더 큰 경향이 보고됐다. 다만 이 연구가 평가한 것은 주로 코드 완성을 제안하는 Coding Assistant Workflow이며, 이 책에서 다루는 2026년 비동기 Coding Agent Factory와 같은 작업 방식은 아니다.
 
 같은 해 METR는 다른 조건에서 다른 결과를 보고했다.
 
-숙련된 오픈소스 개발자 16명이 자신이 잘 아는 성숙한 Repository에서 실제 Issue를 해결하게 했을 때, early-2025 AI 도구를 사용한 경우 평균 작업 시간이 약 19% 늘어났다. 흥미롭게도 참여 개발자들은 실제 측정과 달리 AI가 자신을 약 20% 빠르게 만들었다고 예상했다.
+METR는 숙련된 오픈소스 개발자 16명이 자신이 잘 아는 성숙한 Repository에서 246개의 실제 Task를 수행하는 RCT를 진행했다. 2025년 2~6월 수준의 AI 도구 사용이 허용된 Task에서는 완료 시간이 평균 19% 늘었다. 참여자들은 실험이 끝난 뒤에도 AI가 자신을 약 20% 빠르게 만들었다고 추정했다. 이 결과 역시 해당 시점의 도구, 숙련 개발자, 성숙한 Repository라는 조건에 묶여 있다.
 
 이 두 수치를 `+26%`와 `-19%`라는 하나의 생산성 축에서 직접 비교하면 안 된다.
 
@@ -417,43 +417,9 @@ Business Value
 Benchmark Score가 올랐다고 Team Flow가 좋아지는 것은 아니다.  
 PR 수가 늘었다고 사용자에게 전달된 가치가 같은 비율로 늘어나는 것도 아니다.
 
-Factory 수준에서는 다음 지표들이 더 유용할 수 있다.
+Factory 수준에서는 Agent 실행량보다 Task Cycle Time, Queue/Review 대기, First-pass Acceptance, Retry/Rework, Human Intervention 같은 흐름 지표가 더 중요할 수 있다. 구체적인 Metric 설계는 19장에서 다룬다.
 
-- Task Cycle Time
-- Queue Time
-- Verification Time
-- Human Blocking Time
-- Review Time
-- First-pass Acceptance Rate
-- Retry Rate
-- Rejection Rate
-- Revert
-- Escaped Defect
-- Human Intervention
-- Cost per Accepted Change
-
-처음부터 모두 측정할 필요는 없다.
-
-Minimum Viable Factory에서는 다음 정도로도 시작할 수 있다.
-
-```text
-Task
-- created_at
-- started_at
-- verified_at
-- done_at
-
-Human
-- intervention_count
-- review_minutes
-
-Quality
-- verification_pass
-- retry_count
-- accepted
-```
-
-이 정도만 있어도 중요한 질문을 할 수 있다.
+처음부터 많은 지표를 수집할 필요는 없다. Task의 생성·시작·검증·완료 시각과 Retry, Review 정도만 있어도 중요한 질문을 시작할 수 있다.
 
 Agent를 추가한 뒤 Task Cycle Time이 실제로 줄었는가.  
 Retry는 늘었는가.  
