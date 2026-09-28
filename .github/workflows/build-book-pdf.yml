@@ -64,7 +64,7 @@ jobs:
           mkdir -p manuscript/dist
           pandoc manuscript/build/book-pdf.md \
             --standalone \
-            --from=gfm+raw_tex \
+            --from=markdown+raw_tex \
             --pdf-engine=xelatex \
             --top-level-division=chapter \
             --include-in-header=manuscript/pdf-header.tex \
