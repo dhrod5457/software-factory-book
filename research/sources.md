@@ -798,3 +798,132 @@ These are useful research signals but should not be treated as settled findings 
 - memory
 - observability
 - framework/model independence
+
+
+---
+
+## Academic Agentic Software Engineering Research
+
+### Surveys
+
+- From LLMs to LLM-based Agents for Software Engineering: A Survey of Current, Challenges and Future
+  - https://arxiv.org/abs/2408.02479
+- Large Language Model-Based Agents for Software Engineering: A Survey
+  - https://arxiv.org/abs/2409.02977
+- Agents in Software Engineering: Survey, Landscape, and Vision
+  - https://arxiv.org/abs/2409.09030
+
+### Agent Architecture / Interface
+
+- SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering
+  - NeurIPS 2024
+  - https://arxiv.org/abs/2405.15793
+- Agentless: Demystifying LLM-based Software Engineering Agents
+  - https://arxiv.org/abs/2407.01489
+- OpenHands: An Open Platform for AI Software Developers as Generalist Agents
+  - https://arxiv.org/abs/2407.16741
+- The OpenHands Software Agent SDK: A Composable and Extensible Foundation for Production Agents
+  - https://arxiv.org/abs/2511.03690
+
+### Requirements / Decomposition / Orchestration
+
+- REAgent: Requirement-Driven LLM Agents for Software Issue Resolution
+  - https://arxiv.org/abs/2604.06861
+- Runtime-Structured Task Decomposition for Agentic Coding Systems
+  - https://arxiv.org/abs/2605.15425
+- Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization
+  - AIware 2026
+  - https://doi.org/10.1145/3805760.3814891
+  - https://arxiv.org/abs/2605.09894
+- Wink: Recovering from Misbehaviors in Coding Agents
+  - AIware 2026
+  - https://arxiv.org/abs/2602.17037
+
+### Repository Understanding / Context
+
+- SWE-Explore: Benchmarking How Coding Agents Explore Repositories
+  - https://arxiv.org/abs/2606.07297
+- From Laboratory to Real-World Applications: Benchmarking Agentic Code Reasoning at the Repository Level
+  - https://arxiv.org/abs/2601.03731
+- Agent READMEs: An Empirical Study of Context Files for Agentic Coding
+  - TOSEM 2026
+  - https://arxiv.org/abs/2511.12884
+- Configuring Agentic AI Coding Tools: An Exploratory Study
+  - AIware 2026
+  - https://arxiv.org/abs/2602.14690
+  - https://doi.org/10.1145/3805760.3814887
+- Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?
+  - ICLR 2026 MemAgents Workshop
+  - https://arxiv.org/abs/2602.11988
+- Do Context Files Help Coding Agents? A Two-Agent Ablation Study on Real Repositories
+  - https://arxiv.org/abs/2607.27250
+- Operationalizing Ethics for AI Agents: How Developers Encode Values into Repository Context Files
+  - AIware 2026
+  - https://arxiv.org/abs/2605.05584
+  - https://doi.org/10.1145/3805760.3814899
+
+### Human-Agent Collaboration / Responsibility
+
+- When Code Authors Are Agents: A Large-Scale Study of Human-Agent Collaboration in Pull Requests
+  - AIware 2026
+  - https://doi.org/10.1145/3805760.3814909
+- Collaborator or Assistant? How AI Coding Agents Partition Work across Pull Request Lifecycles
+  - AIware 2026
+  - https://doi.org/10.1145/3805760.3814893
+- Humans are Missing from AI Coding Agent Research
+  - https://arxiv.org/abs/2608.12355
+- Towards AI as a Collaborative Partner: A Taxonomy of AI Agent Behavior in Software Engineering
+  - AIware 2026
+  - https://doi.org/10.1145/3805760.3814913
+- Dialogue SWE-Bench: A Benchmark for Dialogue-Driven Coding Agents
+  - https://arxiv.org/abs/2606.13995
+- Reliable Vibe Coding: The Human-AI Context Gap in Software Development
+  - HHAI 2026
+  - https://doi.org/10.3233/FAIA260505
+- Preemptive, Buffered, or Guided? Empirical Studies on Human-AI Interaction Strategies for Software Test Case Development
+  - ACM TOCHI 2026
+  - https://doi.org/10.1145/3817601
+- Accountable Agents in Software Engineering: An Analysis of Terms of Service and a Research Roadmap
+  - AIware 2026
+  - https://arxiv.org/abs/2605.04532
+  - https://doi.org/10.1145/3805760.3814889
+- Software Engineering in the Agent Era: From Trustworthy Change to Human-Agent Software Organizations
+  - theory / position-oriented work; empirical validation still open
+  - https://arxiv.org/abs/2609.04630
+
+### Benchmark / Evaluation Science
+
+- SWE-Lancer: Can Frontier LLMs Earn $1 Million from Real-World Freelance Software Engineering?
+  - ICML 2025
+  - https://proceedings.mlr.press/v267/miserendino25a.html
+  - https://arxiv.org/abs/2502.12115
+- AI Agents That Matter
+  - TMLR 2025
+  - https://arxiv.org/abs/2407.01502
+- SWE-smith: Scaling Data for Software Engineering Agents
+  - https://arxiv.org/abs/2504.21798
+- SWE-rebench: An Automated Pipeline for Task Collection and Decontaminated Evaluation of Software Engineering Agents
+  - https://arxiv.org/abs/2505.20411
+- RACE-Bench: A Reasoning-Augmented Benchmark for Repository-Level Code Agents on Feature Addition
+  - https://arxiv.org/abs/2603.26337
+- RuBench: A Repository-Level Agentic Coding Benchmark with Natively Authored Russian Task Specifications
+  - https://arxiv.org/abs/2607.06411
+- Are Performance-Optimization Benchmarks Reliably Measuring Coding Agents?
+  - https://arxiv.org/abs/2607.01211
+- RigorBench: Benchmarking Engineering Process Discipline in Autonomous AI Coding Agents
+  - ASE 2026 TRUST
+  - https://conf.researchr.org/details/ase-2026/trust-2026-papers/4/
+
+### Verification
+
+- Fixpad++: Automated Bug Fix Verification using LLM Agents
+  - AIware 2026
+  - https://doi.org/10.1145/3805760.3814915
+
+## Academic-source usage rules
+
+- Peer-reviewed conference/journal papers get priority over vendor claims for general conclusions.
+- arXiv/preprints are useful but should be labeled as preprints unless publication is confirmed.
+- Position/theory papers should be used for concepts, not presented as empirical fact.
+- Small-N ablations are used as counterexamples or hypotheses rather than universal rules.
+- Benchmark result numbers should be interpreted together with environment, cost, task selection, and contamination controls.
