@@ -1,6 +1,6 @@
 # Current Phase
 
-Phase 5 - Chapter Plan 완료
+Phase 6 - Draft 진행
 
 Research → Concept → Scope → TOC를 바탕으로 24개 장과 Epilogue의 `plan.md`를 모두 작성했다.
 
@@ -67,9 +67,22 @@ Draft 중 새로운 주제를 추가하기 전에:
 
 와 비교한다.
 
-# Next
+# Draft Progress
 
-Phase 6 - Draft
+완료:
+
+- 1장 Draft 작성 및 1차 수정
+- 2장 Draft 작성
+- 3장 Draft 작성
+- Part I Draft Review
+
+다음:
+
+- 4장 Requirement / Acceptance
+- 5장 Durable Task
+- 6장 Task Decomposition / Dependency
+
+# Draft Order
 
 권장 순서:
 
