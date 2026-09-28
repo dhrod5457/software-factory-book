@@ -48,12 +48,26 @@ manuscript/book.md
 
 Manuscript에서 구조 자체를 바꾼 1·2·22·23장은 Chapter Source에 동기화했다.
 
-## 남은 Phase 8 작업
+## 완료된 Phase 8 작업
 
-1. 용어 미세 조정
-2. Reference 형식 최종 결정
-3. Figure / Case Study Box 실제 배치
-4. 12·16·19장 layout 정리
-5. publication-time source recheck
+- 전체 manuscript assembly
+- structural flow edit
+- Chapter 1·2 압축
+- Chapter 22·23 grouping
+- 통합 References 53개
+- Glossary
+- Figure marker 21개
+- Case Study marker 14개
+- Copyedit Pass
+- Markdown integrity check
+
+## 남은 작업
+
+1. 실제 Figure 제작 / Caption
+2. Case Study Box 최종 원고화
+3. 최종 오탈자 proofread
+4. publication-time source recheck
 
 새로운 핵심 주제는 추가하지 않는다.
+
+현재 구조와 핵심 논지는 동결한다.
