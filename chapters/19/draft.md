@@ -551,3 +551,6 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
   https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
 - Anthropic, *Demystifying evals for AI agents*  
   https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
+
