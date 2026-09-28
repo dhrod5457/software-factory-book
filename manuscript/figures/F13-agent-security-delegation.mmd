@@ -1,0 +1,7 @@
+flowchart TD
+  H["Human Principal"] -->|delegates| T["Task"]
+  T --> A["Agent Identity"]
+  A --> C["Scoped Capability"]
+  C --> P["Tool / Platform"]
+  G["Approval / Policy"] -. constrains .-> C
+  P -. audit event .-> AU["Audit"]
