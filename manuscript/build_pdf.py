@@ -81,7 +81,7 @@ geometry:
   - bottom=22mm
 mainfont: "Noto Serif CJK KR"
 sansfont: "Noto Sans CJK KR"
-monofont: "Noto Sans Mono CJK KR"
+monofont: "DejaVu Sans Mono"
 fontsize: 10.5pt
 toc: true
 toc-depth: 2
