@@ -129,3 +129,35 @@ Agent ↔ IDE/Client : ACP
 - 개발 조직에서 실제 적용 가능한 최소 Factory 정의 추출
 
 `planning/concept.md`는 위 검증 후 만든다.
+
+
+## 3차 추가 수집
+
+반례와 운영 한계를 중심으로 다음 문서를 추가했다.
+
+- `14-failure-modes-and-antipatterns.md`
+  - test pass와 실제 완료의 차이
+  - reward hacking
+  - Lucky Pass
+  - multi-agent coordination collapse
+  - giant PR
+  - security boundary failure
+- `15-governance-provenance-and-agent-identity.md`
+  - Agent identity
+  - delegated authority
+  - audit
+  - artifact provenance
+  - enterprise governance
+- `16-productivity-evidence-and-measurement.md`
+  - RCT / survey / production evidence
+  - individual vs factory productivity
+  - human attention
+  - cost per accepted change
+- `17-review-integration-and-throughput-bottlenecks.md`
+  - review bottleneck
+  - CI / integration capacity
+  - stacked PR
+  - WIP limit
+- `18-research-contradictions-and-open-questions.md`
+  - 서로 충돌하는 산업 운영 모델
+  - 아직 결론 내리면 안 되는 질문
