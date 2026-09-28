@@ -116,7 +116,7 @@ Prompt
 
 Task
 = durable work item
-~~~
+```
 
 Task에는 Goal, Scope, Acceptance, Status, Attempt, Worker, Verification, Evidence 같은 정보가 연결될 수 있다.
 
@@ -146,7 +146,7 @@ Known Rule
 
 Uncertain Search / Judgment
 → Agent
-~~~
+```
 
 11장에서 이 경계를 자세히 다룬다.
 
@@ -159,7 +159,7 @@ Agent Result
 → Verification
 → Evidence
 → Acceptance
-~~~
+```
 
 Compile, Test, Runtime Check, Screenshot, Security Scan, Evaluator, Human Review 등 Task 위험에 맞는 검증이 필요하다.
 
@@ -184,7 +184,7 @@ Execution
 Verification
 Acceptance
 Merge / Deploy
-~~~
+```
 
 Task 위험에 따라 Human, Agent, Policy가 서로 다른 권한을 가질 수 있다.
 
@@ -220,7 +220,7 @@ Multi-Agent는 Scheduling Pattern이나 구현 전략일 수 있다. Minimum Via
 ```text
 More Agents
 ≠ More Factory
-~~~
+```
 
 ### Agent Framework
 
@@ -238,7 +238,7 @@ Test
 Approval
 Release
 Deployment
-~~~
+```
 
 ### Coding Agent Farm
 
@@ -256,7 +256,7 @@ Source Change
 → Test
 → Release
 → Deploy
-~~~
+```
 
 Factory는 여기에 Requirement/Task, Agent Work, Retry/Approval, Feedback까지 연결할 수 있다. 기존 CI/CD를 대체하기보다 사용한다.
 
@@ -301,7 +301,7 @@ Delivery
       ↓
 Feedback
       ↺
-~~~
+```
 
 처음부터 모든 요소를 구현할 필요는 없다.
 
@@ -315,7 +315,7 @@ Human selects Task
 → Build / Test
 → Evidence
 → Human Review
-~~~
+```
 
 중요한 것은 기능 목록보다 순서다.
 
