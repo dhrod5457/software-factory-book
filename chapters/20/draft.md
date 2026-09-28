@@ -166,6 +166,51 @@ Repeated Agent Failure
 
 ---
 
+### Continuous Planning Loop: 실행 중 배운 것으로 Plan을 다시 본다
+
+Closed Loop는 Production에서만 시작하지 않는다.
+
+WorkOS는 Linear Ticket의 dependency를 따라 다음 Task를 자동으로 시작하는 것뿐 아니라, 하나의 Ticket이 끝날 때 현재 Project를 다시 평가해 빠진 Work가 생겼는지 Agent에게 확인시키는 흐름을 설명한다.
+
+구현은 새로운 정보를 만든다.
+
+~~~text
+Plan
+→ Task
+→ Execution
+→ New Knowledge
+→ Plan Re-evaluation
+→ Task Graph Update
+~~~
+
+처음 만든 Plan을 immutable contract로 취급하면 구현 중 발견한 Gap이 반영되지 않는다. 반대로 Agent가 매 단계 마음대로 Roadmap을 바꾸게 하면 Scope가 흔들린다.
+
+따라서 Plan Re-evaluation도 권한을 나눈다.
+
+~~~text
+Agent
+→ missing task / dependency / risk 제안
+
+System
+→ task graph consistency / policy 확인
+
+Human or Policy
+→ scope-changing proposal 승인
+~~~
+
+이 Loop를 뒤의 두 Loop와 구분하면 Factory Feedback 구조가 더 선명해진다.
+
+~~~text
+Execution Learning Loop
+Task → New Knowledge → Plan
+
+Product Feedback Loop
+Operate → Signal → Requirement
+
+Factory Improvement Loop
+Execution Friction → Factory Capability
+~~~
+
 ## 20.5 Product Loop와 Factory Loop를 구분한다
 
 두 가지 Feedback Loop가 있다.
