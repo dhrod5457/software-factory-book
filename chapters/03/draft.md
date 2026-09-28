@@ -123,7 +123,7 @@ DevOps와 DevSecOps가 강조해 온 원칙은 Agent 시대에도 그대로 중�
 
 오히려 Agent가 더 많은 변경을 더 빠르게 만들수록 이런 원칙은 더 중요해질 수 있다.
 
-NIST NCCoE의 DevSecOps reference model을 보면 Software Delivery를 다음과 같은 연속된 흐름으로 본다.
+NIST NCCoE가 2026년 9월 갱신한 DevSecOps live reference model을 보면 Software Delivery를 다음과 같은 연속된 흐름으로 본다.
 
 ```text
 Plan
@@ -140,40 +140,23 @@ Plan
 
 여기에 CI/CD, Security, Monitoring, Control Gate가 횡단으로 들어간다.
 
-중요한 점은 AI가 이 구조를 없애는 것이 아니라는 것이다.
+중요한 점은 AI가 이 구조를 없애는 것이 아니라는 것이다. 2026년 9월 기준 NIST의 현재 공개 구현은 human-directed Generative AI를 Plan·Develop·Continuous Feedback에 넣고 있으며, 다음 Build 3에서 Agentic AI가 Develop·Build·Test를 수행하는 구조를 검토하고 있다. NIST 역시 AI를 별도 SDLC로 떼어내기보다 기존 DevSecOps lifecycle 안에 통제된 실행 주체로 넣는 방향을 취한다.
 
-Agent는 이 lifecycle 안에 새로운 실행 주체로 들어간다.
-
-예를 들어 다음과 같이 볼 수 있다.
+이 관점에서 Factory는 사람, 기존 자동화, Agent를 하나의 Work Flow 안에서 연결한다.
 
 ```text
-Human / Product Signal
-        ↓
+Human / Product
+      ↓
 Plan / Requirement
-        ↓
-Agent
-→ Develop
-→ Build
-→ Test
-        ↓
-Existing Release / Deploy System
-        ↓
-Operate
-        ↓
-Feedback
+      ↓
+Human + Automation + Agent
+      ↓
+Build / Test / Release / Deploy
+      ↓
+Operate / Feedback
 ```
 
-이 구조에서는 DevOps가 사라지지 않는다.
-
-기존 DevOps가 사람과 자동화 중심으로 설계됐다면, 이제 Agent가 새로운 actor로 추가된다.
-
-```text
-Human
-+ Automation
-+ AI Agent
-```
-
-Factory는 이 셋을 하나의 Work Flow로 묶는 쪽에 가깝다.
+DevOps가 사라지는 것이 아니라 실행 주체가 늘어나는 것이다.
 
 ---
 
@@ -258,46 +241,9 @@ Factory
 
 ### Agent도 Platform User가 된다
 
-기존 Internal Developer Platform은 사람을 주요 사용자로 생각했다.
+Agent가 Platform의 소비자가 되면 Portal과 문서만으로는 부족할 수 있다. Stable API, structured result, scoped permission처럼 machine-readable한 interface가 중요해진다.
 
-그래서 다음 interface가 중요했다.
-
-- Portal
-- CLI
-- Documentation
-- Dashboard
-
-Agent가 사용자가 되면 요구사항이 조금 달라진다.
-
-Agent-friendly interface에는 다음이 더 중요하다.
-
-- Structured Schema
-- Stable Identifier
-- Deterministic API
-- Machine-readable Error
-- Idempotency
-- Scoped Permission
-- Artifact Reference
-
-사람에게는 다음 메시지도 충분할 수 있다.
-
-```text
-Deployment failed.
-```
-
-사람은 로그를 찾아보고 원인을 추적할 수 있다.
-
-Agent에게는 다음 형태가 더 유용하다.
-
-```text
-status: failed
-stage: readiness
-reason: health_check_timeout
-retryable: true
-logs: artifact://deploy/1234
-```
-
-Agent 시대에는 Platform UX도 사람만을 위한 것이 아니게 된다.
+다만 이 장에서는 경계만 확인한다. Golden Path를 Agent Tool로 만드는 방법과 Software Catalog, structured error, idempotency 같은 구체적인 Platform 설계는 21장에서 다룬다.
 
 ---
 
@@ -451,34 +397,7 @@ Developer Platform
 CI/CD / Deploy / Observability
 ```
 
-이 구조에서는 Factory가 직접 모든 일을 하지 않는다.
-
-Factory는 다음을 책임진다.
-
-- Work 상태
-- 어떤 Worker가 필요한가
-- 어떤 Capability를 호출해야 하는가
-- 어떤 Verification이 필요한가
-- 실패하면 어떻게 복구할 것인가
-- 언제 사람의 승인이 필요한가
-
-Platform은 다음을 책임진다.
-
-- 환경 생성
-- Credential
-- Build Infrastructure
-- Deployment
-- Monitoring
-- 공통 Policy
-
-CI/CD는 다음을 책임진다.
-
-- deterministic build
-- test
-- artifact
-- release/deployment pipeline
-
-Agent Runtime은 실제 Agent execution을 담당한다.
+이 구조에서는 Factory가 모든 기능을 직접 구현하지 않는다. Factory는 Work 상태, Worker 선택, 검증, 복구, 승인 같은 Software Delivery의 흐름을 책임지고, Platform과 CI/CD는 환경·Credential·Build·Test·Deploy 같은 기존 Capability를 제공한다. Agent Runtime은 실제 Agent 실행을 담당한다.
 
 각 시스템이 잘하는 일을 그대로 사용한다.
 
