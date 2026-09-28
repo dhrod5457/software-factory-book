@@ -6,7 +6,7 @@
 
 특정 Vendor SDK 사용법을 배우는 것도 아니다.
 
-Reference Factory의 목적은 책에서 설명한 **경계와 Failure Semantics를 직접 확인하는 것**이다.
+이 장에서 제안하는 Reference Factory의 목적은 책에서 설명한 **경계와 Failure Semantics를 실험 가능한 형태로 만드는 것**이다. 여기서 제시하는 Scenario는 아직 보편적인 benchmark가 아니라 구현을 검증하기 위한 acceptance suite 후보다.
 
 그래서 기능 수보다 다음이 중요하다.
 
@@ -187,9 +187,7 @@ integration pending
 - Commit/Patch가 남는가
 - 새 Worker가 이어갈 수 있는가
 
-이 Scenario가 Reference Factory에서 가장 중요하다.
-
-Happy Path보다 Architecture의 실제 품질을 잘 보여준다.
+이 책의 관점에서는 이 Scenario가 특히 중요하다. Happy Path만으로는 Durable Task와 Worker 교체 가능성의 필요성을 확인하기 어렵기 때문이다.
 
 ---
 
@@ -367,7 +365,7 @@ Case Study
   Worker B가 처음부터 다시 작업했다
 ~~~
 
-Runmesh 같은 자체 구현 경험도 같은 방식으로 사용한다.
+자체 구현인 Runmesh의 경험도 같은 방식으로 사용한다. 특정 구현의 결과는 Case Study로 표시하고, 일반 원칙의 근거는 다른 공개 사례·연구와 분리한다.
 
 ---
 
@@ -386,7 +384,7 @@ G. Conflict is detected
 H. Evidence is linked to result revision
 ~~~
 
-이 Scenario를 통과하면 적어도 책의 핵심 Architecture가 코드에서 재현됐다고 볼 수 있다.
+이 Scenario를 통과하면 책이 주장하는 핵심 경계가 해당 Reference Implementation에서 동작한다는 근거가 된다. Production readiness나 다른 조직에서의 일반적 우수성을 증명하는 것은 아니다.
 
 ---
 
