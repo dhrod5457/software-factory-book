@@ -58,33 +58,65 @@ Intent / Signal
 ```text
 Phase 1 Research
 완료에 가까운 상태
-- 산업 사례
-- 학술 연구
-- 실패/반례
-- 보안/거버넌스
-- DevOps/Platform 경계
-- Evaluation
 
 Phase 2 Concept
-진행
-- planning/concept.md 작성 완료
+완료
+- planning/concept.md
+
+Phase 3 Scope
+완료
+- planning/scope.md
+- planning/future-topics.md
 
 Next
-Phase 3 Scope
-→ planning/scope.md
+Phase 4 TOC
+→ planning/toc.md
 ```
+
+## Scope 핵심 경계
+
+반드시 다룬다:
+
+- Durable Task
+- Control Plane
+- Worker / Sandbox
+- Harness / Context
+- Verification / Evidence
+- Recovery
+- Governance / Security
+- Observability / Metrics
+- Review / Integration
+- Platform / CI/CD 연결
+- Minimum Viable Factory
+
+필수조건으로 보지 않는다:
+
+- Multi-Agent
+- Automatic Work Selection
+- Fully Autonomous Merge
+- Self-improvement
+
+현재 책의 핵심 범위에서 제외한다:
+
+- Foundation Model internals
+- Fine-tuning
+- 일반 Prompt Engineering
+- 일반 Agent Framework 비교
+- General-purpose Agent Platform 전체
 
 ## Source of Truth
 
 현재 우선순위:
 
 1. `planning/concept.md`
-2. `research/29-academic-synthesis-design-principles.md`
-3. `research/18-research-contradictions-and-open-questions.md`
-4. `research/19-boundaries-devops-platform-engineering-agent-platform.md`
-5. `research/14-failure-modes-and-antipatterns.md`
-6. `research/sources.md`
-7. `research/README.md`
+2. `planning/scope.md`
+3. `planning/future-topics.md`
+4. `research/29-academic-synthesis-design-principles.md`
+5. `research/18-research-contradictions-and-open-questions.md`
+6. `research/19-boundaries-devops-platform-engineering-agent-platform.md`
+7. `research/14-failure-modes-and-antipatterns.md`
+8. `research/sources.md`
+9. `research/README.md`
 
 ## 작성 방식
 
@@ -101,4 +133,4 @@ research
 → manuscript
 ```
 
-현재는 Concept을 확정하고 Scope로 넘어가는 단계다.
+현재는 Scope를 확정했고 TOC 설계 단계로 넘어간다.
