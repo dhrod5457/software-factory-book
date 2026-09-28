@@ -8,6 +8,49 @@
 
 원본 Source of Truth는 각 `chapters/NN/draft.md`이며, Manuscript 단계의 편집은 이후 이 파일과 Chapter Source에 동기화한다.
 
+## 목차
+
+### Part I. Coding Agent에서 Software Factory로
+1. Coding Agent가 좋아진 뒤 무엇이 병목이 되는가
+2. AI Software Factory란 무엇인가
+3. CI/CD, DevOps, Platform Engineering, Agent Platform과의 경계
+
+### Part II. Work를 정의하는 시스템
+4. Prompt가 아니라 Requirement와 Acceptance에서 시작한다
+5. Durable Task: Session보다 오래 살아남는 작업 단위
+6. Task 크기, 분해, Dependency
+
+### Part III. Factory의 실행 구조
+7. Control Plane과 Execution Plane
+8. Worker, Sandbox, Workspace
+9. Harness Engineering: Agent가 일할 수 있는 환경 만들기
+10. Context Engineering과 Agent Legibility
+11. Controlled Autonomy: 무엇을 시스템에 두고 무엇을 Agent에게 맡길 것인가
+12. Verification: Agent가 완료했다고 말한 뒤부터가 시작이다
+
+### Part IV. 결과를 믿을 수 있게 만드는 시스템
+13. Evidence Contract: 완료를 설명하지 말고 증명한다
+14. Failure와 Recovery: 실패를 정상 상태로 설계한다
+15. Durable Execution: Crash를 넘어 이어지는 Work
+16. Security, Identity, Governance
+
+### Part V. 여러 Worker와 전체 Flow 관리
+17. Parallel Worker와 Multi-Agent: 언제 병렬화할 것인가
+18. Review, CI, Integration: Coding 다음 병목
+19. Observability와 Metrics: 무엇을 측정할 것인가
+
+### Part VI. 조직의 Software Delivery System으로 확장
+20. Event-driven Factory와 Closed-loop SDLC
+21. Developer Platform과 Golden Path를 Factory가 사용하게 만들기
+
+### Part VII. Minimum Viable Factory에서 Adaptive Factory까지
+22. Minimum Viable AI Software Factory
+23. 실전 Reference Factory 만들기
+24. Factory Maturity와 Autonomy를 어떻게 올릴 것인가
+
+### Epilogue
+Software Engineering에서 Software Production으로
+
 ---
 
 # Part I. Coding Agent에서 Software Factory로
