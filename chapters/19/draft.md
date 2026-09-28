@@ -23,6 +23,22 @@ Factory Observability의 목적은 Agent를 감시하는 데 있지 않다.
 
 여기서 `Accepted Change`와 뒤에서 사용하는 `Cost per Accepted Change`는 업계 표준 Metric이 아니라 이 책이 Factory 수준의 측정 경계를 설명하기 위해 사용하는 synthesis다.
 
+Zach Lloyd도 Software Factory를 설명하면서 얼마나 많은 Software를 전달했는지뿐 아니라 human time과 token time을 함께 측정하고 개선해야 한다고 주장한다. 이 책은 그 측정 경계를 한 단계 더 좁힌다. 생성량이나 완료 보고보다 **검증과 Acceptance를 통과한 Change**를 중심으로 시간·비용·Human Attention을 본다.
+
+~~~text
+Generated Output
+→ Candidate
+→ Verified Change
+→ Accepted Change
+
+Accepted Change
+───────────────
+Human Attention
+Cycle Time
+Compute / Token Cost
+Retry / Rework
+~~~
+
 ---
 
 ## 19.1 무엇을 관찰할 것인가
@@ -535,3 +551,6 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
   https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
 - Anthropic, *Demystifying evals for AI agents*  
   https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
+
