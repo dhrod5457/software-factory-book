@@ -378,6 +378,8 @@ Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구�
 
 ## 참고 자료
 
+- Cursor, *Routines*  
+  https://prod.cursor.com/help/grok-bot/routines
 - NIST NCCoE, *DevSecOps Notional Reference Model*  
   https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
 - WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
