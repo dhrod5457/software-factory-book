@@ -1,0 +1,20 @@
+flowchart LR
+  subgraph EV["Evidence"]
+    T["Test Result"]
+    S["Screenshot"]
+    B["Benchmark"]
+  end
+  R["Result Revision"]
+  subgraph PR["Provenance"]
+    TA["Task"]
+    AG["Agent"]
+    PO["Policy"]
+    AP["Approval"]
+  end
+  T --> R
+  S --> R
+  B --> R
+  TA --> R
+  AG --> R
+  PO --> R
+  AP --> R
