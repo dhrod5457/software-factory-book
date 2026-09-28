@@ -1651,7 +1651,7 @@ Agent가 무엇을 구현해야 하는지 어떻게 정의할 것인가.
 
 ---
 
-## Part II. Work를 정의하는 시스템
+# Part II. Work를 정의하는 시스템
 
 ## 4장. Prompt가 아니라 Requirement와 Acceptance에서 시작한다
 
@@ -2832,7 +2832,7 @@ Worker가 죽으면 누가 다시 배정할 것인가.
 
 ---
 
-## Part III. Factory의 실행 구조
+# Part III. Factory의 실행 구조
 
 ## 7장. Control Plane과 Execution Plane
 
@@ -5718,7 +5718,7 @@ Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있
 
 ---
 
-## Part IV. 결과를 믿을 수 있게 만드는 시스템
+# Part IV. 결과를 믿을 수 있게 만드는 시스템
 
 ## 13장. Evidence Contract: 완료를 설명하지 말고 증명한다
 
@@ -7583,7 +7583,7 @@ Agent 수를 늘리면 처리량도 선형으로 늘어날까.
 
 ---
 
-## Part V. 여러 Worker와 전체 Flow 관리
+# Part V. 여러 Worker와 전체 Flow 관리
 
 ## 17장. Parallel Worker와 Multi-Agent: 언제 병렬화할 것인가
 
@@ -8900,7 +8900,7 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
 ---
 
-## Part VI. 조직의 Software Delivery System으로 확장
+# Part VI. 조직의 Software Delivery System으로 확장
 
 ## 20장. Event-driven Factory와 Closed-loop SDLC
 
@@ -9584,7 +9584,7 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
-## Part VII. Minimum Viable Factory에서 Adaptive Factory까지
+# Part VII. Minimum Viable Factory에서 Adaptive Factory까지
 
 ## 22장. Minimum Viable AI Software Factory
 
