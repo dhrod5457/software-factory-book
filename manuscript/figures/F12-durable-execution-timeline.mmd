@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant W as Workflow
+  participant X as External System
+  participant H as Event History
+  W->>X: Side Effect (operation_id)
+  X-->>W: success
+  W->>H: record result
+  Note over W: Crash / Restart
+  W->>H: replay history
+  H-->>W: completed step + checkpoint
+  W->>X: status lookup / idempotent call
+  X-->>W: existing result
+  W->>W: Resume next step
