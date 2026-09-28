@@ -6,16 +6,16 @@
 
 - [ ] F01~F21 중 실제 제작 대상 확정
 - [ ] 중복 Figure 통합
-- [ ] Figure Caption 작성
+- [x] Figure Caption 작성
 - [ ] 본문 marker와 실제 파일 연결
 - [ ] 흑백/축소 인쇄에서도 읽히는지 확인
 
 ## 2. Case Study Box
 
-- [ ] C01~C14 중 실제 삽입 대상 확정
-- [ ] Vendor internal / preprint / simulation 조건 명시
+- [x] C01~C14 working copy 작성
+- [x] Vendor internal / preprint / simulation 조건 명시
 - [ ] 본문과 중복되는 문장 제거
-- [ ] Runmesh는 자체 Case Study로 라벨링
+- [x] Runmesh는 자체 Case Study로 라벨링
 
 ## 3. Copy Proof
 
@@ -25,7 +25,7 @@
 - [ ] 한글/영문 괄호
 - [ ] 숫자 표기
 - [ ] 코드/필드명 monospace 일관성
-- [ ] Chapter/Section 번호
+- [x] Chapter/Section 번호
 
 ## 4. References
 
@@ -33,7 +33,7 @@
 - [ ] publication style 결정
 - [ ] 날짜/저자/기관 metadata 보강
 - [ ] dead link 확인
-- [ ] duplicate 제거 확인
+- [x] duplicate 제거 확인
 
 ## 5. Publication-time Source Recheck
 
