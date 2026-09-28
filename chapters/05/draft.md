@@ -20,6 +20,8 @@ Software Factory에서는 충분하지 않다.
 
 이 책에서는 Prompt와 Session보다 오래 살아남으며 상태, 시도, 검증, 결과를 가진 작업 단위를 **Durable Task**라고 부른다.
 
+여기서 Durable Task는 이 책의 개념어다. Microsoft의 `Durable Task`라는 workflow runtime/product와 이름이 겹치지만 같은 뜻은 아니다. Microsoft Durable Task는 15장에서 durable execution의 구현 사례로 따로 다룬다.
+
 ---
 
 ## 5.1 Prompt, Session, Task
@@ -246,7 +248,7 @@ Dependency나 외부 조건 때문에 진행할 수 없다.
 
 ### RETRY
 
-현재 Attempt는 종료됐고 새 Attempt가 필요하다.
+현재 Attempt는 종료됐고 새 Attempt가 필요하다. 실제 구현에서는 `RETRY_SCHEDULED`처럼 대기 상태와 실행 가능 상태를 더 세분화할 수 있다.
 
 ### DONE
 
