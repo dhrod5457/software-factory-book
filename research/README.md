@@ -35,7 +35,8 @@ research
 12. `12-engineering-role-and-operating-model.md`
 13. `13-protocols-and-interoperability.md`
 14. `11-product-and-open-source-landscape.md`
-15. `sources.md`
+15. `30-workos-product-engineering-factory.md`
+16. `sources.md`
 
 ## 현재 연구 구조
 
@@ -92,6 +93,9 @@ Agent ↔ IDE/Client : ACP
 - Factory capability는 model capability와 동일하지 않다.
 - requirement와 verification 사이의 traceability가 중요한 자산이 된다.
 - self-improvement는 가능하지만 evaluator/policy까지 무제한으로 자기 수정하게 두면 위험하다.
+- Sandbox + Coding Agent + PR 생성만으로는 Product Engineering Process 전체를 자동화했다고 보기 어렵다.
+- Factory 성과는 PR/LOC 같은 output보다 accepted delivery, cycle time, defect/recovery 같은 outcome과 함께 봐야 한다.
+- Task 실행에서 새로 얻은 지식은 현재 Plan과 Task Graph를 다시 평가하는 입력이 될 수 있다.
 
 ## Source Quality
 
@@ -230,3 +234,20 @@ Agent ↔ IDE/Client : ACP
   - 지금까지의 산업+학술 자료에서 반복적으로 지지되는 설계 원칙
 
 이번 학술 수집의 핵심은 **복잡한 Agent architecture와 높은 autonomy가 자동으로 더 좋은 결과를 만들지 않는다는 것**이다. Agentless와 deterministic orchestration 연구는 구조화 가능한 단계에서는 단순하고 deterministic한 시스템이 더 효율적일 수 있음을 보여주고, human-agent collaboration 연구는 실행 주도권과 최종 승인 권한을 독립적으로 설계해야 함을 보여준다.
+
+
+## 6차 추가 수집 - WorkOS Product Engineering Factory
+
+추가 문서:
+
+- `30-workos-product-engineering-factory.md`
+  - PR 생성 자동화와 Software Factory의 경계
+  - output metric과 outcome metric
+  - Product brief/PRD에서 Task decomposition으로 이어지는 workflow
+  - Continuous Planning Loop
+  - MCP Context Engine / semantic gateway
+  - Agent runtime 독립성
+  - session friction 기반 self-improvement
+  - authorization open problem
+
+이번 자료의 핵심은 Software Factory의 자동화 단위를 코드 생성에 한정하지 않고 **Product Engineering Process 전체**로 확장한다는 점이다. 특히 Task 완료 후 새 지식을 반영해 Plan을 다시 평가하는 Continuous Planning Loop를 기존 Production Feedback Loop와 구분해 다룬다.
