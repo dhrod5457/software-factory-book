@@ -85,9 +85,20 @@ Draft 중 새로운 주제를 추가하기 전에:
 
 다음:
 
-- 7장 Control Plane / Execution Plane
-- 8장 Worker / Sandbox / Workspace
-- 9장 Harness Engineering
+- 7장 Draft 작성
+- 8장 Draft 작성
+- 9장 Draft 작성
+- 10장 Draft 작성
+- 11장 Draft 작성
+- 12장 Draft 작성
+- Part III Draft Review
+
+다음:
+
+- 13장 Evidence Contract
+- 14장 Failure / Recovery
+- 15장 Durable Execution
+- 16장 Security / Identity / Governance
 
 # Draft Order
 
