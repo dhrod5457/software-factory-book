@@ -1,0 +1,10 @@
+flowchart TB
+  W["Worker Isolation"]
+  W --> S["Source / Workspace"]
+  W --> P["Process"]
+  W --> N["Network"]
+  W --> C["Credential"]
+  W --> R["Runtime State"]
+  W --> E["External Resource"]
+  EP["Ephemeral"] -. lifecycle .-> W
+  PS["Persistent"] -. lifecycle .-> W
