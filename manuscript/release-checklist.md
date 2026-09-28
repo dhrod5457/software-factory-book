@@ -29,10 +29,10 @@
 
 ## 4. References
 
-- [ ] 53개 Reference URL 재확인
+- [x] 53개 Reference URL 재확인
 - [ ] publication style 결정
 - [ ] 날짜/저자/기관 metadata 보강
-- [ ] dead link 확인
+- [x] dead link 확인
 - [x] duplicate 제거 확인
 
 ## 5. Publication-time Source Recheck
