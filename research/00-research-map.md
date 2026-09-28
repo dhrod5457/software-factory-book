@@ -303,29 +303,36 @@ AI 시대
 + continuous feedback
 ```
 
-## Research 파일 계획
+## Research 파일 현황
+
+현재 수집된 연구 문서:
 
 - `research/00-research-map.md` - 전체 조사 지도
-- `research/01-ai-software-factory-landscape-2026.md` - 실제 사례
-- `research/02-factory-architecture-patterns.md` - 공통 구조
-- `research/03-harness-context-and-agent-legibility.md`
-- `research/04-orchestration-task-state-and-continuity.md`
-- `research/05-verification-evidence-and-human-gates.md`
-- `research/06-security-isolation-and-permissions.md`
-- `research/07-observability-metrics-and-economics.md`
-- `research/08-autonomy-levels-and-self-improvement.md`
-- `research/09-history-background.md` - 최소 역사 배경
-- `research/sources.md` - 출처 인덱스
+- `research/01-ai-software-factory-landscape-2026.md` - 2026 실제 운영 사례
+- `research/02-factory-architecture-patterns.md` - 공통 아키텍처 패턴
+- `research/03-harness-context-and-agent-legibility.md` - Harness / Context / Agent Legibility
+- `research/04-orchestration-task-state-and-continuity.md` - Orchestration / Durable Task / Continuity
+- `research/05-verification-evidence-and-human-gates.md` - Verification / Evidence / Human Gate
+- `research/06-security-isolation-and-permissions.md` - Security / Isolation / Permission
+- `research/07-observability-metrics-and-economics.md` - Observability / Metrics / Economics
+- `research/08-autonomy-levels-and-self-improvement.md` - Autonomy / Self-improvement
+- `research/09-evals-and-benchmark-limitations.md` - Evals / Benchmark
+- `research/10-requirements-specification-and-task-planning.md` - Requirement / Specification / Task Planning
+- `research/11-product-and-open-source-landscape.md` - Product / Open-source Landscape
+- `research/12-engineering-role-and-operating-model.md` - Human Role / Operating Model
+- `research/13-protocols-and-interoperability.md` - MCP / A2A / ACP / Interoperability
+- `research/sources.md` - 공식 1차 출처 인덱스
 
-## 출처 원칙
+다음 단계에서는 새 주제를 무작정 늘리기보다 각 문서의 주장과 출처를 다시 교차검증하고, 서로 반복되는 원칙을 `planning/concept.md` 후보로 추출한다.
 
-A급 자료를 우선한다.
+## 아직 최종 정의하지 않을 것
 
-- 운영 조직의 공식 Engineering Blog
-- 공식 문서 / specification
-- 연구 논문 / benchmark 원문
-- 실제 오픈소스 repository
+현재 research 단계에서는 다음을 확정하지 않는다.
 
-회사 자체 생산성 수치는 독립 검증된 일반 사실이 아니라 **해당 조직의 보고 사례**로 기록한다.
+- 최종 책 제목
+- 최종 목차
+- Software Factory의 한 문장 정의
+- 자율성 단계의 업계 표준화된 명칭
+- 특정 vendor architecture를 정답으로 채택하는 것
 
-최신 제품의 모델명, 가격, session 제한은 책의 핵심 정의와 분리한다.
+충분한 독립 근거가 반복되는 패턴만 concept 단계로 승격한다.
