@@ -326,6 +326,48 @@ Factory Scheduler는 downstream capacity까지 고려할 수 있다.
 
 ---
 
+## 17.10 Role Separation은 Task Independence가 아니다
+
+실제 Agent 제품에서는 Frontend, QA, Documentation, Research처럼 이름과 역할이 다른 Agent를 만들고 서로 메시지를 주고받거나 Task를 넘기는 형태를 제공하기 시작했다. Cursor의 Grok Bot도 여러 Bot의 병렬 실행, 메시지 교환, Task ownership handoff를 제품 기능으로 제공한다.
+
+이 구조는 사람 조직과 비슷해 보여 이해하기 쉽다.
+
+하지만 이름이 다르다고 Work가 독립적인 것은 아니다.
+
+~~~text
+Frontend Bot
+Backend Bot
+QA Bot
+Documentation Bot
+~~~
+
+네 Agent가 모두 같은 API Schema 변경에 의존한다면 실제 Task Graph는 여전히 강하게 결합되어 있다.
+
+따라서 다음을 구분한다.
+
+~~~text
+Role Separation
+= 누가 어떤 종류의 판단과 행동을 주로 하는가
+
+Task Independence
+= 결과를 독립적으로 실행·검증·통합할 수 있는가
+~~~
+
+Factory Scheduler가 병렬화를 결정할 때 더 중요한 것은 두 번째다.
+
+Agent-to-Agent Communication도 마찬가지다.
+
+~~~text
+Agent delegation
+≠ durable orchestration
+~~~
+
+Bot끼리 대화하고 일을 넘기는 것은 Coordination Capability다.
+
+Dependency, timeout, retry, ownership, completion, evidence를 authoritative하게 관리하는 것은 Control Plane의 책임이다.
+
+Multi-Agent UI가 좋아질수록 이 경계를 더 명확히 해야 한다.
+
 ## 예: 독립 Task 3개와 충돌 Task 3개
 
 ### Good
