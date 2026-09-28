@@ -220,6 +220,10 @@
    https://workos.com/blog/project-horizon  
    사용 장: 2장, 5장, 7장, 8장, 20장, 22장, 23장, 24장
 
+54. Ryan Cooke, WorkOS, *No, That's Not a Software Factory*  
+   conference talk transcript, 사용자 제공 자료  
+   사용 장: 2장, 4장, 10장, 16장, 19장, 20장, 24장
+
 ## Publication-time Recheck
 
 다음은 출간 직전 다시 확인한다.
