@@ -59,9 +59,9 @@ Factory Boundary가 실제로 동작하는지 확인하는 것이다.
 
 ---
 
-## 22.2 최소 구조
+## 22.2 권장 시작 구조
 
-Minimum Viable Factory는 다음 정도면 된다.
+2장에서 정의한 Factory의 최소 성질과, 조직이 처음 도입할 때 권장하는 시작 구성은 같지 않다. 여기서는 실패 비용을 낮추기 위해 **Human Review를 남겨 둔 시작 형태**를 사용한다.
 
 ~~~text
 Human selects Task
@@ -83,7 +83,7 @@ Agent 하나면 충분하다.
 
 Automatic Backlog Selection도 필요 없다.
 
-Auto-merge도 필요 없다.
+Auto-merge도 필요 없다. 반대로 낮은 위험의 Task에서 충분한 검증 정책이 이미 있다면 Human Review를 생략할 수도 있다. Human Review는 Factory 정의의 필수조건이 아니라 첫 도입에서 안전한 기본값이다.
 
 그럼에도 Interactive Agent와 다른 중요한 성질이 생긴다.
 
@@ -95,7 +95,7 @@ Auto-merge도 필요 없다.
 
 ---
 
-## 22.3 Phase 0: Agent-ready Repository
+## 22.3 Step A: Agent-ready Repository
 
 Factory보다 먼저 Repository를 본다.
 
@@ -125,7 +125,7 @@ Factory가 Repository Chaos를 자동으로 해결해줄 것이라고 기대하�
 
 ---
 
-## 22.4 Phase 1: Reproducible Worker
+## 22.4 Step B: Reproducible Worker
 
 다음 목표:
 
@@ -145,7 +145,7 @@ Worker 하나가 재현 가능하면 된다.
 
 ---
 
-## 22.5 Phase 2: Evidence Contract
+## 22.5 Step C: Evidence Contract
 
 Scale 전에 Result Format을 만든다.
 
@@ -162,7 +162,7 @@ Known Risk
 
 ---
 
-## 22.6 Phase 3: Durable Task State
+## 22.6 Step D: Durable Task State
 
 다음으로 Work State를 Session 밖으로 꺼낸다.
 
@@ -181,7 +181,7 @@ Attempt와 Retry도 기록한다.
 
 ---
 
-## 22.7 Phase 4: Retry와 Resume
+## 22.7 Step E: Retry와 Resume
 
 Happy Path가 반복적으로 안정적이라면 Failure Recovery를 넣는다.
 
@@ -203,7 +203,7 @@ Approval delay
 
 ---
 
-## 22.8 Phase 5: Event Trigger
+## 22.8 Step F: Event Trigger
 
 Human이 직접 Start하지 않아도 되는 Work를 연결한다.
 
@@ -224,7 +224,7 @@ Work Source 자동화와 Acceptance Authority는 별개다.
 
 ---
 
-## 22.9 Phase 6: Parallel Worker
+## 22.9 Step G: Parallel Worker
 
 Queue가 실제로 쌓이기 시작했을 때 Worker를 늘린다.
 
@@ -241,7 +241,7 @@ Conflict Rate?
 
 ---
 
-## 22.10 Phase 7: Risk-based Automation
+## 22.10 Step H: Risk-based Automation
 
 Task Risk에 따라 정책을 다르게 한다.
 
@@ -270,17 +270,16 @@ Backlog에서 어떤 Task를 할지 Agent가 고르는 것은 높은 수준의 A
 
 잘못된 Task를 완벽하게 실행해도 가치가 없다.
 
-그래서 보통 다음보다 뒤에 둔다.
+그래서 보통 Reliability baseline과 검증·복구·관측 기반을 확인한 뒤에 둔다.
 
 ~~~text
-Reliability
-→ Observability
-→ Recovery
+Reliability baseline
+→ Recovery + Observability
 → Scale
 → Autonomy
 ~~~
 
-이 순서는 절대 법칙이 아니라 안전한 도입 후보 순서다.
+이것은 고정된 maturity ladder가 아니라 위험한 자동화를 너무 일찍 넣지 않기 위한 권장 순서다. Repository와 Workflow 특성에 따라 Recovery와 Observability의 구현 순서는 달라질 수 있다.
 
 ---
 
@@ -332,7 +331,7 @@ Evidence
 Human Review
 ~~~
 
-10~20개 Task를 반복한다.
+처음에는 소수의 실제 Task를 반복해 baseline을 만든다. 몇 건이 충분한지는 Task 다양성과 실패 빈도에 따라 달라지므로 고정 숫자를 두지 않는다.
 
 확인:
 
