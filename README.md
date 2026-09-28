@@ -17,8 +17,8 @@ AI Coding Agent를 실제 소프트웨어 생산 시스템 안에서 어떻게 �
 ```text
 Phase 1 Research   완료에 가까움
 Phase 2 Concept    완료
-Phase 3 Scope      다음
-Phase 4 TOC
+Phase 3 Scope      완료
+Phase 4 TOC        다음
 Phase 5 Chapter Plan
 Phase 6 Draft
 Phase 7 Review
@@ -28,8 +28,13 @@ Phase 8 Manuscript
 현재 Source of Truth:
 
 - `planning/concept.md`
+- `planning/scope.md`
 - `PROJECT.md`
 - `STATUS.md`
+
+범위 밖 후속 주제:
+
+- `planning/future-topics.md`
 
 Research 자료:
 
@@ -48,6 +53,20 @@ Research 자료:
 - 기존 CI/CD와 Platform Engineering은 Factory가 대체하는 것이 아니라 기반으로 활용합니다.
 - Factory의 목표는 Agent 수나 코드량보다 검증된 변경의 전체 흐름을 개선하는 것입니다.
 
+## 핵심 범위
+
+```text
+Intent / Requirement
+→ Durable Task
+→ Control Plane
+→ Worker / Sandbox
+→ Agent Harness
+→ Verification / Evidence
+→ Recovery
+→ Governance
+→ Delivery / Feedback
+```
+
 ## 작성 방식
 
 `cloud-agent-book`의 작성 방식을 참고합니다.
@@ -63,4 +82,4 @@ research
 → manuscript
 ```
 
-다음 작업은 `planning/scope.md` 작성입니다.
+다음 작업은 `planning/toc.md` 설계입니다.
