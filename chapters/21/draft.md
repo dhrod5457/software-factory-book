@@ -399,6 +399,10 @@ Platform은 Agent가 자유롭게 모든 방법을 발명하게 만드는 대신
 
 ## 참고 자료
 
+- Cursor, *Work with Grok Bot*  
+  https://cursor.com/docs/grok-bot/work
+- Cursor, *Grok Bot for Teams and Enterprise*  
+  https://cursor.com/docs/grok-bot/teams
 - DORA, *Platform Engineering Capability*  
   https://dora.dev/capabilities/platform-engineering/
 - CNCF, *Platform Engineering Maturity Model*  
