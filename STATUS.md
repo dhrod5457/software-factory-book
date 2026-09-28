@@ -2,7 +2,7 @@
 
 Phase 8 - Manuscript
 
-상태: **RELEASE CANDIDATE RC1**
+상태: **RELEASE CANDIDATE RC2**
 
 24개 본장과 Epilogue의 Draft 및 Phase 7 Review를 완료했다.
 
@@ -17,11 +17,13 @@ Phase 8 - Manuscript
 - 2026-09-28 Source Validation Snapshot
 - Writing Style Guide Phase 7 규칙 반영
 
-# Working Title
+# Title
 
 **AI Software Factory**
 
-최종 제목/부제는 아직 확정하지 않는다.
+부제:
+
+**코딩 에이전트를 소프트웨어 생산 시스템으로 운영하는 설계 원칙**
 
 # Current Structure
 
@@ -119,19 +121,24 @@ Review에서 완료한 항목:
 - Release Proof PASS
 - RC1 snapshot 기록
 
+완료 추가:
+
+- 최종 RC 제목 / 부제 결정
+- 53개 Reference link audit PASS
+- dead link 0
+
 남은 Release Gate:
 
-1. 최종 제목 / 부제
-2. SVG/PDF용 Figure export 및 흑백/축소 가독성
-3. 53개 Reference 전체 dead-link + metadata 확인
-4. 사람 기준 최종 교정
-5. 최종 출판 산출물 build
+1. SVG/PDF용 Figure export 및 흑백/축소 가독성
+2. Reference publication metadata/style 최종화
+3. 사람 기준 최종 교정
+4. 최종 출판 산출물 build
 
 # Next
 
 ```text
-RC1
-→ final title / proof / reference pass
+RC2
+→ figure export / final proof / bibliography pass
 → publication build
 → release manuscript
 ```
