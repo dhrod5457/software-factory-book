@@ -462,3 +462,5 @@ Agent가 Backlog에서 스스로 Work를 선택하게 할까.
   https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
 - Anthropic, *Effective harnesses for long-running agents*  
   https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript  
+  https://www.youtube.com/watch?v=AsvzMlLyQ38
