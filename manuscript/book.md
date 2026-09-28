@@ -240,7 +240,7 @@ CI는 통과했는데 리뷰가 대기한다.
 
 Coding Assistant와 Coding Agent를 제품 이름으로 나누기는 어렵다. 같은 제품도 사용 방식에 따라 Assistant처럼 동작할 수도 있고 Agent처럼 동작할 수도 있다.
 
-이 책에서는 작업 방식으로 구분한다.
+여기서는 작업 방식으로 구분한다.
 
 Coding Assistant의 흐름은 대체로 다음과 같다.
 
@@ -373,7 +373,7 @@ Agent가 한두 개일 때는 사람이 직접 관리해도 된다.
 
 OpenAI가 2026년 4월 Symphony를 공개하며 설명한 내부 경험에서도 한 엔지니어가 interactive coding-agent session을 대체로 3~5개 정도까지는 편하게 관리했지만, 그 이상에서는 Context Switching 부담이 커졌다고 한다. 업계 일반 한계가 아니라 한 조직의 운영 사례다.
 
-중요한 것은 session 수가 늘수록 **Human Attention 자체가 Capacity Constraint가 될 수 있다는 점**이다.
+session 수가 늘수록 **Human Attention 자체가 Capacity Constraint가 될 수 있다**.
 
 Software Factory의 목표는 사람을 없애는 것이 아니다.
 
@@ -387,7 +387,7 @@ Software Factory의 목표는 사람을 없애는 것이 아니다.
 
 반면 환경 준비, 반복 테스트, 상태 추적, 로그 수집 같은 작업은 시스템으로 이동할 수 있다.
 
-그래서 이 책에서는 다음과 같은 질문을 사용한다.
+그래서 다음 질문을 사용한다.
 
 > 검증된 변경 하나를 받아들이기 위해 사람이 얼마나 많은 Attention을 사용했는가?
 
@@ -514,7 +514,7 @@ Software Factory는 Agent를 여러 개 띄우는 시스템과 같은 말이 아
 
 > **AI Software Factory는 소프트웨어 작업을 durable하게 관리하고, AI Agent에게 실행을 위임하며, 독립된 검증과 통제 아래 실패를 복구하고 검증된 변경을 지속적으로 전달하는 소프트웨어 생산 시스템이다.**
 
-정의에서 중요한 것은 Agent 수가 아니다.
+정의의 중심은 Agent 수가 아니다.
 
 **Durable Work, 실행 위임, 독립된 검증, 실패 복구, 지속적인 전달**이다.
 
@@ -705,7 +705,7 @@ Task 실행에서는 계속 새로운 정보가 나온다.
 
 이 정보는 Product Fix나 Factory Improvement로 되돌아갈 수 있다.
 
-Feedback이 자동이어야 한다는 뜻은 아니다. 중요한 것은 실행 결과가 다음 개선에 사용할 수 있는 상태로 남는다는 것이다.
+Feedback이 자동일 필요는 없다. 실행 결과가 다음 개선에 사용할 수 있는 상태로 남아야 한다.
 
 ---
 
@@ -821,7 +821,7 @@ Human selects Task
 → Human Review
 ~~~
 
-중요한 것은 기능 목록보다 순서다.
+기능 목록보다 순서가 더 중요하다.
 
 Reliability와 Verification을 확인하기 전에 Agent 수나 Decision Authority부터 크게 늘리면 실패 원인을 구분하기 어려워진다.
 
@@ -1461,7 +1461,7 @@ Design Constraint
 
 기존 Architecture, 배포 제약, 호환성 조건이 먼저 정해질 수 있기 때문이다.
 
-중요한 것은 하나의 Planning Process를 모든 작업에 강요하지 않는 것이다.
+하나의 Planning Process를 모든 작업에 강요할 필요는 없다.
 
 2026년 9월 기준 GitHub Spec Kit의 기본 SDD 흐름은 `Specify → Plan → Tasks → Implement → Converge`이고, Kiro도 Requirement·Design·Task를 별도 artifact로 관리한다. 제품별 절차는 다르지만 여기서 가져올 원칙은 문서 형식 자체가 아니라 **Intent와 실행 사이에 durable artifact와 검증 가능한 연결을 둔다는 것**이다.
 
@@ -1508,7 +1508,7 @@ System / Reviewer
 
 작은 maintenance Task에서는 이 과정이 자동화될 수 있다.
 
-중요한 것은 누가 문서를 작성했느냐보다 **누가 최종 의미를 승인하느냐**다.
+문서 작성자보다 **누가 최종 의미를 승인하느냐**가 더 중요하다.
 
 ---
 
@@ -1796,7 +1796,7 @@ carryover
 
 모든 조직이 같은 필드를 가질 필요는 없다.
 
-중요한 것은 이 정보가 Agent transcript 안에만 존재하지 않는 것이다.
+이 정보는 Agent transcript 안에만 존재해서는 안 된다.
 
 ---
 
@@ -2118,7 +2118,7 @@ Task가 너무 작으면 Worker 시작, Repository 탐색, Context 전달, Verif
 
 그래서 좋은 Task 크기는 줄 수나 작업 시간으로 정하기 어렵다.
 
-이 책에서는 다음 기준을 사용한다.
+다음 기준을 사용한다.
 
 > 좋은 Task는 독립적으로 실행하고, 검증하고, 실패 시 복구할 수 있으며, 필요한 승인 주체가 결과를 판단할 수 있는 단위다.
 
@@ -2667,7 +2667,7 @@ Worker Runtime
 
 셋이 같은 제품일 수도 있다.
 
-중요한 것은 책임을 구분하는 것이다.
+책임을 구분해야 한다.
 
 ---
 
@@ -2799,7 +2799,7 @@ Worker B
 
 이 문제는 14~15장에서 더 깊게 다룬다.
 
-여기서 중요한 것은 원칙이다.
+여기서 남는 원칙은 분명하다.
 
 **Compute는 잃을 수 있어도 Work State는 잃지 않는다.**
 
@@ -2961,7 +2961,7 @@ Task
 
 어떤 방식을 써야 하는지는 Task 위험과 환경 복잡도에 따라 달라진다.
 
-중요한 것은 “무엇을 격리해야 하는가”를 명확히 하는 것이다.
+먼저 **무엇을 격리해야 하는가**를 명확히 해야 한다.
 
 예를 들어 다음은 서로 다른 경계다.
 
@@ -3316,7 +3316,7 @@ Worker State 문제다.
 - Ephemeral Browser Worker
 - runtime state checksum
 
-중요한 것은 Failure Class를 구분하는 것이다.
+코드 실패와 환경 실패를 같은 문제로 다루지 않아야 한다.
 
 코드가 틀렸는지, 환경이 오염됐는지 분리하지 않으면 Agent는 잘못된 방향으로 수정할 수 있다.
 
@@ -3856,7 +3856,7 @@ Agent가 실패하면 Context가 부족했다고 생각하기 쉽다.
 
 > 얼마나 많이 넣을 것인가가 아니라, 필요한 정보를 Agent가 얼마나 쉽게 찾을 수 있게 만들 것인가?
 
-이 책에서는 이를 **Agent Legibility**와 연결해 본다.
+여기서는 이를 **Agent Legibility**와 연결해 본다.
 
 Repository와 Application이 사람에게만 읽기 쉬운 것이 아니라 Agent도 구조와 상태를 탐색할 수 있어야 한다.
 
@@ -4261,7 +4261,7 @@ DB Migration 순서도 매번 새로 계획하게 할까.
 
 Agentic이라는 말은 자주 “Agent가 더 많은 것을 스스로 결정한다”는 의미로 쓰인다.
 
-하지만 실제 Factory에서 중요한 것은 Autonomy의 양이 아니다.
+하지만 실제 Factory에서 핵심은 Autonomy의 양이 아니다.
 
 **어떤 결정을 누구에게 맡길 것인가**다.
 
@@ -4283,7 +4283,7 @@ Agentic이라는 말은 자주 “Agent가 더 많은 것을 스스로 결정한
 
 하지만 그럴 이유가 있는지는 별개의 문제다.
 
-이 책에서는 다음 원칙을 사용한다.
+다음 원칙을 사용한다.
 
 > 이미 알고 있는 Rule과 State는 시스템이 책임지고, 사전 규칙화하기 어려운 Search와 Judgment에 Agent Autonomy를 사용한다.
 
@@ -4372,7 +4372,7 @@ Agent owns
 - debugging
 ~~~
 
-이 책에서는 이 형태를 기본 후보로 본다.
+여기서는 이 형태를 기본 후보로 본다.
 
 모든 Workflow를 state machine으로 고정하지도 않고, 모든 Control을 Agent에게 넘기지도 않는다.
 
@@ -4432,7 +4432,7 @@ Agent에게 “가능하면 하지 마라”라고 말할 필요가 없다.
 
 이런 문제는 Agent가 잘하는 영역이다.
 
-Factory 설계에서 중요한 것은 세 종류를 섞지 않는 것이다.
+Factory 설계에서는 세 종류를 섞지 않는 편이 좋다.
 
 ---
 
@@ -4738,7 +4738,7 @@ Agent의 보고는 하나의 **Completion Claim**이다.
 
 Task를 DONE으로 만들 수 있는 **Completion Authority**와는 다르다.
 
-이 책에서는 다음 구조를 기본으로 본다.
+기본 구조는 다음과 같다.
 
 ~~~text
 Agent
@@ -5389,7 +5389,7 @@ artifacts:
     ref: artifact://task-100/integration.log
 ~~~
 
-중요한 것은 Agent가 “Test했다”고 말하는 것이 아니라 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있다는 것이다.
+Agent가 “Test했다”고 말하는 것보다 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있어야 한다.
 
 ---
 
@@ -5772,7 +5772,7 @@ Factory에서 Failure를 몇 가지 범주로 나눌 수 있다.
 
 이 분류가 완벽할 필요는 없다.
 
-중요한 것은 모든 Failure를 “Agent 실패” 하나로 합치지 않는 것이다.
+모든 Failure를 “Agent 실패” 하나로 합치면 복구 위치를 잘못 고를 수 있다.
 
 ---
 
@@ -6047,7 +6047,7 @@ Primary Agent continues
 
 모든 Task에 Observer Agent가 필요하다는 뜻은 아니다.
 
-중요한 것은 Recovery에도 여러 Granularity가 있다는 것이다.
+Recovery에도 여러 Granularity가 있다.
 
 ---
 
@@ -6453,7 +6453,7 @@ Worker / Sandbox
 
 Temporal, Microsoft Durable Task, Google Agent Executor 같은 시스템은 서로 구현과 추상화가 다르다. 특히 여기서 Microsoft Durable Task는 5장에서 정의한 책의 “Durable Task” 작업 단위와 다른 workflow technology다. Microsoft는 이를 특정 Agent Framework에 종속되지 않은 long-running durable workflow 기반으로 설명하고 있고, Google은 2026년 5월 Agent Executor를 event log와 snapshot으로 outage나 HITL 이후 execution을 재개하는 open-source runtime standard로 공개했다.
 
-이 책에서 중요한 것은 특정 제품 API가 아니라 공통적으로 다음 문제를 별도 reliability layer에서 다룬다는 점이다.
+특정 제품 API보다 공통적으로 다음 문제를 별도 reliability layer에서 다룬다는 점에 주목한다.
 
 - long-running state
 - retry
@@ -6882,7 +6882,7 @@ production
 - deploy approval
 - scoped production permission
 
-중요한 것은 Human Gate의 개수가 아니다.
+Human Gate의 개수가 핵심은 아니다.
 
 **Residual Risk를 받아들이는 지점에 Gate를 두는 것**이다.
 
@@ -6921,7 +6921,7 @@ Deployer
 
 각 역할이 반드시 서로 다른 Model일 필요는 없다.
 
-중요한 것은 **권한 경계**다.
+핵심은 **권한 경계**다.
 
 예를 들어 같은 Model을 사용하더라도 Verification Definition은 Control Plane이 보호하고 Merge Token은 Human Approval 뒤에만 발급할 수 있다.
 
@@ -7125,7 +7125,7 @@ Worker 하나가 안정적으로 동작하면 다음 생각이 자연스럽게 �
 - Review overload
 - Shared Resource 경쟁
 
-그래서 이 책에서는 다음 원칙을 사용한다.
+따라서 다음 원칙을 사용한다.
 
 > 병렬화의 대상은 Agent가 아니라 독립 Task다.
 
@@ -7713,7 +7713,7 @@ PENDING_INTEGRATION <= 4
 
 정답 숫자는 조직마다 다르다.
 
-중요한 것은 Start Rate를 Downstream Capacity와 연결하는 것이다.
+Start Rate를 Downstream Capacity와 연결해야 한다.
 
 ---
 
@@ -9738,7 +9738,7 @@ Factory는 다음 중 하나를 해야 한다.
 - Replan
 - Integration Failure
 
-중요한 것은 Conflict가 “놀라운 사고”가 아니라 예상 가능한 Scenario라는 점이다.
+Conflict는 “놀라운 사고”가 아니라 예상 가능한 Scenario로 다뤄야 한다.
 
 ---
 
@@ -9874,7 +9874,7 @@ Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
 
 반대로 Agent가 스스로 Task를 선택하고 Merge한다고 해서 높은 Reliability를 가진 것도 아니다.
 
-이 책에서는 두 축을 분리한다.
+두 축을 분리해 본다.
 
 ---
 
@@ -10293,7 +10293,7 @@ Reliability baseline
 
 실제 조직에서는 일부 순서가 바뀔 수 있다. 이 도식은 maturity score가 아니라 dependency를 설명하는 휴리스틱이다.
 
-중요한 것은 Autonomy를 첫 번째 목표로 두지 않는 것이다.
+Autonomy를 첫 번째 목표로 두지 않는다.
 
 ---
 
@@ -10479,7 +10479,7 @@ Agent 시대에는 다음 숫자가 쉽게 늘어난다.
 - Pull Request
 - Generated Code
 
-하지만 이 책에서는 더 넓은 측정 단위 후보로 다음을 사용했다.
+하지만 여기서는 더 넓은 측정 단위 후보로 다음을 사용했다.
 
 ~~~text
 Accepted Change
