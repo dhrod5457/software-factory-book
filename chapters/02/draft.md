@@ -18,11 +18,31 @@ Software Factory는 Agent를 여러 개 띄우는 시스템과 같은 말이 아
 
 Agent는 중요한 Worker지만 Factory 전체는 아니다.
 
+산업 현장에서도 비슷한 경계가 나타난다. Caylent는 Software Factory를 Claude Code 같은 Coding Agent 자체가 아니라, 그 주위에 Plugin과 Skill, Hook, Rule, 실행 Loop를 배치해 Software Engineering Process를 자동화하는 구조로 설명한다. 공개한 DevBench 역시 구조화된 Backlog를 구현, Review, Security Review, Git 흐름으로 통과시키는 Orchestration System에 가깝다.
+
+이 사례에서 가져올 원칙은 특정 제품이나 자동화 수준이 아니다.
+
+~~~text
+Coding Agent
+≠ Software Factory
+
+Agent Capability
++ Harness
++ Work State
++ Verification
++ Delivery Control
+→ Factory Capability
+~~~
+
+이 책의 정의는 여기서 한 단계 더 넓다. Harness는 중요한 실행 계층이지만, Durable Work, Recovery, Acceptance Authority, Feedback까지 포함하는 Factory 전체와 동일하지 않다.
+
 ---
 
 ## 2.1 왜 다시 Factory라는 표현인가
 
 Software Factory라는 말은 AI 시대에 처음 등장한 것이 아니다. Software Engineering은 오래전부터 반복 가능한 프로세스, 자동화, 표준화, 재사용 가능한 자산을 통해 생산성을 높이려 해왔다.
+
+최근에는 Software Factory와 함께 Dark Factory 같은 표현도 등장한다. 하지만 이 책에서는 사람이 보이지 않는가를 기준으로 Factory를 정의하지 않는다. Work가 durable하게 관리되고, 실행이 통제되며, 결과가 독립적으로 검증되고, 실패 후 복구 가능한가를 더 중요한 경계로 본다.
 
 이 책은 그 역사를 길게 다루지 않는다.
 
@@ -349,3 +369,7 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
   https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
 - DORA, *Platform Engineering Capability*  
   https://dora.dev/capabilities/platform-engineering/
+- Caylent, *What is a Software Factory*  
+  https://www.youtube.com/watch?v=0Q8R_FZbnLk
+- Caylent Solutions, *DevBench*  
+  https://github.com/caylent-solutions/devbench
