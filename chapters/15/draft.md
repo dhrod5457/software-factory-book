@@ -386,6 +386,61 @@ Durable Task State가 있어도 Workspace/Checkpoint State가 없으면 실제 �
 
 ---
 
+## 15.11 Persistent Agent, Persistent Worker, Durable Task를 구분한다
+
+최근 Agent 제품 중에는 이름과 역할을 가진 Agent가 여러 Session에 걸쳐 기억, 파일, Browser Session, 선호를 유지하는 형태가 등장하고 있다. Cursor의 Grok Bot도 Bot별 Context를 유지하면서 계정 단위의 persistent cloud computer에서 파일과 Browser Session을 이어 사용하는 구조를 공개하고 있다.
+
+이런 형태는 긴 작업의 마찰을 크게 줄일 수 있다.
+
+하지만 다음 세 가지 Persistence를 같은 것으로 보면 안 된다.
+
+~~~text
+Persistent Agent
+- role
+- learned preference
+- memory
+- skill
+
+Persistent Worker
+- filesystem
+- browser session
+- process
+- cache
+- runtime tools
+
+Durable Task
+- goal
+- status
+- attempt
+- dependency
+- approval
+- verification
+- evidence
+~~~
+
+Agent가 기억한다고 Task가 durable한 것은 아니다.
+
+Worker의 파일이 남아 있다고 Orchestration State가 보존된 것도 아니다.
+
+반대로 Worker를 잃더라도 Task Store와 Checkpoint가 살아 있다면 다른 Worker에서 Work를 이어갈 수 있다.
+
+따라서 다음 등식을 피한다.
+
+~~~text
+Memory
+≠ Worker Persistence
+≠ Durable Task
+≠ Durable Execution
+~~~
+
+Persistent Agent는 작업 경험을 축적하는 UX와 Capability 문제다.
+
+Persistent Worker는 실행환경의 연속성 문제다.
+
+Durable Task와 Durable Execution은 업무 책임과 Side Effect를 crash 이후에도 복구하는 시스템 문제다.
+
+이 경계를 분리해야 Agent 제품의 편리한 Persistence를 Factory Reliability와 혼동하지 않는다.
+
 ## 예: Duplicate PR 방지
 
 Attempt A1:
