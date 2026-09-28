@@ -285,7 +285,9 @@ Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없�
 
 Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
 
-다만 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
+2026년 공개 사례에는 Factory.ai의 Signals처럼 session friction을 분석해 개선 Issue와 Fix로 연결하는 closed-loop 구현이 있고, Anthropic도 Agent Skills를 소개하며 장기적으로 Agent가 Skill을 직접 생성·편집·평가하는 방향을 언급했다. 전자는 한 회사의 제품 구현이고, 후자는 당시 “향후 탐색”으로 제시한 방향이다. 이를 일반적인 self-improving factory가 이미 확립됐다는 근거로 보지는 않는다.
+
+따라서 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
 
 예:
 
