@@ -1,0 +1,12 @@
+flowchart LR
+  R["Ready Work"] --> W["Worker"]
+  W --> V["Verification"]
+  V --> RV["Review"]
+  RV --> I["Integration"]
+  I --> D["Deployment"]
+  B["Throughput = slowest stage"] -. governs .-> R
+  B -. governs .-> W
+  B -. governs .-> V
+  B -. governs .-> RV
+  B -. governs .-> I
+  B -. governs .-> D
