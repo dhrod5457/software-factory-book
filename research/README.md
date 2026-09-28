@@ -198,3 +198,35 @@ Agent ↔ IDE/Client : ACP
   - single-worker factory starting point
 
 이번 자료에서 특히 중요한 근거는 NIST NCCoE가 DevSecOps reference model 자체를 software factory 구성 관점으로 설명하고 있다는 점이다. AI Software Factory는 기존 SDLC/DevSecOps/Platform Engineering을 폐기하는 대체재라기보다 이 기반 위에서 AI Agent가 새로운 실행 주체로 들어가는 방향으로 검토한다.
+
+
+## 5차 추가 수집 - 학술/실증 연구
+
+제품 문서보다 논문과 실증 연구를 중심으로 다음 문서를 추가했다.
+
+- `24-academic-foundations-of-agentic-software-engineering.md`
+  - SWE-agent / Agentless / OpenHands
+  - Requirement quality
+  - runtime decomposition
+  - repository exploration
+- `25-human-agent-collaboration-and-responsibility-research.md`
+  - 실제 PR lifecycle
+  - initiative vs approval
+  - steerability / verifiability
+  - responsibility
+- `26-orchestration-science-control-vs-autonomy.md`
+  - deterministic vs LLM-controlled orchestration
+  - hybrid control
+  - recovery hierarchy
+- `27-context-files-and-repository-governance-evidence.md`
+  - AGENTS.md / CLAUDE.md empirical evidence
+  - context file의 효과와 한계
+  - repository governance
+- `28-benchmark-science-and-evaluation-methodology.md`
+  - SWE-Lancer / SWE-smith / SWE-rebench
+  - exploration / dialogue / reasoning benchmark
+  - process quality / cost
+- `29-academic-synthesis-design-principles.md`
+  - 지금까지의 산업+학술 자료에서 반복적으로 지지되는 설계 원칙
+
+이번 학술 수집의 핵심은 **복잡한 Agent architecture와 높은 autonomy가 자동으로 더 좋은 결과를 만들지 않는다는 것**이다. Agentless와 deterministic orchestration 연구는 구조화 가능한 단계에서는 단순하고 deterministic한 시스템이 더 효율적일 수 있음을 보여주고, human-agent collaboration 연구는 실행 주도권과 최종 승인 권한을 독립적으로 설계해야 함을 보여준다.
