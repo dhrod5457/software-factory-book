@@ -142,6 +142,39 @@ Task의 구체적인 behavior를 검증한다.
 
 Residual Risk와 Product Intent를 최종적으로 사람이 판단한다.
 
+Verification을 비용 순서의 Pyramid로만 볼 필요는 없다. **무엇에 대한 적합성을 검증하는가**라는 축도 필요하다.
+
+~~~text
+Functional Conformance
+- 요구한 동작을 실제로 하는가
+
+Architecture Conformance
+- 정해진 Architecture / Design Constraint를 지켰는가
+
+Scope Conformance
+- 허용된 파일과 변경 범위를 벗어나지 않았는가
+
+Security Conformance
+- 필요한 Security Policy와 Review를 통과했는가
+~~~
+
+예를 들어 Test가 모두 PASS해도 Agent가 허용되지 않은 공통 모듈까지 수정했거나, Requirement가 요구한 Architecture Boundary를 우회했다면 Production-ready Change라고 보기 어렵다.
+
+Caylent는 Software Factory Harness가 Security Review, Architectural Conformance, Scope 이탈 여부를 실행 Loop 안에서 점검해야 한다고 설명한다. 현재 공개 DevBench 구현은 이를 code/test/doc review, 실제 변경과 Changes Manifest의 비교, 별도 Security Review 같은 Gate로 구체화한다.
+
+~~~text
+Behavior PASS
++
+Architecture PASS
++
+Scope PASS
++
+Security PASS
+→ stronger completion evidence
+~~~
+
+모든 Task가 네 축을 모두 요구하는 것은 아니다. 핵심은 Functional Test 하나가 전체 Conformance를 대표한다고 가정하지 않는 것이다.
+
 모든 Task가 Pyramid 끝까지 갈 필요는 없다.
 
 Docs typo는 lint와 preview만으로 충분할 수 있다.
@@ -530,7 +563,9 @@ Verification Profile은 Task type과 Risk에 맞아야 한다.
 4. Agent가 Verification Definition을 약화시킬 수 있는가?
 5. Runtime Behavior를 봐야 하는가?
 6. Independent Evaluator나 Human Gate가 필요한가?
-7. 이 Task의 Risk에 비해 Verification Cost가 적절한가?
+7. 실제 변경이 선언된 Scope를 벗어나지 않았는가?
+8. Architecture / Design Constraint를 별도로 확인해야 하는가?
+9. 이 Task의 Risk에 비해 Verification Cost가 적절한가?
 ~~~
 
 ---
@@ -555,3 +590,7 @@ Commit은 무엇인지, 어떤 Test가 실행됐는지, Screenshot은 어디 있
   https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
 - Microsoft Research, *AgentLens*  
   https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
+- Caylent, *What is a Software Factory*  
+  https://www.youtube.com/watch?v=0Q8R_FZbnLk
+- Caylent Solutions, *DevBench Architecture*  
+  https://github.com/caylent-solutions/devbench/blob/main/docs/architecture.md
