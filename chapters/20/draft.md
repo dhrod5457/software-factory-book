@@ -323,6 +323,49 @@ latency high
 
 ---
 
+## 20.10 Routine은 Trigger이고 Task는 Work다
+
+Cloud Agent 제품은 Schedule이나 외부 Event로 반복 Work를 시작하는 기능을 제공하기 시작했다. Cursor의 Grok Bot Routines는 시간 Schedule뿐 아니라 Slack, GitHub, Linear, Sentry, PagerDuty, Email, Webhook 같은 Event를 Trigger로 사용할 수 있다고 문서화한다.
+
+이 기능은 Event-driven Factory와 닮아 있다.
+
+하지만 다음을 그대로 같다고 보면 안 된다.
+
+~~~text
+Routine Trigger
+≠ Durable Task
+~~~
+
+Routine은 "언제 시작할 것인가"를 표현하는 데 강하다.
+
+Factory의 Durable Task는 시작 이후의 책임을 가진다.
+
+~~~text
+Trigger
+→ Intake
+→ Deduplicate
+→ Risk / Scope
+→ Durable Task
+→ Attempt
+→ Verification
+→ Evidence
+→ Acceptance
+~~~
+
+예를 들어 GitHub Event가 들어왔다는 이유만으로 같은 수정 Task를 매번 새로 만들면 duplicate Work가 발생한다.
+
+Schedule이 실행됐다는 사실만으로 이전 실행의 Side Effect가 안전하게 처리됐다는 보장도 없다.
+
+따라서 Event/Routine 기능을 Factory에 연결할 때는 다음 질문이 추가된다.
+
+- 같은 Signal을 어떻게 Deduplicate하는가
+- 이전 실행이 아직 진행 중이면 어떻게 하는가
+- 실패한 실행을 Retry할지 다음 Schedule까지 기다릴지
+- 외부 Side Effect가 replay-safe한가
+- 어떤 Event는 Diagnosis만 만들고 어떤 Event는 Fix Task까지 만드는가
+
+Event Trigger가 편리해질수록 Work Intake와 Durable Execution의 책임을 Trigger Layer 밖에 남겨두는 것이 중요하다.
+
 ## 다음 질문
 
 Event-driven Factory가 Work를 만들기 시작하면 더 많은 Platform Capability가 필요해진다.
