@@ -68,41 +68,30 @@ Phase 3 Scope
 - planning/scope.md
 - planning/future-topics.md
 
-Next
 Phase 4 TOC
-→ planning/toc.md
+완료
+- planning/toc.md
+
+Next
+Phase 5 Chapter Plan
+→ chapters/NN/plan.md
 ```
 
-## Scope 핵심 경계
+## TOC
 
-반드시 다룬다:
+현재 목차:
 
-- Durable Task
-- Control Plane
-- Worker / Sandbox
-- Harness / Context
-- Verification / Evidence
-- Recovery
-- Governance / Security
-- Observability / Metrics
-- Review / Integration
-- Platform / CI/CD 연결
-- Minimum Viable Factory
+```text
+Part I   Coding Agent에서 Software Factory로
+Part II  Work를 정의하는 시스템
+Part III Factory의 실행 구조
+Part IV  결과를 믿을 수 있게 만드는 시스템
+Part V   여러 Worker와 전체 Flow 관리
+Part VI  조직의 Software Delivery System으로 확장
+Part VII Minimum Viable Factory에서 Adaptive Factory까지
+```
 
-필수조건으로 보지 않는다:
-
-- Multi-Agent
-- Automatic Work Selection
-- Fully Autonomous Merge
-- Self-improvement
-
-현재 책의 핵심 범위에서 제외한다:
-
-- Foundation Model internals
-- Fine-tuning
-- 일반 Prompt Engineering
-- 일반 Agent Framework 비교
-- General-purpose Agent Platform 전체
+전체 24장 + Epilogue.
 
 ## Source of Truth
 
@@ -110,13 +99,12 @@ Phase 4 TOC
 
 1. `planning/concept.md`
 2. `planning/scope.md`
-3. `planning/future-topics.md`
-4. `research/29-academic-synthesis-design-principles.md`
-5. `research/18-research-contradictions-and-open-questions.md`
-6. `research/19-boundaries-devops-platform-engineering-agent-platform.md`
-7. `research/14-failure-modes-and-antipatterns.md`
-8. `research/sources.md`
-9. `research/README.md`
+3. `planning/toc.md`
+4. `planning/future-topics.md`
+5. `research/29-academic-synthesis-design-principles.md`
+6. `research/18-research-contradictions-and-open-questions.md`
+7. `research/sources.md`
+8. `research/README.md`
 
 ## 작성 방식
 
@@ -133,4 +121,4 @@ research
 → manuscript
 ```
 
-현재는 Scope를 확정했고 TOC 설계 단계로 넘어간다.
+현재는 TOC를 확정했고 Chapter Plan 단계로 넘어간다.
