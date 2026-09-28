@@ -297,6 +297,82 @@ Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리�
 
 ---
 
+## 21.11 Agent Execution Golden Path
+
+Golden Path는 Infrastructure Provisioning에만 적용되는 개념이 아니다.
+
+조직에서 반복되는 Agent Work에도 표준 실행 구성을 만들 수 있다.
+
+예:
+
+~~~text
+backend-fix
+security-review
+db-migration
+ui-verification
+release-check
+incident-diagnosis
+~~~
+
+각 Profile은 단순 Prompt Template이 아니라 다음 묶음이 될 수 있다.
+
+~~~text
+Agent Execution Profile
+=
+Instruction
++ Skills
++ Tool / Connector Set
++ Worker Profile
++ Verification Profile
++ Permission Policy
++ Evidence Contract
+~~~
+
+최근 제품에서 Bot Template이나 공유 가능한 Agent 설정을 제공하는 흐름은 이런 가능성을 보여준다. 중요한 것은 특정 Marketplace가 아니라 검증된 Agent Work Pattern을 조직 자산으로 재사용할 수 있다는 점이다.
+
+예를 들어 db-migration Profile은 다음을 포함할 수 있다.
+
+~~~text
+Instruction
+- migration convention
+
+Skills
+- schema-diff
+- backward-compatibility-check
+
+Worker
+- database client
+- isolated test database
+
+Permission
+- production write denied
+
+Verification
+- migration up/down
+- compatibility test
+
+Evidence
+- schema diff
+- test result
+- migration revision
+~~~
+
+이렇게 하면 팀마다 Agent에게 같은 운영 규칙을 다시 설명하는 비용을 줄일 수 있다.
+
+하지만 Template 공유가 곧 신뢰 전파를 의미해서는 안 된다.
+
+새로운 Skill, Tool, Permission Policy가 포함된 Profile은 Software처럼 version, review, eval, rollout할 수 있어야 한다.
+
+즉 Agent 시대의 Golden Path는 다음까지 확장될 수 있다.
+
+~~~text
+Infrastructure Golden Path
++
+Agent Execution Golden Path
+~~~
+
+Platform은 Agent가 자유롭게 모든 방법을 발명하게 만드는 대신, 조직에서 이미 검증한 실행 Capability와 안전한 경로를 제공한다.
+
 ## Platform을 Agent-ready하게 만들 때 묻는 질문
 
 ~~~text
