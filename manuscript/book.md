@@ -372,6 +372,10 @@ Agent가 빨라졌다는 사실과 변경이 빨리 전달됐다는 사실은 �
 
 <!-- CASE C01: OpenAI Symphony - Human Attention에서 Task Orchestration으로 -->
 
+> **Case Study C01 — OpenAI Symphony — Session보다 Task를 관리한다**
+>
+OpenAI는 2026년 Symphony를 공개하며 내부 경험상 한 엔지니어가 interactive coding-agent session을 여러 개 직접 관리할 때 Context Switching이 빠르게 부담이 된다고 설명했다. 공개 글에서는 대체로 3~5개 session 이후 관리 부담이 눈에 띄었다고 한다.
+
 Agent가 한두 개일 때는 사람이 직접 관리해도 된다.
 
 여러 Agent를 동시에 사용하기 시작하면 개발자는 곧 다른 일을 하게 된다.
@@ -416,6 +420,10 @@ Accepted Change
 ### 1.4 생산성 연구가 서로 다른 이유
 
 <!-- CASE C10: Microsoft / METR Productivity Contrast -->
+
+> **Case Study C10 — Microsoft와 METR — “AI 생산성” 숫자가 다른 이유**
+>
+Microsoft Research의 2025년 field experiment는 4,867명의 개발자에서 AI Coding Assistant 접근군의 completed task 증가를 보고했다.
 
 AI 코딩 도구의 생산성 효과를 이야기하면 서로 반대처럼 보이는 수치가 나온다.
 
@@ -2696,6 +2704,10 @@ Task Result
 
 <!-- CASE C02: WorkOS Horizon - Durable Control Plane과 Disposable Execution -->
 
+> **Case Study C02 — WorkOS Horizon — Durable State와 Disposable Execution**
+>
+WorkOS의 Horizon은 Software Work를 durable한 control state로 관리하고 실제 실행은 sandbox environment에서 수행하는 구조를 공개했다.
+
 많은 조직에서 Issue Tracker는 이미 Work의 출발점이다.
 
 그래서 다음 흐름은 자연스럽다.
@@ -3205,6 +3217,10 @@ Fresh per Task
 ### 8.4 Ephemeral Worker와 Persistent Worker
 
 <!-- CASE C03: Anthropic Managed Agents - Brain / Hands Separation -->
+
+> **Case Study C03 — Anthropic Managed Agents — Brain과 Hands를 분리한다**
+>
+Anthropic은 Managed Agents Architecture에서 Session, Harness, Sandbox를 분리해 설명한다. Session은 Agent interaction state, Harness는 Model loop와 Tool/Context orchestration, Sandbox는 실제 Compute와 Filesystem을 담당한다.
 
 Worker 운영에는 두 방향이 있다.
 
@@ -3855,6 +3871,10 @@ release-worker
 
 <!-- CASE C05: GitHub Copilot Code Review - Better Tool, Worse Result -->
 
+> **Case Study C05 — GitHub Copilot Code Review — 더 좋은 Tool이 처음에는 더 나쁜 결과를 냈다**
+>
+GitHub는 Copilot Code Review의 code exploration tool을 더 강한 공용 CLI 계열로 교체했지만 초기 offline benchmark에서 평균 비용이 늘고 유용한 review comment가 줄었다고 공개했다.
+
 Tool을 업그레이드하면 성능이 좋아질 것이라고 생각하기 쉽다.
 
 하지만 Tool Interface가 바뀌면 기존 Instruction과 Agent 행동 전략이 더 이상 맞지 않을 수 있다.
@@ -4084,6 +4104,10 @@ Agent가 처음부터 모든 문서를 읽지 않아도 되는 구조가 중요�
 ### 10.3 AGENTS.md는 지식 저장소가 아니라 Entry Point다
 
 <!-- CASE C04: OpenAI Harness Engineering - Agent Legibility -->
+
+> **Case Study C04 — OpenAI Harness Engineering — 거대한 AGENTS.md가 실패한 이유**
+>
+OpenAI의 Harness Engineering 사례에서는 모든 지식을 하나의 거대한 AGENTS.md에 넣는 접근이 잘 작동하지 않았다고 설명한다. Context를 많이 차지했고, 모든 규칙이 같은 중요도로 보였으며, 문서가 빠르게 stale해졌다.
 
 Context File은 유용하다.
 
@@ -5112,6 +5136,10 @@ Acceptance를 Test 하나와 완전히 동일시하면 안 된다.
 
 <!-- CASE C06: Microsoft Building to the Test -->
 
+> **Case Study C06 — Microsoft Building to the Test — Test를 통과했지만 요청한 구조는 아니었다**
+>
+Microsoft Research의 2026년 preprint는 coding agent에게 강한 observable test signal을 제공했을 때 Agent가 요청된 reusable architecture보다 test가 직접 확인하는 behavior에 맞춘 구현을 만들 수 있음을 통제 실험으로 보여줬다.
+
 Test는 강력하다.
 
 Agent에게 빠르고 deterministic한 Feedback을 준다.
@@ -5156,6 +5184,10 @@ Validation의 종류를 넓혀야 한다.
 ### 12.6 Automated Grader PASS와 Maintainer Acceptance는 다르다
 
 <!-- CASE C07: METR Maintainer Review -->
+
+> **Case Study C07 — METR Maintainer Review — Grader PASS와 Merge 판단은 다르다**
+>
+METR는 SWE-bench Verified automated grader를 통과한 Patch를 실제 Maintainer에게 검토하게 했다. 4명의 Maintainer가 3개 Repository의 95개 Issue 범위를 살펴본 표본에서, Test를 통과한 AI Patch의 상당수가 실제 main에는 Merge되지 않았을 것으로 평가됐다.
 
 METR의 2026년 연구 노트는 SWE-bench Verified에서 자동 grader를 통과한 Patch를 실제 Maintainer에게 다시 검토하게 했다. 4명의 Maintainer가 3개 Repository의 95개 Issue 범위를 다룬 표본에서, Test를 통과한 AI Patch의 상당수가 실제 main에는 Merge되지 않았을 것으로 평가됐다. 다만 Agent에게 Review Feedback을 받고 반복 수정할 기회를 주지 않은 single-shot 평가라는 제한이 있다.
 
@@ -5217,6 +5249,10 @@ Factory에서는 다음 경계를 고려할 수 있다.
 ### 12.8 Lucky Pass: 결과만 맞아도 충분한가
 
 <!-- CASE C08: Microsoft AgentLens - Lucky Pass -->
+
+> **Case Study C08 — Microsoft AgentLens — PASS만 보면 Lucky Pass를 놓친다**
+>
+AgentLens는 Software Agent의 최종 결과뿐 아니라 작업 Trajectory를 분석한다. 연구진은 2,614개 OpenHands trajectory를 분석했고, process reference를 구성할 수 있었던 subset에서 Passing 결과 중 일부가 반복 Regression, Blind Retry, 검증 누락을 포함한 Lucky Pass로 분류됐다.
 
 Final Test가 통과했지만 Trajectory가 불안정할 수도 있다.
 
@@ -6604,6 +6640,10 @@ Workflow 모델에서는 Human Approval을 나중에 도착하는 asynchronous e
 
 <!-- CASE C12: Google Agent Executor / Microsoft Durable Task -->
 
+> **Case Study C12 — Durable Runtime — Memory보다 Execution History**
+>
+Microsoft Durable Task와 Google Agent Executor는 구현 방식은 다르지만 long-running Agent Work에서 execution history, retry, wait, resume를 별도 reliability layer로 다룬다는 공통점이 있다.
+
 둘을 구분해보자.
 
 #### Agent Harness
@@ -6904,6 +6944,10 @@ flowchart TD
 
 *Human Principal의 권한 전체를 빌려주는 대신 Task와 Agent Identity에 필요한 Capability만 위임한다. Identity, Authorization, Approval, Audit를 하나의 Delegation Chain으로 본다.*
 <!-- CASE C11: NIST Agent Identity Direction -->
+
+> **Case Study C11 — NIST Agent Identity — 사람 계정을 Agent에게 빌려주는 문제**
+>
+NIST NCCoE는 2026년 Software and AI Agent Identity and Authorization concept paper를 공개하며 Agent identification, authentication, authorization, auditing, non-repudiation 같은 문제를 공식적으로 다루기 시작했다.
 
 가장 간단한 연결 방식은 개발자의 Personal Token을 Worker에 넣는 것이다.
 
@@ -7525,6 +7569,10 @@ Runtime conflict detection
 ### 17.5 More Agents가 More Throughput이 아닌 이유
 
 <!-- CASE C09: Anthropic Multi-Agent Simulation -->
+
+> **Case Study C09 — Anthropic Multi-Agent Simulation — Agent를 늘리면 Coordination도 늘어난다**
+>
+Anthropic은 2026년 여러 Agent가 동일한 software project를 장시간 공동 개발하는 controlled simulation을 공개했다. 일부 Model에서는 많은 Pull Request를 만들고도 Merge 비율이 낮거나 shared-file conflict 뒤 Work를 포기하는 패턴이 나타났다.
 
 Anthropic이 2026년 8월 공개한 연구는 이런 Coordination Failure를 통제된 simulation에서 보여준다. 여러 Model Generation과 Agent 수를 바꿔 동일한 open-world game project를 12시간 동안 공동 개발하게 했을 때, 일부 Model에서는 많은 PR을 열고도 Merge 비율이 낮았고 shared file conflict 뒤 PR을 포기하는 패턴이 나타났다. 더 최신 Model 중 일부는 오히려 file ownership을 강하게 나눠 충돌을 줄였다.
 
@@ -8783,6 +8831,10 @@ Diagnosis 결과가 Code Issue로 확인되면 그다음 Fix Task를 만든다.
 ### 20.3 Event-driven은 Fully Autonomous와 다르다
 
 <!-- CASE C13: Google Jules Proactive Work -->
+
+> **Case Study C13 — Google Jules — Proactive Work와 Auto-merge는 다르다**
+>
+Google은 Jules에 Suggested Tasks와 Scheduled Tasks 같은 proactive work 기능을 공개했다. Suggested Tasks는 Repository 개선 후보를 찾아 사용자에게 제시하고, deployment-failure 연동에서도 Agent가 Fix를 만든 뒤 Pull Request를 열어 Review할 수 있게 하는 흐름을 보여줬다.
 
 Event가 자동으로 Task를 생성해도 Merge까지 자동일 필요는 없다. Google이 2025년 12월 Jules에 공개한 Suggested Tasks와 Scheduled Tasks도 이 구분을 보여준다. Suggested Tasks는 개선 후보를 제안해 사용자가 review/approve/dismiss하도록 했고, Render 연동의 deployment-failure 대응도 fix를 만든 뒤 Pull Request를 열어 review를 남겼다.
 
@@ -10121,6 +10173,10 @@ Human Review 화면은 이 Manifest를 사용한다.
 ### 23.8 Case Study와 Reference를 구분한다
 
 <!-- CASE C14: Runmesh Continuity Gap -->
+
+> **Case Study C14 — Runmesh Continuity Gap — Task는 살아남았지만 Work는 재사용되지 않았다**
+>
+자체 구현 Runmesh의 한 live continuity experiment에서는 Worker runtime loss 이후 Task가 사람 개입과 retry 소비 없이 최종 완료됐다. Durable Task와 Reassignment 자체는 동작했다.
 
 실제 구현 경험은 유용하다.
 
