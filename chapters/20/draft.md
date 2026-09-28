@@ -343,3 +343,6 @@ Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구�
   https://workos.com/blog/project-horizon
 - Google, *Jules proactive updates*  
   https://blog.google/innovation-and-ai/technology/developers-tools/jules-proactive-updates/
+- Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
+  https://www.youtube.com/watch?v=tUPPVhBBcoM
+
