@@ -8854,3 +8854,2252 @@ Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
   https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
 - Anthropic, *Demystifying evals for AI agents*  
   https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
+
+---
+
+# Part VI. 조직의 Software Delivery System으로 확장
+
+# 20장. Event-driven Factory와 Closed-loop SDLC
+
+지금까지의 Factory는 대부분 사람이 Task를 시작하는 구조였다.
+
+하지만 실제 Software Delivery에서는 새로운 Work가 사람의 Prompt로만 생기지 않는다.
+
+- CI Failure
+- Security Alert
+- Dependency Update
+- Review Comment
+- Scheduled Maintenance
+- Production Incident
+- Documentation Drift
+
+이런 Signal을 Work Source로 사용할 수 있다.
+
+문제는 Signal을 곧바로 Agent Action으로 연결하면 위험하다는 것이다.
+
+~~~text
+Alert
+→ Agent
+→ Production Change
+~~~
+
+이 구조에서는 잘못된 Alert, 중복 Signal, 일시적 장애가 실제 변경으로 이어질 수 있다.
+
+그래서 Event-driven Factory에서는 중간에 해석 단계가 필요하다.
+
+> Alert는 Task가 아니다.
+
+---
+
+## 20.1 Task Source를 확장한다
+
+Factory가 받을 수 있는 Work Source는 다양하다.
+
+~~~text
+Human Request
+Issue
+CI Failure
+Review
+Vulnerability
+Schedule
+Production Signal
+~~~
+
+이 Signal은 모두 같은 의미가 아니다.
+
+예를 들어 CI Failure는 재현 가능한 Engineering Problem에 가까울 수 있다.
+
+반면 CPU Spike 하나는 아직 Task가 아니다.
+
+원인이 코드인지, Traffic인지, Infra인지도 모른다.
+
+그래서 Work Intake는 Signal을 먼저 분류해야 한다.
+
+---
+
+## 20.2 Signal에서 Task로
+
+좋은 흐름은 다음에 가깝다.
+
+~~~text
+Signal
+→ Diagnose
+→ Scope
+→ Risk
+→ Acceptance
+→ Task
+→ Execute
+~~~
+
+예를 들어 Production Latency Alert가 발생했다.
+
+바로 Code Change를 시작하지 않는다.
+
+먼저 Diagnosis Task를 만든다.
+
+~~~text
+Goal
+- latency 증가 원인 확인
+
+Input
+- traces
+- metrics
+- deployment revision
+
+Acceptance
+- top bottleneck identified
+- evidence attached
+~~~
+
+Diagnosis 결과가 Code Issue로 확인되면 그다음 Fix Task를 만든다.
+
+이렇게 하면 Alert와 Action 사이에 의미 있는 경계가 생긴다.
+
+---
+
+## 20.3 Event-driven은 Fully Autonomous와 다르다
+
+Event가 자동으로 Task를 생성해도 Merge까지 자동일 필요는 없다. Google이 2025년 12월 Jules에 공개한 Suggested Tasks와 Scheduled Tasks도 이 구분을 보여준다. Suggested Tasks는 개선 후보를 제안해 사용자가 review/approve/dismiss하도록 했고, Render 연동의 deployment-failure 대응도 fix를 만든 뒤 Pull Request를 열어 review를 남겼다.
+
+예:
+
+~~~text
+CI Failure
+→ auto task create
+→ Agent fix
+→ verification
+→ human review
+~~~
+
+또는 Low-risk Task에서는:
+
+~~~text
+docs drift
+→ auto task
+→ agent fix
+→ deterministic verification
+→ auto merge by policy
+~~~
+
+즉 Event-driven은 **Work 시작 방식**에 관한 개념이다.
+
+Autonomy는 별도 축이다.
+
+---
+
+## 20.4 Closed-loop SDLC
+
+Software Delivery는 Deploy에서 끝나지 않는다.
+
+~~~text
+Plan
+→ Build
+→ Test
+→ Release
+→ Deploy
+→ Operate
+→ Observe
+→ Learn
+↺
+~~~
+
+Production에서 나온 Signal은 다시 Requirement, Test, Task로 돌아갈 수 있다.
+
+예:
+
+~~~text
+Production Bug
+→ Regression Test
+→ Fix Task
+→ Verification
+→ Deploy
+~~~
+
+또는:
+
+~~~text
+Repeated Agent Failure
+→ Missing Skill 발견
+→ Factory Improvement Task
+~~~
+
+이 책에서는 이런 Operate/Observe 결과가 다시 Requirement·Test·Task로 돌아가는 구조를 Closed-loop SDLC라고 부른다. 기존 DevSecOps의 continuous feedback을 Agent Work Intake까지 확장한 개념이다.
+
+---
+
+## 20.5 Product Loop와 Factory Loop를 구분한다
+
+두 가지 Feedback Loop가 있다.
+
+### Product Loop
+
+~~~text
+Production Problem
+→ Product Code Fix
+~~~
+
+예:
+
+- latency bug
+- validation bug
+- UI defect
+
+### Factory Loop
+
+~~~text
+Factory Friction
+→ Factory Capability Improvement
+~~~
+
+예:
+
+- slow Worker bootstrap
+- missing Tool
+- flaky Verification
+- stale Context
+- poor Evidence Package
+
+둘을 섞지 않는다.
+
+Product 문제가 Factory configuration 변경으로 잘못 이어지거나, Factory 문제를 Product Code 수정으로 해결하려 하면 혼란이 생긴다.
+
+---
+
+## 20.6 Noise를 Work로 증폭시키지 않는다
+
+Production Signal은 noisy할 수 있다.
+
+모든 Alert를 Task로 만들면 Backlog가 폭발한다.
+
+예:
+
+~~~text
+same alert × 100
+→ 100 tasks
+~~~
+
+필요한 제어:
+
+- deduplication
+- cooldown
+- aggregation
+- confidence threshold
+- suppression
+- change budget
+
+예:
+
+~~~text
+same fingerprint
+within 10m
+→ one diagnosis task
+~~~
+
+---
+
+## 20.7 Oscillation
+
+자동 remediation이나 self-healing 성격의 Loop가 잘못 설계되면 반복 변경이 발생할 수 있다.
+
+~~~text
+Agent
+→ config increase
+
+Metric improves briefly
+
+Another signal
+→ config decrease
+
+Repeat
+~~~
+
+이런 Oscillation을 막기 위해 다음이 필요하다.
+
+- observation window
+- rollback rule
+- change budget
+- human escalation
+- state/history
+
+자동화가 많아질수록 “언제 아무것도 하지 않을 것인가”도 중요하다.
+
+---
+
+## 20.8 예: Nightly Test Failure
+
+~~~text
+02:00 Nightly Test FAIL
+      ↓
+Event received
+      ↓
+Deduplicate
+      ↓
+Task created
+      ↓
+Agent diagnoses
+      ↓
+Fix
+      ↓
+Targeted verification
+      ↓
+Regression test added
+      ↓
+Human / Policy Gate
+~~~
+
+좋은 점은 실패가 단순히 고쳐지고 끝나지 않는다는 것이다.
+
+같은 문제가 다시 생기지 않도록 Regression Test가 Factory 자산으로 남는다.
+
+---
+
+## 20.9 Production Signal을 바로 Code Fix로 보내지 않는다
+
+Latency Alert 예:
+
+나쁜 흐름:
+
+~~~text
+latency high
+→ Agent edits code
+→ deploy
+~~~
+
+더 안전한 흐름:
+
+~~~text
+latency high
+→ trace analysis
+→ bottleneck identified
+→ scope
+→ risk
+→ fix task
+→ verification
+→ deploy gate
+~~~
+
+이 구조는 속도를 조금 늦출 수 있다.
+
+대신 잘못된 자동 수정의 Blast Radius를 줄인다.
+
+---
+
+## 다음 질문
+
+Event-driven Factory가 Work를 만들기 시작하면 더 많은 Platform Capability가 필요해진다.
+
+Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구현하게 해야 할까.
+
+다음 장에서는 기존 **Developer Platform과 Golden Path를 Factory가 어떻게 활용하는가**를 다룬다.
+
+---
+
+## 참고 자료
+
+- NIST NCCoE, *DevSecOps Notional Reference Model*  
+  https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
+- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+  https://workos.com/blog/project-horizon
+- Google, *Jules proactive updates*  
+  https://blog.google/innovation-and-ai/technology/developers-tools/jules-proactive-updates/
+
+---
+
+# 21장. Developer Platform과 Golden Path를 Factory가 사용하게 만들기
+
+Software Factory를 만든다고 모든 Infrastructure Capability를 새로 만들 필요는 없다.
+
+조직마다 성숙도는 다르지만, Software Factory를 도입하려는 팀은 대개 다음 Capability 중 일부를 이미 사용하고 있다.
+
+- CI/CD
+- Environment Provisioning
+- Secret Management
+- Deployment
+- Observability
+- Software Catalog
+- Golden Path
+
+Factory가 해야 할 일은 이 Capability를 Agent도 안전하게 사용할 수 있게 연결하는 것이다.
+
+> Platform은 생산 Capability를 제공하고, Factory는 그 Capability를 이용해 Work를 완료한다.
+
+---
+
+## 21.1 Platform이 이미 제공하는 것
+
+Internal Developer Platform은 보통 다음 문제를 해결한다.
+
+~~~text
+어떻게 Service를 만든다?
+어떻게 DB를 만든다?
+어떻게 배포한다?
+어떻게 Secret을 쓴다?
+어떻게 Observability를 붙인다?
+~~~
+
+이것은 사람 개발자에게도 어려운 반복 작업이다.
+
+Agent에게도 똑같다.
+
+Factory가 각각의 Infra Detail을 직접 다루게 하면 다음 문제가 생긴다.
+
+- Policy Drift
+- Security Risk
+- Cost Variation
+- Duplicated Logic
+
+그래서 기존 Platform Capability를 재사용하는 편이 낫다.
+
+---
+
+## 21.2 Agent도 Platform Consumer다
+
+사람용 Platform Interface는 보통 다음과 같다.
+
+- Portal
+- CLI
+- Documentation
+- Dashboard
+
+Agent에는 사람용 Portal과는 다른 Interface가 더 적합할 수 있다. 2026년 CNCF의 업계 논의에서도 AI Agent를 사람과 함께 Platform Capability를 소비하는 non-human consumer로 보고, distinct identity와 scoped permission, audit가 필요한 방향을 제시한다. 이는 CNCF 표준 정의라기보다 현재 Platform Engineering의 확장 논의로 보는 편이 맞다.
+
+- API
+- MCP
+- Structured Schema
+- Stable Identifier
+- Machine-readable Error
+
+예를 들어 사람에게는 버튼 하나가 편하다.
+
+Agent에게는 다음 Tool Contract가 더 편하다.
+
+~~~text
+deploy_staging(
+  service,
+  revision
+)
+~~~
+
+결과:
+
+~~~text
+deployment_id
+status
+url
+log_ref
+~~~
+
+---
+
+## 21.3 Golden Path를 Tool로 만든다
+
+기존 Golden Path:
+
+> 회사에서 Spring Boot Service를 만드는 표준 방법
+
+Agent 시대에는 이를 실행 가능한 Contract로 만들 수 있다.
+
+~~~text
+create_service()
+provision_database()
+deploy_staging()
+setup_observability()
+run_security_scan()
+~~~
+
+중요한 점은 Agent가 Kubernetes/Terraform 세부사항을 매번 생성하지 않는다는 것이다.
+
+Trusted Platform이 표준 구현을 제공한다.
+
+---
+
+## 21.4 직접 Infra를 만들게 하는 방식과 비교
+
+Task:
+
+~~~text
+staging DB를 만들어라.
+~~~
+
+Agent가 직접 Terraform을 생성:
+
+위험:
+
+- Size 선택이 달라짐
+- Naming 불일치
+- Security Group 오류
+- Cost 증가
+- Policy Drift
+
+Golden Path:
+
+~~~text
+provision_database(
+  profile="staging-small"
+)
+~~~
+
+Platform이 다음을 보장할 수 있다.
+
+- allowed topology
+- naming
+- encryption
+- backup
+- audit
+- cost limit
+
+Agent의 자유도를 줄이는 것이 아니라 Infrastructure Domain에서는 이미 알고 있는 Rule을 재사용하는 것이다.
+
+---
+
+## 21.5 Software Catalog
+
+Agent가 Repository만 보고 조직 전체를 이해하기는 어렵다.
+
+Catalog가 충분히 관리되고 있다면 다음 정보를 찾을 수 있다. Backstage의 현재 문서도 Skill, governance Rule, MCP Server 같은 AI resource를 ownership·lifecycle·relationship과 함께 Software Catalog에 모델링하는 기능을 제공한다.
+
+- Service Owner
+- Dependency
+- API
+- Lifecycle
+- Environment
+- Documentation
+- Review Rule
+
+흐름:
+
+~~~text
+Task
+→ Catalog Lookup
+→ Owner / Dependency / API
+→ Focused Context
+~~~
+
+예를 들어 Agent가 auth-service를 바꾼다.
+
+Catalog에서 dependent service를 찾고 Integration Verification 범위를 결정할 수 있다.
+
+---
+
+## 21.6 Catalog는 모든 것의 Source of Truth가 아니다
+
+모든 Runtime State를 Catalog에 복제하면 stale data가 생긴다.
+
+책임을 나눈다.
+
+~~~text
+Code
+→ Git
+
+Task
+→ Task Store
+
+Deployment
+→ Runtime Platform
+
+Logs
+→ Observability
+
+Ownership / Dependency Index
+→ Catalog
+~~~
+
+Catalog는 조직 Context Graph에 가깝다.
+
+---
+
+## 21.7 Agent-friendly Feedback
+
+사람에게는 다음 메시지도 충분할 수 있다.
+
+~~~text
+Deployment failed.
+~~~
+
+Agent에게는 부족하다.
+
+더 좋은 결과:
+
+~~~text
+status: failed
+stage: readiness
+reason: health_check_timeout
+retryable: true
+logs: artifact://deploy/1234
+~~~
+
+Agent는 다음 행동을 판단할 수 있다.
+
+- retry
+- log inspect
+- code fix
+- escalation
+
+Structured Feedback은 Agent가 다음 행동을 고르기 쉽게 한다. DORA의 2025 Platform Engineering 연구는 사람 개발자에게도 “작업 결과에 대한 명확한 feedback”이 Platform 경험과 강하게 연결된다고 보고한다. 이를 Agent Interface에 적용하는 것은 이 책의 설계 확장이다.
+
+---
+
+## 21.8 Idempotency도 Platform Contract에 포함한다
+
+Durable Execution과 연결하면 Platform Tool에는 operation identity가 필요할 수 있다.
+
+~~~text
+deploy_staging(
+  operation_id,
+  service,
+  revision
+)
+~~~
+
+같은 operation_id로 재호출해도 duplicate deploy를 막는다.
+
+Agent-ready Platform은 단순 API 노출을 넘어 **replay-safe machine contract**를 고려할 수 있다. 모든 Platform API에 반드시 operation_id가 필요한 것은 아니지만, 재시도 시 중복 Side Effect가 위험한 Operation에는 중요한 조건이다.
+
+---
+
+## 21.9 Platform Governance
+
+Agent가 Platform API를 통해 Infrastructure에 접근하면 Governance를 중앙화할 수 있다.
+
+~~~text
+Agent
+→ Platform Contract
+→ Policy
+→ Infrastructure
+~~~
+
+Policy:
+
+- allowed region
+- max DB size
+- network
+- credential
+- approval
+- audit
+
+각 Agent가 Infrastructure Policy를 직접 해석할 필요가 줄어든다.
+
+---
+
+## 21.10 Human-friendly와 Agent-friendly를 함께 유지한다
+
+Agent-ready Platform이라고 사람용 Portal을 없앨 필요는 없다.
+
+같은 Capability를 여러 Interface로 제공할 수 있다.
+
+~~~text
+Human
+→ Portal / CLI
+
+Agent
+→ API / MCP
+
+Both
+→ Same Platform Capability
+~~~
+
+이 구조가 중요하다.
+
+Human과 Agent가 서로 다른 Infrastructure를 사용하면 운영이 분리된다.
+
+---
+
+## Platform을 Agent-ready하게 만들 때 묻는 질문
+
+~~~text
+1. Capability가 stable machine contract로 노출되는가?
+2. Output이 structured한가?
+3. Error가 retryable 여부를 알려주는가?
+4. Idempotent한가?
+5. Scoped Identity를 지원하는가?
+6. Audit 가능한가?
+7. Catalog에서 ownership/dependency를 찾을 수 있는가?
+~~~
+
+---
+
+## 다음 질문
+
+지금까지 책에서는 상당히 많은 Capability를 다뤘다.
+
+하지만 처음 Factory를 만들 때 이 모든 것을 구현해야 할까.
+
+다음 장에서는 **Minimum Viable AI Software Factory**로 범위를 다시 줄인다.
+
+---
+
+## 참고 자료
+
+- DORA, *Platform Engineering Capability*  
+  https://dora.dev/capabilities/platform-engineering/
+- CNCF, *Platform Engineering Maturity Model*  
+  https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
+- CNCF, *Platform Engineering for the Agentic Enterprise*  
+  https://www.cncf.io/blog/2026/07/21/platform-engineering-for-the-agentic-enterprise-managing-applications-resources-and-ai-agents/
+- Backstage, *AI in the Software Catalog*  
+  https://backstage.io/docs/ai/ai-in-the-catalog/
+
+---
+
+# Part VII. Minimum Viable Factory에서 Adaptive Factory까지
+
+# 22장. Minimum Viable AI Software Factory
+
+지금까지 책에서는 많은 구성요소를 다뤘다.
+
+- Durable Task
+- Control Plane
+- Worker
+- Harness
+- Context
+- Verification
+- Evidence
+- Recovery
+- Governance
+- Observability
+- Platform
+
+이 목록만 보면 Software Factory를 시작하기 전에 거대한 Platform부터 만들어야 할 것처럼 보인다.
+
+그럴 필요는 없다.
+
+오히려 처음부터 Multi-Agent, Automatic Work Selection, Self-improvement까지 넣으면 무엇이 실제로 필요한지 확인하기 어렵다.
+
+첫 Factory는 작아야 한다.
+
+> 반복 가능하고 Acceptance를 정의할 수 있는 한 가지 Work를 안정적으로 처리하는 것부터 시작한다.
+
+---
+
+## 22.1 첫 Use Case를 고른다
+
+첫 Task는 화려할 필요가 없다.
+
+좋은 후보:
+
+- Documentation 수정
+- Test 추가
+- Dependency Update
+- CI Failure Triage
+- 작은 Bug Fix
+- Static/Lint Fix
+
+공통점:
+
+- Scope가 비교적 좁다.
+- 반복해서 발생한다.
+- Verification을 만들기 쉽다.
+- 실패 Blast Radius가 작다.
+
+나쁜 첫 후보:
+
+- 전체 Architecture 재설계
+- 모호한 신규 Product
+- Production Emergency Auto-remediation
+- Acceptance를 정의하기 어려운 대규모 Refactor
+
+첫 Use Case의 목표는 Agent Capability를 자랑하는 것이 아니다.
+
+Factory Boundary가 실제로 동작하는지 확인하는 것이다.
+
+---
+
+## 22.2 권장 시작 구조
+
+2장에서 정의한 Factory의 최소 성질과, 조직이 처음 도입할 때 권장하는 시작 구성은 같지 않다. 여기서는 실패 비용을 낮추기 위해 **Human Review를 남겨 둔 시작 형태**를 사용한다.
+
+~~~text
+Human selects Task
+        ↓
+Durable Task
+        ↓
+Isolated Worker
+        ↓
+Coding Agent
+        ↓
+Deterministic Verification
+        ↓
+Evidence
+        ↓
+Human Review
+~~~
+
+Agent 하나면 충분하다.
+
+Automatic Backlog Selection도 필요 없다.
+
+Auto-merge도 필요 없다. 반대로 낮은 위험의 Task에서 충분한 검증 정책이 이미 있다면 Human Review를 생략할 수도 있다. Human Review는 Factory 정의의 필수조건이 아니라 첫 도입에서 안전한 기본값이다.
+
+그럼에도 Interactive Agent와 다른 중요한 성질이 생긴다.
+
+- Task State가 남는다.
+- Worker가 분리된다.
+- Verification이 있다.
+- Evidence가 남는다.
+- 동일 Workflow를 반복할 수 있다.
+
+---
+
+## 22.3 Step A: Agent-ready Repository
+
+Factory보다 먼저 Repository를 본다.
+
+다음 질문에 답하기 어렵다면 Agent도 고생한다.
+
+~~~text
+Build command는?
+Targeted test는?
+Environment setup은?
+Architecture boundary는?
+Generated file은?
+Owner는?
+~~~
+
+Factory가 Repository Chaos를 자동으로 해결해줄 것이라고 기대하면 안 된다.
+
+오히려 Chaos를 빠르게 반복할 수 있다.
+
+먼저 다음을 정리한다.
+
+- canonical build
+- fast test
+- setup
+- docs
+- ownership
+- basic runtime
+
+---
+
+## 22.4 Step B: Reproducible Worker
+
+다음 목표:
+
+> 같은 Task가 다른 Worker에서도 실행 가능한가?
+
+필요:
+
+- clean checkout
+- known runtime
+- dependencies
+- scoped credential
+- test command
+
+아직 Fleet Scheduler는 필요 없다.
+
+Worker 하나가 재현 가능하면 된다.
+
+---
+
+## 22.5 Step C: Evidence Contract
+
+Scale 전에 Result Format을 만든다.
+
+~~~text
+Task ID
+Result Commit
+Changed Files
+Verification
+Artifacts
+Known Risk
+~~~
+
+이것이 없으면 Worker 수가 늘었을 때 사람이 결과를 비교하기 어려워진다.
+
+---
+
+## 22.6 Step D: Durable Task State
+
+다음으로 Work State를 Session 밖으로 꺼낸다.
+
+~~~text
+READY
+RUNNING
+VERIFYING
+AWAITING_HUMAN
+DONE
+FAILED
+~~~
+
+Attempt와 Retry도 기록한다.
+
+이 시점부터 Worker Loss와 Task Loss를 분리할 수 있다.
+
+---
+
+## 22.7 Step E: Retry와 Resume
+
+Happy Path가 반복적으로 안정적이라면 Failure Recovery를 넣는다.
+
+시험:
+
+~~~text
+Worker kill
+Network failure
+Verification failure
+Approval delay
+~~~
+
+확인:
+
+- Task State 보존
+- Retry Budget 유지
+- Evidence 연결
+- Duplicate Side Effect 없음
+
+---
+
+## 22.8 Step F: Event Trigger
+
+Human이 직접 Start하지 않아도 되는 Work를 연결한다.
+
+예:
+
+- CI Failure
+- Issue Status
+- Schedule
+
+중요:
+
+~~~text
+Auto Start
+≠ Auto Merge
+~~~
+
+Work Source 자동화와 Acceptance Authority는 별개다.
+
+---
+
+## 22.9 Step G: Parallel Worker
+
+Queue가 실제로 쌓이기 시작했을 때 Worker를 늘린다.
+
+먼저 측정한다.
+
+~~~text
+Ready Task 충분?
+Review Capacity?
+CI Capacity?
+Conflict Rate?
+~~~
+
+이 조건이 없으면 Worker 증가가 가치가 없다.
+
+---
+
+## 22.10 Step H: Risk-based Automation
+
+Task Risk에 따라 정책을 다르게 한다.
+
+예:
+
+~~~text
+Docs
+→ auto verify
+→ auto merge possible
+
+Business Logic
+→ human review
+
+Auth / Payment / Migration
+→ stronger verification
+→ specialist approval
+~~~
+
+이때부터 Autonomy를 Task Class별로 올린다.
+
+---
+
+## 22.11 Work Selection Automation은 뒤에 둔다
+
+Backlog에서 어떤 Task를 할지 Agent가 고르는 것은 높은 수준의 Autonomy다.
+
+잘못된 Task를 완벽하게 실행해도 가치가 없다.
+
+그래서 보통 Reliability baseline과 검증·복구·관측 기반을 확인한 뒤에 둔다.
+
+~~~text
+Reliability baseline
+→ Recovery + Observability
+→ Scale
+→ Autonomy
+~~~
+
+이것은 고정된 maturity ladder가 아니라 위험한 자동화를 너무 일찍 넣지 않기 위한 권장 순서다. Repository와 Workflow 특성에 따라 Recovery와 Observability의 구현 순서는 달라질 수 있다.
+
+---
+
+## 22.12 Measure Before Automation
+
+자동화 전 Baseline을 남긴다.
+
+예:
+
+~~~text
+cycle time
+human intervention
+retry
+acceptance
+review time
+CI time
+cost
+~~~
+
+이 데이터가 없으면 다음 질문에 답하기 어렵다.
+
+> Factory를 도입한 뒤 실제로 좋아졌는가?
+
+---
+
+## 예: CI Failure Fix부터 시작하기
+
+첫 Use Case:
+
+~~~text
+CI unit test failure
+~~~
+
+Flow:
+
+~~~text
+Human selects failure
+      ↓
+Task
+      ↓
+Worker
+      ↓
+Agent diagnosis/fix
+      ↓
+targeted test
+      ↓
+Evidence
+      ↓
+Human Review
+~~~
+
+처음에는 소수의 실제 Task를 반복해 baseline을 만든다. 몇 건이 충분한지는 Task 다양성과 실패 빈도에 따라 달라지므로 고정 숫자를 두지 않는다.
+
+확인:
+
+- First-pass Acceptance
+- Retry
+- Human Review Time
+- False Fix
+- Worker Setup Time
+
+문제가 관찰된 뒤에 다음 Capability를 추가한다.
+
+---
+
+## Minimum Viable Factory 체크
+
+~~~text
+1. 반복 가능한 Work가 있는가?
+2. Acceptance를 자동/반자동으로 확인할 수 있는가?
+3. Worker를 재현할 수 있는가?
+4. Result Evidence가 표준화돼 있는가?
+5. Task State가 Session 밖에 있는가?
+6. 실패를 관찰할 수 있는가?
+7. Human Review가 감당 가능한가?
+~~~
+
+처음부터 7개 모두 완벽할 필요는 없다.
+
+하지만 빠진 것이 무엇인지 알고 시작해야 한다.
+
+---
+
+## 다음 질문
+
+Minimum Viable Factory의 구조는 이해했다.
+
+그렇다면 책 전체 원칙을 실제로 눈으로 확인할 수 있는 작은 Reference Implementation은 어떤 모습이어야 할까.
+
+다음 장에서는 **Reference Factory**를 설계하고 Happy Path보다 Failure Scenario를 중심으로 검증한다.
+
+---
+
+## 참고 자료
+
+- DORA, *Platform Engineering Capability*  
+  https://dora.dev/capabilities/platform-engineering/
+- CNCF, *Platform Engineering Maturity Model*  
+  https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
+- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
+  https://openai.com/index/harness-engineering/
+- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+  https://workos.com/blog/project-horizon
+
+---
+
+# 23장. 실전 Reference Factory 만들기
+
+지금까지의 Architecture가 실제로 필요한지 확인하려면 작은 구현이 필요하다.
+
+단, 목표는 Production-ready Platform을 만드는 것이 아니다.
+
+특정 Vendor SDK 사용법을 배우는 것도 아니다.
+
+이 장에서 제안하는 Reference Factory의 목적은 책에서 설명한 **경계와 Failure Semantics를 실험 가능한 형태로 만드는 것**이다. 여기서 제시하는 Scenario는 아직 보편적인 benchmark가 아니라 구현을 검증하기 위한 acceptance suite 후보다.
+
+그래서 기능 수보다 다음이 중요하다.
+
+- Task가 Session 밖에 남는가
+- Worker가 격리되는가
+- Verification이 독립적인가
+- Evidence가 남는가
+- Worker Loss에서 복구되는가
+- Conflict를 감지하는가
+
+---
+
+## 23.1 Reference Architecture
+
+최소 Component:
+
+~~~text
+Task Store
+Queue / Scheduler
+Worker
+Workspace
+Agent Adapter
+Verifier
+Evidence Store
+Human Gate
+~~~
+
+Flow:
+
+~~~text
+Task Create
+→ Queue
+→ Assign
+→ Worker
+→ Agent
+→ Verification
+→ Evidence
+→ Human Gate
+→ DONE
+~~~
+
+특정 LLM Vendor에 종속되지 않도록 Agent Adapter를 분리한다.
+
+---
+
+## 23.2 최소 Data Model
+
+### Task
+
+~~~text
+id
+goal
+scope
+acceptance
+status
+dependency
+risk
+~~~
+
+### Attempt
+
+~~~text
+id
+task_id
+worker_id
+status
+started_at
+ended_at
+failure
+~~~
+
+### Assignment
+
+~~~text
+task_id
+worker_id
+lease
+~~~
+
+### Verification
+
+~~~text
+task_id
+attempt_id
+check
+status
+artifact
+~~~
+
+### Evidence
+
+~~~text
+result_revision
+changed_files
+artifacts
+known_risk
+~~~
+
+### Approval
+
+~~~text
+task_id
+state
+actor
+timestamp
+~~~
+
+이 정도면 책의 핵심 구조를 실험할 수 있다.
+
+---
+
+## 23.3 Scenario 1: Normal Success
+
+가장 먼저 Happy Path를 검증한다.
+
+~~~text
+Task READY
+→ Worker assigned
+→ Agent edits
+→ commit
+→ verification PASS
+→ evidence
+→ human approve
+→ DONE
+~~~
+
+검증할 것:
+
+- State Transition 정확
+- Result Revision 연결
+- Evidence와 Commit 일치
+- Worker Release
+
+---
+
+## 23.4 Scenario 2: Verification Failure
+
+Agent가 Candidate를 만들었지만 Test가 실패한다.
+
+~~~text
+Attempt A1
+→ Verification FAIL
+~~~
+
+System은 Task를 바로 FAILED로 끝내지 않고 Policy를 본다.
+
+~~~text
+retry_count < budget
+→ RETRY
+→ Attempt A2
+~~~
+
+확인:
+
+- A1 history 보존
+- Failed Test가 A2 Carryover에 포함
+- 같은 Failure 반복 시 escalation
+
+---
+
+## 23.5 Scenario 3: Worker Kill
+
+Task 수행 중 Worker Process를 강제로 죽인다.
+
+예:
+
+~~~text
+Agent edited 2 files
+unit test PASS
+integration pending
+→ kill worker
+~~~
+
+확인:
+
+- Task가 사라지지 않는가
+- Attempt가 Worker Lost로 닫히는가
+- Commit/Patch가 남는가
+- 새 Worker가 이어갈 수 있는가
+
+이 책의 관점에서는 이 Scenario가 특히 중요하다. Happy Path만으로는 Durable Task와 Worker 교체 가능성의 필요성을 확인하기 어렵기 때문이다.
+
+---
+
+## 23.6 Scenario 4: Worker A → Worker B Reassignment
+
+Worker A의 Partial Work를 Worker B가 이어받는다.
+
+약한 구현:
+
+~~~text
+Worker B
+→ starts from scratch
+~~~
+
+강한 구현:
+
+~~~text
+Worker B
+→ restores commit/patch
+→ reads carryover
+→ continues remaining verification
+~~~
+
+측정:
+
+~~~text
+reused work
+lost work
+resume time
+duplicate work
+~~~
+
+---
+
+## 23.7 Scenario 5: Human Approval
+
+Task가 Verification을 통과한다.
+
+~~~text
+VERIFYING
+→ AWAITING_HUMAN
+~~~
+
+Worker를 해제한다.
+
+몇 분 또는 몇 시간 뒤 Approval Event가 들어온다.
+
+~~~text
+APPROVED
+→ DONE / MERGE
+~~~
+
+확인:
+
+- Worker를 계속 점유하지 않음
+- Approval State durable
+- Approver Audit 남음
+
+---
+
+## 23.8 Scenario 6: Independent Parallel Tasks
+
+Task A와 B가 다른 Module을 수정한다.
+
+~~~text
+Task A → Worker A
+Task B → Worker B
+~~~
+
+둘을 동시에 실행한다.
+
+측정:
+
+- total elapsed time
+- conflict
+- CI queue
+- review load
+
+Parallelism이 실제 이득인지 본다.
+
+---
+
+## 23.9 Scenario 7: Same-file Conflict
+
+Task C와 D가 같은 File을 수정한다.
+
+~~~text
+Task C → UserService.java
+Task D → UserService.java
+~~~
+
+두 Worker가 동시에 작업한다.
+
+Factory는 다음 중 하나를 해야 한다.
+
+- 사전 Serialize
+- Conflict 감지
+- Replan
+- Integration Failure
+
+중요한 것은 Conflict가 “놀라운 사고”가 아니라 예상 가능한 Scenario라는 점이다.
+
+---
+
+## 23.10 Evidence Output
+
+각 Task 결과는 같은 Manifest를 반환한다.
+
+예:
+
+~~~json
+{
+  "taskId": "T-100",
+  "attemptId": "A2",
+  "resultRevision": "abc123",
+  "changedFiles": [
+    "AuthService.java"
+  ],
+  "verification": [
+    {
+      "name": "auth-unit",
+      "status": "passed"
+    }
+  ],
+  "artifacts": [],
+  "knownRisk": []
+}
+~~~
+
+Human Review 화면은 이 Manifest를 사용한다.
+
+---
+
+## 23.11 Reference Implementation에서 일부러 만들지 않는 것
+
+다음은 없어도 된다.
+
+- 완성된 Web Dashboard
+- Kubernetes Cluster
+- Multi-region
+- Advanced IAM
+- 20개 Agent Role
+- Auto Product Planning
+
+이 기능들은 Factory 원칙을 검증하는 데 필수적이지 않다.
+
+---
+
+## 23.12 Case Study와 Reference를 구분한다
+
+실제 구현 경험은 유용하다.
+
+예를 들어 한 Factory 구현에서 다음이 관찰됐다고 하자.
+
+~~~text
+Worker A loss
+→ Task recovered
+→ Worker B completed
+but
+→ Worker A uncommitted work not reused
+~~~
+
+이것은 중요한 Continuity Gap 사례다.
+
+하지만 특정 구현의 Failure를 모든 Factory의 일반 사실로 표현하면 안 된다.
+
+책에서는 다음처럼 구분한다.
+
+~~~text
+Reference Principle
+- cross-worker continuation requires durable partial work
+
+Case Study
+- 특정 구현에서는 carryover가 interruption reason만 전달해
+  Worker B가 처음부터 다시 작업했다
+~~~
+
+자체 구현인 Runmesh의 경험도 같은 방식으로 사용한다. 특정 구현의 결과는 Case Study로 표시하고, 일반 원칙의 근거는 다른 공개 사례·연구와 분리한다.
+
+---
+
+## Reference Factory Acceptance
+
+최소 Acceptance:
+
+~~~text
+A. Normal Task completes
+B. Verification failure retries within budget
+C. Worker kill does not lose Task
+D. Different Worker can continue
+E. Human Approval can suspend/resume
+F. Independent Tasks run in parallel
+G. Conflict is detected
+H. Evidence is linked to result revision
+~~~
+
+이 Scenario를 통과하면 책이 주장하는 핵심 경계가 해당 Reference Implementation에서 동작한다는 근거가 된다. Production readiness나 다른 조직에서의 일반적 우수성을 증명하는 것은 아니다.
+
+---
+
+## 다음 질문
+
+Reference Factory가 동작한다.
+
+그다음에는 무엇을 자동화해야 할까.
+
+Worker를 늘릴까.
+
+Event Trigger를 붙일까.
+
+Agent가 Backlog에서 스스로 Work를 선택하게 할까.
+
+다음 장에서는 Factory의 **Maturity와 Autonomy를 서로 다른 축으로 분리해** 확장 순서를 정리한다.
+
+---
+
+## 참고 자료
+
+- OpenAI, *Symphony*  
+  https://openai.com/index/open-source-codex-orchestration-symphony/
+- WorkOS, *Project Horizon*  
+  https://workos.com/blog/project-horizon
+- Microsoft, *Durable Task for AI agents*  
+  https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
+- Anthropic, *Effective harnesses for long-running agents*  
+  https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+
+---
+
+# 24장. Factory Maturity와 Autonomy를 어떻게 올릴 것인가
+
+Software Factory를 만들기 시작하면 곧 다음 질문이 생긴다.
+
+> 어디까지 자동화해야 하는가?
+
+Worker가 하나일 때는 쉽다.
+
+여러 Worker를 붙이고 Event Trigger를 연결하고 Backlog Selection까지 자동화하려 하면 “우리 Factory는 몇 단계인가”를 말하고 싶어진다.
+
+하지만 여기서 하나를 조심해야 한다.
+
+Factory의 **Maturity**와 Agent의 **Autonomy**는 같은 것이 아니다.
+
+Human Review가 있다고 해서 낮은 Maturity인 것은 아니다.
+
+반대로 Agent가 스스로 Task를 선택하고 Merge한다고 해서 높은 Reliability를 가진 것도 아니다.
+
+이 책에서는 두 축을 분리한다.
+
+---
+
+## 24.1 Maturity와 Autonomy는 다른 축이다
+
+### Maturity
+
+질문:
+
+> Factory System이 어떤 Production Capability를 갖췄는가?
+
+예:
+
+- Durable Task
+- Retry
+- Resume
+- Parallel Worker
+- Event Trigger
+- Observability
+
+### Autonomy
+
+질문:
+
+> 어떤 Decision Authority를 Agent/System에 위임했는가?
+
+예:
+
+- Work Selection
+- Planning
+- Execution
+- Verification
+- Acceptance
+- Merge / Deploy
+
+둘은 독립적이다.
+
+예를 들어 매우 성숙한 Durable Factory가 있어도 Merge는 항상 Human이 할 수 있다.
+
+반대로 간단한 Script가 자동으로 Code를 만들고 Merge할 수는 있지만 Recovery와 Audit이 약할 수 있다.
+
+---
+
+## 24.2 M0~M5 Maturity 후보
+
+다음은 이 책에서 복잡한 Capability 조합을 설명하기 위해 사용하는 **비규범적 Taxonomy**다.
+
+업계 표준, 인증 모델, 조직 평가 점수가 아니다. 번호가 높다고 더 좋은 조직을 뜻하지 않으며, 실제 조직은 여러 단계의 특성을 동시에 가질 수 있다.
+
+### M0. Interactive Agent
+
+~~~text
+Human
+→ Agent Session
+→ Result
+~~~
+
+특징:
+
+- 사람이 Session 직접 관리
+- durable task 없음
+- 수동 verification
+
+### M1. Repeatable Worker
+
+~~~text
+Task
+→ Isolated Worker
+→ Agent
+→ Verification
+→ Evidence
+~~~
+
+특징:
+
+- 반복 가능한 실행
+- 기본 Isolation
+- Result Contract
+
+### M2. Durable Factory
+
+추가:
+
+- Task Store
+- Attempt
+- Retry
+- Resume
+- Human Wait
+- Recovery
+
+Worker Loss와 Task Loss가 분리된다.
+
+### M3. Parallel Factory
+
+추가:
+
+- Multiple Workers
+- Dependency
+- Scheduler
+- Conflict
+- Capacity Management
+
+### M4. Event-driven Factory
+
+추가:
+
+- CI / Issue / Schedule / Production Signal
+- automatic task intake
+- closed-loop feedback
+
+### M5. Adaptive Factory
+
+추가 후보:
+
+- Work Selection Assistance
+- Dynamic Routing
+- Factory Improvement Loop
+- guarded self-improvement
+
+M5는 가장 높은 “좋음”을 의미하지 않는다.
+
+필요한 조직에만 적합할 수 있다.
+
+---
+
+## 24.3 Autonomy Authority Matrix
+
+Autonomy를 하나의 숫자로 만들지 않는다.
+
+Decision별로 본다.
+
+예시 Matrix는 다음과 같이 만들 수 있다.
+
+| Decision | Human | Agent | System/Policy |
+| --- | --- | --- | --- |
+| Work Selection | A | C | R |
+| Planning | A/C | R | |
+| Execution | C | R | |
+| Verification | C | R | R |
+| Acceptance | A | C | Gate |
+| Merge / Deploy | A/R | C | Gate |
+
+A = Accountable  
+R = Responsible  
+C = Consulted
+
+이 표는 권장 RACI가 아니라 Authority를 분리해서 생각하기 위한 예시다. Task Risk와 조직 책임 구조에 따라 값은 달라진다.
+
+---
+
+## 24.4 같은 조직도 Task마다 Autonomy가 다르다
+
+예:
+
+### Documentation
+
+~~~text
+Work Selection: system
+Execution: agent
+Verification: automated
+Acceptance: automated
+Merge: automated
+~~~
+
+### Business Logic
+
+~~~text
+Work Selection: human/system
+Execution: agent
+Verification: automated + agent
+Acceptance: human
+Merge: human
+~~~
+
+### Production Migration
+
+~~~text
+Work Selection: human
+Planning: agent + human
+Execution: controlled tool
+Verification: strong automated
+Acceptance: specialist human
+Deploy: explicit approval
+~~~
+
+조직 전체에 “Autonomy Level 4” 같은 하나의 숫자를 붙이면 이 차이를 놓친다.
+
+---
+
+## 24.5 다음 단계로 가기 전 확인할 것
+
+Maturity를 올릴 때 Success Rate 하나만 보지 않는다.
+
+예를 들어 M2에서 M3로 가기 전에 다음을 확인할 수 있다.
+
+~~~text
+Task independence 충분?
+Retry 안정적?
+Review queue 여유?
+CI capacity 충분?
+Conflict rate 낮음?
+Evidence standardized?
+~~~
+
+Worker를 늘렸는데 Review가 이미 병목이면 M3 확장이 오히려 WIP를 늘릴 수 있다.
+
+M3에서 M4로 갈 때는 다른 질문이 필요하다.
+
+~~~text
+Signal quality 충분?
+Deduplication 있음?
+Unsafe event 차단?
+Task readiness 자동 판정 가능?
+~~~
+
+---
+
+## 24.6 Autonomy 승급 조건
+
+Agent에게 더 많은 Authority를 줄 때 다음 조건을 볼 수 있다.
+
+~~~text
+1. Failure가 관찰 가능한가?
+2. Recovery가 가능한가?
+3. Verification이 독립적인가?
+4. Blast Radius가 제한되는가?
+5. Audit 가능한가?
+6. Human Escalation이 가능한가?
+7. Downstream Capacity가 감당 가능한가?
+~~~
+
+이 조건이 약한데 Autonomy만 높이면 위험이 커진다.
+
+> 높은 Autonomy는 목표가 아니라 Reliability와 Governance 위에서 선택하는 운영 정책이다.
+
+---
+
+## 24.7 Risk-based Autonomy
+
+Autonomy는 Risk에 따라 달라져야 한다.
+
+예:
+
+~~~text
+Docs
+→ auto merge 가능
+
+Unit Test
+→ automated acceptance 가능
+
+Feature Code
+→ human review
+
+Auth / Payment
+→ specialist review
+
+Production Migration
+→ explicit approval
+~~~
+
+Risk-based Policy는 “Human이 항상 있어야 한다”와 “Human이 없어야 한다” 사이의 현실적인 운영 모델이다.
+
+---
+
+## 24.8 Self-improvement Authority는 늦게 넓힌다
+
+Factory 개선 자체는 초기부터 일어날 수 있다. 사람이 반복 실패를 보고 문서나 Skill을 수정하는 것도 Factory Improvement다.
+
+2026년 공개 사례에는 Factory.ai의 Signals처럼 session friction을 분석해 개선 Issue와 Fix로 연결하는 closed-loop 구현이 있고, Anthropic도 Agent Skills를 소개하며 장기적으로 Agent가 Skill을 직접 생성·편집·평가하는 방향을 언급했다. 전자는 한 회사의 제품 구현이고, 후자는 당시 “향후 탐색”으로 제시한 방향이다. 이를 일반적인 self-improving factory가 이미 확립됐다는 근거로 보지는 않는다.
+
+따라서 Factory가 **자기 구성 변경을 스스로 제안하고 적용하는 Authority**는 더 늦게 넓히는 편이 안전하다.
+
+예:
+
+- Skill 개선
+- Tool 추가
+- Context 개선
+- Worker Image 개선
+- Eval 추가
+- Routing Policy 개선
+
+이런 Loop는 강력하다.
+
+~~~text
+Factory Work
+→ Friction
+→ Improvement Task
+→ Better Factory
+~~~
+
+하지만 Factory가 자신의 평가 기준과 Security Policy까지 자유롭게 바꾸면 문제가 생긴다.
+
+예:
+
+~~~text
+test too hard
+→ weaken test
+
+approval slows work
+→ disable approval
+~~~
+
+이런 변화는 “개선”처럼 보일 수 있지만 실제로는 Governance 붕괴다.
+
+---
+
+## 24.9 Meta-change는 별도 Class로 관리한다
+
+Factory Configuration 변경:
+
+- System Instruction
+- Skill
+- Tool
+- Hook
+- Evaluator
+- Model Routing
+- Sandbox Image
+- Network Policy
+
+이 변경은 일반 Product Code보다 큰 Blast Radius를 가질 수 있다.
+
+따라서 다음을 고려한다.
+
+~~~text
+Eval
+→ Shadow
+→ Canary
+→ Approval
+→ Rollout
+→ Rollback
+~~~
+
+특히 Evaluator와 Security Policy 변경은 더 강한 Gate가 필요할 수 있다.
+
+---
+
+## 24.10 Shadow Mode
+
+새 Harness나 Policy를 바로 Authoritative하게 사용하지 않는다.
+
+~~~text
+Production Factory
+→ real task
+→ authoritative result
+
+Candidate Factory
+→ same / sampled task
+→ shadow result
+
+Compare
+→ quality
+→ cost
+→ safety
+~~~
+
+Candidate가 충분히 안정적이면 승격한다.
+
+Self-improvement를 Production에서 바로 자기 자신에게 적용하는 것보다 안전하다.
+
+---
+
+## 24.11 조직별 목표는 다르다
+
+### Small Team 예시
+
+Single Worker, Evidence, Human Review 중심의 M1~M2 성질만으로도 충분한 경우가 있다.
+
+### Platform Team 예시
+
+여러 Project와 Worker Profile, Event Trigger, Policy, Observability 때문에 M2~M4 성질이 함께 필요할 수 있다.
+
+### Regulated Enterprise 예시
+
+운영 Capability는 높아도 Autonomy는 일부 Decision에서 의도적으로 낮게 유지할 수 있다.
+
+예:
+
+- execution automated
+- acceptance human
+- deploy dual approval
+
+이것은 뒤처진 구조가 아니다.
+
+Risk Model에 맞는 구조다.
+
+---
+
+## 24.12 이 책의 도입 순서
+
+지금까지의 내용을 한 줄로 정리하면 다음과 같다.
+
+~~~text
+Agent-ready Repository
+→ Reproducible Worker
+→ Verification
+→ Evidence
+→ Durable Task
+→ Recovery
+→ Observability
+→ Parallelism
+→ Event Trigger
+→ Risk-based Autonomy
+→ Guarded Self-improvement
+~~~
+
+더 짧게 줄이면:
+
+~~~text
+Reliability baseline
+→ Recovery + Observability
+→ Scale
+→ Autonomy
+~~~
+
+실제 조직에서는 일부 순서가 바뀔 수 있다. 이 도식은 maturity score가 아니라 dependency를 설명하는 휴리스틱이다.
+
+중요한 것은 Autonomy를 첫 번째 목표로 두지 않는 것이다.
+
+---
+
+## 마지막 질문
+
+이 책의 기술적 여정은 여기까지다.
+
+하지만 남는 질문이 있다.
+
+Agent가 점점 더 많은 Implementation을 수행한다면 개발자의 일은 무엇이 되는가.
+
+Software Engineering은 Code Authoring에서 무엇으로 확장되는가.
+
+Epilogue에서는 **Software Engineering에서 Software Production System Engineering으로 넓어지는 역할**을 정리한다.
+
+---
+
+## 참고 자료
+
+- OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
+  https://openai.com/index/harness-engineering/
+- WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
+  https://workos.com/blog/project-horizon
+- Factory.ai, *Signals*  
+  https://factory.ai/news/factory-signals
+- Anthropic, *Agent Skills*  
+  https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
+
+---
+
+# Epilogue. Software Engineering에서 Software Production으로
+
+이 책은 “AI가 코드를 얼마나 잘 쓰는가”에서 시작하지 않았다.
+
+오히려 Coding Agent가 충분히 좋아진 다음에 생기는 문제에서 시작했다.
+
+코드 생성이 빨라지면 Review가 밀렸다.
+
+Agent를 여러 개 실행하면 Human Attention이 부족해졌다.
+
+Session이 길어지면 State가 사라졌다.
+
+Test가 통과해도 User Intent를 놓칠 수 있었다.
+
+Worker가 죽으면 Work Continuity가 깨졌다.
+
+Autonomy를 높이면 Security와 Governance가 더 중요해졌다.
+
+그래서 책의 관심은 자연스럽게 Model 밖으로 이동했다.
+
+~~~text
+Model
+→ Agent
+→ Harness
+→ Worker
+→ Control Plane
+→ Verification
+→ Governance
+→ Delivery System
+~~~
+
+이 변화는 개발자의 역할에도 영향을 준다.
+
+---
+
+## 구현에서 Intent와 Verification으로 이동하는 Attention
+
+Agent가 더 많은 구현을 수행하면 사람이 하는 일이 사라지는 것처럼 보일 수 있다.
+
+실제로는 일부 Attention의 위치가 바뀐다.
+
+기존:
+
+~~~text
+Code 작성
+Command 실행
+Test 반복
+~~~
+
+Factory가 담당할 수 있는 영역:
+
+~~~text
+Task Execution
+Environment Setup
+Repeated Verification
+State Tracking
+~~~
+
+사람의 Attention은 다음 쪽으로 이동할 수 있다.
+
+~~~text
+Intent
+Requirement
+Architecture
+Acceptance
+Risk
+Exception
+Policy
+Factory Improvement
+~~~
+
+이 이동이 모든 조직에서 같은 속도로 일어나는 것은 아니다.
+
+하지만 공개 사례와 연구에서 반복되는 방향 중 하나다.
+
+---
+
+## Coding Skill은 사라지지 않는다
+
+Agent가 코드를 작성한다고 Code를 이해할 필요가 없어지는 것은 아니다.
+
+오히려 다음 능력은 계속 중요하다.
+
+- Architecture
+- Debugging
+- Test Design
+- Security
+- Performance
+- Production Judgment
+
+Agent 결과를 검증하려면 기술적 깊이가 필요하다.
+
+Factory 자체를 설계하려면 더 넓은 System Thinking이 필요하다.
+
+“코드를 직접 적게 쓴다”와 “코드를 몰라도 된다”는 다른 말이다.
+
+---
+
+## Agent Management도 Software가 된다
+
+Agent가 하나일 때는 사람이 직접 관리할 수 있다.
+
+여러 개가 되면 다음 작업이 늘어난다.
+
+- Start
+- Monitor
+- Retry
+- Review
+- Conflict
+- Approval
+
+사람에게 Terminal Window를 더 주는 방식으로는 확장되지 않는다.
+
+그래서 이 관리 자체를 Software로 만든다.
+
+~~~text
+Queue
+Policy
+Scheduler
+Verification
+Evidence
+Recovery
+Dashboard
+~~~
+
+이것이 Software Factory의 중요한 의미 중 하나다.
+
+Agent가 많아질수록 Orchestration과 Governance도 새로운 Software Engineering 대상이 된다.
+
+---
+
+## Human과 Agent를 역할이 아니라 Authority로 본다
+
+“Agent는 구현하고 Human은 리뷰한다”는 구분도 너무 단순하다.
+
+더 유용한 질문은 Decision Authority다.
+
+~~~text
+Who selects work?
+Who plans?
+Who executes?
+Who verifies?
+Who accepts risk?
+Who merges?
+Who deploys?
+~~~
+
+Task에 따라 답이 다를 수 있다.
+
+Docs는 대부분 자동화할 수 있고, Production Migration은 Human Authority를 강하게 유지할 수 있다.
+
+이 구조에서는 Human-in-the-loop가 중간마다 버튼을 누르는 방식이 아니다.
+
+책임과 위험을 적절한 위치에 배치하는 Governance다.
+
+---
+
+## 생산성도 다시 정의해야 한다
+
+Agent 시대에는 다음 숫자가 쉽게 늘어난다.
+
+- Token
+- Agent Run
+- Pull Request
+- Generated Code
+
+하지만 이 책에서는 더 넓은 측정 단위 후보로 다음을 사용했다.
+
+~~~text
+Accepted Change
+~~~
+
+이는 업계 표준 Metric이 아니라 Agent output을 Delivery outcome과 구분하기 위한 책의 synthesis다.
+
+더 구체적으로는 다음 질문이다.
+
+> 사람이 감당 가능한 Attention과 비용 안에서 검증된 소프트웨어 변경이 지속적으로 전달되는가?
+
+그래서 다음을 함께 본다.
+
+- Cycle Time
+- Review
+- Retry
+- Rework
+- Revert
+- Defect
+- Cost
+- Human Attention
+
+Coding Speed는 이 시스템의 한 부분이다.
+
+---
+
+## Factory도 하나의 Product다
+
+Software Factory는 한 번 만들고 끝나는 Infrastructure가 아니다.
+
+실제 Work를 처리하면서 부족한 점이 드러난다.
+
+~~~text
+Missing Test
+Flaky Environment
+Poor Context
+Slow Worker
+Unsafe Permission
+Review Bottleneck
+~~~
+
+이 Friction을 다시 Factory Backlog로 넣는 운영 방식을 선택할 수 있다.
+
+~~~text
+Factory Work
+→ Friction
+→ Improvement
+→ Better Factory
+~~~
+
+다만 Self-improvement를 무제한으로 자동화하면 위험하다.
+
+Factory가 자신의 Evaluator를 약하게 만들거나 Security Policy를 제거하면 생산성이 좋아진 것처럼 보일 수 있다.
+
+그래서 Factory 자체도 Versioning, Evaluation, Review, Rollback이 필요하다.
+
+---
+
+## Software Engineering에서 Software Production으로
+
+Software Engineering이 코드 작성만을 의미한 적은 없다.
+
+Requirement, Design, Test, Deployment, Operation까지 항상 포함했다.
+
+AI Agent는 이 범위를 더 분명하게 만든다.
+
+Implementation의 일부가 위임되면 다른 단계의 중요성이 더 잘 보인다.
+
+~~~text
+Intent
+→ Work Design
+→ Delegated Execution
+→ Verification
+→ Acceptance
+→ Operation
+→ Feedback
+~~~
+
+Agent 활용 비중이 높은 팀에서는 좋은 Engineer의 역할이 “직접 작성한 코드량”만으로 설명되기 어려워질 수 있다.
+
+그런 환경에서는 다음 능력의 비중이 커질 수 있다.
+
+- 좋은 Work를 정의한다.
+- Agent가 일할 수 있는 Environment를 만든다.
+- Rule과 Judgment를 분리한다.
+- Completion을 검증 가능하게 만든다.
+- Failure가 Work Loss로 이어지지 않게 한다.
+- Human Attention이 필요한 곳을 선택한다.
+- Factory 자체를 개선한다.
+
+그렇다고 직접 구현 능력이 가치 없어진다는 뜻은 아니다.
+
+이 시스템을 설계하고 실패를 진단하려면 여전히 깊은 Software Engineering이 필요하다.
+
+---
+
+## 마지막에 남는 네 가지 질문
+
+Factory를 도입하려는 조직은 기술보다 먼저 다음을 답할 수 있어야 한다.
+
+> 우리는 어떤 Work를 Agent에게 위임할 것인가?
+
+> 그 Agent가 실패해도 안전한가?
+
+> 완료를 누가 무엇으로 판단하는가?
+
+> Agent가 늘어날수록 사람의 Attention은 실제로 더 가치 있는 판단에 쓰이고 있는가?
+
+이 질문에 하나의 정답은 없다.
+
+Repository, Risk, Team, Product가 다르기 때문이다.
+
+이 책의 목적도 Fully Autonomous Organization이라는 하나의 종착점을 제시하는 것이 아니다.
+
+더 현실적인 목표는 다음에 가깝다.
+
+> **Agent에게 Work를 위임하되, State와 Verification과 Responsibility를 잃지 않는 Software Production System을 만드는 것.**
+
+그 시스템이 각 조직에서 어디까지 자동화될지는 사람이 결정해야 한다.
+
