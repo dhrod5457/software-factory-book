@@ -32,6 +32,7 @@
 ---
 
 ## 반드시 사용할 Research
+- `research/30-workos-product-engineering-factory.md`
 
 - `research/22-closed-loop-sdlc-and-production-feedback.md`
 - `research/08-autonomy-levels-and-self-improvement.md`
