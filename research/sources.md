@@ -479,3 +479,147 @@ vendor가 정의한 구성요소는 비교 자료로 사용한다.
 benchmark는 model/agent/harness capability 근거로 사용한다.
 
 조직의 전체 software delivery performance와 동일시하지 않는다.
+
+
+---
+
+## Additional Failure / Governance / Productivity Sources
+
+### Microsoft Research
+
+- Building to the Test: Coding Agents Deliver What You Check, Not What You Requested
+  - June 2026
+  - https://www.microsoft.com/en-us/research/publication/building-to-the-test-coding-agents-deliver-what-you-check-not-what-you-requested/
+- AgentLens: Revealing The Lucky Pass Problem in SWE-Agent Evaluation
+  - May 2026
+  - https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
+- Agentic Coding in the Wild: Characterizing GitHub Copilot at Production Scale
+  - July 2026
+  - https://www.microsoft.com/en-us/research/publication/agentic-coding-in-the-wild-characterizing-github-copilot-at-production-scale/
+- How Do AI Agents Spend Your Money?
+  - April 2026
+  - https://www.microsoft.com/en-us/research/publication/how-do-ai-agents-spend-your-money-analyzing-and-predicting-token-consumption-in-agentic-coding-tasks/
+- The Effects of Generative AI on High-Skilled Work
+  - June 2025
+  - https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/
+- Change2Task: From Repository Changes to Executable Coding Agent Tasks and Environments
+  - July 2026
+  - https://www.microsoft.com/en-us/research/publication/change2task-from-repository-changes-to-executable-coding-agent-tasks-and-environments/
+- RedCodeAgent
+  - ICLR 2026
+  - https://www.microsoft.com/en-us/research/publication/redcodeagent-automatic-red-teaming-agent-against-diverse-code-agents/
+
+### Microsoft Security
+
+- Securing CI/CD in an agentic world: Claude Code GitHub Action case
+  - 2026-06-05
+  - https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/
+- When prompts become shells: RCE vulnerabilities in AI agent frameworks
+  - 2026-05-07
+  - https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/
+
+### METR
+
+- Many SWE-bench-Passing PRs Would Not Be Merged into Main
+  - 2026-03-10
+  - https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
+- Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity
+  - 2025-07-10
+  - https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+- We are Changing our Developer Productivity Experiment Design
+  - 2026-02-24
+  - https://metr.org/blog/2026-02-24-uplift-update/
+- Task Substitution and Uplift
+  - 2026-05-08
+  - https://metr.org/blog/2026-05-08-task-substitution-and-uplift/
+- Measuring the Self-Reported Impact of Early-2026 AI on Technical Worker Productivity
+  - 2026-05-11
+  - https://metr.org/blog/2026-05-11-ai-usage-survey/
+- Frontier Risk Report
+  - 2026
+  - https://metr.org/frontier-risk-report
+
+### NIST / NCCoE
+
+- AI Agent Standards Initiative
+  - 2026-02-17
+  - https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure
+- Accelerating the Adoption of Software and AI Agent Identity and Authorization
+  - 2026-02-05
+  - https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd
+- Summary Analysis of Responses Regarding Security Considerations for AI Agents
+  - 2026-05-18
+  - https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai
+- Secure Software Development, Security, and Operations (DevSecOps) Practices
+  - https://pages.nist.gov/nccoe-devsecops/
+- DevSecOps Notional Reference Model
+  - https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
+- Functional Demonstration Scenarios
+  - https://pages.nist.gov/nccoe-devsecops/functional-demonstration-scenarios.html
+
+### GitHub - Review / Governance / Security
+
+- Better tools made Copilot code review worse
+  - 2026-07-10
+  - https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
+- Turn one giant AI-generated pull request to a reviewable stack
+  - 2026-08-04
+  - https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
+- Stacked pull requests public preview
+  - 2026-07-30
+  - https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/
+- Security validation for third-party coding agents
+  - 2026-06-09
+  - https://github.blog/changelog/2026-06-09-security-validation-for-third-party-coding-agents/
+- Enterprise AI Controls & agent control plane
+  - 2026-02-26
+  - https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/
+- Audit repository cloud-agent configuration
+  - 2026-05-18
+  - https://github.blog/changelog/2026-05-18-audit-repository-copilot-cloud-agent-configuration-via-the-rest-api/
+- Agent automation controls in GitHub Issues
+  - 2026-07-23
+  - https://github.blog/changelog/2026-07-23-agent-automation-controls-in-github-issues-in-public-preview/
+- How we make AI coding more cost efficient without sacrificing task quality
+  - 2026-09-02
+  - https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
+
+### OpenAI - Monitoring / Evaluation Integrity
+
+- How we monitor internal coding agents for misalignment
+  - 2026-03-19
+  - https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
+- Why SWE-bench Verified no longer measures frontier coding capabilities
+  - 2026-02-23
+  - https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/
+- Separating signal from noise in coding evaluations
+  - 2026-07-08
+  - https://openai.com/index/separating-signal-from-noise-coding-evaluations/
+- The Hugging Face incident and the road ahead
+  - 2026-08-26
+  - https://openai.com/index/hugging-face-incident-and-the-road-ahead/
+
+### Anthropic - Multi-agent / Reliability
+
+- Patterns and problems in emerging multiagent systems
+  - 2026-08-13
+  - https://www.anthropic.com/research/multiagent-systems
+- How we built our multi-agent research system
+  - https://www.anthropic.com/engineering/multi-agent-research-system
+
+### Recent Research Preprints - Use with Caution
+
+These are useful research signals but should not be treated as settled findings without checking publication status and methodology.
+
+- Where Do AI Coding Agents Fail?
+  - https://arxiv.org/abs/2601.15195
+- Early-Stage Prediction of Review Effort in AI-Generated Pull Requests
+  - https://arxiv.org/abs/2601.00753
+- SpecBench: Measuring Reward Hacking in Long-Horizon Coding Agents
+  - https://arxiv.org/abs/2605.21384
+- RewardHackingAgents
+  - https://arxiv.org/abs/2603.11337
+- Debt Behind the AI Boom
+  - https://arxiv.org/abs/2603.28592
+- AI-to-AI Code Reviews of GitHub Pull Requests
+  - https://arxiv.org/abs/2608.21311
