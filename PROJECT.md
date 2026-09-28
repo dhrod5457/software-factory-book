@@ -61,60 +61,64 @@ Phase 1 Research
 
 Phase 2 Concept
 완료
-- planning/concept.md
 
 Phase 3 Scope
 완료
-- planning/scope.md
-- planning/future-topics.md
 
 Phase 4 TOC
 완료
-- planning/toc.md
 
 Phase 5 Chapter Plan
 완료
-- chapters/01..24/plan.md
-- chapters/epilogue/plan.md
-- chapters/README.md
+
+Phase 6 Draft
+완료
+- chapters/01..24/draft.md
+- chapters/epilogue/draft.md
+
+Current
+Phase 7 Review
+- review/part-01..07-draft-review.md
+- review/full-draft-structural-review.md
 
 Next
-Phase 6 Draft
-→ chapters/NN/draft.md
+Phase 8 Manuscript
 ```
 
-## Chapter Plan 원칙
+## Draft Completion
 
-각 Plan은 Draft의 Source of Truth다.
+확인 완료:
 
-필수 항목:
+- 24개 본장 Draft
+- Epilogue Draft
+- Writing Style Guide
+- Part별 Draft Review
+- Full Draft Structural Review
 
-- 장의 목표
-- 독자가 답할 질문
-- 핵심 주장
-- Research 근거
-- 반례
-- 도식
-- 실전 예제
-- 포함/제외 경계
-- 다음 장 연결
+## Review 기준
+
+- 중복 제거
+- 장간 역할 분리
+- 연구 주장 강도 조정
+- 최신 출처 재검증
+- Vendor 사례와 일반 원칙 구분
+- 용어 통일
+- 도식 보강
+- 문체 Line Edit
 
 ## Source of Truth
-
-현재 우선순위:
 
 1. `planning/concept.md`
 2. `planning/scope.md`
 3. `planning/toc.md`
-4. `chapters/README.md`
-5. 각 `chapters/NN/plan.md`
-6. `planning/future-topics.md`
-7. `research/29-academic-synthesis-design-principles.md`
-8. `research/sources.md`
+4. 각 `chapters/NN/plan.md`
+5. 각 `chapters/NN/draft.md`
+6. `chapters/epilogue/draft.md`
+7. `planning/writing-style.md`
+8. `review/full-draft-structural-review.md`
+9. `research/sources.md`
 
 ## 작성 방식
-
-`cloud-agent-book`의 작업 흐름을 참고한다.
 
 ```text
 research
@@ -127,4 +131,4 @@ research
 → manuscript
 ```
 
-현재는 Chapter Plan을 완료했고 Draft 단계로 넘어간다.
+현재는 Draft를 완료했고 Review 단계다.
