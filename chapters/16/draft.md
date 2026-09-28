@@ -142,6 +142,29 @@ Production Deploy 권한은 없다.
 
 ---
 
+### Tool 연결보다 어려운 문제는 Delegated Authorization이다
+
+MCP Gateway를 통해 GitHub, Linear, Data Warehouse, Slack 같은 시스템이 Agent에게 연결되면 Context 접근성은 좋아진다. 동시에 Authorization 문제가 커진다.
+
+WorkOS 발표에서도 Agent authorization은 아직 충분히 해결하지 못한 영역으로 명시적으로 언급됐다. 이 사례가 보여주는 점은 앞선 Factory가 실패했다는 것이 아니라, **Tool을 연결하는 문제와 안전하게 권한을 위임하는 문제는 별개**라는 것이다.
+
+~~~text
+Human Principal
+→ Delegation
+→ Agent Identity
+→ Task-scoped Authorization
+→ Tool / MCP Gateway
+→ Internal System
+~~~
+
+따라서 다음 질문이 필요하다.
+
+- 이 Agent는 누구의 권한으로 실행되는가
+- 이 Task에 Read만 필요한가 Write도 필요한가
+- 어떤 Side Effect에 별도 Approval이 필요한가
+- 권한은 언제 만료되고 어떻게 회수되는가
+- 결과와 Audit에서 initiating principal을 추적할 수 있는가
+
 ## 16.4 Task-scoped Credential
 
 Credential Scope를 다음 축으로 제한할 수 있다.
