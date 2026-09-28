@@ -333,7 +333,7 @@ Software Factory는 기존 Software Engineering을 버리고 새 시스템으로
 
 > AI Software Factory는 기존 CI/CD, DevOps, Platform Engineering, Agent Platform과 어디에서 겹치고 어디에서 달라지는가?
 
-다음 장에서는 이 경계를 정리한다.
+먼저 기존 Delivery System과의 경계를 정리한다.
 
 ---
 
