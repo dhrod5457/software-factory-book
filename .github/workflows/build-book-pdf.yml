@@ -50,10 +50,7 @@ jobs:
             echo "render $base"
             mmdc \
               --input "$src" \
-              --output "manuscript/figures/rendered/$base.png" \
-              --backgroundColor white \
-              --width 1400 \
-              --scale 2
+              --output "manuscript/figures/rendered/$base.png"
           done
           test "$(find manuscript/figures/rendered -name 'F*.png' | wc -l)" -eq 21
 
