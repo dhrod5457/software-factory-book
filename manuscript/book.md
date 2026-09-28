@@ -9793,7 +9793,9 @@ Auto-merge도 필요 없다. 반대로 낮은 위험의 Task에서 충분한 검
 
 ---
 
-### 22.3 Step A: Agent-ready Repository
+### 22.3 Baseline: Repository, Worker, Evidence
+
+**Step A — Agent-ready Repository**
 
 Factory보다 먼저 Repository를 본다.
 
@@ -9823,7 +9825,7 @@ Factory가 Repository Chaos를 자동으로 해결해줄 것이라고 기대하�
 
 ---
 
-### 22.4 Step B: Reproducible Worker
+**Step B — Reproducible Worker**
 
 다음 목표:
 
@@ -9843,7 +9845,7 @@ Worker 하나가 재현 가능하면 된다.
 
 ---
 
-### 22.5 Step C: Evidence Contract
+**Step C — Evidence Contract**
 
 Scale 전에 Result Format을 만든다.
 
@@ -9860,7 +9862,9 @@ Known Risk
 
 ---
 
-### 22.6 Step D: Durable Task State
+### 22.4 Reliability: Durable State와 Recovery
+
+**Step D — Durable Task State**
 
 다음으로 Work State를 Session 밖으로 꺼낸다.
 
@@ -9879,7 +9883,7 @@ Attempt와 Retry도 기록한다.
 
 ---
 
-### 22.7 Step E: Retry와 Resume
+**Step E — Retry와 Resume**
 
 Happy Path가 반복적으로 안정적이라면 Failure Recovery를 넣는다.
 
@@ -9901,7 +9905,9 @@ Approval delay
 
 ---
 
-### 22.8 Step F: Event Trigger
+### 22.5 Scale: Event Trigger와 Parallel Worker
+
+**Step F — Event Trigger**
 
 Human이 직접 Start하지 않아도 되는 Work를 연결한다.
 
@@ -9922,7 +9928,7 @@ Work Source 자동화와 Acceptance Authority는 별개다.
 
 ---
 
-### 22.9 Step G: Parallel Worker
+**Step G — Parallel Worker**
 
 Queue가 실제로 쌓이기 시작했을 때 Worker를 늘린다.
 
@@ -9939,7 +9945,7 @@ Conflict Rate?
 
 ---
 
-### 22.10 Step H: Risk-based Automation
+### 22.6 Risk-based Automation
 
 Task Risk에 따라 정책을 다르게 한다.
 
@@ -9962,7 +9968,7 @@ Auth / Payment / Migration
 
 ---
 
-### 22.11 Work Selection Automation은 뒤에 둔다
+### 22.7 Work Selection Automation은 뒤에 둔다
 
 Backlog에서 어떤 Task를 할지 Agent가 고르는 것은 높은 수준의 Autonomy다.
 
@@ -9981,7 +9987,7 @@ Reliability baseline
 
 ---
 
-### 22.12 Measure Before Automation
+### 22.8 Measure Before Automation
 
 자동화 전 Baseline을 남긴다.
 
@@ -10226,7 +10232,9 @@ Task READY
 
 ---
 
-### 23.4 Scenario 2: Verification Failure
+### 23.4 Failure와 Recovery Scenario
+
+**Scenario 2 — Verification Failure**
 
 Agent가 Candidate를 만들었지만 Test가 실패한다.
 
@@ -10251,7 +10259,7 @@ retry_count < budget
 
 ---
 
-### 23.5 Scenario 3: Worker Kill
+**Scenario 3 — Worker Kill**
 
 Task 수행 중 Worker Process를 강제로 죽인다.
 
@@ -10275,7 +10283,7 @@ integration pending
 
 ---
 
-### 23.6 Scenario 4: Worker A → Worker B Reassignment
+**Scenario 4 — Worker A → Worker B Reassignment**
 
 Worker A의 Partial Work를 Worker B가 이어받는다.
 
@@ -10306,7 +10314,7 @@ duplicate work
 
 ---
 
-### 23.7 Scenario 5: Human Approval
+**Scenario 5 — Human Approval**
 
 Task가 Verification을 통과한다.
 
@@ -10332,7 +10340,9 @@ APPROVED
 
 ---
 
-### 23.8 Scenario 6: Independent Parallel Tasks
+### 23.5 Parallel과 Conflict Scenario
+
+**Scenario 6 — Independent Parallel Tasks**
 
 Task A와 B가 다른 Module을 수정한다.
 
@@ -10354,7 +10364,7 @@ Parallelism이 실제 이득인지 본다.
 
 ---
 
-### 23.9 Scenario 7: Same-file Conflict
+**Scenario 7 — Same-file Conflict**
 
 Task C와 D가 같은 File을 수정한다.
 
@@ -10376,7 +10386,7 @@ Factory는 다음 중 하나를 해야 한다.
 
 ---
 
-### 23.10 Evidence Output
+### 23.6 Evidence Output
 
 각 Task 결과는 같은 Manifest를 반환한다.
 
@@ -10405,7 +10415,7 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ---
 
-### 23.11 Reference Implementation에서 일부러 만들지 않는 것
+### 23.7 Reference Implementation에서 일부러 만들지 않는 것
 
 다음은 없어도 된다.
 
@@ -10420,7 +10430,7 @@ Human Review 화면은 이 Manifest를 사용한다.
 
 ---
 
-### 23.12 Case Study와 Reference를 구분한다
+### 23.8 Case Study와 Reference를 구분한다
 
 실제 구현 경험은 유용하다.
 
