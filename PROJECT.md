@@ -72,26 +72,32 @@ Phase 4 TOC
 완료
 - planning/toc.md
 
-Next
 Phase 5 Chapter Plan
-→ chapters/NN/plan.md
+완료
+- chapters/01..24/plan.md
+- chapters/epilogue/plan.md
+- chapters/README.md
+
+Next
+Phase 6 Draft
+→ chapters/NN/draft.md
 ```
 
-## TOC
+## Chapter Plan 원칙
 
-현재 목차:
+각 Plan은 Draft의 Source of Truth다.
 
-```text
-Part I   Coding Agent에서 Software Factory로
-Part II  Work를 정의하는 시스템
-Part III Factory의 실행 구조
-Part IV  결과를 믿을 수 있게 만드는 시스템
-Part V   여러 Worker와 전체 Flow 관리
-Part VI  조직의 Software Delivery System으로 확장
-Part VII Minimum Viable Factory에서 Adaptive Factory까지
-```
+필수 항목:
 
-전체 24장 + Epilogue.
+- 장의 목표
+- 독자가 답할 질문
+- 핵심 주장
+- Research 근거
+- 반례
+- 도식
+- 실전 예제
+- 포함/제외 경계
+- 다음 장 연결
 
 ## Source of Truth
 
@@ -100,11 +106,11 @@ Part VII Minimum Viable Factory에서 Adaptive Factory까지
 1. `planning/concept.md`
 2. `planning/scope.md`
 3. `planning/toc.md`
-4. `planning/future-topics.md`
-5. `research/29-academic-synthesis-design-principles.md`
-6. `research/18-research-contradictions-and-open-questions.md`
-7. `research/sources.md`
-8. `research/README.md`
+4. `chapters/README.md`
+5. 각 `chapters/NN/plan.md`
+6. `planning/future-topics.md`
+7. `research/29-academic-synthesis-design-principles.md`
+8. `research/sources.md`
 
 ## 작성 방식
 
@@ -121,4 +127,4 @@ research
 → manuscript
 ```
 
-현재는 TOC를 확정했고 Chapter Plan 단계로 넘어간다.
+현재는 Chapter Plan을 완료했고 Draft 단계로 넘어간다.
