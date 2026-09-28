@@ -12,7 +12,7 @@ Task가 너무 작으면 Worker 시작, Repository 탐색, Context 전달, Verif
 
 이 책에서는 다음 기준을 사용한다.
 
-> 좋은 Task는 독립적으로 실행하고, 검증하고, 실패 시 복구할 수 있으며, 사람이 결과를 리뷰할 수 있는 단위다.
+> 좋은 Task는 독립적으로 실행하고, 검증하고, 실패 시 복구할 수 있으며, 필요한 승인 주체가 결과를 판단할 수 있는 단위다.
 
 Task 분해는 Prompt를 예쁘게 나누는 문제가 아니다.
 
@@ -162,7 +162,7 @@ Task를 나누면 나아질 것 같지만 반드시 그렇지는 않다.
 
 Static하게 여러 Subtask로 쪼갰어도 orchestration이 실패 상태를 이해하지 못하면 downstream 전체를 다시 실행할 수 있다.
 
-2026년 Runtime-Structured Task Decomposition 연구는 이 차이를 다룬다.
+2026년 `Runtime-Structured Task Decomposition` 연구는 두 Software Engineering workload를 각각 10회씩 비교한 소규모 실험에서 이 차이를 다뤘다. Static Decomposition은 경우에 따라 monolithic 실행보다 retry 비용이 더 커졌고, dependency와 failure를 runtime control logic이 관리한 방식은 실패한 subtask만 다시 실행해 retry 비용을 낮췄다. 아직 제한된 workload의 연구이므로 일반 법칙으로 볼 수는 없지만, 적어도 “잘게 나누기만 하면 복구 비용이 줄어든다”는 가정에는 반례가 된다.
 
 핵심은 분해 자체보다 **dependency와 failure semantics를 runtime이 아는가**다.
 
