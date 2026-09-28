@@ -104,12 +104,18 @@ Review에서 완료한 항목:
 - Case Study marker 14개 실제 배치
 - Manuscript quality check PASS
 
+완료 추가:
+
+- Figure caption 21개 작성
+- Case Study Box 14개 최종 working copy 작성
+- 기계적 proof scan PASS
+
 남은 작업:
 
-1. 실제 Figure 제작 / Caption
-2. Case Study Box 최종 원고화
-3. 최종 오탈자 proofread
-4. publication-time source recheck
+1. 실제 Figure 아트워크 제작
+2. Figure/Case Study 최종 삽입·레이아웃
+3. 출간 직전 source recheck
+4. 최종 release proof
 
 # Next
 
