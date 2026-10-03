@@ -2,54 +2,56 @@
 
 **코딩 에이전트를 소프트웨어 생산 시스템으로 운영하는 설계 원칙**
 
-> 릴리스 후보 RC1
-> 기준일: 2026-09-28
-> 소스: reviewed chapter drafts
+> Release Candidate RC1  
+> 기준일: 2026-09-28  
+> Source: reviewed chapter drafts
 
-이 파일은 검토가 완료된 Chapter Draft를 출판 원고 흐름으로 조립한 working manuscript다. 원본 기준 원본은 각 `chapters/NN/draft.md`이며, Manuscript 단계의 편집은 이후 이 파일과 Chapter 소스에 동기화한다.
+이 파일은 Review가 완료된 Chapter Draft를 출판 원고 흐름으로 조립한 working manuscript다.
+
+원본 Source of Truth는 각 `chapters/NN/draft.md`이며, Manuscript 단계의 편집은 이후 이 파일과 Chapter Source에 동기화한다.
 
 ## 목차
 
 ### Part I. Coding Agent에서 Software Factory로
-1. 코딩 에이전트가 좋아진 뒤 무엇이 병목이 되는가
+1. Coding Agent가 좋아진 뒤 무엇이 병목이 되는가
 2. AI Software Factory란 무엇인가
-3. CI/CD, DevOps, Platform Engineering, 에이전트 플랫폼과의 경계
+3. CI/CD, DevOps, Platform Engineering, Agent Platform과의 경계
 
 ### Part II. Work를 정의하는 시스템
-4. 지시문이 아니라 요구사항과 수용 판단에서 시작한다
-5. 지속 작업: 세션보다 오래 살아남는 작업 단위
-6. 작업 크기, 분해, 의존 관계
+4. Prompt가 아니라 Requirement와 Acceptance에서 시작한다
+5. Durable Task: Session보다 오래 살아남는 작업 단위
+6. Task 크기, 분해, Dependency
 
 ### Part III. Factory의 실행 구조
-7. 제어 계층과 실행 계층
-8. 워커, 격리 환경, 작업 공간
-9. 하네스 설계: 에이전트가 일할 수 있는 환경 만들기
-10. Context Engineering과 에이전트가 읽고 이해하기 쉬운 정도
-11. 통제된 자율성: 무엇을 시스템에 두고 무엇을 에이전트에게 맡길 것인가
-12. 검증: 에이전트가 완료했다고 말한 뒤부터가 시작이다
+7. Control Plane과 Execution Plane
+8. Worker, Sandbox, Workspace
+9. Harness Engineering: Agent가 일할 수 있는 환경 만들기
+10. Context Engineering과 Agent Legibility
+11. Controlled Autonomy: 무엇을 시스템에 두고 무엇을 Agent에게 맡길 것인가
+12. Verification: Agent가 완료했다고 말한 뒤부터가 시작이다
 
 ### Part IV. 결과를 믿을 수 있게 만드는 시스템
-13. 증거 계약: 완료를 설명하지 말고 증명한다
-14. 실패와 복구: 실패를 정상 상태로 설계한다
-15. 지속 실행: 비정상 종료를 넘어 이어지는 작업
-16. 보안, 신원, 권한과 책임 관리
+13. Evidence Contract: 완료를 설명하지 말고 증명한다
+14. Failure와 Recovery: 실패를 정상 상태로 설계한다
+15. Durable Execution: Crash를 넘어 이어지는 Work
+16. Security, Identity, Governance
 
 ### Part V. 여러 Worker와 전체 Flow 관리
-17. 병렬 워커와 여러 에이전트를 함께 쓰는 방식: 언제 병렬화할 것인가
-18. 검토, CI, 통합: 코딩 다음 병목
-19. 관측 가능성과 지표: 무엇을 측정할 것인가
+17. Parallel Worker와 Multi-Agent: 언제 병렬화할 것인가
+18. Review, CI, Integration: Coding 다음 병목
+19. Observability와 Metrics: 무엇을 측정할 것인가
 
 ### Part VI. 조직의 Software Delivery System으로 확장
-20. 이벤트 기반 생산 시스템과 운영 결과를 개발로 되돌리는 순환 구조
-21. 개발자 플랫폼과 표준 개발 경로를 생산 시스템이 사용하게 만들기
+20. Event-driven Factory와 Closed-loop SDLC
+21. Developer Platform과 Golden Path를 Factory가 사용하게 만들기
 
 ### Part VII. Minimum Viable Factory에서 Adaptive Factory까지
 22. Minimum Viable AI Software Factory
-23. 실전 참조 생산 시스템 만들기
-24. 생산 시스템 성숙도와 자율성을 어떻게 올릴 것인가
+23. 실전 Reference Factory 만들기
+24. Factory Maturity와 Autonomy를 어떻게 올릴 것인가
 
 ### Epilogue
-소프트웨어 공학에서 소프트웨어 생산으로
+Software Engineering에서 Software Production으로
 
 ---
 
@@ -138,6 +140,7 @@ Part V는 워커 수가 늘어났을 때 병렬 실행과 검토·CI 병목, 관
 
 소프트웨어 생산 시스템의 품질은 에이전트가 한 번에 성공했을 때보다 실패했을 때 더 잘 드러난다. 작업은 남아 있는가. 유효한 작업을 이어받을 수 있는가. 잘못된 결과가 완료로 보이지 않는가. 사람이 필요한 지점에서 개입할 수 있는가. 전체 전달 흐름이 실제로 좋아지고 있는가. 이 질문을 하나씩 시스템 구조로 바꾸는 것이 이 책의 목적이다.
 
+
 ---
 
 # Part I. Coding Agent에서 Software Factory로
@@ -174,8 +177,11 @@ flowchart TD
 
 *모델 성능은 에이전트와 생산 시스템 성능의 한 구성요소일 뿐이다. 저장소, 도구, 맥락 정보, 실행환경, 상태 관리, 검증을 포함한 시스템 계층이 실제 전달 수행 능력을 결정한다.*
 
+Coding Assistant와 Coding Agent를 제품 이름으로 나누기는 어렵다. 같은 제품도 사용 방식에 따라 도우미처럼 동작할 수도 있고 에이전트처럼 동작할 수도 있다.
 
-코딩 도우미와 코딩 에이전트를 제품 이름으로 나누기는 어렵다. 같은 제품도 사용 방식에 따라 도우미처럼 동작할 수도 있고 에이전트처럼 동작할 수도 있다. 이 책에서는 작업 방식으로 구분한다. 코딩 도우미의 흐름은 대체로 다음과 같다.
+여기서는 작업 방식으로 구분한다.
+
+Coding Assistant의 흐름은 대체로 다음과 같다.
 
 ```text
 Developer
@@ -281,19 +287,22 @@ Total Task Cycle Time
 >
 > 소스: OpenAI, *An open-source spec for Codex orchestration: Symphony*.
 
-
 에이전트가 한두 개일 때는 사람이 직접 관리해도 된다. 여러 에이전트를 동시에 사용하기 시작하면 개발자는 곧 다른 일을 하게 된다.
 
 - 어떤 에이전트가 무엇을 하는지 확인한다.
 - 중간 질문에 답한다.
 - 완료 결과를 읽는다.
 - 실패한 작업을 다시 시작한다.
-- 변경 검토 요청을 검토한다.
+- Pull Request를 검토한다.
 - 충돌을 조정한다.
 
-OpenAI가 2026년 4월 Symphony를 공개하며 설명한 내부 경험에서도 한 엔지니어가 대화형 코딩 에이전트 세션을 대체로 3~5개 정도까지는 편하게 관리했지만, 그 이상에서는 작업을 오가며 맥락을 다시 파악하는 부담이 커졌다고 한다. 업계 일반 한계가 아니라 한 조직의 운영 사례다. 중요한 것은 동시에 진행하는 작업이 늘수록 **사람이 주의를 기울일 수 있는 시간과 여력 자체가 처리량의 한계가 될 수 있다는 점**이다.
+OpenAI가 2026년 4월 Symphony를 공개하며 설명한 내부 경험에서도 한 엔지니어가 interactive coding-agent session을 대체로 3~5개 정도까지는 편하게 관리했지만, 그 이상에서는 Context Switching 부담이 커졌다고 한다. 업계 일반 한계가 아니라 한 조직의 운영 사례다.
 
-소프트웨어 생산 시스템의 목표는 사람을 없애는 것이 아니다. 사람의 주의와 노력을 반복적인 실행 관리에서 다음과 같은 판단으로 옮기는 데 가깝다.
+session 수가 늘수록 **Human Attention 자체가 Capacity Constraint가 될 수 있다**.
+
+Software Factory의 목표는 사람을 없애는 것이 아니다.
+
+사람의 Attention을 반복적인 실행 관리에서 다음과 같은 판단으로 옮기는 데 가깝다.
 
 - 무엇을 만들어야 하는가
 - 어떤 설계 구조가 적절한가
@@ -301,7 +310,9 @@ OpenAI가 2026년 4월 Symphony를 공개하며 설명한 내부 경험에서도
 - 무엇을 완료라고 판단할 것인가
 - 어떤 변경을 운영 환경에 넣을 것인가
 
-반면 환경 준비, 반복 테스트, 상태 추적, 로그 수집 같은 작업은 시스템으로 이동할 수 있다. 그래서 이 책에서는 다음과 같은 질문을 사용한다.
+반면 환경 준비, 반복 테스트, 상태 추적, 로그 수집 같은 작업은 시스템으로 이동할 수 있다.
+
+그래서 다음 질문을 사용한다.
 
 > 검증된 변경 하나를 받아들이기 위해 사람이 얼마나 많은 주의와 노력을 사용했는가?
 
@@ -330,7 +341,6 @@ Accepted Change
 > 개발자 population, 작업, 도구 generation, 저장소에 익숙한 정도, productivity 지표가 다르면 결과도 달라질 수 있다.
 >
 > Sources: Microsoft Research, *The Effects of Generative AI on High-Skilled Work*; METR, *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*.
-
 
 AI 코딩 도구의 생산성 효과를 이야기하면 서로 반대처럼 보이는 수치가 나온다.
 
@@ -399,7 +409,7 @@ Business Value
 
 > 에이전트를 포함한 소프트웨어 생산 시스템은 어떤 구조를 가져야 하는가?
 
-다음 장에서는 이 시스템을 이 책에서 **AI Software Factory**라고 부르는 이유와 최소 정의를 정리한다.
+먼저 이 시스템을 왜 **AI Software Factory**라고 부르는지, 최소 정의부터 정리한다.
 
 ---
 
@@ -429,9 +439,11 @@ Agent Capability
 → Factory Capability
 ~~~
 
-이 책의 정의는 여기서 한 단계 더 넓다. 하네스는 중요한 실행 계층이지만, 지속되는 작업, 복구, 최종 수용 권한, 피드백까지 포함하는 생산 시스템 전체와 동일하지 않다. WorkOS의 Ryan Cooke도 비슷한 경계를 다른 각도에서 설명한다. WorkOS는 격리 환경에 코딩 에이전트를 넣고 지시문으로 PR을 만드는 초기 구조를 운영했지만, 그것만으로는 개발자가 로컬 코딩 에이전트를 직접 사용하는 것과 조직의 소프트웨어 전달 성과 측면에서 뚜렷한 차이를 만들기 어려웠다고 설명한다. 이후 자동화 범위를 코드 생성에서 제품 개발 과정으로 확장했다.
+이 책의 정의는 여기서 한 단계 더 넓다. 하네스는 중요한 실행 계층이지만, Durable Work, Recovery, Acceptance Authority, Feedback까지 포함하는 생산 시스템 전체와 동일하지 않다.
 
-~~~text
+WorkOS의 Ryan Cooke는 비슷한 경계를 다른 각도에서 설명한다. WorkOS는 Sandbox에 Coding Agent를 넣고 Prompt로 PR을 만드는 초기 구조만으로는 개발자가 로컬 Coding Agent를 직접 사용하는 것과 조직의 delivery outcome 측면에서 뚜렷한 차이를 만들기 어려웠다고 설명한다. 이후 자동화 범위를 코드 생성에서 Product Engineering Process로 확장했다.
+
+```text
 Sandbox + Agent + Prompt + PR
 = automated coding cell
 
@@ -443,9 +455,9 @@ Work Intake
 + Delivery
 + Feedback
 = software production system
-~~~
+```
 
-여기서 가져올 핵심은 WorkOS의 제품명이 아니다. **제품 개발 과정까지 자동화해야 생산 시스템의 차이가 생긴다**는 경계다. PR 생성은 생산 시스템의 중요한 출력일 수 있지만 생산 시스템 자체와 동일하지 않다.
+PR 생성은 Factory의 중요한 출력일 수 있지만 생산 시스템 자체와 동일하지 않다.
 
 <!-- CASE C16: WorkOS - PR Factory에서 Product Engineering Factory로 -->
 
@@ -689,7 +701,6 @@ flowchart TD
 ```
 
 *의도가 요구사항과 지속 작업으로 변환되고, 제어 계층과 워커를 거쳐 검증·근거·권한과 책임 관리·전달로 이어진 뒤 운영 피드백이 다시 다음 작업으로 돌아오는 전체 순환.*
-
 
 여기서 생산 시스템을 두 개의 경계로 볼 수 있다. 좁은 의미에서는 이미 정의된 작업을 중단돼도 기록이 남도록 실행하고 검증하고 복구하는 **실행 시스템**이다. 넓은 의미에서는 신호와 의도를 작업으로 변환하는 앞단부터 전달 이후의 관찰과 개선까지 연결하는 **생산 루프**다.
 
@@ -1106,9 +1117,17 @@ Git
 
 ---
 
-### 다음 질문
+지금까지는 Factory의 외곽 경계를 정리했다.
 
-지금까지는 생산 시스템의 외곽 경계를 정리했다. 이제부터는 내부로 들어간다. 에이전트에게 작업을 주기 전에 먼저 결정해야 할 것이 있다. 에이전트가 무엇을 구현해야 하는지 어떻게 정의할 것인가. 어떤 상태가 되어야 "작업할 준비가 됐다"고 볼 것인가. 다음 장에서는 지시문을 바로 에이전트에게 던지는 대신 **의도를 요구사항과 수용 판단으로 바꾸는 과정**부터 시작한다.
+이제부터는 내부로 들어간다.
+
+Agent에게 Task를 주기 전에 먼저 결정해야 할 것이 있다.
+
+Agent가 무엇을 구현해야 하는지 어떻게 정의할 것인가.
+
+어떤 상태가 되어야 "작업할 준비가 됐다"고 볼 것인가.
+
+이제 내부로 들어가 **Intent를 Requirement와 Acceptance로 바꾸는 과정**부터 시작한다.
 
 ---
 
@@ -1297,11 +1316,15 @@ Design Constraint
 → Task
 ~~~
 
-기존 설계 구조, 배포 제약, 호환성 조건이 먼저 정해질 수 있기 때문이다. 중요한 것은 하나의 계획 수립 과정을 모든 작업에 강요하지 않는 것이다.
+기존 설계 구조, 배포 제약, 호환성 조건이 먼저 정해질 수 있기 때문이다.
 
-2026년 9월 기준 GitHub Spec Kit의 기본 SDD 흐름은 `Specify → Plan → Tasks → Implement → Converge`이고, Kiro도 요구사항·설계·작업을 별도 산출물로 관리한다. 제품별 절차는 다르지만 여기서 가져올 원칙은 문서 형식 자체가 아니라 **의도와 실행 사이에 중단 뒤에도 남는 산출물과 검증 가능한 연결을 둔다는 것**이다.
+하나의 Planning Process를 모든 작업에 강요할 필요는 없다.
 
-작은 수정에 20페이지 명세를 만드는 것은 낭비다. 반대로 여러 모듈이 연결된 마이그레이션을 한 줄 지시문으로 처리하는 것도 위험하다. 계획의 상세 수준은 작업의 위험과 복잡도에 맞춰야 한다.
+2026년 9월 기준 GitHub Spec Kit의 기본 SDD 흐름은 `Specify → Plan → Tasks → Implement → Converge`이고, Kiro도 Requirement·Design·Task를 별도 artifact로 관리한다. 제품별 절차는 다르지만 여기서 가져올 원칙은 문서 형식 자체가 아니라 **의도와 실행 사이에 durable artifact와 검증 가능한 연결을 둔다는 것**이다.
+
+작은 수정에 20페이지 명세를 만드는 것은 낭비다. 반대로 여러 모듈이 연결된 마이그레이션을 한 줄 지시문으로 처리하는 것도 위험하다.
+
+Planning Depth는 Task의 Risk와 Complexity에 맞춰야 한다.
 
 ---
 
@@ -1330,35 +1353,6 @@ Production Architecture ─┘
 이는 제품으로 만들 대상을 탐색하는 과정을 모두 자동화해야 한다는 뜻도 아니다. 오히려 의도와 설계 구조를 먼저 정리하고, 에이전트가 실행할 작업과 완료 기준으로 변환하는 경계가 필요하다는 사례다.
 
 ---
-
-#### WorkOS: 빈 문서를 Agent가 먼저 채우고 사람이 Scope를 결정한다
-
-WorkOS의 제품 개발 과정에는 `Hilltop`이라는 PRD 성격의 산출물이 있다. 프로젝트 목적, 고객의 필요, 경쟁 상황, 초기 설계, 주요 일정 같은 정보를 한곳에 모으고, 에이전트가 짧은 설명에서 첫 초안을 만든 뒤 사람이 검토와 범위 조정을 수행한다. 승인된 산출물은 다시 구현 작업 티켓으로 분해된다.
-
-~~~text
-Brief
-→ Agent First Draft
-→ Human Review / Scope Correction
-→ Approved Product Artifact
-→ Task Decomposition
-→ Execution
-~~~
-
-중요한 점은 에이전트가 제품에 담긴 의도의 최종 권한까지 갖는 것이 아니다. 발표에서는 에이전트가 실제 의도보다 범위를 크게 잡는 경우도 있다고 설명한다. 하지만 빈 문서에서 모든 산출물을 사람이 처음부터 만드는 것보다, 에이전트가 맥락 정보를 모아 첫 초안을 만들고 사람이 잘라내고 보정하는 방식이 개발에 드는 주의와 노력을 줄일 수 있다. 따라서 요구사항 작성 자동화는 다음처럼 볼 수 있다.
-
-~~~text
-Agent
-- research
-- context collection
-- first draft
-- decomposition
-
-Human
-- intent
-- scope
-- trade-off
-- acceptance authority
-~~~
 
 ### 4.5 Requirement Generator와 Acceptance Authority를 분리한다
 
@@ -1389,7 +1383,9 @@ System / Reviewer
 → Acceptance Approval
 ~~~
 
-작은 유지보수 작업에서는 이 과정이 자동화될 수 있다. 중요한 것은 누가 문서를 작성했느냐보다 **누가 최종 의미를 승인하느냐**다.
+작은 maintenance Task에서는 이 과정이 자동화될 수 있다.
+
+문서 작성자보다 **누가 최종 의미를 승인하느냐**가 더 중요하다.
 
 ---
 
@@ -1409,7 +1405,6 @@ flowchart LR
 ```
 
 *요구사항에서 설계, 작업, 커밋, 검증, 근거까지 연결하면 “무엇을 왜 바꿨고 무엇으로 완료를 판정했는가”를 추적할 수 있다.*
-
 
 좋은 생산 시스템은 작업 산출물을 서로 연결한다. Spec Kit의 최신 `converge` 단계처럼 구현 결과를 다시 명세·계획·작업과 대조하는 흐름도 이 연결의 한 사례다.
 
@@ -1528,9 +1523,11 @@ Verification
 
 ---
 
-### 다음 질문
+Requirement와 Acceptance가 준비됐다고 해도 아직 한 가지 문제가 남는다.
 
-요구사항과 수용 판단이 준비됐다고 해도 아직 한 가지 문제가 남는다. 에이전트가 실행 중 중단되면 이 작업은 어디에 남는가. 세션이 닫히면 작업도 사라지는가. 재시도할 때 처음부터 새로운 지시문을 만들어야 하는가. 다음 장에서는 지시문이나 세션보다 오래 살아남는 작업 단위인 **지속 작업**을 정의한다.
+Agent가 실행 중 중단되면 이 작업은 어디에 남는가. 세션이 닫히면 작업도 사라지는가. 재시도할 때 처음부터 새로운 지시문을 만들어야 하는가.
+
+그다음에는 Prompt나 Session보다 오래 살아남는 작업 단위인 **Durable Task**를 정의한다.
 
 ---
 
@@ -1645,7 +1642,9 @@ retry_count
 carryover
 ~~~
 
-모든 조직이 같은 필드를 가질 필요는 없다. 중요한 것은 이 정보가 에이전트 대화 기록 안에만 존재하지 않는 것이다.
+모든 조직이 같은 필드를 가질 필요는 없다.
+
+이 정보는 Agent transcript 안에만 존재해서는 안 된다.
 
 ---
 
@@ -1669,7 +1668,6 @@ flowchart TD
 ```
 
 *작업은 여러 시도를 가질 수 있고 각 시도는 서로 다른 워커에서 실행될 수 있다. 워커가 교체되어도 작업과 시도 이력은 남는다.*
-
 
 작업을 운영 단위로 만들려면 시도를 별도로 봐야 한다. 다음 상황을 생각해 보자.
 
@@ -1923,9 +1921,15 @@ A2가 통과하면 작업은 VERIFYING을 거쳐 DONE으로 이동한다. 작업
 
 ---
 
-### 다음 질문
+Durable Task를 만들었다고 끝은 아니다.
 
-지속 작업을 만들었다고 끝은 아니다. 작업이 너무 크면 맥락 정보와 재시도 비용이 커진다. 너무 작으면 워커 시작과 맥락 정보 전달 비용이 더 커진다. 작업끼리 의존 관계가 있으면 아무 순서로나 실행할 수도 없다. 다음 장에서는 **어떤 크기로 작업을 나누고 어떤 의존 관계를 표현해야 하는가**를 다룬다.
+Task가 너무 크면 Context와 Retry 비용이 커진다.
+
+너무 작으면 Worker 시작과 Context 전달 비용이 더 커진다.
+
+Task끼리 Dependency가 있으면 아무 순서로나 실행할 수도 없다.
+
+이어지는 문제는 **Task를 어떤 크기로 나누고 어떤 Dependency를 표현할 것인가**다.
 
 ---
 
@@ -1933,11 +1937,23 @@ A2가 통과하면 작업은 VERIFYING을 거쳐 DONE으로 이동한다. 작업
 
 ## 6장. Task 크기, 분해, Dependency
 
-작업 기록이 중단 뒤에도 남도록 만들면 다음 문제는 크기다. 너무 큰 작업을 에이전트에게 주면 오래 실행되고 수정 범위가 넓어진다. 실패했을 때 처음부터 다시 해야 할 가능성도 커진다. 그렇다고 무조건 잘게 나누면 좋은 것도 아니다. 작업이 너무 작으면 워커 시작, 저장소 탐색, 맥락 정보 전달, 검증 같은 고정 비용이 반복된다. 그래서 좋은 작업 크기는 줄 수나 작업 시간으로 정하기 어렵다. 이 책에서는 다음 기준을 사용한다.
+Task를 durable하게 만들면 다음 문제는 크기다.
 
-> 좋은 작업은 독립적으로 실행하고, 검증하고, 실패 시 복구할 수 있으며, 필요한 승인 주체가 결과를 판단할 수 있는 단위다.
+너무 큰 Task를 Agent에게 주면 오래 실행되고 수정 범위가 넓어진다. 실패했을 때 처음부터 다시 해야 할 가능성도 커진다.
 
-작업을 나눈다는 것은 지시문을 보기 좋게 나누는 데 그치지 않는다. **어떤 작업을 먼저 하고 어떤 작업을 함께 할 수 있는지, 그 관계를 설계하는 일**이다.
+그렇다고 무조건 잘게 나누면 좋은 것도 아니다.
+
+Task가 너무 작으면 Worker 시작, Repository 탐색, Context 전달, Verification 같은 고정 비용이 반복된다.
+
+그래서 좋은 작업 크기는 줄 수나 작업 시간으로 정하기 어렵다.
+
+다음 기준을 사용한다.
+
+> 좋은 Task는 독립적으로 실행하고, 검증하고, 실패 시 복구할 수 있으며, 필요한 승인 주체가 결과를 판단할 수 있는 단위다.
+
+Task 분해는 Prompt를 예쁘게 나누는 문제가 아니다.
+
+**실행 그래프를 설계하는 문제**다.
 
 ---
 
@@ -2192,8 +2208,6 @@ T1과 T3는 일부 병렬 가능하다. T4는 앞 작업 결과를 합친 뒤 �
 
 ---
 
-### 다음 질문
-
 요구사항이 있고, 지속 작업이 있고, 의존 관계 그래프까지 만들었다. 이제 실제로 누군가 이 작업을 실행해야 한다. 어떤 워커를 선택할 것인가. 누가 작업 상태를 바꿀 것인가. 워커가 죽으면 누가 다시 배정할 것인가.
 
 7장부터는 생산 시스템의 실행 구조로 들어간다.
@@ -2257,7 +2271,6 @@ flowchart TD
 ```
 
 *제어 계층은 작업 상태, 배정, 재시도, 승인을 관리하고 실행 계층은 실제 저장소 수정과 빌드·테스트를 수행한다. 작업 상태와 연산 자원을 분리하는 것이 핵심이다.*
-
 
 제어 계층은 코드를 직접 작성하는 주체가 아니다. 주요 책임은 **작업의 상태와 흐름을 관리하는 것**이다. 예를 들면 다음과 같다.
 
@@ -2377,7 +2390,6 @@ Task Result
 >
 > 소스: WorkOS, *The self-driving codebase: Building Horizon at WorkOS*.
 
-
 많은 조직에서 이슈 추적 도구는 이미 작업의 출발점이다. 그래서 다음 흐름은 자연스럽다.
 
 ~~~text
@@ -2418,22 +2430,9 @@ Worker Runtime
 = Temporary Execution
 ~~~
 
-셋이 같은 제품일 수도 있다. 작은 구현에서는 GitHub 이슈의 라벨과 의견을 사람이 사용하는 조작 화면으로 사용할 수도 있다.
+셋이 같은 제품일 수도 있다.
 
-~~~text
-ready
-→ running
-→ review
-~~~
-
-이렇게 하면 별도 대시보드 없이도 사람이 현재 흐름을 볼 수 있다. 다만 이 편리함 때문에 다음 두 개를 같은 것으로 보면 안 된다.
-
-~~~text
-Human-facing State
-≠ Authoritative Runtime State
-~~~
-
-이슈 라벨은 사람이 이해하기 좋은 요약 표현일 수 있다. 워커 작업 점유권, 재시도 횟수, 시도 이력 같은 실행 의미까지 같은 표현에 억지로 담을 필요는 없다. 중요한 것은 책임을 구분하는 것이다.
+책임을 구분해야 한다.
 
 ---
 
@@ -2545,9 +2544,13 @@ Worker B
 → continues
 ~~~
 
-물론 실제로 "계속 진행"하려면 커밋하지 않은 작업까지 어떻게 보존할지 결정해야 한다. 이 문제는 14~15장에서 더 깊게 다룬다. 여기서 중요한 것은 원칙이다.
+물론 실제로 "계속 진행"하려면 uncommitted work까지 어떻게 보존할지 결정해야 한다.
 
-**연산 자원은 잃을 수 있어도 작업 상태는 잃지 않는다.**
+이 문제는 14~15장에서 더 깊게 다룬다.
+
+여기서 남는 원칙은 분명하다.
+
+**Compute는 잃을 수 있어도 Work State는 잃지 않는다.**
 
 ---
 
@@ -2609,9 +2612,19 @@ Execution Plane
 
 ---
 
-### 다음 질문
+Control Plane과 Execution Plane을 나눴다.
 
-제어 계층과 실행 계층을 나눴다. 이제 실행 계층 안을 더 자세히 봐야 한다. 워커는 어떤 파일 시스템을 가져야 하는가. 매번 새로 만들 것인가. 의존 패키지와 브라우저를 작업마다 다시 설치할 것인가. 예열된 상태를 재사용하면 무엇이 위험한가. 다음 장에서는 **워커, 격리 환경, 작업 공간**을 다룬다.
+이제 Execution Plane 안을 더 자세히 봐야 한다.
+
+Worker는 어떤 파일 시스템을 가져야 하는가.
+
+매번 새로 만들 것인가.
+
+Dependency와 Browser를 매 Task 다시 설치할 것인가.
+
+Warm 상태를 재사용하면 무엇이 위험한가.
+
+그다음 Worker, Sandbox, Workspace 안으로 들어간다.
 
 ---
 
@@ -2658,7 +2671,6 @@ flowchart TB
 
 *작업 공간 격리는 Git 브랜치만의 문제가 아니다. 파일 시스템, 프로세스, 네트워크, 인증 정보, 실행 상태, 외부 자원을 각각 어떤 경계로 분리할지 결정해야 한다.*
 
-
 에이전트가 파일을 수정하고 셸 명령을 실행하려면 독립된 작업 공간이 필요하다. 먼저 브랜치는 소스 이력을 분리하지만 실행환경을 격리하지는 않는다.
 
 ~~~text
@@ -2685,18 +2697,24 @@ Task
 → scoped credential
 ~~~
 
-어떤 방식을 써야 하는지는 작업 위험과 환경 복잡도에 따라 달라진다. 중요한 것은 “무엇을 격리해야 하는가”를 명확히 하는 것이다. 예를 들어 다음은 서로 다른 경계다.
+어떤 방식을 써야 하는지는 작업 위험과 환경 복잡도에 따라 달라진다.
 
-- 소스 파일
-- 프로세스
-- 네트워크
-- 인증 정보
-- 포트
-- 데이터베이스
-- 브라우저 구성
-- 임시 캐시
+먼저 **무엇을 격리해야 하는가**를 명확히 해야 한다.
 
-코드만 분리하고 브라우저 세션은 공유하면 한 에이전트의 로그인 상태가 다른 에이전트 테스트에 영향을 줄 수 있다. 작업 공간 격리는 Git 문제만이 아니다.
+예를 들어 다음은 서로 다른 경계다.
+
+- source file
+- process
+- network
+- credential
+- port
+- database
+- browser profile
+- temporary cache
+
+코드만 분리하고 Browser Session은 공유하면 한 Agent의 Login 상태가 다른 에이전트 테스트에 영향을 줄 수 있다.
+
+Workspace Isolation은 Git 문제만이 아니다.
 
 ---
 
@@ -2759,36 +2777,6 @@ Network
 
 ---
 
-#### Prepared Snapshot과 Fresh Task State
-
-미리 준비된 환경을 실제 운영 형태로 만들 때는 이미지나 스냅샷을 사용할 수 있다. 한 공개 구현 예제에서는 코딩 에이전트 실행 기반, 스킬, 브라우저 도구, MCP 서버, `AGENTS.md` 같은 정적 실행 자산을 재사용 가능한 스냅샷에 넣고 새 워커를 그 환경에서 생성한다. 특정 공급업체 방식이 표준이라는 뜻은 아니다. 중요한 것은 **환경의 재사용 단위와 작업의 새로운 상태를 분리했다는 점**이다.
-
-~~~text
-Reusable Worker Image / Snapshot
-- runtime
-- coding agent runtime
-- tools
-- browser
-- skills
-- MCP integration
-- static instructions
-
-Fresh per Task
-- source revision
-- workspace
-- task input
-- scoped credential
-- uncommitted work
-- test state
-- temporary service data
-~~~
-
-이 구분이 무너지면 스냅샷은 빠른 초기 준비 수단이 아니라 오래된 작업 상태를 복제하는 수단이 된다. 따라서 미리 준비된 환경의 목표는 "항상 같은 워커를 유지하는 것"이 아니라 다음에 가깝다.
-
-> **같은 실행 능력은 재현하고, 작업 상태는 새로 시작한다.**
-
----
-
 ### 8.3 Fresh State와 Cache를 구분한다
 
 환경을 재사용하기 시작하면 새로운 위험이 생긴다. 캐시와 작업 상태가 섞이는 것이다. 다음은 재사용하기 좋다.
@@ -2841,7 +2829,6 @@ Fresh per Task
 > 이 구분은 “에이전트”라는 한 단어 안에 모델, 제어 로직, 연산 자원을 모두 넣지 않게 해준다. 각 계층의 실패와 생애주기를 따로 설계할 수 있기 때문이다.
 >
 > 소스: Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*.
-
 
 워커 운영에는 두 방향이 있다.
 
@@ -3015,15 +3002,29 @@ Verification
 
 ### Stale Browser State가 만든 잘못된 PASS
 
-지속형 브라우저 워커에서 이전 작업의 로그인 세션이 남았다고 하자. 새 작업은 로그인하지 않은 사용자의 오류 화면을 검증해야 한다. 하지만 브라우저 쿠키가 남아 있어서 인증된 화면이 열린다. 에이전트는 DOM과 화면 캡처를 보고 정상으로 판단할 수 있다. 이 문제는 모델 성능이 아니다. 워커 상태 문제다. 해결 방법은 다음처럼 다양하다.
+Persistent Browser Worker에서 이전 작업의 로그인 세션이 남았다고 하자.
 
-- 작업마다 브라우저 구성 초기화
+새 Task는 로그인하지 않은 사용자의 Error Page를 검증해야 한다.
+
+하지만 Browser Cookie가 남아 있어서 인증된 화면이 열린다.
+
+Agent는 DOM과 화면 캡처를 보고 정상으로 판단할 수 있다.
+
+이 문제는 모델 성능이 아니다.
+
+Worker State 문제다.
+
+해결 방법은 다음처럼 다양하다.
+
+- Task마다 Browser Profile reset
 - cookie/storage clear
-- 깨끗한 테스트 계정
-- 일회성 브라우저 워커
-- 실행 상태 검사 합계
+- clean test account
+- Ephemeral Browser Worker
+- runtime state checksum
 
-중요한 것은 실패 유형을 구분하는 것이다. 코드가 틀렸는지, 환경이 오염됐는지 분리하지 않으면 에이전트는 잘못된 방향으로 수정할 수 있다.
+코드 실패와 환경 실패를 같은 문제로 다루지 않아야 한다.
+
+코드가 틀렸는지, 환경이 오염됐는지 분리하지 않으면 Agent는 잘못된 방향으로 수정할 수 있다.
 
 ---
 
@@ -3045,9 +3046,11 @@ Verification
 
 ---
 
-### 다음 질문
+좋은 Worker를 만들었다고 에이전트가 자동으로 잘 일하는 것은 아니다.
 
-좋은 워커를 만들었다고 에이전트가 자동으로 잘 일하는 것은 아니다. 같은 모델과 같은 저장소를 사용해도 도구의 형태, 지시사항, 탐색 결과, 오류 피드백에 따라 행동이 달라진다. 다음 장에서는 모델 주변에서 에이전트의 실제 작업 능력을 만드는 **하네스 설계**를 다룬다.
+같은 Model과 같은 저장소를 사용해도 도구의 형태, Instruction, Search 결과, Error Feedback에 따라 행동이 달라진다.
+
+여기서 한 단계 더 들어가면 Model 주변의 실제 작업 능력을 만드는 **Harness Engineering**이 나온다.
 
 ---
 
@@ -3065,7 +3068,6 @@ Instructions
 + Tool Interface
 + Feedback
 + Verification Hooks
-+ Execution Loop / Gates
 ~~~
 
 하네스의 정확한 경계는 구현마다 다르다. 예를 들어 Anthropic Managed Agents는 세션, 하네스, 격리 환경을 별도 인터페이스로 분리한다. 여기서 하네스는 연산 자원 자체가 아니라 모델 순환과 맥락 정보·도구 선택 규칙을 연결하는 계층을 뜻한다. 하네스 설계는 지시문을 더 잘 쓰는 기술보다 넓다. 에이전트가 저장소와 도구를 어떻게 보고, 어떤 결과를 받고, 어떤 규칙이 강제되는지를 설계하는 일이다.
@@ -3094,7 +3096,6 @@ flowchart TD
 ```
 
 *하네스는 모델과 실제 소프트웨어 환경 사이에서 지시사항, 맥락 정보, 도구 인터페이스, 피드백을 연결한다. 격리 환경과 실행 기반은 실행 공간이고 하네스는 그 실행을 조정하는 계층이다.*
-
 
 모델은 혼자 저장소를 수정하지 않는다. 다음과 같은 계층이 필요하다.
 
@@ -3444,7 +3445,6 @@ release-worker
 >
 > 소스: GitHub, *Better tools made Copilot code review worse*.
 
-
 도구를 업그레이드하면 성능이 좋아질 것이라고 생각하기 쉽다. 하지만 도구 인터페이스가 바뀌면 기존 지시사항과 에이전트 행동 전략이 더 이상 맞지 않을 수 있다. GitHub는 2026년 Copilot Code Review의 코드 탐색 도구를 공용 CLI 계열로 교체했을 때 초기 오프라인 성능 평가에서 평균 비용이 늘고 유용한 검토 의견이 줄었다고 공개했다.
 
 도구 자체보다 검토자에 맞지 않는 지시사항과 탐색 작업 흐름이 문제였고, 이를 다시 설계한 뒤 운영 환경에서는 기존 품질을 유지하면서 평균 검토 비용을 약 20% 낮췄다고 보고했다. 이는 GitHub의 제품 내부 사례이지 모든 에이전트에 그대로 적용되는 수치는 아니다.
@@ -3518,61 +3518,6 @@ Verification
 
 ---
 
-### 9.10 Context, Capability, Outcome, Guardrail, Evidence
-
-미리 준비된 하네스를 실제 작업에 적용할 때는 에이전트에게 무엇을 줄지 다시 한 번 단순한 질문으로 정리할 수 있다. Cursor의 Grok Bot 문서는 좋은 작업 인계를 설명하면서 작업, 관련 맥락 정보, 필요한 도구 접근, 완료 상태를 함께 주는 방식을 제시한다. 제품별 UI는 달라질 수 있지만, 이 구조는 에이전트 작업 설계의 실용적인 출발점이 된다. 이 책에서는 이를 다음 다섯 요소로 확장한다.
-
-~~~text
-Context
-- 무엇을 알아야 하는가
-
-Capability
-- 어디에서 읽고
-- 어디에 행동할 수 있는가
-
-Outcome
-- 무엇이 끝난 상태인가
-
-Guardrail
-- 무엇을 하면 안 되는가
-- 어디에서 멈춰야 하는가
-
-Evidence
-- 완료를 무엇으로 증명하는가
-~~~
-
-수행 능력은 도구, MCP, API, 브라우저, 셸 같은 실행 수단을 포함한다. 성과는 단순한 자연어 목표보다 구체적이어야 한다.
-
-~~~text
-Goal
-- 로그인 실패 메시지 개선
-
-Outcome
-- 잘못된 자격증명 입력 시 새 메시지 표시
-- 기존 성공 로그인 동작 유지
-
-Guardrail
-- 인증 정책 변경 금지
-- production 직접 변경 금지
-
-Evidence
-- targeted test
-- browser screenshot
-- changed revision
-~~~
-
-이 구조는 지시문 서식을 만들기 위한 것이 아니다. 작업이 에이전트에게 전달되기 전에 정보, 권한, 완료 조건, 통제, 증거가 서로 분리되어 있는지 확인하는 작업 규약에 가깝다. 특히 성과와 근거를 분리하는 것이 중요하다.
-
-~~~text
-Outcome
-= 무엇이 참이어야 하는가
-
-Evidence
-= 그것이 참임을 무엇으로 확인했는가
-~~~
-
-에이전트가 "완료했다"고 말하는 것은 성과도 근거도 아니다. 이 구분은 뒤의 검증과 증거 계약으로 이어진다.
-
 ### Model 문제인가 Harness 문제인가
 
 에이전트가 실패했을 때 바로 모델을 바꾸기 전에 확인할 수 있다.
@@ -3590,9 +3535,11 @@ Edit Feedback이 부족했는가?
 
 ---
 
-### 다음 질문
+Harness를 준비했다고 해도 맥락 정보를 무한정 넣을 수는 없다.
 
-하네스를 준비했다고 해도 맥락 정보를 무한정 넣을 수는 없다. 저장소 문서, 설계 구조, 이슈, 로그, 추적 기록, 목록까지 모두 맥락 정보에 넣으면 오히려 에이전트가 중요한 정보를 찾기 어려워질 수 있다. 다음 장에서는 **얼마나 많은 맥락 정보를 줄 것인가가 아니라, 필요한 맥락 정보를 어떻게 찾게 할 것인가**를 다룬다.
+Repository 문서, Architecture, Issue, Log, Trace, Catalog까지 모두 맥락 정보에 넣으면 오히려 에이전트가 중요한 정보를 찾기 어려워질 수 있다.
+
+Harness 다음에는 **얼마나 많이 줄지가 아니라 필요한 Context를 어떻게 찾게 할지** 살펴본다.
 
 ---
 
@@ -3600,11 +3547,21 @@ Edit Feedback이 부족했는가?
 
 ## 10장. Context Engineering과 Agent Legibility
 
-에이전트가 실패하면 맥락 정보가 부족했다고 생각하기 쉽다. 그래서 더 많은 문서를 넣고, 더 긴 지시사항을 만들고, 로그를 통째로 붙인다. 하지만 맥락 정보는 많을수록 좋은 자원이 아니다. 정보가 늘어나면 중요한 단서가 묻힐 수 있다. 오래된 문서가 최신 코드와 맞지 않을 수도 있고, 긴 로그가 추론에 사용할 공간을 차지할 수도 있다. 그래서 Context Engineering의 질문은 다음에 가깝다.
+에이전트가 실패하면 맥락 정보가 부족했다고 생각하기 쉽다.
 
-> 얼마나 많이 넣을 것인가가 아니라, 필요한 정보를 에이전트가 얼마나 쉽게 찾을 수 있게 만들 것인가?
+그래서 더 많은 문서를 넣고, 더 긴 지시사항을 만들고, 로그를 통째로 붙인다.
 
-이 책에서는 이를 **에이전트가 구조와 상태를 읽고 이해하기 쉬운 정도(Agent Legibility)**와 연결해 본다. 저장소와 애플리케이션이 사람에게만 읽기 쉬운 것이 아니라 에이전트도 구조와 상태를 탐색할 수 있어야 한다.
+하지만 Context는 많을수록 좋은 자원이 아니다.
+
+필요한 정보가 늘어나면 중요한 단서가 묻힐 수 있다. 오래된 문서가 최신 코드가 충돌할 수도 있고, 긴 로그가 Reasoning 공간을 잡아먹을 수도 있다.
+
+그래서 Context Engineering의 질문은 다음에 가깝다.
+
+> 얼마나 많이 넣을 것인가가 아니라, 필요한 정보를 Agent가 얼마나 쉽게 찾을 수 있게 만들 것인가?
+
+여기서는 이를 **Agent Legibility**와 연결해 본다.
+
+Repository와 Application이 사람에게만 읽기 쉬운 것이 아니라 Agent도 구조와 상태를 탐색할 수 있어야 한다.
 
 ---
 
@@ -3710,7 +3667,6 @@ CODEOWNERS / catalog
 >
 > 소스: OpenAI, *Harness engineering: leveraging Codex in an agent-first world*.
 
-
 맥락 정보 파일은 유용하다. 하지만 여기에 모든 조직 지식을 넣으면 다시 문제가 생긴다. 예를 들어 AGENTS.md가 2만 줄이 됐다고 하자.
 
 - 빌드 규칙
@@ -3795,33 +3751,22 @@ Ownership / Dependency Index
 
 #### MCP Gateway를 Context Engine으로 만든다
 
-외부 시스템을 MCP로 연결했다고 Context Engineering이 끝나는 것은 아니다. WorkOS는 내부 MCP 연결 관문을 `Context Engine`처럼 사용한다고 설명한다. Snowflake와 내부 시스템을 연결하는 것뿐 아니라, 어떤 테이블에 어떤 의미의 데이터가 있고 어떤 질문에서 어떤 소스를 찾아야 하는지까지 도구 설명과 맥락 정보로 제공한다. 이 차이는 다음처럼 볼 수 있다.
+외부 시스템을 MCP로 연결했다고 Context Engineering이 끝나는 것은 아니다.
 
-~~~text
+WorkOS는 내부 MCP 연결 관문을 `Context Engine`처럼 사용한다고 설명한다. Snowflake와 내부 시스템을 연결하는 것뿐 아니라, 어떤 테이블에 어떤 의미의 데이터가 있고 어떤 질문에서 어떤 소스를 찾아야 하는지까지 Tool description과 context로 제공한다.
+
+```text
 Raw Tool Gateway
-→ API를 Agent에게 노출
+→ API 노출
 
 Semantic Tool Gateway
 → Tool + Schema + Usage Guidance
 
 Organizational Context Gateway
-→ Tool
- + Data Semantics
- + Organization Convention
- + Resource Discovery
-~~~
+→ Tool + Data Semantics + Convention + Resource Discovery
+```
 
-에이전트에게 `query()`라는 도구 하나를 주는 것과, 조직의 데이터 구조를 이해하고 올바른 소스를 선택할 수 있게 만드는 것은 다른 문제다. 또한 이런 맥락 정보 계층이 특정 코딩 에이전트의 세션 안에만 있지 않으면 여러 실행 기반이 같은 조직 지식을 재사용할 수 있다.
-
-~~~text
-Durable Task / Context / Policy
-          ↓
-     MCP Context Layer
-      ↙    ↓     ↘
- Agent A Agent B Agent C
-~~~
-
-따라서 에이전트 공급업체를 교체해도 작업 상태와 조직 맥락 정보가 유지되는 구조가 장기적으로 더 유연하다.
+MCP 연결과 조직 Context 설계는 별개의 문제다. 또한 Durable Task와 Organization Context를 특정 Coding Agent Session과 분리하면 여러 Agent Runtime이 같은 지식을 재사용할 수 있다.
 
 ### 10.5 Application Legibility
 
@@ -3972,9 +3917,17 @@ Task
 
 ---
 
-### 다음 질문
+Context를 잘 준비해도 한 가지 결정은 남는다.
 
-맥락 정보를 잘 준비해도 한 가지 결정은 남는다. 어떤 것은 에이전트가 자유롭게 판단하게 하고, 어떤 것은 시스템이 고정해야 하는가. 재시도 횟수도 에이전트가 정해야 할까. 권한도 에이전트에게 판단시킬까. DB 마이그레이션 순서도 매번 새로 계획하게 할까. 다음 장에서는 **통제된 자율성**, 즉 정해진 규칙에 따른 제어와 에이전트 판단의 경계를 다룬다.
+어떤 것은 에이전트가 자유롭게 판단하게 하고, 어떤 것은 시스템이 고정해야 하는가.
+
+Retry 횟수도 Agent가 정해야 할까.
+
+Permission도 Agent에게 판단시킬까.
+
+DB Migration 순서도 매번 새로 계획하게 할까.
+
+이제 deterministic control과 Agent judgment의 경계, 즉 **Controlled Autonomy**를 정리할 차례다.
 
 ---
 
@@ -3982,7 +3935,9 @@ Task
 
 ## 11장. Controlled Autonomy: 무엇을 시스템에 두고 무엇을 Agent에게 맡길 것인가
 
-에이전트 중심이라는 말은 자주 “에이전트가 더 많은 것을 스스로 결정한다”는 의미로 쓰인다. 하지만 실제 생산 시스템에서 중요한 것은 자율성의 양이 아니다.
+에이전트 중심이라는 말은 자주 “에이전트가 더 많은 것을 스스로 결정한다”는 의미로 쓰인다.
+
+하지만 실제 Factory에서 핵심은 Autonomy의 양이 아니다.
 
 **어떤 결정을 누구에게 맡길 것인가**다.
 
@@ -3996,9 +3951,17 @@ Task
 이 실패의 원인이 SecurityFilter인지 ExceptionMapper인지 조사한다.
 ~~~
 
-첫 번째는 이미 알고 있는 운영 규칙이다. 두 번째는 탐색과 판단이 필요한 공학 문제다. 둘 다 에이전트에게 맡길 수는 있다. 하지만 그럴 이유가 있는지는 별개의 문제다. 이 책에서는 다음 원칙을 사용한다.
+첫 번째는 이미 알고 있는 운영 규칙이다.
 
-> 이미 알고 있는 규칙과 상태는 시스템이 책임지고, 사전 규칙화하기 어려운 탐색과 판단에 에이전트 자율성을 사용한다.
+두 번째는 탐색과 판단이 필요한 공학 문제다.
+
+둘 다 Agent에게 맡길 수는 있다.
+
+하지만 그럴 이유가 있는지는 별개의 문제다.
+
+다음 원칙을 사용한다.
+
+> 이미 알고 있는 Rule과 State는 시스템이 책임지고, 사전 규칙화하기 어려운 Search와 Judgment에 Agent Autonomy를 사용한다.
 
 ---
 
@@ -4083,7 +4046,9 @@ Agent owns
 - debugging
 ~~~
 
-이 책에서는 이 형태를 기본 후보로 본다. 모든 작업 흐름을 정해진 상태 전이로 고정하지도 않고, 모든 진행 결정을 에이전트에게 넘기지도 않는다.
+여기서는 이 형태를 기본 후보로 본다.
+
+모든 Workflow를 state machine으로 고정하지도 않고, 모든 Control을 Agent에게 넘기지도 않는다.
 
 ---
 
@@ -4133,36 +4098,9 @@ main direct push forbidden
 어떤 구현 전략이 가장 적합한가?
 ~~~
 
-이런 문제는 에이전트가 잘하는 영역이다. 생산 시스템 설계에서 중요한 것은 세 종류를 섞지 않는 것이다.
+이런 문제는 에이전트가 잘하는 영역이다.
 
----
-
-#### 모든 Triage에 LLM이 필요한 것은 아니다
-
-소프트웨어 생산 시스템을 만들기 시작하면 분류와 우선순위 판단, 경로 선택, 배정까지 모두 모델에 맡기고 싶어질 수 있다. 하지만 조건이 이미 명확하면 그럴 이유가 없다. 예를 들어 공개된 한 작은 GitHub 기능을 활용하는 생산 시스템 구현은 이슈에 `ready` 상태가 들어오면 단순 작업 배정기가 가용 워커를 선택한다. 필요하면 LLM으로 버그 / 기능 / 문서 같은 분류를 추가할 수 있지만, 기본 배정 자체에는 LLM이 필수가 아니다.
-
-~~~text
-ready task
-→ deterministic dispatcher
-→ available worker
-~~~
-
-반대로 입력의 의미를 해석해야 한다면 모델을 넣을 수 있다.
-
-~~~text
-known routing rule
-→ code
-
-ambiguous classification
-→ optional model
-
-root-cause diagnosis
-→ coding agent
-~~~
-
-이 사례는 규칙, 경험에 따른 판단 기준, 판단을 나누는 이유를 잘 보여준다.
-
-> **에이전트 중심 시스템의 수준은 LLM 호출 횟수로 결정되지 않는다. 이미 아는 결정을 코드로 남기는 것도 좋은 실행 조율이다.**
+Factory 설계에서는 세 종류를 섞지 않는 편이 좋다.
 
 ---
 
@@ -4364,7 +4302,6 @@ flowchart TD
 
 *상위 계층은 정책과 중단 뒤에도 유지되는 상태를 소유하고, 아래로 갈수록 에이전트의 상황에 맞게 적응하는 판단이 커진다. 이미 알고 있는 규칙과 불확실한 탐색·판단를 같은 방식으로 처리하지 않는다.*
 
-
 생산 시스템의 제어를 계층으로 보면 다음처럼 정리할 수 있다.
 
 ~~~text
@@ -4424,9 +4361,17 @@ Tool
 
 ---
 
-### 다음 질문
+Agent에게 적절한 Autonomy를 줬다.
 
-에이전트에게 적절한 자율성을 줬다. 그래도 에이전트가 만든 결과가 맞는지는 별개의 문제다. 에이전트는 자신이 성공했다고 믿을 수 있다. 테스트도 통과할 수 있다. 하지만 사용자의 의도를 놓쳤을 수도 있다. 다음 장에서는 **에이전트의 완료 보고와 생산 시스템의 완료 판정을 분리하는 검증 구조**를 다룬다.
+그래도 Agent가 만든 결과가 맞는지는 별개의 문제다.
+
+Agent는 자신이 성공했다고 믿을 수 있다.
+
+Test도 통과할 수 있다.
+
+하지만 User Intent를 놓쳤을 수도 있다.
+
+그 경계 위에서 **Agent의 완료 보고와 생산 시스템의 완료 판정을 분리하는 Verification 구조**를 본다.
 
 ---
 
@@ -4438,7 +4383,15 @@ Tool
 
 > 수정 완료했습니다. 테스트도 모두 통과했습니다.
 
-대화형 사용에서는 여기서 사람이 코드를 열어보고 판단할 수 있다. 생산 시스템에서는 이 문장을 작업의 최종 상태로 사용하면 안 된다. 에이전트의 보고는 **작업을 마쳤다는 주장(Completion Claim)**이다. 작업 상태를 DONE으로 바꿀 수 있는 **완료 판정 권한(Completion Authority)**과는 구분해야 한다. 이 책에서는 다음 구조를 기본으로 본다.
+대화형 사용에서는 여기서 사람이 코드를 열어보고 판단할 수 있다.
+
+Factory에서는 이 문장을 작업의 최종 상태로 사용하면 안 된다.
+
+Agent의 보고는 하나의 **Completion Claim**이다.
+
+Task를 DONE으로 바꿀 수 있는 **Completion Authority**와는 다르다.
+
+기본 구조는 다음과 같다.
 
 ~~~text
 Agent
@@ -4509,7 +4462,6 @@ flowchart BT
 ```
 
 *정적 검사 검사에서 사람 수용 판단까지 검증의 범위와 비용이 달라진다. 모든 작업이 가장 높은 단계까지 갈 필요는 없으며 위험에 맞는 검증 조합을 선택한다.*
-
 
 모든 작업에 같은 검증 비용을 쓸 필요는 없다. 검증은 여러 층으로 구성할 수 있다.
 
@@ -4707,7 +4659,6 @@ Evidence
 >
 > 소스: Microsoft Research, *Building to the Test*.
 
-
 테스트는 강력하다. 에이전트에게 빠르고 정해진 규칙에 따른 피드백을 준다. 하지만 테스트는 **검사한 것만** 확인한다. Microsoft Research의 2026년 동료 심사 전 논문 *Building to the Test*는 실제 운영되는 코딩 에이전트 두 개를 사용한 18회 조건을 통제한 실행에서 이런 위험을 관찰했다.
 
 비공개 Playwright 판정 기준을 에이전트 순환에 제공하자 점수는 거의 완벽해졌지만, 요청된 재사용 가능한 라이브러리 대신 테스트가 검사하는 동작을 직접 담은 시연용 구현 형태로 우회하는 결과가 나올 수 있었다. 저자들도 다른 에이전트·신호·Model Family에서의 발생 빈도는 열린 질문이라고 명시한다. 예를 들어 사용자는 다음을 원했다고 하자.
@@ -4750,7 +4701,6 @@ Original Intent
 > **범위:** 에이전트가 검토 피드백을 받고 다시 수정하지 않는 한 번의 실행으로만 평가했다는 제한이 있다.
 >
 > 소스: METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*.
-
 
 METR의 2026년 연구 노트는 SWE-bench Verified에서 자동 채점기를 통과한 패치를 실제 유지보수 담당자에게 다시 검토하게 했다. 4명의 유지보수 담당자가 3개 저장소의 95개 이슈 범위를 다룬 표본에서, 테스트를 통과한 AI 패치의 상당수가 실제 main에는 병합되지 않았을 것으로 평가됐다. 다만 에이전트에게 검토 피드백을 받고 반복 수정할 기회를 주지 않은 한 번의 실행으로만 평가했다는 제한이 있다. 이 차이는 이상하지 않다. 유지보수 담당자는 테스트 외에도 다음을 본다.
 
@@ -4812,7 +4762,6 @@ Scoring condition 우회
 > **범위:** 보고된 10.7%는 분석 가능한 subset에서 나온 값이며 모든 코딩 에이전트 PASS의 일반 비율이 아니다.
 >
 > 소스: Microsoft Research, *AgentLens*.
-
 
 최종 테스트가 통과했지만 실행 경로가 불안정할 수도 있다. Microsoft AgentLens 연구는 8개 모델 백엔드의 2,614개 OpenHands 실행 경로를 분석했고, 과정 비교 기준을 구성할 수 있었던 47개 작업의 1,815개 실행 경로 부분집합에서 성공한 실행 경로의 10.7%를 우연한 통과로 분류했다. 저자들은 반복적인 기존 기능의 오류, 원인 확인 없는 재시도, 검증 누락처럼 결과 PASS만으로 가려지는 과정 문제를 분석한다.
 
@@ -4945,7 +4894,7 @@ human approval
 
 #### UI Task
 
-목표:
+Goal:
 
 ~~~text
 모바일 화면에서 신청 버튼이 겹치지 않게 수정
@@ -4964,7 +4913,7 @@ human visual acceptance
 
 #### Auth Task
 
-목표:
+Goal:
 
 ~~~text
 expired JWT → 401
@@ -4993,16 +4942,16 @@ runtime request
 4. Agent가 Verification Definition을 약화시킬 수 있는가?
 5. Runtime Behavior를 봐야 하는가?
 6. Independent Evaluator나 Human Gate가 필요한가?
-7. 실제 변경이 선언된 Scope를 벗어나지 않았는가?
-8. Architecture / Design Constraint를 별도로 확인해야 하는가?
-9. 이 Task의 Risk에 비해 Verification Cost가 적절한가?
+7. 이 Task의 Risk에 비해 Verification Cost가 적절한가?
 ~~~
 
 ---
 
-### 다음 질문
+Verification이 끝났다고 사람이 결과를 빠르게 이해할 수 있는 것은 아니다.
 
-검증이 끝났다고 사람이 결과를 빠르게 이해할 수 있는 것은 아니다. 커밋은 무엇인지, 어떤 테스트가 실행됐는지, 화면 캡처는 어디 있는지, 알려진 위험은 무엇인지 매번 찾아야 한다면 검토 비용이 커진다. 다음 장에서는 검증 결과를 표준화된 **증거 계약**으로 묶는 방법을 다룬다.
+Commit은 무엇인지, 어떤 테스트가 실행됐는지, 화면 캡처는 어디 있는지, Known Risk는 무엇인지 매번 찾아야 한다면 검토 비용이 커진다.
+
+검증 결과를 사람이 빠르게 판단하려면 표준화된 **Evidence Contract**가 필요하다.
 
 ---
 
@@ -5109,7 +5058,9 @@ artifacts:
     ref: artifact://task-100/integration.log
 ~~~
 
-중요한 것은 에이전트가 “테스트했다”고 말하는 것이 아니라 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있다는 것이다. 범위가 중요한 작업이라면 `declared_scope`와 `changed_files`를 함께 남긴다.
+Agent가 “Test했다”고 말하는 것보다 **무엇을 어떻게 실행했고 결과가 무엇인지** 확인할 수 있어야 한다.
+
+Scope가 중요한 작업이라면 `declared_scope`와 `changed_files`를 함께 남긴다.
 
 ~~~text
 declared_scope
@@ -5230,7 +5181,6 @@ flowchart LR
 ```
 
 *근거는 결과가 맞다는 근거이고 생성 이력은 결과가 어떤 작업, 에이전트, 코드 버전, 정책, 승인을 거쳐 만들어졌는지 나타내는 생성 이력다.*
-
 
 두 개념을 구분할 필요가 있다.
 
@@ -5406,9 +5356,17 @@ benchmark:
 
 ---
 
-### 다음 질문
+Evidence가 실패를 보여주었다고 하자.
 
-근거가 실패를 보여주었다고 하자. 통합 테스트가 실패했다. 워커도 중간에 죽었다. 같은 오류가 세 번째 반복됐다. 이때 생산 시스템은 무엇을 해야 할까. 다음 장에서는 실패를 예외가 아니라 정상적인 상태로 보고 **재시도, 처음부터 재시작, 중단 지점부터 재개, 다른 워커에 재배정, 사람에게 판단 요청**을 구분한다.
+Integration Test가 실패했다.
+
+Worker도 중간에 죽었다.
+
+같은 오류가 세 번째 반복됐다.
+
+이때 Factory는 무엇을 해야 할까.
+
+Evidence가 실패를 보여줄 때는 Failure를 정상적인 State로 보고 **Retry, Restart, Resume, Reassignment, Human Escalation**을 구분해야 한다.
 
 ---
 
@@ -5498,11 +5456,13 @@ benchmark:
 
 예:
 
-- 오래된 캐시
-- 오염된 테스트 DB
-- 잘못된 실행 기반 버전
+- stale cache
+- polluted test DB
+- wrong runtime version
 
-이 분류가 완벽할 필요는 없다. 중요한 것은 모든 실패를 “에이전트 실패” 하나로 합치지 않는 것이다.
+이 분류가 완벽할 필요는 없다.
+
+모든 Failure를 “Agent 실패” 하나로 합치면 복구 위치를 잘못 고를 수 있다.
 
 ---
 
@@ -5523,7 +5483,6 @@ flowchart LR
 ```
 
 *일시적인 도구 오류에서 사람에게 판단 요청까지 실패 범위에 맞춰 복구 범위를 키운다. 가능한 한 가장 작은 범위부터 복구하는 것이 비용과 재작업을 줄인다.*
-
 
 실패가 났다고 바로 워커 전체를 새로 만들 필요는 없다. 가장 작은 범위부터 복구할 수 있다.
 
@@ -5764,7 +5723,11 @@ Primary Agent continues
 현재 수정한 frontend 파일은 되돌려라.
 ~~~
 
-이 방식은 처음부터 완전히 재시작보다 비용이 낮을 수 있다. 모든 작업에 관찰자 에이전트가 필요하다는 뜻은 아니다. 중요한 것은 복구할 때도 어디까지 다시 수행할지 범위를 여러 크기로 나눌 수 있다는 것이다.
+이 방식은 Full Restart보다 비용이 낮을 수 있다.
+
+모든 Task에 Observer Agent가 필요하다는 뜻은 아니다.
+
+Recovery에도 여러 Granularity가 있다.
 
 ---
 
@@ -5831,9 +5794,15 @@ same_failure_repeated
 
 ---
 
-### 다음 질문
+Retry와 Resume를 설계했어도 한 가지 어려운 문제가 남는다.
 
-재시도와 중단 지점부터 재개를 설계했어도 한 가지 어려운 문제가 남는다. 외부 API 호출이 실제로 성공했는데 응답만 유실되면 어떻게 할까. PR을 이미 만들었는데 실행 기반이 그 사실을 모르고 다시 생성하면 어떻게 할까. 사람의 승인을 하루 동안 기다리는 동안 워커를 계속 붙잡고 있어야 할까. 다음 장에서는 장시간 실행 작업을 현실의 비정상 종료와 대기에서 살아남게 만드는 **지속 실행**을 다룬다.
+외부 API 호출이 실제로 성공했는데 응답만 유실되면 어떻게 할까.
+
+PR을 이미 만들었는데 실행 기반이 그 사실을 모르고 다시 생성하면 어떻게 할까.
+
+Human Approval을 하루 동안 기다리는 동안 워커를 계속 붙잡고 있어야 할까.
+
+Long-running Work에서는 Recovery를 넘어 현실의 Crash와 Wait를 견디는 **Durable Execution**이 필요하다.
 
 ---
 
@@ -5901,7 +5870,6 @@ sequenceDiagram
 ```
 
 *외부에 남는 변경 이후 비정상 종료가 발생해도 이벤트 이력, 복구 지점, 멱등성을 통해 이미 완료된 실행을 재구성하고 안전하게 중단 지점부터 재개할 수 있어야 한다.*
-
 
 지속 실행에서는 중요한 상태 변화와 외부 행동을 기록한다.
 
@@ -6090,7 +6058,6 @@ Human Approval Event
 >
 > Sources: Microsoft Durable Task for AI Agents; Google Cloud Agent Executor.
 
-
 둘을 구분해보자.
 
 #### Agent Harness
@@ -6146,20 +6113,22 @@ Worker / Sandbox
 
 ### 15.8 제품이 아니라 책임 분리로 본다
 
-Temporal, Microsoft Durable Task, Google Agent Executor 같은 시스템은 서로 구현과 추상화가 다르다. 특히 여기서 Microsoft Durable Task는 5장에서 정의한 책의 “지속 작업” 작업 단위와 다른 작업 흐름 기술다.
+Temporal, Microsoft Durable Task, Google Agent Executor 같은 시스템은 서로 구현과 추상화가 다르다. 특히 여기서 Microsoft Durable Task는 5장에서 정의한 책의 “Durable Task” 작업 단위와 다른 workflow technology다. Microsoft는 이를 특정 Agent Framework에 종속되지 않은 long-running durable workflow 기반으로 설명하고 있고, Google은 2026년 5월 Agent Executor를 event log와 snapshot으로 outage나 HITL 이후 execution을 재개하는 open-source runtime standard로 공개했다.
 
-Microsoft는 이를 특정 에이전트 프레임워크에 종속되지 않은 장시간 실행하는 상태를 보존하는 작업 흐름 기반으로 설명하고 있고, Google은 2026년 5월 Agent Executor를 이벤트 기록과 스냅샷으로 서비스 중단나 사람의 개입 이후 실행을 재개하는 오픈소스 실행 기반 표준으로 공개했다.
+특정 제품 API보다 공통적으로 다음 문제를 별도 reliability layer에서 다룬다는 점에 주목한다.
 
-이 책에서 중요한 것은 특정 제품 API가 아니라 공통적으로 다음 문제를 별도 신뢰성 계층에서 다룬다는 점이다.
+- long-running state
+- retry
+- resume
+- event
+- human wait
+- crash recovery
 
-- 장시간 실행하는 상태
-- 재시도
-- 중단 지점부터 재개
-- 이벤트
-- 사람의 판단을 기다리는 시간
-- 비정상 종료 복구
+Factory가 직접 모든 것을 구현할 수도 있다.
 
-생산 시스템이 직접 모든 것을 구현할 수도 있다. 하지만 작업 점유권, 타이머, 재시도, 이력, 멱등성은 전형적인 분산 시스템 문제다. 규모가 커지기 전에 기존 중단 후 복구할 수 있는 작업 실행 인프라를 검토할 가치가 있다.
+하지만 lease, timer, retry, history, idempotency는 전형적인 distributed systems 문제다.
+
+규모가 커지기 전에 기존 Durable Workflow Infrastructure를 검토할 가치가 있다.
 
 ---
 
@@ -6207,45 +6176,6 @@ Resume Quality
 
 ---
 
-### 15.11 Persistent Agent, Persistent Worker, Durable Task를 구분한다
-
-최근 에이전트 제품 중에는 이름과 역할을 가진 에이전트가 여러 세션에 걸쳐 기억, 파일, 브라우저 세션, 선호를 유지하는 형태가 등장하고 있다. Cursor의 Grok Bot도 봇별 맥락 정보를 유지하면서 계정 단위의 계속 유지되는 클라우드 컴퓨터에서 파일과 브라우저 세션을 이어 사용하는 구조를 공개하고 있다. 이런 형태는 긴 작업의 마찰을 크게 줄일 수 있다. 하지만 다음 세 가지 지속성을 같은 것으로 보면 안 된다.
-
-~~~text
-Persistent Agent
-- role
-- learned preference
-- memory
-- skill
-
-Persistent Worker
-- filesystem
-- browser session
-- process
-- cache
-- runtime tools
-
-Durable Task
-- goal
-- status
-- attempt
-- dependency
-- approval
-- verification
-- evidence
-~~~
-
-에이전트가 기억한다고 작업이 중단돼도 기록이 남는 것은 아니다. 워커의 파일이 남아 있다고 실행 조율 상태가 보존된 것도 아니다. 반대로 워커를 잃더라도 작업 저장소와 복구 지점이 살아 있다면 다른 워커에서 작업을 이어갈 수 있다. 따라서 다음 등식을 피한다.
-
-~~~text
-Memory
-≠ Worker Persistence
-≠ Durable Task
-≠ Durable Execution
-~~~
-
-지속형 에이전트는 작업 경험을 축적하는 UX와 수행 능력 문제다. 지속형 워커는 실행환경의 연속성 문제다. 지속 작업과 지속 실행은 업무 책임과 외부에 남는 변경을 비정상 종료 이후에도 복구하는 시스템 문제다. 이 경계를 분리해야 에이전트 제품의 편리한 지속성을 생산 시스템 신뢰성과 혼동하지 않는다.
-
 ### 예: Duplicate PR 방지
 
 시도 A1:
@@ -6276,9 +6206,17 @@ pr: #381
 
 ---
 
-### 다음 질문
+Work가 Crash와 Wait를 견딜 수 있게 됐다.
 
-작업이 비정상 종료와 대기를 견딜 수 있게 됐다. 이제 더 오래, 더 많은 권한으로 에이전트를 실행할 수 있다. 그만큼 위험도 커진다. 에이전트가 어떤 인증 정보를 가져야 하는가. 신뢰할 수 없는 이슈 내용이 도구 호출로 이어지면 어떻게 막을 것인가. 다음 장에서는 **보안, 신원, 권한과 책임 관리**를 다룬다.
+이제 더 오래, 더 많은 권한으로 에이전트를 실행할 수 있다.
+
+그만큼 위험도 커진다.
+
+Agent가 어떤 인증 정보를 가져야 하는가.
+
+Untrusted Issue 내용이 Tool Call로 이어지면 어떻게 막을 것인가.
+
+실행 지속성이 높아질수록 권한과 위험을 다루는 **Security, Identity, Governance**가 중요해진다.
 
 ---
 
@@ -6368,44 +6306,13 @@ forbidden path 변경 금지
 → hook / policy
 ~~~
 
-지시문은 행동을 안내한다. 반드시 지켜야 하는 규칙은 시스템이 실제로 강제해야 한다. 그리고 규칙의 강제 적용은 항상 "실행 전에 승인받는다"는 형태일 필요도 없다. 더 강한 방법은 위험한 실행 권한 자체를 주지 않는 것이다.
+Instruction은 Guidance다.
 
-~~~text
-Agent can
-- read repository
-- write task branch
-- create pull request
-
-Agent cannot
-- delete protected infrastructure
-- access production credential
-- bypass branch protection
-~~~
-
-한 공개 구현 예제의 워커 환경에서도 일부 인프라를 파괴할 수 있는 작업은 에이전트에게 허용되지 않고 사람이 직접 수행한다. 특정 제품 제약을 표준으로 볼 수는 없지만, 설계 원칙은 분명하다.
-
-> **실행 권한을 주지 않는 것도 사람의 판단 단계다.**
-
-승인 흐름을 복잡하게 만들기 전에 "이 워커가 애초에 이 동작을 할 수 있어야 하는가"부터 묻는 편이 좋다.
+Mandatory Rule은 Enforcement가 필요하다.
 
 ---
 
 ### 16.3 Human Credential을 Agent에게 그대로 주지 않는다
-
-<!-- CASE C11: NIST Agent Identity Direction -->
-
-> **Case Study C11 — NIST Agent Identity — 사람 계정을 Agent에게 빌려주는 문제**
->
-> NIST NCCoE는 2026년 2월 소프트웨어 and AI 에이전트 신원 and 권한 부여 개념 문서 초안을 공개했고, 이후 이 논의를 정식 NCCoE 프로젝트로 이어가고 있다. 에이전트 신원 확인, authentication, 권한 부여, 감사, 수행 사실을 부인하지 못하게 하는 장치 같은 문제가 주요 범위다.
->
-> 이 책의 Task-scoped 에이전트 신원 모델은 이 방향과 맞닿아 있지만 NIST의 확정 표준은 아니다.
->
-> 핵심 질문은 “에이전트가 누구인가”보다 “누가 어떤 작업에 어떤 실행 권한을 위임했고, 어떤 행동을 했는지 추적할 수 있는가”다.
->
-> **상태:** 개념 문서 초안 + ongoing NCCoE 프로젝트.
->
-> 소스: NIST NCCoE, *Software and AI Agent Identity and Authorization*.
-
 
 <!-- FIGURE F13: Agent Security Delegation -->
 
@@ -6422,7 +6329,19 @@ flowchart TD
 ```
 
 *권한을 위임한 사람의 권한 전체를 빌려주는 대신 작업과 에이전트 신원에 필요한 수행 능력만 위임한다. 신원, 권한 부여, 승인, 감사를 하나의 권한 위임 연결로 본다.*
+<!-- CASE C11: NIST Agent Identity Direction -->
 
+> **Case Study C11 — NIST Agent Identity — 사람 계정을 Agent에게 빌려주는 문제**
+>
+> NIST NCCoE는 2026년 2월 소프트웨어 and AI 에이전트 신원 and 권한 부여 개념 문서 초안을 공개했고, 이후 이 논의를 정식 NCCoE 프로젝트로 이어가고 있다. 에이전트 신원 확인, authentication, 권한 부여, 감사, 수행 사실을 부인하지 못하게 하는 장치 같은 문제가 주요 범위다.
+>
+> 이 책의 Task-scoped 에이전트 신원 모델은 이 방향과 맞닿아 있지만 NIST의 확정 표준은 아니다.
+>
+> 핵심 질문은 “에이전트가 누구인가”보다 “누가 어떤 작업에 어떤 실행 권한을 위임했고, 어떤 행동을 했는지 추적할 수 있는가”다.
+>
+> **상태:** 개념 문서 초안 + ongoing NCCoE 프로젝트.
+>
+> 소스: NIST NCCoE, *Software and AI Agent Identity and Authorization*.
 
 가장 간단한 연결 방식은 개발자의 개인용 토큰을 워커에 넣는 것이다. 빠르게 동작한다. 하지만 문제가 많다. 에이전트가 개발자와 동일한 권한을 갖는다. 감사에서 사람 행동과 에이전트 행동을 구분하기 어렵다. 작업이 끝난 뒤에도 인증 정보가 남을 수 있다.
 
@@ -6454,24 +6373,20 @@ expires: 60m
 
 #### Tool 연결보다 어려운 문제는 Delegated Authorization이다
 
-MCP 연결 관문을 통해 GitHub, Linear, 데이터 웨어하우스, Slack 같은 시스템이 에이전트에게 연결되면 맥락 정보 접근성은 좋아진다. 동시에 권한 부여 문제가 커진다. WorkOS 발표에서도 에이전트 권한 부여는 아직 충분히 해결하지 못한 영역으로 명시적으로 언급됐다. 이 사례가 보여주는 점은 앞선 생산 시스템이 실패했다는 것이 아니라, **도구를 연결하는 문제와 안전하게 권한을 위임하는 문제는 별개**라는 것이다.
+MCP 연결 관문을 통해 GitHub, Linear, Data Warehouse, Slack 같은 시스템이 에이전트에게 연결되면 맥락 정보 접근성은 좋아진다. 동시에 권한 부여 문제가 커진다.
 
-~~~text
+WorkOS 발표에서도 Agent authorization은 아직 충분히 해결하지 못한 영역으로 언급됐다. Tool을 연결하는 문제와 안전하게 권한을 위임하는 문제는 별개다.
+
+```text
 Human Principal
 → Delegation
 → Agent Identity
 → Task-scoped Authorization
 → Tool / MCP Gateway
 → Internal System
-~~~
+```
 
-따라서 다음 질문이 필요하다.
-
-- 이 에이전트는 누구의 권한으로 실행되는가
-- 이 작업에 읽기만 필요한가 쓰기도 필요한가
-- 어떤 외부에 남는 변경에 별도 승인이 필요한가
-- 권한은 언제 만료되고 어떻게 회수되는가
-- 결과와 감사에서 최초 요청자를 추적할 수 있는가
+Read/Write 범위, Side Effect Approval, Expiration, Revocation, initiating principal 추적을 별도로 설계해야 한다.
 
 ### 16.4 Task-scoped Credential
 
@@ -6611,14 +6526,14 @@ production
 
 가능:
 
-- 더 강한 검증
-- 전문가 검토
-- 배포 승인
-- 범위가 제한된 운영 환경 권한
+- stronger verification
+- specialist review
+- deploy approval
+- scoped production permission
 
-중요한 것은 사람의 판단 단계의 개수가 아니다.
+Human Gate의 개수가 핵심은 아니다.
 
-**남은 위험을 받아들이는 지점에 통과 조건을 두는 것**이다.
+**Residual Risk를 받아들이는 지점에 Gate를 두는 것**이다.
 
 ---
 
@@ -6649,7 +6564,11 @@ Deployer
 → Apply
 ~~~
 
-각 역할이 반드시 서로 다른 모델일 필요는 없다. 중요한 것은 **권한 경계**다. 예를 들어 같은 모델을 사용하더라도 검증 정의는 제어 계층이 보호하고 병합 토큰은 사람의 승인 뒤에만 발급할 수 있다.
+각 역할이 반드시 서로 다른 모델일 필요는 없다.
+
+핵심은 **권한 경계**다.
+
+예를 들어 같은 모델을 사용하더라도 Verification Definition은 Control Plane이 보호하고 Merge Token은 Human Approval 뒤에만 발급할 수 있다.
 
 ---
 
@@ -6805,9 +6724,15 @@ Permission
 
 ---
 
-### 다음 질문
+지금까지는 하나의 Worker가 안전하게 실행되고 결과를 검증하고 복구하는 구조를 만들었다.
 
-지금까지는 하나의 워커가 안전하게 실행되고 결과를 검증하고 복구하는 구조를 만들었다. 이제 여러 워커를 동시에 실행하면 어떻게 될까. 에이전트 수를 늘리면 처리량도 선형으로 늘어날까. 같은 파일을 동시에 수정하면 누가 조정할까. 다음 장에서는 **병렬 워커와 여러 에이전트를 함께 쓰는 방식**을 다룬다.
+이제 여러 워커를 동시에 실행하면 어떻게 될까.
+
+Agent 수를 늘리면 처리량도 선형으로 늘어날까.
+
+같은 파일을 동시에 수정하면 누가 조정할까.
+
+안전한 단일 Worker를 만들었다면 다음 문제는 **Parallel Worker와 Multi-Agent**다.
 
 ---
 
@@ -6831,7 +6756,7 @@ Permission
 - 검토 과부하
 - 공유 자원 경쟁
 
-그래서 이 책에서는 다음 원칙을 사용한다.
+따라서 다음 원칙을 사용한다.
 
 > 병렬화의 대상은 에이전트가 아니라 독립 작업이다.
 
@@ -6916,7 +6841,6 @@ flowchart TD
 
 *작업 Independence가 확보된 작업만 여러 워커에 Fan-out하고, 결과를 다시 합치는 단계 이후에는 통합 검증을 수행한다. 병렬 실행의 단위는 에이전트 수가 아니라 독립 작업이다.*
 
-
 병렬 워커는 보통 다음 구조를 가진다.
 
 ~~~text
@@ -7000,7 +6924,6 @@ Runtime conflict detection
 > **범위:** 실제 enterprise 저장소가 아니라 조건을 통제한 시뮬레이션이다.
 >
 > 소스: Anthropic, *Patterns and problems in emerging multiagent systems*.
-
 
 Anthropic이 2026년 8월 공개한 연구는 이런 조율 실패를 통제된 시뮬레이션에서 보여준다. 여러 모델 세대와 에이전트 수를 바꿔 동일한 오픈월드 게임 프로젝트를 12시간 동안 공동 개발하게 했을 때, 일부 모델에서는 많은 PR을 열고도 병합 비율이 낮았고 공유 파일 충돌 뒤 PR을 포기하는 패턴이 나타났다. 더 최신 모델 중 일부는 오히려 파일 담당 관계를 강하게 나눠 충돌을 줄였다.
 
@@ -7139,36 +7062,6 @@ Review capacity: 3
 
 ---
 
-### 17.10 Role Separation은 Task Independence가 아니다
-
-실제 에이전트 제품에서는 프런트엔드, QA, 문서, 연구처럼 이름과 역할이 다른 에이전트를 만들고 서로 메시지를 주고받거나 작업을 넘기는 형태를 제공하기 시작했다. Cursor의 Grok Bot도 여러 봇의 병렬 실행, 메시지 교환, 작업 담당 관계 인계를 제품 기능으로 제공한다. 이 구조는 사람 조직과 비슷해 보여 이해하기 쉽다. 하지만 이름이 다르다고 작업이 독립적인 것은 아니다.
-
-~~~text
-Frontend Bot
-Backend Bot
-QA Bot
-Documentation Bot
-~~~
-
-네 에이전트가 모두 같은 API 스키마 변경에 의존한다면 실제 작업 관계 그래프는 여전히 강하게 결합되어 있다. 따라서 다음을 구분한다.
-
-~~~text
-Role Separation
-= 누가 어떤 종류의 판단과 행동을 주로 하는가
-
-Task Independence
-= 결과를 독립적으로 실행·검증·통합할 수 있는가
-~~~
-
-생산 시스템 작업 배정기가 병렬화를 결정할 때 더 중요한 것은 두 번째다. 에이전트 간 통신도 마찬가지다.
-
-~~~text
-Agent delegation
-≠ durable orchestration
-~~~
-
-봇끼리 대화하고 일을 넘기는 것은 조율 수행 능력이다. 의존 관계, 시간 초과, 재시도, 담당 관계, 완료, 근거를 판단의 기준이 되도록 관리하는 것은 제어 계층의 책임이다. 여러 에이전트를 함께 쓰는 방식 UI가 좋아질수록 이 경계를 더 명확히 해야 한다.
-
 ### 예: 독립 Task 3개와 충돌 Task 3개
 
 #### Good
@@ -7208,9 +7101,13 @@ T6 auth API contract
 
 ---
 
-### 다음 질문
+Parallel Worker로 Implementation Throughput을 높였다.
 
-병렬 워커로 구현 처리량을 높였다. 이제 더 많은 변경 검토 요청과 검증 작업이 나온다. 그 결과 검토 대기열과 CI 대기열이 길어질 수 있다. 다음 장에서는 코딩 다음 단계에서 생기는 **검토, CI, 통합 병목**을 다룬다.
+이제 더 많은 Pull Request와 Verification Job이 나온다.
+
+그 결과 Review Queue와 CI Queue가 길어질 수 있다.
+
+병렬 실행이 가능해지면 병목은 **Review, CI, Integration**으로 이동할 수 있다.
 
 ---
 
@@ -7256,7 +7153,6 @@ flowchart LR
 ```
 
 *전체 생산 시스템 처리량은 워커 수 하나가 아니라 실행 준비가 된 작업, 검증, 검토, 통합, 배포 등 가장 느린 단계에 제한된다.*
-
 
 예를 들어 하루에 다음 처리량을 가진 팀이 있다고 하자.
 
@@ -7425,7 +7321,9 @@ AWAITING_REVIEW <= 6
 PENDING_INTEGRATION <= 4
 ~~~
 
-정답 숫자는 조직마다 다르다. 중요한 것은 뒤에 이어질 검토와 통합 단계가 감당할 수 있는 만큼 새 작업을 시작하는 것이다.
+정답 숫자는 조직마다 다르다.
+
+Start Rate를 Downstream Capacity와 연결해야 한다.
 
 ---
 
@@ -7558,9 +7456,13 @@ Reviewer capacity
 
 ---
 
-### 다음 질문
+어디가 병목인지 알려면 관찰해야 한다.
 
-어디가 병목인지 알려면 관찰해야 한다. 에이전트 실행 시간만 봐서는 검토 대기열과 사람의 판단을 기다리는 시간을 알 수 없다. 토큰 비용만 봐서는 재시도와 재작업을 알 수 없다. 다음 장에서는 **생산 시스템 관측 가능성과 지표**를 다룬다.
+Agent 실행 시간만 봐서는 Review Queue와 Human Wait를 알 수 없다.
+
+Token Cost만 봐서는 Retry와 Rework를 알 수 없다.
+
+어디가 막히는지 판단하려면 **Factory Observability와 Metrics**가 필요하다.
 
 ---
 
@@ -7693,40 +7595,6 @@ rework
 
 이 계층들을 구분하면 실패가 어디에서 생겼는지 더 정확히 볼 수 있다.
 
-#### Human-facing Observability와 Telemetry는 다르다
-
-운영자가 항상 추적 기록 보기 도구를 열어야 하는 것은 아니다. 작은 생산 시스템에서는 기존 작업 화면에 단순한 상태를 보여주는 것만으로도 유용하다.
-
-예:
-
-~~~text
-Issue label
-ready → running → review
-
-Issue comment
-worker: W3
-result: PR #52
-~~~
-
-이 정도 정보만으로도 사람은 "시작됐는가, 누가 맡았는가, 검토할 결과가 나왔는가"를 빠르게 판단할 수 있다. 하지만 이것이 시스템 운영 계측 정보 전체를 대체하지는 않는다.
-
-~~~text
-Human-facing state
-- label
-- comment
-- PR link
-
-System telemetry
-- attempt
-- lease
-- tool event
-- verification
-- cost
-- failure
-~~~
-
-좋은 관측 가능성은 두 계층을 모두 가질 수 있다. 사람에게는 간단한 상태를 보여주고, 장애 분석에는 더 세밀한 이벤트와 지표를 남긴다.
-
 ---
 
 ### 19.2 Raw Chain-of-Thought가 Observability의 중심은 아니다
@@ -7771,7 +7639,6 @@ flowchart LR
 ```
 
 *작업 전체 처리 시간을 대기열, 실행, 검증, 사람의 판단을 기다리는 시간으로 분해하면 병목이 모델인지 검토인지 구분할 수 있다.*
-
 
 작업이 10시간 걸렸다고 하자. 이 숫자만으로는 원인을 알 수 없다. 다음처럼 나눌 수 있다.
 
@@ -7852,9 +7719,9 @@ Business Outcome
 
 #### Activity → Output → Flow → Outcome
 
-생산 시스템 지표를 한 층으로 놓으면 숫자가 쉽게 왜곡된다. WorkOS는 AI가 만든 PR 비율, PR 개수, 운영 환경에 들어간 AI 코드 비율 같은 지표가 실제 고객이 얻는 성과를 가릴 수 있다고 지적한다. PR이 늘어도 기능 전달이 빨라졌는지, 결함이 늘지 않았는지는 별도 문제다. 이 책에서는 측정 경계를 다음 네 층으로 나눈다.
+WorkOS는 AI가 만든 PR 비율, PR 개수, 운영 환경에 들어간 AI Code 비율 같은 Output이 실제 Customer Outcome을 가릴 수 있다고 지적한다.
 
-~~~text
+```text
 Activity
 - Agent Runs
 - Tokens
@@ -7878,11 +7745,9 @@ Outcome
 - Revert
 - MTTR
 - Customer Impact
-~~~
+```
 
-이 계층은 하위 지표를 버리자는 뜻이 아니다. 에이전트 실행과 PR 수는 처리 능력과 비용을 설명하는 데 필요하다. 다만 **출력이 늘었다는 사실을 성과가 좋아졌다는 결론으로 바로 연결하지 않는다.**
-
-WorkOS가 생산 시스템의 목표를 코드 생산량보다 기능 전달과 고객에게 미친 영향에 두고, 동시에 결함 비율과 복구 시간을 보려는 이유도 여기에 있다.
+하위 Metric도 운영에는 필요하다. 다만 Output 증가를 Outcome 개선으로 바로 해석하지 않는다.
 
 ### 19.5 First-pass Acceptance
 
@@ -8132,9 +7997,13 @@ Cost
 
 ---
 
-### 다음 질문
+Factory가 충분히 관찰되기 시작하면 새로운 가능성이 생긴다.
 
-생산 시스템이 충분히 관찰되기 시작하면 새로운 가능성이 생긴다. 사람이 매번 작업을 직접 만들지 않아도 CI 실패, 취약점, 운영 환경 신호가 작업 소스가 될 수 있다. 하지만 알림을 곧바로 에이전트 행동으로 연결하면 위험하다. 다음 장에서는 **이벤트 기반 생산 시스템과 운영 결과를 개발로 되돌리는 순환 구조**를 다룬다.
+사람이 매번 작업을 직접 만들지 않아도 CI Failure, Vulnerability, Production Signal이 Work Source가 될 수 있다.
+
+하지만 Alert를 곧바로 Agent Action으로 연결하면 위험하다.
+
+관찰 가능한 Factory는 CI Failure나 Production Signal을 Work Source로 연결하는 **Event-driven Factory**로 확장할 수 있다.
 
 ---
 
@@ -8204,7 +8073,6 @@ flowchart LR
 
 *운영 환경 알림이나 CI 실패를 바로 에이전트 행동으로 연결하지 않는다. Diagnose, 범위, 위험, 수용 판단을 거쳐 실행 가능한 작업으로 변환한다.*
 
-
 좋은 흐름은 다음에 가깝다.
 
 ~~~text
@@ -8249,7 +8117,6 @@ Acceptance
 >
 > 소스: Google, *Jules proactive updates*.
 
-
 이벤트가 자동으로 작업을 생성해도 병합까지 자동일 필요는 없다. Google이 2025년 12월 Jules에 공개한 Suggested Tasks와 Scheduled Tasks도 이 구분을 보여준다. Suggested Tasks는 개선 후보를 제안해 사용자가 review/approve/dismiss하도록 했고, Render 연동의 deployment-failure 대응도 수정을 만든 뒤 변경 검토 요청을 열어 검토를 남겼다.
 
 예:
@@ -8277,21 +8144,6 @@ docs drift
 ---
 
 ### 20.4 Closed-loop SDLC
-
-<!-- CASE C15: Warp Public Software Factory -->
-
-> **Case Study C15 — Warp — Interactive Agent에서 Public Software Factory로**
->
-> Warp 창업자 Zach Lloyd는 소프트웨어 생산 시스템을 idea/issue 접수, 문제를 분류, 명세, 구현, 검토, 검증, 전달, 관찰이 이어지는 순환으로 설명한다. 복잡한 작업에는 제품 명세와 기술 명세를 나누고, UI 검증에는 실제 화면을 직접 조작하는 기능과 screenshot/video 같은 실제 동작의 근거를 사용한다.
->
-> Open 소스 전환 역시 단순한 코드 공개보다 public 생산 시스템을 운영하려는 시도와 연결해 설명한다. 이슈 상태와 작업 Agent/Contributor를 보이는 빌드.warp.dev를 proto-factory 사례로 제시했다.
->
-> 이 책은 여기서 세 가지를 확장한다. 첫째, 명세를 요구사항·수용 판단·검증 규약으로 연결한다. 둘째, 생산 시스템 효율을 단순 출력보다 수용된 변경과 사람의 주의와 노력으로 본다. 셋째, 자체 개선을 운영 환경에 즉시 적용하지 않고 Evaluate·Shadow·승인을 거치는 통제된 meta-change로 다룬다.
->
-> **주의:** 이 사례는 Warp founder의 thesis와 자사 운영 사례다. 보편적 산업 성과나 모든 조직에 대한 예측으로 사용하지 않는다.
->
-> 소스: Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*.
-
 
 소프트웨어 전달은 배포에서 끝나지 않는다.
 
@@ -8331,37 +8183,38 @@ Repeated Agent Failure
 
 여기서 중요한 것은 특정 공급업체 작업 흐름이 아니라 **전달 이후의 관찰이 다음 작업의 원인이 되는 경계**다.
 
+<!-- CASE C15: Warp Public Software Factory -->
+
+> **Case Study C15 — Warp — Interactive Agent에서 Public Software Factory로**
+>
+> Warp 창업자 Zach Lloyd는 소프트웨어 생산 시스템을 idea/issue 접수, 문제를 분류, 명세, 구현, 검토, 검증, 전달, 관찰이 이어지는 순환으로 설명한다. 복잡한 작업에는 제품 명세와 기술 명세를 나누고, UI 검증에는 실제 화면을 직접 조작하는 기능과 screenshot/video 같은 실제 동작의 근거를 사용한다.
+>
+> Open 소스 전환 역시 단순한 코드 공개보다 public 생산 시스템을 운영하려는 시도와 연결해 설명한다. 이슈 상태와 작업 Agent/Contributor를 보이는 빌드.warp.dev를 proto-factory 사례로 제시했다.
+>
+> 이 책은 여기서 세 가지를 확장한다. 첫째, 명세를 요구사항·수용 판단·검증 규약으로 연결한다. 둘째, 생산 시스템 효율을 단순 출력보다 수용된 변경과 사람의 주의와 노력으로 본다. 셋째, 자체 개선을 운영 환경에 즉시 적용하지 않고 Evaluate·Shadow·승인을 거치는 통제된 meta-change로 다룬다.
+>
+> **주의:** 이 사례는 Warp founder의 thesis와 자사 운영 사례다. 보편적 산업 성과나 모든 조직에 대한 예측으로 사용하지 않는다.
+>
+> 소스: Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*.
+
 ---
 
 #### Continuous Planning Loop: 실행 중 배운 것으로 Plan을 다시 본다
 
-닫힌 순환은 운영 환경에서만 시작하지 않는다. WorkOS는 Linear 작업 티켓의 의존 관계를 따라 다음 작업을 자동으로 시작하는 것뿐 아니라, 하나의 작업 티켓이 끝날 때 현재 프로젝트를 다시 평가해 빠진 작업이 생겼는지 에이전트에게 확인시키는 흐름을 설명한다. 구현은 새로운 정보를 만든다.
+WorkOS는 Linear Ticket이 끝날 때 dependency에 따라 다음 Task를 진행하는 것뿐 아니라 현재 Project를 다시 평가해 빠진 Work가 생겼는지도 Agent에게 확인시키는 흐름을 설명한다.
 
-~~~text
+```text
 Plan
 → Task
 → Execution
 → New Knowledge
 → Plan Re-evaluation
 → Task Graph Update
-~~~
+```
 
-처음 만든 계획을 바꿀 수 없는 약속으로 취급하면 구현 중 발견한 빠진 내용을 반영하지 못한다. 반대로 에이전트가 매 단계 마음대로 앞으로의 계획을 바꾸게 하면 작업 범위가 흔들린다. 따라서 계획 재평가도 권한을 나눈다.
+처음 만든 Plan을 immutable contract로 취급하면 구현 중 발견한 Gap이 반영되지 않는다. 반대로 Agent가 마음대로 Roadmap을 바꾸게 하면 작업 범위가 흔들린다. Agent는 missing task, dependency, risk를 제안하고 Scope-changing proposal의 승인 권한은 Human이나 Policy에 둘 수 있다.
 
-~~~text
-Agent
-→ missing task / dependency / risk 제안
-
-System
-→ task graph consistency / policy 확인
-
-Human or Policy
-→ scope-changing proposal 승인
-~~~
-
-이 순환을 뒤의 두 순환과 구분하면 생산 시스템 피드백 구조가 더 선명해진다.
-
-~~~text
+```text
 Execution Learning Loop
 Task → New Knowledge → Plan
 
@@ -8370,7 +8223,7 @@ Operate → Signal → Requirement
 
 Factory Improvement Loop
 Execution Friction → Factory Capability
-~~~
+```
 
 ### 20.5 Product Loop와 Factory Loop를 구분한다
 
@@ -8521,42 +8374,11 @@ latency high
 
 ---
 
-### 20.10 Routine은 Trigger이고 Task는 Work다
+Event-driven Factory가 Work를 만들기 시작하면 더 많은 Platform Capability가 필요해진다.
 
-클라우드 에이전트 제품은 일정이나 외부 이벤트로 반복 작업을 시작하는 기능을 제공하기 시작했다. Cursor의 Grok Bot Routines는 시간 일정뿐 아니라 Slack, GitHub, Linear, Sentry, PagerDuty, 이메일, Webhook 같은 이벤트를 시작 조건으로 사용할 수 있다고 문서화한다. 이 기능은 이벤트 기반 생산 시스템과 닮아 있다. 하지만 다음을 그대로 같다고 보면 안 된다.
+Database Provisioning, Deployment, Secret, Observability를 Agent가 직접 구현하게 해야 할까.
 
-~~~text
-Routine Trigger
-≠ Durable Task
-~~~
-
-정기 실행 기능은 "언제 시작할 것인가"를 표현하는 데 강하다. 생산 시스템의 지속 작업은 시작 이후의 책임을 가진다.
-
-~~~text
-Trigger
-→ Intake
-→ Deduplicate
-→ Risk / Scope
-→ Durable Task
-→ Attempt
-→ Verification
-→ Evidence
-→ Acceptance
-~~~
-
-예를 들어 GitHub 이벤트가 들어왔다는 이유만으로 같은 수정 작업을 매번 새로 만들면 중복 작업이 발생한다. 일정이 실행됐다는 사실만으로 이전 실행의 외부에 남는 변경이 안전하게 처리됐다는 보장도 없다. 따라서 이벤트·정기 실행 기능을 생산 시스템에 연결할 때는 다음 질문이 추가된다.
-
-- 같은 신호를 어떻게 중복 제거하는가
-- 이전 실행이 아직 진행 중이면 어떻게 하는가
-- 실패한 실행을 재시도할지 다음 일정까지 기다릴지
-- 외부 시스템에 남는 변경이 반복 실행해도 안전한가
-- 어떤 이벤트는 진단만 만들고 어떤 이벤트는 수정 작업까지 만드는가
-
-이벤트 시작 조건이 편리해질수록 작업 접수와 지속 실행의 책임을 시작 조건 계층 밖에 남겨두는 것이 중요하다.
-
-### 다음 질문
-
-이벤트 기반 생산 시스템이 작업을 만들기 시작하면 더 많은 플랫폼 기능이 필요해진다. 데이터베이스 준비, 배포, 비밀 정보, 관측 가능성을 에이전트가 직접 구현하게 해야 할까. 다음 장에서는 기존 **개발자 플랫폼과 표준 개발 경로를 생산 시스템이 어떻게 활용하는가**를 다룬다.
+이 Work를 실행할 때는 기존 **Developer Platform과 Golden Path**를 어떻게 재사용할지도 정해야 한다.
 
 ---
 
@@ -8622,7 +8444,6 @@ flowchart TD
 
 *생산 시스템은 기존 개발자 플랫폼의 표준 개발 경로, CI/CD, 비밀 정보, 배포, 관측 가능성 수행 능력을 재사용한다. 사람과 에이전트가 같은 플랫폼 기능을 서로 다른 인터페이스로 소비한다.*
 
-
 사람용 플랫폼 인터페이스는 보통 다음과 같다.
 
 - 포털
@@ -8680,7 +8501,7 @@ run_security_scan()
 
 ### 21.4 직접 Infra를 만들게 하는 방식과 비교
 
-작업:
+Task:
 
 ~~~text
 staging DB를 만들어라.
@@ -8857,72 +8678,6 @@ Both
 
 ---
 
-### 21.11 Agent Execution Golden Path
-
-표준 개발 경로는 인프라 자원 준비에만 적용되는 개념이 아니다. 조직에서 반복되는 에이전트 작업에도 표준 실행 구성을 만들 수 있다.
-
-예:
-
-~~~text
-backend-fix
-security-review
-db-migration
-ui-verification
-release-check
-incident-diagnosis
-~~~
-
-각 구성은 단순 지시문 서식이 아니라 다음 묶음이 될 수 있다.
-
-~~~text
-Agent Execution Profile
-=
-Instruction
-+ Skills
-+ Tool / Connector Set
-+ Worker Profile
-+ Verification Profile
-+ Permission Policy
-+ Evidence Contract
-~~~
-
-최근 제품에서 봇 서식이나 공유 가능한 에이전트 설정을 제공하는 흐름은 이런 가능성을 보여준다. 중요한 것은 특정 공유 장터가 아니라 검증된 에이전트 작업 패턴을 조직 자산으로 재사용할 수 있다는 점이다. 예를 들어 db-migration 구성은 다음을 포함할 수 있다.
-
-~~~text
-Instruction
-- migration convention
-
-Skills
-- schema-diff
-- backward-compatibility-check
-
-Worker
-- database client
-- isolated test database
-
-Permission
-- production write denied
-
-Verification
-- migration up/down
-- compatibility test
-
-Evidence
-- schema diff
-- test result
-- migration revision
-~~~
-
-이렇게 하면 팀마다 에이전트에게 같은 운영 규칙을 다시 설명하는 비용을 줄일 수 있다. 하지만 서식 공유가 곧 신뢰 전파를 의미해서는 안 된다. 새로운 스킬, 도구, 권한 정책이 포함된 구성은 소프트웨어처럼 버전 관리, 검토, 평가, 단계적 적용할 수 있어야 한다. 즉 에이전트 시대의 표준 개발 경로는 다음까지 확장될 수 있다.
-
-~~~text
-Infrastructure Golden Path
-+
-Agent Execution Golden Path
-~~~
-
-플랫폼은 에이전트가 자유롭게 모든 방법을 발명하게 만드는 대신, 조직에서 이미 검증한 실행 능력과 안전한 경로를 제공한다.
-
 ### Platform을 Agent-ready하게 만들 때 묻는 질문
 
 ~~~text
@@ -8937,9 +8692,11 @@ Agent Execution Golden Path
 
 ---
 
-### 다음 질문
+지금까지 책에서는 상당히 많은 Capability를 다뤘다.
 
-지금까지 책에서는 상당히 많은 수행 능력을 다뤘다. 하지만 처음 생산 시스템을 만들 때 이 모든 것을 구현해야 할까. 다음 장에서는 **Minimum Viable AI Software Factory**로 범위를 다시 줄인다.
+하지만 처음 생산 시스템을 만들 때 이 모든 것을 구현해야 할까.
+
+지금까지의 Capability를 실제 도입 관점에서 **Minimum Viable AI Software Factory**로 다시 줄여 보자.
 
 ---
 
@@ -9017,7 +8774,6 @@ flowchart LR
 ```
 
 *첫 생산 시스템은 단일 워커와 사람의 검토로도 충분하다. 중요한 것은 지속 작업, 격리, 검증, 근거가 반복 가능한 흐름으로 연결되는가다.*
-
 
 2장에서 정의한 생산 시스템의 최소 성질과, 조직이 처음 도입할 때 권장하는 시작 구성은 같지 않다. 여기서는 실패 비용을 낮추기 위해 **사람의 검토를 남겨 둔 시작 형태**를 사용한다.
 
@@ -9151,63 +8907,24 @@ Approval delay
 
 ### 22.5 Scale: Event Trigger와 Parallel Worker
 
-**단계 F — 이벤트 시작 조건을 시험 실행으로 연결한다**
+**Step F — Event Trigger**
 
-사람이 직접 시작하지 않아도 되는 작업을 연결한다.
+Human이 직접 시작하지 않아도 되는 작업을 연결한다.
 
 예:
 
-- CI 실패
-- 이슈 상태
-- 일정
-
-하지만 이벤트를 연결했다고 곧바로 저장소 쓰기나 에이전트 실행까지 켤 필요는 없다. 먼저 신호 경로만 검증할 수 있다.
-
-~~~text
-Issue / CI / Schedule
-→ Factory receives signal
-→ Task candidate visible
-→ no code change
-~~~
-
-실제 공개 구현 예제에서도 프로젝트 저장소의 이슈와 라벨이 중앙 생산 시스템에 도달하는지만 먼저 확인한 뒤 실제 실행을 활성화하는 방식이 사용된다. 이 패턴을 일반화하면 다음과 같다.
-
-~~~text
-Signal Integration
-→ Observe-only / Dry Run
-→ Agent Execution
-→ Repository Write
-→ Delivery / Merge Permission
-~~~
-
-각 단계에서 확인할 것이 다르다.
-
-~~~text
-Dry Run
-- 중복 Signal은 없는가
-- 올바른 Repository / Task로 매핑되는가
-- 예상하지 않은 사용자 입력이 Trigger하지 않는가
-
-Execution
-- 올바른 Worker가 선택되는가
-- 필요한 Context만 전달되는가
-
-Write
-- 허용된 Branch / Path만 변경하는가
-
-Delivery
-- Verification과 Approval 정책을 통과하는가
-~~~
+- CI Failure
+- Issue Status
+- Schedule
 
 중요:
 
 ~~~text
 Auto Start
-≠ Auto Write
 ≠ Auto Merge
 ~~~
 
-작업 소스 자동화와 외부에 남는 변경 권한, 최종 수용 권한은 서로 다른 축이다. 이렇게 단계적으로 권한을 열면 이벤트 기반 생산 시스템을 처음부터 완전 자율 시스템으로 만들지 않아도 된다.
+Work Source 자동화와 Acceptance Authority는 별개다.
 
 ---
 
@@ -9342,9 +9059,11 @@ Human Review
 
 ---
 
-### 다음 질문
+Minimum Viable Factory의 구조는 이해했다.
 
-최소 기능 생산 시스템의 구조는 이해했다. 그렇다면 책 전체 원칙을 실제로 눈으로 확인할 수 있는 작은 참조 구현은 어떤 모습이어야 할까. 다음 장에서는 **참조 생산 시스템**을 설계하고 정상 실행 경로보다 실패 시나리오를 중심으로 검증한다.
+그렇다면 책 전체 원칙을 실제로 눈으로 확인할 수 있는 작은 Reference Implementation은 어떤 모습이어야 할까.
+
+그 구조를 실제로 확인하기 위해 **Reference Factory**를 설계하고 Failure Scenario로 검증한다.
 
 ---
 
@@ -9394,46 +9113,6 @@ Task Create
 
 특정 LLM 공급업체에 종속되지 않도록 에이전트 연결 어댑터를 분리한다.
 
-#### 작은 구현 사례: GitHub-native Hub-and-Spoke
-
-참조 설계 구조를 처음 접하면 별도 대시보드와 복잡한 대기열부터 필요하다고 느낄 수 있다. 하지만 가장 작은 구현은 기존 개발 작업 흐름을 조작 화면으로 재사용할 수 있다. 한 공개 구현 예제에서는 여러 프로젝트 저장소의 GitHub 이슈를 중앙 생산 시스템이 받아 워커에 배정하고, 결과 변경 검토 요청을 원래 저장소로 돌려보내는 구조를 사용한다.
-
-~~~text
-Repo A ─┐
-Repo B ─┼→ Factory Ingress
-Repo C ─┘       ↓
-             Dispatcher
-                ↓
-            Worker Fleet
-                ↓
-       PR → Original Repo
-~~~
-
-이슈 라벨은 사람이 보는 상태를 표현한다.
-
-~~~text
-ready
-→ factory running
-→ factory review
-~~~
-
-이 구조의 의미는 GitHub가 반드시 생산 시스템 DB가 되어야 한다는 것이 아니다.
-
-7장에서 구분했듯 다음 책임은 여전히 분리해서 생각하는 편이 낫다.
-
-~~~text
-Issue / PR
-= Work Intent + Human Collaboration + Control Surface
-
-Task Store
-= authoritative durable execution state
-
-Worker
-= temporary execution
-~~~
-
-작은 생산 시스템에서는 이 책임이 한 제품 안에 구현될 수도 있다. 참조 생산 시스템에서는 제품 선택보다 **책임 경계가 유지되는지**를 먼저 검증한다.
-
 ---
 
 ### 23.2 최소 Data Model
@@ -9455,7 +9134,6 @@ flowchart TD
 ```
 
 *정상 실행 경로뿐 아니라 검증 실패, 워커 강제 종료, 다른 워커에 재배정, 사람의 판단을 기다리는 시간, 병렬 실행, 충돌을 수용 판단 시나리오로 만들어 생산 시스템 신뢰성을 검증한다.*
-
 
 #### Task
 
@@ -9684,14 +9362,16 @@ Task C → UserService.java
 Task D → UserService.java
 ~~~
 
-두 워커가 동시에 작업한다. 생산 시스템은 다음 중 하나를 해야 한다.
+두 워커가 동시에 작업한다.
 
-- 사전 순차 실행
-- 충돌 감지
-- 재계획
-- 통합 실패
+Factory는 다음 중 하나를 해야 한다.
 
-중요한 것은 충돌이 “놀라운 사고”가 아니라 예상 가능한 시나리오라는 점이다.
+- 사전 Serialize
+- Conflict 감지
+- Replan
+- Integration Failure
+
+Conflict는 “놀라운 사고”가 아니라 예상 가능한 Scenario로 다뤄야 한다.
 
 ---
 
@@ -9755,7 +9435,6 @@ Task D → UserService.java
 >
 > **주의:** 자체 구현 사례 연구이며 일반 산업 통계가 아니다.
 
-
 실제 구현 경험은 유용하다. 예를 들어 한 생산 시스템 구현에서 다음이 관찰됐다고 하자.
 
 ~~~text
@@ -9781,40 +9460,6 @@ Case Study
 
 ---
 
-### 23.9 Operator Surface
-
-참조 생산 시스템이 내부적으로 작업 저장소, 작업 배정기, 워커, 검증, 승인을 갖추면 사용자가 보는 화면도 복잡하게 만들기 쉽다. 하지만 운영자에게 필요한 핵심 행동은 의외로 적다.
-
-~~~text
-Create
-Observe
-Approve
-Intervene
-Inspect Evidence
-~~~
-
-최근 지속형 에이전트 제품이 복잡한 클라우드 실행 기반과 외부 연결 도구를 단순한 메시지 인터페이스 뒤에 숨기는 것은 중요한 UX 신호다. 생산 시스템도 내부 복잡도를 그대로 사람에게 노출할 필요는 없다. 참조 생산 시스템에서는 다음 구조를 목표로 한다.
-
-~~~text
-                Factory Internals
-Task Store / Scheduler / Worker / Retry / Policy
-Verification / Evidence / Event History
-                        ↓
-                 Operator Surface
-Create | Observe | Approve | Intervene | Inspect
-~~~
-
-단순한 화면은 상태를 숨긴다는 뜻이 아니다. 오히려 사용자가 다음 질문에 빠르게 답할 수 있어야 한다.
-
-- 지금 무엇이 실행 중인가
-- 어디에서 진행 불가 상태됐는가
-- 사람 결정이 필요한 것은 무엇인가
-- 에이전트가 무엇을 변경했는가
-- 무엇으로 완료를 증명했는가
-- 실패하면 어디서 이어지는가
-
-대시보드에 내부에서 일어난 일을 모두 나열하기보다, 사람이 다음 행동을 결정하는 데 필요한 상태와 근거를 먼저 보여주는 것이 중요하다. 생산 시스템 구조가 복잡해질수록 운영자 화면은 더 의도적으로 단순해져야 한다.
-
 ### Reference Factory Acceptance
 
 최소 수용 기준:
@@ -9834,9 +9479,17 @@ H. Evidence is linked to result revision
 
 ---
 
-### 다음 질문
+Reference Factory가 동작한다.
 
-참조 생산 시스템이 동작한다. 그다음에는 무엇을 자동화해야 할까. 워커를 늘릴까. 이벤트 시작 조건을 붙일까. 에이전트가 할 일 목록에서 스스로 작업을 선택하게 할까. 다음 장에서는 생산 시스템의 **성숙도와 자율성을 서로 다른 축으로 분리해** 확장 순서를 정리한다.
+그다음에는 무엇을 자동화해야 할까.
+
+Worker를 늘릴까.
+
+Event Trigger를 붙일까.
+
+Agent가 Backlog에서 스스로 작업을 선택하게 할까.
+
+마지막으로 Factory의 **Maturity와 Autonomy를 서로 다른 축으로 놓고** 확장 순서를 정리한다.
 
 ---
 
@@ -9848,9 +9501,19 @@ H. Evidence is linked to result revision
 
 > 어디까지 자동화해야 하는가?
 
-워커가 하나일 때는 쉽다. 여러 워커를 붙이고 이벤트 시작 조건을 연결하고 할 일 목록 선택까지 자동화하려 하면 “우리 생산 시스템은 몇 단계인가”를 말하고 싶어진다. 하지만 여기서 하나를 조심해야 한다. 생산 시스템이 운영 기능을 얼마나 갖췄는지를 나타내는 **성숙도(Maturity)**와 에이전트에게 판단 권한을 얼마나 맡겼는지를 나타내는 **자율성(Autonomy)**은 같은 것이 아니다. 사람의 검토가 있다고 해서 낮은 성숙도인 것은 아니다.
+워커가 하나일 때는 쉽다.
 
-반대로 에이전트가 스스로 작업을 선택하고 병합한다고 해서 높은 신뢰성을 가진 것도 아니다. 이 책에서는 두 축을 분리한다.
+여러 Worker를 붙이고 Event Trigger를 연결하고 Backlog Selection까지 자동화하려 하면 “우리 생산 시스템은 몇 단계인가”를 말하고 싶어진다.
+
+하지만 여기서 하나를 조심해야 한다.
+
+Factory의 **Maturity**와 Agent의 **Autonomy**는 같은 것이 아니다.
+
+Human Review가 있다고 해서 낮은 성숙도인 것은 아니다.
+
+반대로 에이전트가 스스로 작업을 선택하고 병합한다고 해서 높은 신뢰성을 가진 것도 아니다.
+
+두 축을 분리해 본다.
 
 ---
 
@@ -9879,7 +9542,6 @@ flowchart TB
 ```
 
 *생산 시스템의 수행 능력의 성숙도와 에이전트 결정 권한은 서로 다른 축이다. 운영 수행 능력이 높아도 위험이 큰 결정은 사람 권한을 유지할 수 있다.*
-
 
 #### Maturity
 
@@ -10006,8 +9668,8 @@ M5는 가장 높은 “좋음”을 의미하지 않는다. 필요한 조직에�
 | Acceptance | A | C | Gate |
 | Merge / Deploy | A/R | C | Gate |
 
-A = Accountable
-R = Responsible
+A = Accountable  
+R = Responsible  
 C = Consulted
 
 이 표는 권장 RACI가 아니라 권한을 분리해서 생각하기 위한 예시다. 작업 위험도와 조직 책임 구조에 따라 값은 달라진다.
@@ -10194,58 +9856,22 @@ approval slows work
 
 ---
 
-#### Learned Skill은 Candidate로 시작한다
-
-일부 에이전트 제품은 사람이 브라우저에서 작업 흐름을 한 번 보여주면 이를 스킬로 저장하거나, 에이전트에게 스킬을 생성·수정하게 할 수 있는 방향을 제공한다. 이 기능은 생산 시스템 개선 순환의 좋은 입력이 될 수 있다. 하지만 에이전트가 새 스킬을 만들었다고 곧바로 실제 운영 중인 생산 시스템의 표준 스킬로 승격하면 안 된다.
-
-~~~text
-Observed Workflow
-      ↓
-Candidate Skill
-      ↓
-Eval
-      ↓
-Human / Policy Review
-      ↓
-Version
-      ↓
-Shadow / Canary
-      ↓
-Production
-~~~
-
-이 구분은 자체 개선에서 중요하다. 에이전트가 자신의 반복 작업을 더 잘 수행하도록 절차를 제안하는 것은 비교적 낮은 위험의 개선일 수 있다. 반면 다음 변경은 피해 범위가 크다.
-
-- 검증 약화
-- 승인 제거
-- 권한 확대
-- 보안 규칙 수정
-- 평가자 기준 변경
-
-따라서 "에이전트가 학습한다"는 표현보다 어떤 변경이 후보로 생성되고 누가 실제 운영의 기준 설정으로 승격하는가를 명확히 하는 편이 안전하다.
-
 #### Session Friction을 Improvement Candidate로 바꾼다
 
-자체 개선을 처음부터 생산 시스템이 자기 코드를 마음대로 수정하는 기능으로 볼 필요는 없다. 더 현실적인 출발점은 실제 에이전트 세션과 작업 시간 기록에서 반복되는 불편과 장애를 찾는 것이다. WorkOS가 설명한 향후 방향도 이쪽에 가깝다. 자체 인프라를 더 많이 소유하고 세션을 관찰하면서 다음과 같은 질문을 찾으려 한다.
+Self-improvement의 현실적인 출발점은 Factory가 자기 코드를 마음대로 고치는 것이 아니라 실제 Agent Session과 Task Timeline에서 반복되는 불편과 장애를 찾는 것이다.
 
-- 에이전트가 반복해서 같은 실수를 하는가
-- 새 스킬이 필요한가
-- 기존 스킬이 저장소 변화 때문에 낡았는가
-- 도구나 맥락 정보 탐색이 반복해서 막히는가
-- 격리 환경 자체가 병목인가
+WorkOS가 설명한 향후 방향도 반복 실수, 필요한 Skill, 낡은 Skill, Tool/Context friction, Sandbox bottleneck을 관찰해 개선 후보로 만드는 쪽에 가깝다.
 
-이를 생산 시스템 개선 순환으로 표현하면:
-
-~~~text
+```text
 Execution
 → Friction Signal
 → Improvement Candidate
 → Skill / Tool / Context / Infrastructure Change
 → Eval
 → Promotion
-~~~
+```
 
-이 접근의 장점은 자체 개선의 입력이 추상적인 "더 똑똑해져라"가 아니라 관찰 가능한 실패와 반복 비용이라는 점이다. 단, 발표에서 메모리 계층과 일부 자체 개선 기능은 향후 방향으로 설명된 부분이므로 현재 실제 운영 능력으로 일반화하지 않는다.
+Self-improvement의 입력을 추상적인 목표가 아니라 관찰 가능한 실패와 반복 비용으로 만든다. 단, 발표에서 Memory Layer와 일부 Self-improvement 기능은 향후 방향으로 설명된 부분이므로 현재 Production Capability로 일반화하지 않는다.
 
 ### 24.9 Meta-change는 별도 Class로 관리한다
 
@@ -10349,7 +9975,9 @@ Reliability baseline
 → Autonomy
 ~~~
 
-실제 조직에서는 일부 순서가 바뀔 수 있다. 이 도식은 성숙도 점수가 아니라 의존 관계를 설명하는 휴리스틱이다. 중요한 것은 자율성을 첫 번째 목표로 두지 않는 것이다.
+실제 조직에서는 일부 순서가 바뀔 수 있다. 이 도식은 maturity score가 아니라 의존 관계를 설명하는 휴리스틱이다.
+
+Autonomy를 첫 번째 목표로 두지 않는다.
 
 ---
 
@@ -10513,7 +10141,7 @@ Who deploys?
 - 변경 검토 요청
 - 생성된 코드
 
-하지만 이 책에서는 더 넓은 측정 단위 후보로 다음을 사용했다.
+하지만 여기서는 더 넓은 측정 단위 후보로 다음을 사용했다.
 
 ~~~text
 Accepted Change
@@ -10610,6 +10238,7 @@ Intent
 
 그 시스템이 각 조직에서 어디까지 자동화될지는 사람이 결정해야 한다.
 
+
 ---
 
 # Glossary
@@ -10618,7 +10247,7 @@ Intent
 
 ## AI Software Factory
 
-소프트웨어 작업을 중단돼도 기록이 남도록 관리하고, AI 에이전트에게 실행을 위임하며, 독립된 검증과 통제 아래 실패를 복구하고 검증된 변경을 지속적으로 전달하는 소프트웨어 생산 시스템. 이 책의 이 책에서 사용하는 정의이다.
+소프트웨어 작업을 중단돼도 기록이 남도록 관리하고, AI 에이전트에게 실행을 맡기며, 독립된 검증과 통제 아래 실패를 복구하고 검증된 변경을 지속적으로 전달하는 소프트웨어 생산 시스템. 이 책의 이 책에서 사용하는 정의이다.
 
 ## Agent
 
@@ -10764,209 +10393,174 @@ Intent
 
 작업 선택, 계획 수립, 실행, 검증, 수용 판단, 병합·배포 같은 결정 권한을 에이전트·시스템에 얼마나 위임했는지 나타내는 축. 성숙도와 같은 축이 아니다.
 
+
 ---
 
 # References
 
 > Working bibliography. 최종 출판 형식은 publication pass에서 통일한다.
 
-1. *Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization*
+1. *Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization*  
    https://doi.org/10.1145/3805760.3814891
 
-2. *Runtime-Structured Task Decomposition for Agentic Coding Systems*
+2. *Runtime-Structured Task Decomposition for Agentic Coding Systems*  
    https://arxiv.org/abs/2605.15425
 
-3. *Wink: Recovering from Misbehaviors in Coding Agents*
+3. *Wink: Recovering from Misbehaviors in Coding Agents*  
    https://arxiv.org/abs/2602.17037
 
-4. Agentless
+4. Agentless  
    https://arxiv.org/abs/2407.01489
 
-5. Anthropic, *Agent Skills*
+5. Anthropic, *Agent Skills*  
    https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
 
-6. Anthropic, *Building a C compiler with a team of parallel Claudes*
+6. Anthropic, *Building a C compiler with a team of parallel Claudes*  
    https://www.anthropic.com/engineering/building-c-compiler
 
-7. Anthropic, *Demystifying evals for AI agents*
+7. Anthropic, *Demystifying evals for AI agents*  
    https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
 
-8. Anthropic, *Effective harnesses for long-running agents*
+8. Anthropic, *Effective harnesses for long-running agents*  
    https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
 
-9. Anthropic, *Patterns and problems in emerging multiagent systems*
+9. Anthropic, *Patterns and problems in emerging multiagent systems*  
    https://www.anthropic.com/research/multiagent-systems
 
-10. Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*
+10. Anthropic, *Scaling Managed Agents: Decoupling the brain from the hands*  
    https://www.anthropic.com/engineering/managed-agents
 
-11. Anthropic, *Writing tools for agents*
+11. Anthropic, *Writing tools for agents*  
    https://www.anthropic.com/engineering/writing-tools-for-agents
 
-12. Backstage, *AI in the Software Catalog*
+12. Backstage, *AI in the Software Catalog*  
    https://backstage.io/docs/ai/ai-in-the-catalog/
 
-13. CNCF, *Platform Engineering for the Agentic Enterprise*
+13. CNCF, *Platform Engineering for the Agentic Enterprise*  
    https://www.cncf.io/blog/2026/07/21/platform-engineering-for-the-agentic-enterprise-managing-applications-resources-and-ai-agents/
 
-14. CNCF, *Platform Engineering Maturity Model*
+14. CNCF, *Platform Engineering Maturity Model*  
    https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/
 
-15. Cursor, *Cloud Agents*
+15. Cursor, *Cloud Agents*  
    https://cursor.com/docs/cloud-agent
 
-16. DORA, *2025 DORA Report*
+16. DORA, *2025 DORA Report*  
    https://dora.dev/research/2025/dora-report/
 
-17. DORA, *Balancing AI tensions*
+17. DORA, *Balancing AI tensions*  
    https://dora.dev/insights/balancing-ai-tensions/
 
-18. DORA, *Platform Engineering Capability*
+18. DORA, *Platform Engineering Capability*  
    https://dora.dev/capabilities/platform-engineering/
 
-19. Factory.ai, *Signals*
+19. Factory.ai, *Signals*  
    https://factory.com/news/factory-signals
 
-20. GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*
+20. GitHub Engineering, *Turn one giant AI-generated pull request to a reviewable stack*  
    https://github.blog/engineering/turn-one-giant-ai-generated-pull-request-to-a-reviewable-stack/
 
-21. GitHub, *Better tools made Copilot code review worse*
+21. GitHub, *Better tools made Copilot code review worse*  
    https://github.blog/ai-and-ml/github-copilot/better-tools-made-copilot-code-review-worse-heres-how-we-actually-improved-it/
 
-22. GitHub, *Copilot CLI Fleet*
+22. GitHub, *Copilot CLI Fleet*  
    https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet
 
-23. GitHub, *Enterprise AI controls: agent control plane*
+23. GitHub, *Enterprise AI controls: agent control plane*  
    https://github.blog/changelog/2026-02-26-enterprise-ai-controls-agent-control-plane-now-generally-available/
 
-24. GitHub, *How we make AI coding more cost-efficient without sacrificing task quality*
+24. GitHub, *How we make AI coding more cost-efficient without sacrificing task quality*  
    https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/
 
-25. GitHub, *Spec Kit*
+25. GitHub, *Spec Kit*  
    https://github.com/github/spec-kit
 
-26. GitHub, *Stacked pull requests are now in public preview*
+26. GitHub, *Stacked pull requests are now in public preview*  
    https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/
 
-27. Google Cloud, *Agent Executor: Google’s distributed agent runtime*
+27. Google Cloud, *Agent Executor: Google’s distributed agent runtime*  
    https://cloud.google.com/blog/products/ai-machine-learning/agent-executor-googles-distributed-agent-runtime
 
-28. Google, *Jules proactive updates*
+28. Google, *Jules proactive updates*  
    https://blog.google/innovation-and-ai/technology/developers-tools/jules-proactive-updates/
 
-29. Kiro, *Analyze Requirements*
+29. Kiro, *Analyze Requirements*  
    https://kiro.dev/docs/specs/analyze-requirements/
 
-30. Kiro, *Specs*
+30. Kiro, *Specs*  
    https://kiro.dev/docs/specs/
 
-31. METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*
+31. METR, *Many SWE-bench-Passing PRs Would Not Be Merged into Main*  
    https://metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
 
-32. METR, *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*
+32. METR, *Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity*  
    https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
 
-33. METR, *Task Substitution and Uplift*
+33. METR, *Task Substitution and Uplift*  
    https://metr.org/blog/2026-05-08-task-substitution-and-uplift/
 
-34. METR, *We are Changing our Developer Productivity Experiment Design*
+34. METR, *We are Changing our Developer Productivity Experiment Design*  
    https://metr.org/blog/2026-02-24-uplift-update/
 
-35. Microsoft Research, *Agentic Coding in the Wild*
+35. Microsoft Research, *Agentic Coding in the Wild*  
    https://www.microsoft.com/en-us/research/publication/agentic-coding-in-the-wild-characterizing-github-copilot-at-production-scale/
 
-36. Microsoft Research, *AgentLens*
+36. Microsoft Research, *AgentLens*  
    https://www.microsoft.com/en-us/research/publication/agentlens-revealing-the-lucky-pass-problem-in-swe-agent-evaluation/
 
-37. Microsoft Research, *Building to the Test: Coding Agents Deliver What You Check, Not What You Requested*
+37. Microsoft Research, *Building to the Test: Coding Agents Deliver What You Check, Not What You Requested*  
    https://www.microsoft.com/en-us/research/publication/building-to-the-test-coding-agents-deliver-what-you-check-not-what-you-requested/
 
-38. Microsoft Research, *The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers*
+38. Microsoft Research, *The Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers*  
    https://www.microsoft.com/en-us/research/publication/the-effects-of-generative-ai-on-high-skilled-work-evidence-from-three-field-experiments-with-software-developers/
 
-39. Microsoft Security, *Prompts become shells: RCE vulnerabilities in AI agent frameworks*
+39. Microsoft Security, *Prompts become shells: RCE vulnerabilities in AI agent frameworks*  
    https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/
 
-40. Microsoft Security, *Securing CI/CD in the agentic world: Claude Code GitHub Action case*
+40. Microsoft Security, *Securing CI/CD in the agentic world: Claude Code GitHub Action case*  
    https://www.microsoft.com/en-us/security/blog/2026/06/05/securing-ci-cd-in-agentic-world-claude-code-github-action-case/
 
-41. Microsoft, *Durable Task for AI agents*
+41. Microsoft, *Durable Task for AI agents*  
    https://learn.microsoft.com/en-us/azure/durable-task/sdks/durable-task-for-ai-agents
 
-42. NIST NCCoE, *DevSecOps Functional Demonstration Scenarios*
+42. NIST NCCoE, *DevSecOps Functional Demonstration Scenarios*  
    https://pages.nist.gov/nccoe-devsecops/functional-demonstration-scenarios.html
 
-43. NIST NCCoE, *Notional Reference Model for DevSecOps*
+43. NIST NCCoE, *Notional Reference Model for DevSecOps*  
    https://pages.nist.gov/nccoe-devsecops/notational-reference-model.html
 
-44. NIST, *Software and AI Agent Identity and Authorization*
+44. NIST, *Software and AI Agent Identity and Authorization*  
    https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd
 
-45. OpenAI, *An open-source spec for Codex orchestration: Symphony*
+45. OpenAI, *An open-source spec for Codex orchestration: Symphony*  
    https://openai.com/index/open-source-codex-orchestration-symphony/
 
-46. OpenAI, *Harness engineering: leveraging Codex in an agent-first world*
+46. OpenAI, *Harness engineering: leveraging Codex in an agent-first world*  
    https://openai.com/index/harness-engineering/
 
-47. OpenAI, *How we monitor internal coding agents for misalignment*
+47. OpenAI, *How we monitor internal coding agents for misalignment*  
    https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment/
 
-48. OpenHands, *Software Agent SDK*
+48. OpenHands, *Software Agent SDK*  
    https://github.com/OpenHands/software-agent-sdk
 
-49. REAgent, *Requirement-Driven LLM Agents for Software Issue Resolution*
+49. REAgent, *Requirement-Driven LLM Agents for Software Issue Resolution*  
    https://arxiv.org/abs/2604.06861
 
-50. SWE-agent, *Agent-Computer Interface*
+50. SWE-agent, *Agent-Computer Interface*  
    https://swe-agent.com/1.0/background/aci/
 
-51. SWE-Explore
+51. SWE-Explore  
    https://arxiv.org/abs/2606.07297
 
-52. Temporal, *AI and Durable Execution*
+52. Temporal, *AI and Durable Execution*  
    https://docs.temporal.io/ai
 
-53. WorkOS, *The self-driving codebase: Building Horizon at WorkOS*
+53. WorkOS, *The self-driving codebase: Building Horizon at WorkOS*  
    https://workos.com/blog/project-horizon
 
-54. Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*
+54. Warp / Zach Lloyd, *Software Engineering Is Becoming Factory Engineering*  
    https://www.youtube.com/watch?v=tUPPVhBBcoM
 
-55. Warp / Zach Lloyd, *Adopting the software factory model: crawl, walk, run*
+55. Warp / Zach Lloyd, *Adopting the software factory model: crawl, walk, run*  
    https://www.warp.dev/blog/adopting-the-software-factory-model-crawl-walk-run
-
-- Caylent, *What is a Software Factory*
-  https://www.youtube.com/watch?v=0Q8R_FZbnLk
-
-- Caylent Solutions, *DevBench*
-  https://github.com/caylent-solutions/devbench
-
-- *I Built the Simplest Software Factory*, YouTube video / user-provided transcript
-  https://www.youtube.com/watch?v=AsvzMlLyQ38
-
-- Cursor, *Grok Bot*
-  https://cursor.com/docs/grok-bot
-
-- Cursor, *Get started with Grok Bot*
-  https://cursor.com/docs/grok-bot/get-started
-
-- Caylent Solutions, *DevBench Architecture*
-  https://github.com/caylent-solutions/devbench/blob/main/docs/architecture.md
-
-- Caylent Solutions, *DevBench Execution Modes*
-  https://github.com/caylent-solutions/devbench/blob/main/docs/execution-modes.md
-
-- Cursor, *Work with Grok Bot*
-  https://cursor.com/docs/grok-bot/work
-
-- Cursor, *Manage Grok Bot computers*
-  https://cursor.com/docs/grok-bot/computers
-
-- Cursor, *Routines*
-  https://prod.cursor.com/help/grok-bot/routines
-
-- Cursor, *Grok Bot for Teams and Enterprise*
-  https://cursor.com/docs/grok-bot/teams
-
-- Factory.ai, *Signals*
-  https://factory.ai/news/factory-signals

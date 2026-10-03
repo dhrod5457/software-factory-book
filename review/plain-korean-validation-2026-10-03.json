@@ -1,413 +1,341 @@
 {
   "baseline": "a812a23bf03c85f94ae109414e43df8ced795d78",
-  "source_files": [
+  "scope": "Existing publication scope preserved; no canonical RC2 synchronization.",
+  "files": [
     {
       "path": "chapters/01/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "c99f9b2430494cbdcfadb2c8c0cb7446651fab6b51f4ab1d3eb35fe0c25d6fa0"
     },
     {
       "path": "chapters/02/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "dff3d45809da1012b7967099f328918b2cd943eea99960255a429e0ccb0aaf06"
     },
     {
       "path": "chapters/03/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "2e33936e88fe9f70a30ad11f7dd7ae6cbc1c315620a62548c62ca89ce5362ce4"
     },
     {
       "path": "chapters/04/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "1463a85e7951db189c0572257f4dfc60f0e6385a8785b605eaf410290ed41cc3"
     },
     {
       "path": "chapters/05/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "dc5d4a5860b840bade9b19ce80682b6a56100965cf2083479b57f882a0c260ab"
     },
     {
       "path": "chapters/06/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "052a7b60ec0feefbd65502775ac68b0127e3fa77e1cd28fd3a8d17e57385d9dd"
     },
     {
       "path": "chapters/07/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "f030ca1abef553596b85319c0d3efff8bb110dce3f05233e1a26b3e0d94abdb5"
     },
     {
       "path": "chapters/08/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "62f0af8ec889c7b052ed08e5b12e54db7d7f008639d78932dfcf6fe775353eed"
     },
     {
       "path": "chapters/09/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "9196a16aa5adb10e854aaf3751c6fc0f14466e57450d395953a8dade88f96b38"
     },
     {
       "path": "chapters/10/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "3421732d6e8af812170d3813592764efdd51bd395def08f29f3b07e809c07ab1"
     },
     {
       "path": "chapters/11/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "9f3a78e059748c395676483a7523df9334b2948f851a12245e0ef5a8ca5511a1"
     },
     {
       "path": "chapters/12/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "ab710b849d9657588f3bea2dc04749663c169b5cf36f5232859e6e18d11af768"
     },
     {
       "path": "chapters/13/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "efe1a395123e6dfc15e60db9d83315c60671565a9e71ad5921d8c52b4d5bb949"
     },
     {
       "path": "chapters/14/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "1239baff3b710af2030379e432677c03f9cf0e7beeee9c88acc6797c99e3ed2e"
     },
     {
       "path": "chapters/15/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "1a1d9bf27f299487b3a9201f3537c8aef0391ce8c59f7881a3c0e3f588b80d7d"
     },
     {
       "path": "chapters/16/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "421a33cd154b294f1dc1dba8d151ccd0ff65bf0944a14654370e1ae4bd586fec"
     },
     {
       "path": "chapters/17/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "f75e3d517909b5d46ac6cc7b3551538f8a4d480a58b5ea6b4275c01ff42e24d1"
     },
     {
       "path": "chapters/18/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "7faa01107cd9b9c737630eee2c73be47465d544d0d8edf0bf0becec994ba3c3d"
     },
     {
       "path": "chapters/19/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "690afe2c87022333122a65cfbdf3ea7251abd94008eb00fdfb827e7f7e60f728"
     },
     {
       "path": "chapters/20/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "8321aea4ce3d33596e398c8bf3bb9d6c5c30371da77de6b669f7bbd1ee86690f"
     },
     {
       "path": "chapters/21/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "8777d0dd06cf778546b24c964585d6949c3b041cfef8740e19716cf75d6219fb"
     },
     {
       "path": "chapters/22/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "4b403b5aa8faa6e6fc898bf2e1faf94e4d0d11ba82e1e2c54b3d2342a0b89967"
     },
     {
       "path": "chapters/23/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "c053d0151bdcb67bdfb59737046f7dec24aa8b8d857b37cf4d6c39bf966ddca1"
     },
     {
       "path": "chapters/24/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "05ffd3351faf856c66a3f6918a42ce2025489aba4cbb835cb93166c3f16c0a67"
     },
     {
       "path": "chapters/epilogue/draft.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "09061f9eddd0ec6ce2477ca2022479be663b28b5bd9c7bb9e10cec0f64a06fe8"
     },
     {
       "path": "manuscript/preface.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "02c1806af9884522433c287df8d0efd03f7ac95418ac53c2e8126aa358308ef7"
     },
     {
       "path": "manuscript/glossary.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "713bf0a92553d8122a9d9262dede4e24d08d3903c758622911e88562818b1097"
     },
     {
       "path": "manuscript/case-study-boxes.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "b71bda61edd957ba49072f2ffd66a302427000d80bbc06cd85414c4d1221d0ed"
     },
     {
       "path": "manuscript/figure-captions.md",
       "checks": {
-        "code_blocks": true,
-        "headings": true,
-        "urls": true,
-        "numbers": true
-      }
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true,
+        "prior_edited_source_exact": true
+      },
+      "sha256": "98cef0711749f4c9999ebf62a83cde2f5169bab69e484e309385850e0098e793"
+    },
+    {
+      "path": "manuscript/book.md",
+      "checks": {
+        "code_blocks_exact": true,
+        "headings_exact": true,
+        "url_order_exact": true,
+        "number_counts_exact": true
+      },
+      "sha256": "9a0fadbda2fb2bb79ca31433c4edead694438f92333edbc11b934ce088a25969"
     }
   ],
-  "assembly_exact": {
-    "01": true,
-    "02": true,
-    "03": true,
-    "04": true,
-    "05": true,
-    "06": true,
-    "07": true,
-    "08": true,
-    "09": true,
-    "10": true,
-    "11": true,
-    "12": true,
-    "13": true,
-    "14": true,
-    "15": true,
-    "16": true,
-    "17": true,
-    "18": true,
-    "19": true,
-    "20": true,
-    "21": true,
-    "22": true,
-    "23": true,
-    "24": true,
-    "preface": true,
-    "epilogue": true,
-    "glossary": true
-  },
-  "restored_sections": {
-    "01": [],
-    "02": [],
-    "03": [
-      "다음 질문"
-    ],
-    "04": [
-      "WorkOS: 빈 문서를 Agent가 먼저 채우고 사람이 Scope를 결정한다",
-      "다음 질문"
-    ],
-    "05": [
-      "다음 질문"
-    ],
-    "06": [
-      "다음 질문"
-    ],
-    "07": [
-      "다음 질문"
-    ],
-    "08": [
-      "Prepared Snapshot과 Fresh Task State",
-      "다음 질문"
-    ],
-    "09": [
-      "9.10 Context, Capability, Outcome, Guardrail, Evidence",
-      "다음 질문"
-    ],
-    "10": [
-      "다음 질문"
-    ],
-    "11": [
-      "모든 Triage에 LLM이 필요한 것은 아니다",
-      "다음 질문"
-    ],
-    "12": [
-      "다음 질문"
-    ],
-    "13": [
-      "다음 질문"
-    ],
-    "14": [
-      "다음 질문"
-    ],
-    "15": [
-      "15.11 Persistent Agent, Persistent Worker, Durable Task를 구분한다",
-      "다음 질문"
-    ],
-    "16": [
-      "다음 질문"
-    ],
-    "17": [
-      "17.10 Role Separation은 Task Independence가 아니다",
-      "다음 질문"
-    ],
-    "18": [
-      "다음 질문"
-    ],
-    "19": [
-      "Human-facing Observability와 Telemetry는 다르다",
-      "다음 질문"
-    ],
-    "20": [
-      "20.10 Routine은 Trigger이고 Task는 Work다",
-      "다음 질문"
-    ],
-    "21": [
-      "21.11 Agent Execution Golden Path",
-      "다음 질문"
-    ],
-    "22": [
-      "다음 질문"
-    ],
-    "23": [
-      "작은 구현 사례: GitHub-native Hub-and-Spoke",
-      "23.9 Operator Surface",
-      "다음 질문"
-    ],
-    "24": [
-      "Learned Skill은 Candidate로 시작한다"
-    ]
-  },
-  "publication_insertions": {
-    "figures": {
-      "count": 21,
-      "all_original_ids_preserved": true
-    },
-    "cases": {
-      "count": 16,
-      "all_original_ids_preserved": true
-    }
-  },
-  "original_book_code_variants_superseded": [
-    {
-      "language": "text",
-      "old_body": "Harness\n=\nInstructions\n+ Context\n+ Tool Interface\n+ Feedback\n+ Verification Hooks\n",
-      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
-    },
-    {
-      "language": "text",
-      "old_body": "Raw Tool Gateway\n→ API 노출\n\nSemantic Tool Gateway\n→ Tool + Schema + Usage Guidance\n\nOrganizational Context Gateway\n→ Tool + Data Semantics + Convention + Resource Discovery\n",
-      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
-    },
-    {
-      "language": "text",
-      "old_body": "1. Agent의 자기 보고 외에 무엇으로 확인할 것인가?\n2. Acceptance를 실행 가능한 Check로 바꿀 수 있는가?\n3. Visible Test에만 과적합할 수 있는가?\n4. Agent가 Verification Definition을 약화시킬 수 있는가?\n5. Runtime Behavior를 봐야 하는가?\n6. Independent Evaluator나 Human Gate가 필요한가?\n7. 이 Task의 Risk에 비해 Verification Cost가 적절한가?\n",
-      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
-    },
-    {
-      "language": "text",
-      "old_body": "Auto Start\n≠ Auto Merge\n",
-      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
-    }
-  ],
-  "all_original_book_urls_preserved": true,
-  "all_source_reference_urls_in_book": true,
-  "old_book_heading_count": 465,
-  "new_book_heading_count": 498,
-  "book_sha256": "3beb019b1d146e6c6f8a516aa76d1b73c8b1f29b3566a636f80d94721e5a57c2"
+  "book": {
+    "heading_count": 465,
+    "references_exact": true,
+    "figure_ids_exact": true,
+    "case_ids_exact": true
+  }
 }
