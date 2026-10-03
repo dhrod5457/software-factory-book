@@ -6,84 +6,84 @@
 
 ## F01. Model → Agent → Factory Capability
 
-Model 성능은 Agent와 Factory 성능의 한 구성요소일 뿐이다. Repository, Tool, Context, 실행환경, 상태 관리, 검증을 포함한 시스템 계층이 실제 Delivery Capability를 결정한다.
+모델 성능은 에이전트와 생산 시스템 성능의 한 구성요소일 뿐이다. 저장소, 도구, 맥락 정보, 실행환경, 상태 관리, 검증을 포함한 시스템 계층이 실제 전달 수행 능력을 결정한다.
 
 ## F02. AI Software Factory Reference Loop
 
-Intent가 Requirement와 Durable Task로 변환되고, Control Plane과 Worker를 거쳐 검증·Evidence·Governance·Delivery로 이어진 뒤 운영 Feedback이 다시 다음 Work로 돌아오는 전체 Loop.
+의도가 요구사항과 지속 작업으로 변환되고, 제어 계층과 워커를 거쳐 검증·근거·권한과 책임 관리·전달로 이어진 뒤 운영 피드백이 다시 다음 작업으로 돌아오는 전체 순환.
 
 ## F03. Work Artifact Traceability
 
-Requirement에서 Design, Task, Commit, Verification, Evidence까지 연결하면 “무엇을 왜 바꿨고 무엇으로 완료를 판정했는가”를 추적할 수 있다.
+요구사항에서 설계, 작업, 커밋, 검증, 근거까지 연결하면 “무엇을 왜 바꿨고 무엇으로 완료를 판정했는가”를 추적할 수 있다.
 
 ## F04. Task / Attempt / Worker State Model
 
-Task는 여러 Attempt를 가질 수 있고 각 Attempt는 서로 다른 Worker에서 실행될 수 있다. Worker가 교체되어도 Task와 Attempt History는 남는다.
+작업은 여러 시도를 가질 수 있고 각 시도는 서로 다른 워커에서 실행될 수 있다. 워커가 교체되어도 작업과 시도 이력은 남는다.
 
 ## F05. Control Plane vs Execution Plane
 
-Control Plane은 Task State, Assignment, Retry, Approval을 관리하고 Execution Plane은 실제 Repository 수정과 Build/Test를 수행한다. Work State와 Compute를 분리하는 것이 핵심이다.
+제어 계층은 작업 상태, 배정, 재시도, 승인을 관리하고 실행 계층은 실제 저장소 수정과 빌드·테스트를 수행한다. 작업 상태와 연산 자원을 분리하는 것이 핵심이다.
 
 ## F06. Worker Isolation Boundary
 
-Workspace Isolation은 Git Branch만의 문제가 아니다. Filesystem, Process, Network, Credential, Runtime State, External Resource를 각각 어떤 경계로 분리할지 결정해야 한다.
+작업 공간 격리는 Git 브랜치만의 문제가 아니다. 파일 시스템, 프로세스, 네트워크, 인증 정보, 실행 상태, 외부 자원을 각각 어떤 경계로 분리할지 결정해야 한다.
 
 ## F07. Harness / Context / Runtime
 
-Harness는 Model과 실제 Software Environment 사이에서 Instruction, Context, Tool Interface, Feedback을 연결한다. Sandbox와 Runtime은 실행 공간이고 Harness는 그 실행을 조정하는 계층이다.
+하네스는 모델과 실제 소프트웨어 환경 사이에서 지시사항, 맥락 정보, 도구 인터페이스, 피드백을 연결한다. 격리 환경과 실행 기반은 실행 공간이고 하네스는 그 실행을 조정하는 계층이다.
 
 ## F08. Controlled Autonomy Stack
 
-상위 계층은 Policy와 Durable State를 소유하고, 아래로 갈수록 Agent의 adaptive judgment가 커진다. 이미 알고 있는 Rule과 불확실한 Search/Judgment를 같은 방식으로 처리하지 않는다.
+상위 계층은 정책과 중단 뒤에도 유지되는 상태를 소유하고, 아래로 갈수록 에이전트의 상황에 맞게 적응하는 판단이 커진다. 이미 알고 있는 규칙과 불확실한 탐색·판단를 같은 방식으로 처리하지 않는다.
 
 ## F09. Verification Pyramid
 
-Static Check에서 Human Acceptance까지 검증의 범위와 비용이 달라진다. 모든 Task가 가장 높은 단계까지 갈 필요는 없으며 Risk에 맞는 검증 조합을 선택한다.
+정적 검사 검사에서 사람 수용 판단까지 검증의 범위와 비용이 달라진다. 모든 작업이 가장 높은 단계까지 갈 필요는 없으며 위험에 맞는 검증 조합을 선택한다.
 
 ## F10. Evidence vs Provenance
 
-Evidence는 결과가 맞다는 근거이고 Provenance는 결과가 어떤 Task, Agent, Revision, Policy, Approval을 거쳐 만들어졌는지 나타내는 Lineage다.
+근거는 결과가 맞다는 근거이고 생성 이력은 결과가 어떤 작업, 에이전트, 코드 버전, 정책, 승인을 거쳐 만들어졌는지 나타내는 생성 이력다.
 
 ## F11. Recovery Ladder
 
-일시적인 Tool 오류에서 Human Escalation까지 Failure Scope에 맞춰 복구 범위를 키운다. 가능한 한 가장 작은 범위부터 복구하는 것이 비용과 재작업을 줄인다.
+일시적인 도구 오류에서 사람에게 판단 요청까지 실패 범위에 맞춰 복구 범위를 키운다. 가능한 한 가장 작은 범위부터 복구하는 것이 비용과 재작업을 줄인다.
 
 ## F12. Durable Execution Timeline
 
-Side Effect 이후 Crash가 발생해도 Event History, Checkpoint, Idempotency를 통해 이미 완료된 실행을 재구성하고 안전하게 Resume할 수 있어야 한다.
+외부에 남는 변경 이후 비정상 종료가 발생해도 이벤트 이력, 복구 지점, 멱등성을 통해 이미 완료된 실행을 재구성하고 안전하게 중단 지점부터 재개할 수 있어야 한다.
 
 ## F13. Agent Security Delegation
 
-Human Principal의 권한 전체를 빌려주는 대신 Task와 Agent Identity에 필요한 Capability만 위임한다. Identity, Authorization, Approval, Audit를 하나의 Delegation Chain으로 본다.
+권한을 위임한 사람의 권한 전체를 빌려주는 대신 작업과 에이전트 신원에 필요한 수행 능력만 위임한다. 신원, 권한 부여, 승인, 감사를 하나의 권한 위임 연결로 본다.
 
 ## F14. Parallel Fan-out / Fan-in
 
-Task Independence가 확보된 Work만 여러 Worker에 Fan-out하고, Fan-in 이후에는 Integration Verification을 수행한다. Parallelism의 단위는 Agent 수가 아니라 독립 Task다.
+작업 Independence가 확보된 작업만 여러 워커에 Fan-out하고, 결과를 다시 합치는 단계 이후에는 통합 검증을 수행한다. 병렬 실행의 단위는 에이전트 수가 아니라 독립 작업이다.
 
 ## F15. Factory Throughput Bottleneck
 
-전체 Factory 처리량은 Worker 수 하나가 아니라 Ready Work, Verification, Review, Integration, Deployment 등 가장 느린 단계에 제한된다.
+전체 생산 시스템 처리량은 워커 수 하나가 아니라 실행 준비가 된 작업, 검증, 검토, 통합, 배포 등 가장 느린 단계에 제한된다.
 
 ## F16. Task Timeline / Observability
 
-Task Cycle Time을 Queue, Execution, Verification, Human Wait로 분해하면 병목이 Model인지 Review인지 구분할 수 있다.
+작업 전체 처리 시간을 대기열, 실행, 검증, 사람의 판단을 기다리는 시간으로 분해하면 병목이 모델인지 검토인지 구분할 수 있다.
 
 ## F17. Signal → Task Conversion
 
-Production Alert나 CI Failure를 바로 Agent Action으로 연결하지 않는다. Diagnose, Scope, Risk, Acceptance를 거쳐 실행 가능한 Task로 변환한다.
+운영 환경 알림이나 CI 실패를 바로 에이전트 행동으로 연결하지 않는다. Diagnose, 범위, 위험, 수용 판단을 거쳐 실행 가능한 작업으로 변환한다.
 
 ## F18. Factory ↔ Developer Platform
 
-Factory는 기존 Developer Platform의 Golden Path, CI/CD, Secret, Deploy, Observability Capability를 재사용한다. 사람과 Agent가 같은 Platform Capability를 서로 다른 Interface로 소비한다.
+생산 시스템은 기존 개발자 플랫폼의 표준 개발 경로, CI/CD, 비밀 정보, 배포, 관측 가능성 수행 능력을 재사용한다. 사람과 에이전트가 같은 플랫폼 기능을 서로 다른 인터페이스로 소비한다.
 
 ## F19. Minimum Viable Factory
 
-첫 Factory는 Single Worker와 Human Review로도 충분하다. 중요한 것은 Durable Task, Isolation, Verification, Evidence가 반복 가능한 흐름으로 연결되는가다.
+첫 생산 시스템은 단일 워커와 사람의 검토로도 충분하다. 중요한 것은 지속 작업, 격리, 검증, 근거가 반복 가능한 흐름으로 연결되는가다.
 
 ## F20. Reference Factory Acceptance Scenarios
 
-Happy Path뿐 아니라 Verification Failure, Worker Kill, Reassignment, Human Wait, Parallel Execution, Conflict를 acceptance scenario로 만들어 Factory Reliability를 검증한다.
+정상 실행 경로뿐 아니라 검증 실패, 워커 강제 종료, 다른 워커에 재배정, 사람의 판단을 기다리는 시간, 병렬 실행, 충돌을 수용 판단 시나리오로 만들어 생산 시스템 신뢰성을 검증한다.
 
 ## F21. Maturity × Autonomy Matrix
 
-Factory Capability의 성숙도와 Agent Decision Authority는 서로 다른 축이다. 운영 Capability가 높아도 Risk가 큰 Decision은 Human Authority를 유지할 수 있다.
+생산 시스템의 수행 능력의 성숙도와 에이전트 결정 권한은 서로 다른 축이다. 운영 수행 능력이 높아도 위험이 큰 결정은 사람 권한을 유지할 수 있다.

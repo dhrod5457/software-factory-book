@@ -1,0 +1,413 @@
+{
+  "baseline": "a812a23bf03c85f94ae109414e43df8ced795d78",
+  "source_files": [
+    {
+      "path": "chapters/01/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/02/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/03/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/04/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/05/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/06/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/07/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/08/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/09/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/10/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/11/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/12/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/13/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/14/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/15/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/16/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/17/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/18/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/19/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/20/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/21/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/22/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/23/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/24/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "chapters/epilogue/draft.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "manuscript/preface.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "manuscript/glossary.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "manuscript/case-study-boxes.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    },
+    {
+      "path": "manuscript/figure-captions.md",
+      "checks": {
+        "code_blocks": true,
+        "headings": true,
+        "urls": true,
+        "numbers": true
+      }
+    }
+  ],
+  "assembly_exact": {
+    "01": true,
+    "02": true,
+    "03": true,
+    "04": true,
+    "05": true,
+    "06": true,
+    "07": true,
+    "08": true,
+    "09": true,
+    "10": true,
+    "11": true,
+    "12": true,
+    "13": true,
+    "14": true,
+    "15": true,
+    "16": true,
+    "17": true,
+    "18": true,
+    "19": true,
+    "20": true,
+    "21": true,
+    "22": true,
+    "23": true,
+    "24": true,
+    "preface": true,
+    "epilogue": true,
+    "glossary": true
+  },
+  "restored_sections": {
+    "01": [],
+    "02": [],
+    "03": [
+      "다음 질문"
+    ],
+    "04": [
+      "WorkOS: 빈 문서를 Agent가 먼저 채우고 사람이 Scope를 결정한다",
+      "다음 질문"
+    ],
+    "05": [
+      "다음 질문"
+    ],
+    "06": [
+      "다음 질문"
+    ],
+    "07": [
+      "다음 질문"
+    ],
+    "08": [
+      "Prepared Snapshot과 Fresh Task State",
+      "다음 질문"
+    ],
+    "09": [
+      "9.10 Context, Capability, Outcome, Guardrail, Evidence",
+      "다음 질문"
+    ],
+    "10": [
+      "다음 질문"
+    ],
+    "11": [
+      "모든 Triage에 LLM이 필요한 것은 아니다",
+      "다음 질문"
+    ],
+    "12": [
+      "다음 질문"
+    ],
+    "13": [
+      "다음 질문"
+    ],
+    "14": [
+      "다음 질문"
+    ],
+    "15": [
+      "15.11 Persistent Agent, Persistent Worker, Durable Task를 구분한다",
+      "다음 질문"
+    ],
+    "16": [
+      "다음 질문"
+    ],
+    "17": [
+      "17.10 Role Separation은 Task Independence가 아니다",
+      "다음 질문"
+    ],
+    "18": [
+      "다음 질문"
+    ],
+    "19": [
+      "Human-facing Observability와 Telemetry는 다르다",
+      "다음 질문"
+    ],
+    "20": [
+      "20.10 Routine은 Trigger이고 Task는 Work다",
+      "다음 질문"
+    ],
+    "21": [
+      "21.11 Agent Execution Golden Path",
+      "다음 질문"
+    ],
+    "22": [
+      "다음 질문"
+    ],
+    "23": [
+      "작은 구현 사례: GitHub-native Hub-and-Spoke",
+      "23.9 Operator Surface",
+      "다음 질문"
+    ],
+    "24": [
+      "Learned Skill은 Candidate로 시작한다"
+    ]
+  },
+  "publication_insertions": {
+    "figures": {
+      "count": 21,
+      "all_original_ids_preserved": true
+    },
+    "cases": {
+      "count": 16,
+      "all_original_ids_preserved": true
+    }
+  },
+  "original_book_code_variants_superseded": [
+    {
+      "language": "text",
+      "old_body": "Harness\n=\nInstructions\n+ Context\n+ Tool Interface\n+ Feedback\n+ Verification Hooks\n",
+      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
+    },
+    {
+      "language": "text",
+      "old_body": "Raw Tool Gateway\n→ API 노출\n\nSemantic Tool Gateway\n→ Tool + Schema + Usage Guidance\n\nOrganizational Context Gateway\n→ Tool + Data Semantics + Convention + Resource Discovery\n",
+      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
+    },
+    {
+      "language": "text",
+      "old_body": "1. Agent의 자기 보고 외에 무엇으로 확인할 것인가?\n2. Acceptance를 실행 가능한 Check로 바꿀 수 있는가?\n3. Visible Test에만 과적합할 수 있는가?\n4. Agent가 Verification Definition을 약화시킬 수 있는가?\n5. Runtime Behavior를 봐야 하는가?\n6. Independent Evaluator나 Human Gate가 필요한가?\n7. 이 Task의 Risk에 비해 Verification Cost가 적절한가?\n",
+      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
+    },
+    {
+      "language": "text",
+      "old_body": "Auto Start\n≠ Auto Merge\n",
+      "reason": "Canonical chapter draft contains the maintained variant; source code unchanged by this edit."
+    }
+  ],
+  "all_original_book_urls_preserved": true,
+  "all_source_reference_urls_in_book": true,
+  "old_book_heading_count": 465,
+  "new_book_heading_count": 498,
+  "book_sha256": "3beb019b1d146e6c6f8a516aa76d1b73c8b1f29b3566a636f80d94721e5a57c2"
+}
